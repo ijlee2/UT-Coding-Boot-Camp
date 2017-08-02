@@ -1,0 +1,27 @@
+/**
+ * Float Stylesheet
+ **/
+
+
+/* content1 starts the float and will rest at the top-left corner of its enclosing element */
+
+.content1 {
+  float: left;
+}
+
+
+/* content2 continues the left float; it will sit at the right side of content1 */
+
+.content2 {
+  float: left;
+}
+
+
+/* clearfix is applied to the parent container to 'fix' the flow of the page */
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
