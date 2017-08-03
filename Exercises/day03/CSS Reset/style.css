@@ -1,0 +1,17 @@
+h1 {
+    background-color: #892083;
+    color: #ffffff;
+    font-size: 2em;
+    padding: 20px;
+}
+
+p {
+    font-size: 1.4em;
+    padding: 10px 0 10px 20px;
+}
+
+li {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    padding-left: 50px;
+}
