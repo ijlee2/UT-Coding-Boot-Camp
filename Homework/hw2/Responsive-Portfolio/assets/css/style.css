@@ -20,7 +20,7 @@ body {
     background-image : url("../images/crossword.png");
     background-repeat: repeat;
     font-family      : "Arial", "Helvetica Neue", Helvetica, sans-serif;
-    font-size        : 18px;
+    font-size        : 17px;
 }
 
 div.container {
@@ -74,15 +74,17 @@ div#top_pane {
 
     float           : left;
     width           : 25%;
-    padding         : 30px 40px;
+    padding         : 28px 22px;
 }
 
 #website_menu {
     font-size     : 1.3em;
     letter-spacing: 0.02em;
 
-    float         : right;
-    padding       : 35px 15px;
+    position      : absolute;
+    top           : 0;
+    right         : 0;
+    padding       : 35px 10px;
 }
 
 #website_menu a {
@@ -90,7 +92,7 @@ div#top_pane {
     text-decoration: none;
 
     border-right   : 2px solid var(--color-separator);
-    margin         : 0 15px;
+    margin         : 0 12.5px;
     padding-right  : 35px;
 }
 
@@ -100,7 +102,7 @@ div#top_pane {
 
 #website_menu a.last_link {
     border-right : 0;
-    padding-right: 10px;
+    padding-right: 12.5px;
 }
 
 
@@ -124,8 +126,8 @@ section.left_pane {
 }
 
 section.left_pane:hover {
-    box-shadow      : 0 4px  8px  6px rgba(250, 242, 203, 0.60),
-                      0 6px 20px 10px rgba(250, 242, 203, 0.52);
+    box-shadow: 0 4px  8px  6px rgba(250, 242, 203, 0.60),
+                0 6px 20px 10px rgba(250, 242, 203, 0.52);
 }
 
 section.left_pane h1 {
@@ -234,8 +236,8 @@ section.left_pane p {
 
 section.right_pane {
     background-color: var(--color-top-pane);
-    box-shadow      : 0 2px 4px 2px rgba(0, 0, 0, 0.24),
-                      0 6px 8px 3px rgba(0, 0, 0, 0.16);
+    box-shadow      : 0 4px  8px  6px rgba(0, 0, 0, 0.12),
+                      0 6px 20px 10px rgba(0, 0, 0, 0.07);
     
     float           : right;
     width           : 220px;
@@ -244,8 +246,8 @@ section.right_pane {
 }
 
 section.right_pane:hover {
-    box-shadow      : 0 2px 4px 2px rgba(250, 242, 203, 0.68),
-                      0 6px 8px 3px rgba(250, 242, 203, 0.54);
+    box-shadow: 0 4px  8px  6px rgba(250, 242, 203, 0.60),
+                0 6px 20px 10px rgba(250, 242, 203, 0.52);
 }
 
 section.right_pane h2 {
@@ -299,56 +301,16 @@ div#bottom_pane {
 *****************************************************************************/
 @media all and (max-width: 980px) and (min-width: 769px), all and (max-device-width: 980px) and (min-device-width: 769px) {
     :root {
-        /* Define color scheme */
-        --color-top-pane      : #ffffff;
-        --color-middle-pane   : #ededed;
-        --color-bottom-pane   : #666666;
-        /*
-        --color-mint-green    : #4aaaa5;
-        */
-        --color-mint-green    : #b98109;
-        --color-separator     : #d8d8d8;
-        --color-text          : #202020;
-        --color-text-highlight: #ff6600;
+        --color-mint-green: #b98109;
     }
 
     body {
-        background-image : url("../images/crossword.png");
-        background-repeat: repeat;
-        font-family      : "Arial", "Helvetica Neue", Helvetica, sans-serif;
-        font-size        : 18px;
+        font-size: 17px;
     }
 
     div.container {
-        width : 960px;
+        width : 92%;
         margin: auto;
-    }
-
-    .clearfix::after {
-        content: "";
-        display: block;
-        clear  : both;
-    }
-
-    h1, h2 {
-        color      : var(--color-mint-green);
-        font-family: "Georgia", Times, "Times New Roman", serif;
-        font-weight: bold;
-    }
-
-    h1 {
-        font-size     : 1.6em;
-        letter-spacing: 0.015em;
-    }
-
-    h2 {
-        font-size     : 1.3em;
-        letter-spacing: 0.005em;
-    }
-
-    strong {
-        color      : var(--color-text-highlight);
-        font-weight: bold;
     }
 
 
@@ -360,63 +322,41 @@ div#bottom_pane {
     }
 
     #website_name {
-        background-color: var(--color-mint-green);
-        color           : var(--color-top-pane);
-        font-family     : "Georgia", Times, "Times New Roman", serif;
-        font-size       : 1.9em;
-        font-weight     : bold;
-        letter-spacing  : 0.02em;
-        text-align      : center;
-
-        float           : left;
-        width           : 25%;
-        padding         : 30px 40px;
+        float  : left;
+        width  : 230px;
+        padding: 28px 22px;
     }
 
     #website_menu {
-        font-size     : 1.3em;
-        letter-spacing: 0.02em;
-
-        float         : right;
-        padding       : 35px 15px;
+        text-align: right;
+        
+        position  : absolute;
+        top       : 0;
+        right     : 0;
+        width     : 480px;
+        padding   : 35px 10px;
     }
 
     #website_menu a {
-        color          : var(--color-text);
-        text-decoration: none;
-
-        border-right   : 2px solid var(--color-separator);
-        margin         : 0 15px;
-        padding-right  : 35px;
-    }
-
-    #website_menu a:hover {
-        text-decoration: underline;
+        margin       : 0 12.5px;
+        padding-right: 30px;
     }
 
     #website_menu a.last_link {
-        border-right : 0;
-        padding-right: 10px;
+        padding-right: 12.5px;
     }
 
 
-    /*
-       All things related to the middle pane
-       The left and right panes have a width of 650px and 270px, respectively.
-    */
+    /* All things related to the middle pane */
     div#middle_pane {
         padding: 35px 0 40px 0;
     }
 
     section.left_pane {
-        background-color: var(--color-top-pane);
-        box-shadow      : 0 4px  8px  6px rgba(0, 0, 0, 0.12),
-                          0 6px 20px 10px rgba(0, 0, 0, 0.07);
-        
-        float           : left;
-        width           : 550px;
-        margin          : 40px 0;
-        padding         : 40px 50px 30px 50px;
+        float  : left;
+        width  : 50%;
+        margin : 5% 0 6% 0;
+        padding: 5%;
     }
 
     section.left_pane:hover {
@@ -425,19 +365,17 @@ div#bottom_pane {
     }
 
     section.left_pane h1 {
-        margin-bottom : 30px;
-        border-bottom : 2px solid var(--color-separator);
-        padding-bottom: 20px;
+        margin-bottom : 6%;
+        padding-bottom: 5%;
     }
 
     /* Begin: index.html */
     section.left_pane figure.profile_photo img {
-        float       : left;
-        max-width   : 100%;
-        max-height  : 100%;
-        width       : 200px;
-        margin-top  : 25px;
-        margin-right: 25px;
+        display   : block;
+        max-width : 100%;
+        max-height: 100%;
+        width     : 99%;
+        margin    : 0;
     }
     /* End: index.html */
 
@@ -445,35 +383,27 @@ div#bottom_pane {
     section.left_pane figure.portfolio {
         display      : inline-block;
         position     : relative;
-        margin-bottom: 20px;
+        margin-top   : 4%;
+        margin-bottom: 4%;
     }
 
     section.left_pane figure.portfolio img {
-        border    : 2px solid var(--color-separator);
-
-        clear     : left;
         display   : block;
         max-width : 100%;
         max-height: 100%;
-        width     : 226px;
-        margin    : 25px 20px 0 20px;
+        width     : 99%;
+        margin    : 0;
     }
 
     section.left_pane figure.portfolio figcaption {
-        background-color: var(--color-mint-green);
-        color           : var(--color-top-pane);
-        font-size       : 1.1em;
-        line-height     : 1.2em;
-        text-align      : center;
-
-        float           : left;
+        float           : none;
         position        : absolute;
         max-width       : 100%;
-        max-height      : 20%;
-        width           : 200px;
-        bottom          : 20px;
-        margin-left     : 20px;
-        padding         : 15px 15px;
+        max-height      : 40%;
+        width           : 90%;
+        bottom          : 5%;
+        margin          : 0;
+        padding         : 4% 5%;
     }
     /* End: portfolio.html */
 
@@ -529,14 +459,9 @@ div#bottom_pane {
     }
 
     section.right_pane {
-        background-color: var(--color-top-pane);
-        box-shadow      : 0 2px 4px 2px rgba(0, 0, 0, 0.24),
-                          0 6px 8px 3px rgba(0, 0, 0, 0.16);
-        
-        float           : right;
-        width           : 220px;
-        margin          : 40px 0;
-        padding         : 45px 25px 35px 25px;
+        width  : 25%;
+        margin : 5% 0 6% 0;
+        padding: 5%;
     }
 
     section.right_pane:hover {
@@ -545,10 +470,8 @@ div#bottom_pane {
     }
 
     section.right_pane h2 {
-        margin-top    : 2px;
-        margin-bottom : 30px;
-        border-bottom : 2px solid var(--color-separator);
-        padding-bottom: 18px;
+        margin-bottom : 6%;
+        padding-bottom: 5%;
     }
 
     section.right_pane figure {
@@ -613,7 +536,10 @@ div#bottom_pane {
 
     #website_menu {
         text-align: right;
-
+        
+        position  : absolute;
+        top       : 0;
+        right     : 0;
         width     : 60%;
         padding   : 4.5% 0;
     }
@@ -793,6 +719,7 @@ div#bottom_pane {
         text-align: center;
         
         float     : none;
+        position  : static;
         width     : 100%;
         padding   : 6.5% 0;
     }
