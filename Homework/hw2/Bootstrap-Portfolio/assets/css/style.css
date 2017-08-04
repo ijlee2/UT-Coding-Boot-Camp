@@ -1,0 +1,282 @@
+:root {
+    /* Define color scheme */
+    --color-top-pane      : #ffffff;
+    --color-middle-pane   : #ededed;
+    --color-bottom-pane   : #666666;
+    --color-mint-green    : #4aaaa5;
+    --color-separator     : #d8d8d8;
+    --color-text          : #202020;
+    --color-text-highlight: #ff6600;
+}
+
+body {
+    background-image : url("../images/crossword.png");
+    background-repeat: repeat;
+    font-family      : "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    font-size        : 18px;
+}
+
+div.container {
+    width : 960px;
+    margin: auto;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear  : both;
+}
+
+h1, h2 {
+    color      : var(--color-mint-green);
+    font-family: "Georgia", Times, "Times New Roman", serif;
+    font-weight: bold;
+}
+
+h1 {
+    font-size     : 1.6em;
+    letter-spacing: 0.015em;
+}
+
+h2 {
+    font-size     : 1.3em;
+    letter-spacing: 0.005em;
+}
+
+strong {
+    color      : var(--color-text-highlight);
+    font-weight: bold;
+}
+
+
+/* All things related to top pane */
+div#top_pane {
+    background   : var(--color-top-pane);
+    
+    border-bottom: 2px solid var(--color-separator);
+}
+
+#website_name {
+    background-color: var(--color-mint-green);
+    color           : var(--color-top-pane);
+    font-family     : "Georgia", Times, "Times New Roman", serif;
+    font-size       : 1.9em;
+    font-weight     : bold;
+    letter-spacing  : 0.02em;
+    text-align      : center;
+
+    float           : left;
+    width           : 25%;
+    padding         : 30px 40px;
+}
+
+#website_menu {
+    font-size     : 1.3em;
+    letter-spacing: 0.02em;
+
+    float         : right;
+    padding       : 35px 15px;
+}
+
+#website_menu a {
+    color          : var(--color-text);
+    text-decoration: none;
+
+    border-right   : 2px solid var(--color-separator);
+    margin         : 0 15px;
+    padding-right  : 35px;
+}
+
+#website_menu a:hover {
+    text-decoration: underline;
+}
+
+#website_menu a.last_link {
+    border-right : 0;
+    padding-right: 10px;
+}
+
+
+/*
+   All things related to the middle pane
+   The left and right panes have a width of 650px and 270px, respectively.
+*/
+div#middle_pane {
+    padding: 35px 0 40px 0;
+}
+
+section.left_pane {
+    background-color: var(--color-top-pane);
+    box-shadow      : 0 4px  8px  6px rgba(0, 0, 0, 0.12),
+                      0 6px 20px 10px rgba(0, 0, 0, 0.07);
+    
+    float           : left;
+    width           : 550px;
+    margin          : 40px 0;
+    padding         : 40px 50px 30px 50px;
+}
+
+section.left_pane:hover {
+    box-shadow      : 0 4px  8px  6px rgba(250, 242, 203, 0.60),
+                      0 6px 20px 10px rgba(250, 242, 203, 0.52);
+}
+
+section.left_pane h1 {
+    margin-bottom : 30px;
+    border-bottom : 2px solid var(--color-separator);
+    padding-bottom: 20px;
+}
+
+/* Begin: index.html */
+section.left_pane figure.profile_photo img {
+    float       : left;
+    max-width   : 100%;
+    max-height  : 100%;
+    width       : 200px;
+    margin-top  : 25px;
+    margin-right: 25px;
+}
+/* End: index.html */
+
+/* Begin: portfolio.html */
+section.left_pane figure.portfolio {
+    display      : inline-block;
+    position     : relative;
+    margin-bottom: 20px;
+}
+
+section.left_pane figure.portfolio img {
+    border    : 2px solid var(--color-separator);
+
+    clear     : left;
+    display   : block;
+    max-width : 100%;
+    max-height: 100%;
+    width     : 226px;
+    margin    : 25px 20px 0 20px;
+}
+
+section.left_pane figure.portfolio figcaption {
+    background-color: var(--color-mint-green);
+    color           : var(--color-top-pane);
+    font-size       : 1.1em;
+    line-height     : 1.2em;
+    text-align      : center;
+
+    float           : left;
+    position        : absolute;
+    max-width       : 100%;
+    max-height      : 20%;
+    width           : 200px;
+    bottom          : 20px;
+    margin-left     : 20px;
+    padding         : 15px 15px;
+}
+/* End: portfolio.html */
+
+/* Begin: contact.html */
+section.left_pane label {
+    font-size    : 1.3em;
+    font-weight  : bold;
+
+    display      : block;
+    margin-bottom: 15px;
+}
+
+section.left_pane input {
+    font-size    : 1.1em;
+    
+    display      : block;
+    width        : 96%;
+    margin-bottom: 15px;
+    padding      : 8px 4px 8px 12px;
+}
+
+section.left_pane textarea {
+    font-family  : "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    font-size    : 1.1em;
+
+    display      : block;
+    max-width    : 96%;
+    max-height   : 240px;
+    width        : 96%;
+    height       : 160px;
+    margin-bottom: 15px;
+    padding      : 8px 4px 8px 12px;
+}
+
+section.left_pane input#form_submit {
+    background-color: var(--color-mint-green);
+    color           : var(--color-top-pane);
+    font-size       : 1.3em;
+    font-weight     : bold;
+    text-align      : center;
+    
+    display: block;
+    width: 30%;
+    margin-top: 40px;
+    padding: 10px 0;
+}
+/* End: contact.html */
+
+section.left_pane p {
+    line-height   : 1.6em;
+    
+    padding-bottom: 20px;
+}
+
+section.right_pane {
+    background-color: var(--color-top-pane);
+    box-shadow      : 0 2px 4px 2px rgba(0, 0, 0, 0.24),
+                      0 6px 8px 3px rgba(0, 0, 0, 0.16);
+    
+    float           : right;
+    width           : 220px;
+    margin          : 40px 0;
+    padding         : 45px 25px 35px 25px;
+}
+
+section.right_pane:hover {
+    box-shadow      : 0 2px 4px 2px rgba(250, 242, 203, 0.68),
+                      0 6px 8px 3px rgba(250, 242, 203, 0.54);
+}
+
+section.right_pane h2 {
+    margin-top    : 2px;
+    margin-bottom : 30px;
+    border-bottom : 2px solid var(--color-separator);
+    padding-bottom: 18px;
+}
+
+section.right_pane figure {
+    margin: auto;
+}
+
+section.right_pane img {
+    width : 36%;
+    margin: 6%;
+}
+
+section.right_pane img:hover {
+    background-color: var(--color-separator);
+    opacity         : 0.65;
+}
+
+
+/* All things related to the bottom pane */
+div#bottom_pane {
+    background-color: var(--color-bottom-pane);
+    
+    border-top      : 15px solid var(--color-mint-green);
+    padding         : 40px;
+}
+
+#copyright {
+    color         : var(--color-top-pane);
+    letter-spacing: 0.005em;
+    text-align    : center;
+}
+
+#copyright a {
+    color: var(--color-top-pane);
+}
