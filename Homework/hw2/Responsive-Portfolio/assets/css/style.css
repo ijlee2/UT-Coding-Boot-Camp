@@ -35,23 +35,26 @@ div.container {
 }
 
 h1, h2 {
-    color      : var(--color-mint-green);
-    font-family: "Georgia", Times, "Times New Roman", serif;
-    font-weight: bold;
-}
-
-h1 {
-    font-size     : 1.6em;
+    color         : var(--color-mint-green);
+    font-family   : "Georgia", Times, "Times New Roman", serif;
+    font-weight   : bold;
     letter-spacing: 0.015em;
 }
 
-h2 {
-    font-size     : 1.3em;
-    letter-spacing: 0.005em;
+h1 {
+    font-size: 1.7em;
 }
 
-strong {
+h2 {
+    font-size: 1.4em;
+}
+
+p strong {
     color      : var(--color-text-highlight);
+    font-weight: bold;
+}
+
+figcaption strong {
     font-weight: bold;
 }
 
@@ -140,27 +143,27 @@ section.left_pane figure.profile_photo img {
     max-width   : 100%;
     max-height  : 100%;
     width       : 200px;
-    margin-top  : 25px;
-    margin-right: 25px;
+    margin      : 0.4em 25px 0.4em 0; /* 50% of 0.8em (line height of p) */
 }
 /* End: index.html */
 
 /* Begin: portfolio.html */
 section.left_pane figure.portfolio {
-    display      : inline-block;
-    position     : relative;
-    margin-bottom: 20px;
+    display      : table;
+    float        : left;
+    position     : relative; /* For figcaption (position: absolute) */
+    margin-top   : 0.4em;
+    margin-bottom: 0.4em;
 }
 
 section.left_pane figure.portfolio img {
     border    : 2px solid var(--color-separator);
 
-    clear     : left;
-    display   : block;
+    display   : table-cell;
     max-width : 100%;
     max-height: 100%;
     width     : 226px;
-    margin    : 25px 20px 0 20px;
+    margin    : 0 20px;
 }
 
 section.left_pane figure.portfolio figcaption {
@@ -170,14 +173,15 @@ section.left_pane figure.portfolio figcaption {
     line-height     : 1.2em;
     text-align      : center;
 
+    display         : table-cell;
     float           : left;
     position        : absolute;
     max-width       : 100%;
     max-height      : 20%;
     width           : 200px;
     bottom          : 20px;
-    margin-left     : 20px;
-    padding         : 15px 15px;
+    left            : 20px;
+    padding         : 15px;
 }
 /* End: portfolio.html */
 
@@ -227,7 +231,7 @@ section.left_pane input#form_submit {
 /* End: contact.html */
 
 section.left_pane p {
-    line-height   : 1.6em;
+    line-height   : 1.8em;
     
     padding-bottom: 20px;
 }
@@ -250,7 +254,7 @@ section.right_pane:hover {
 
 section.right_pane h2 {
     margin-top    : 2px;
-    margin-bottom : 30px;
+    margin-bottom : 24.71px; /* 1.4/1.7 of 30px (margin-bottom of h1) */
     border-bottom : 2px solid var(--color-separator);
     padding-bottom: 18px;
 }
@@ -281,6 +285,7 @@ div#bottom_pane {
 #copyright {
     color         : var(--color-top-pane);
     letter-spacing: 0.005em;
+    line-height   : 1.5em;
     text-align    : center;
 }
 
@@ -302,27 +307,16 @@ div#bottom_pane {
         --color-mint-green: #b9c149;
     }
 
-    body {
-        font-size: 17px;
-    }
-
     div.container {
-        width : 98%;
+        width : 98%; /* 960px relative to 980px */
         margin: auto;
     }
-
+    
 
     /* All things related to top pane */
-    div#top_pane {
-        background   : var(--color-top-pane);
-        
-        border-bottom: 2px solid var(--color-separator);
-    }
-
     #website_name {
-        float  : left;
         width  : 240px;         /* 25% of 960px */
-        padding: 28.8px 19.2px; /* 3% and 2% of 960px */
+        padding: 28.8px 19.2px; /* 3%, 2% of 960px */
     }
 
     #website_menu {
@@ -337,62 +331,55 @@ div#bottom_pane {
 
 
     /* All things related to the middle pane */
-    div#middle_pane {
-        padding: 35px 0 40px 0;
-    }
-
     section.left_pane {
-        float  : left;
-        width  : 50%;
-        margin : 5% 0 6% 0;
-        padding: 5%;
+        font-size: 1.77vw;                  /* 17px relative to 960px */
+
+        float    : left;
+        width    : 57.29%;                  /* 550px relative to 960px */
+        margin   : 4.17% 0;                 /* 40px relative to 960px */
+        padding  : 4.17% 5.21% 3.13% 5.21%; /* 40px, 50px, 30px, 50px relative to 960px */
     }
 
     section.left_pane:hover {
-        box-shadow      : 0 4px  8px  6px rgba(250, 242, 203, 0.60),
-                          0 6px 20px 10px rgba(250, 242, 203, 0.52);
+        box-shadow: 0 4px  8px  6px rgba(250, 242, 203, 0.60),
+                    0 6px 20px 10px rgba(250, 242, 203, 0.52);
     }
 
     section.left_pane h1 {
-        margin-bottom : 6%;
-        padding-bottom: 5%;
+        margin-bottom : 5.45%; /* 30px relative to 550px */
+        padding-bottom: 3.64%; /* 20px relative to 550px */
     }
 
     /* Begin: index.html */
     section.left_pane figure.profile_photo img {
-        display   : block;
-        max-width : 100%;
-        max-height: 100%;
-        width     : 99%;
-        margin    : 0 0 6% 0;
+        display      : block;
+        float        : none;
+        max-width    : 50%;
+        max-height   : 50%;
+        width        : 50%;
+        margin       : auto;
+        margin-top   : 0.4em;
+        margin-bottom: 1.6em;
     }
     /* End: index.html */
 
     /* Begin: portfolio.html */
     section.left_pane figure.portfolio {
-        display      : inline-block;
-        position     : relative;
-        margin-top   : 4%;
+        float        : none;
         margin-bottom: 4%;
     }
 
     section.left_pane figure.portfolio img {
-        display   : block;
-        max-width : 100%;
-        max-height: 100%;
-        width     : 99%;
-        margin    : 0;
+        width : 100%;
+        margin: 0;
     }
 
     section.left_pane figure.portfolio figcaption {
         float           : none;
-        position        : absolute;
-        max-width       : 100%;
-        max-height      : 40%;
-        width           : 90%;
+        width           : 90.6%;
         bottom          : 5%;
-        margin          : 0;
-        padding         : 4% 5%;
+        left            : 0;
+        padding         : 5%;
     }
     /* End: portfolio.html */
 
@@ -427,9 +414,11 @@ div#bottom_pane {
     }
 
     section.right_pane {
-        width  : 28%;
-        margin : 5% 0 6% 0;
-        padding: 4%;
+        font-size: 1.77vw;                  /* 17px relative to 960px */
+
+        width    : 22.92%;                  /* 220px relative to 960px */
+        margin   : 4.17% 0;                 /* 40px relative to 960px */
+        padding  : 4.69% 2.60% 3.65% 2.60%; /* 45px, 25px, 35px, 25px relative to 960px */
     }
 
     section.right_pane:hover {
@@ -438,8 +427,9 @@ div#bottom_pane {
     }
 
     section.right_pane h2 {
-        margin-bottom : 6%;
-        padding-bottom: 5%;
+        margin-top    : 0.91%;  /* 2px relative to 220px */
+        margin-bottom : 11.23%; /* 24.71px relative to 220px */
+        padding-bottom: 8.18%;  /* 18px relative to 220px */
     }
 
     section.right_pane figure {
@@ -458,14 +448,7 @@ div#bottom_pane {
 
 
     /* All things related to the bottom pane */
-    div#bottom_pane {
-        border-top: 10px solid var(--color-mint-green);
-        padding   : 6%;
-    }
-
-    #copyright {
-        line-height: 1.5em;
-    }
+    /* No change needed */
 }
 
 
@@ -493,9 +476,8 @@ div#bottom_pane {
 
     /* All things related to top pane */
     #website_name {
-        float  : left;
-        width  : 31.89%;      /* 100% * (240px / (.98*768px)) */
-        padding: 3.83% 2.55%; /* 100% * (28.8px / (.98*768px)), 100% * (19.2px / (.98*768px)) */
+        width  : 31.90%;      /* 240px relative to (.98*768px) */
+        padding: 3.83% 2.55%; /* 28.8px, 19.2px relative to (.98*768px)) */
     }
 
     #website_menu {
@@ -505,16 +487,16 @@ div#bottom_pane {
         top       : 0;
         right     : 0;
         width     : 100%;
-        padding   : 4.38% 1.25%; /* 33.6px and 9.6px relative to (1*768px) */
+        padding   : 4.38% 1.25%; /* 33.6px, 9.6px relative to (1*768px) */
     }
 
     #website_menu a {
-        margin : 0 1.7%;
-        padding-right: 4%;
+        margin       : 0 1.63%; /* 12.5px relative to (1*768px) */
+        padding-right: 3.90%;   /* 30px relative to (1*768px) */
     }
 
     #website_menu a.last_link {
-        padding-right: 1.7%;
+        padding-right: 1.63%;
     }
 
 
@@ -555,29 +537,21 @@ div#bottom_pane {
 
     /* Begin: portfolio.html */
     section.left_pane figure.portfolio {
-        display      : inline-block;
-        position     : relative;
-        margin-top   : 4%;
+        float        : none;
         margin-bottom: 4%;
     }
 
     section.left_pane figure.portfolio img {
-        display   : block;
-        max-width : 100%;
-        max-height: 100%;
-        width     : 99%;
-        margin    : 0;
+        width : 100%;
+        margin: 0;
     }
 
     section.left_pane figure.portfolio figcaption {
         float           : none;
-        position        : absolute;
-        max-width       : 100%;
-        max-height      : 40%;
-        width           : 90%;
+        width           : 90.6%;
         bottom          : 5%;
-        margin          : 0;
-        padding         : 4% 5%;
+        left            : 0;
+        padding         : 5%;
     }
     /* End: portfolio.html */
 
@@ -668,8 +642,8 @@ div#bottom_pane {
     }
 
     body {
-        font-size: 18px;
-        font-size: 2.8vw;
+        font-size: 17px;
+        font-size: 2.66vw;
     }
     
     div.container {
@@ -680,7 +654,7 @@ div#bottom_pane {
     #website_name {
         float  : none;
         width  : 100%;
-        padding: 5% 0;
+        padding: 4.5% 0;
     }
 
     #website_menu {
@@ -689,7 +663,7 @@ div#bottom_pane {
         float     : none;
         position  : static;
         width     : 100%;
-        padding   : 5% 0;
+        padding   : 4% 0;
     }
 
     #website_menu a {
@@ -701,7 +675,7 @@ div#bottom_pane {
         
         margin          : 0 2.5%;
         border          : 1px solid var(--color-separator);
-        padding         : 2% 4%;
+        padding         : 2% 5%;
     }
 
     #website_menu a:hover {
@@ -710,7 +684,7 @@ div#bottom_pane {
 
     #website_menu a.last_link {
         border       : 1px solid var(--color-separator);
-        padding-right: 4%;
+        padding-right: 5%;
     }
 
 
@@ -751,29 +725,21 @@ div#bottom_pane {
 
     /* Begin: portfolio.html */
     section.left_pane figure.portfolio {
-        display      : inline-block;
-        position     : relative;
-        margin-top   : 4%;
+        float        : none;
         margin-bottom: 4%;
     }
 
     section.left_pane figure.portfolio img {
-        display   : block;
-        max-width : 100%;
-        max-height: 100%;
-        width     : 99%;
-        margin    : 0;
+        width : 100%;
+        margin: 0;
     }
 
     section.left_pane figure.portfolio figcaption {
         float           : none;
-        position        : absolute;
-        max-width       : 100%;
-        max-height      : 40%;
-        width           : 90%;
+        width           : 90.6%;
         bottom          : 5%;
-        margin          : 0;
-        padding         : 4% 5%;
+        left            : 0;
+        padding         : 5%;
     }
     /* End: portfolio.html */
 
