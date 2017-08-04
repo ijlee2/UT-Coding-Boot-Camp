@@ -892,16 +892,11 @@ div#bottom_pane {
 *****************************************************************************
 *****************************************************************************/
 @media all and (max-width: 640px), all and (max-device-width: 640px) {
-    :root {
-        /* Define color scheme */
-        --color-mint-green: #794069;
-    }
-
     body {
-        /* TODO: maybe remove this line? */
         font-size: 18px;
+        font-size: 3.5vw;
     }
-
+    
     div.container {
         width: 100%;
     }
@@ -910,7 +905,7 @@ div#bottom_pane {
     #website_name {
         float  : none;
         width  : 100%;
-        padding: 25px 0;
+        padding: 6% 0;
     }
 
     #website_menu {
@@ -918,15 +913,18 @@ div#bottom_pane {
         
         float     : none;
         width     : 100%;
-        padding   : 30px 0;
+        padding   : 6.5% 0;
     }
 
     #website_menu a {
-        background-color: var(--color-separator);
+        background-color: var(--color-separator);                                 /* Fallback */
+        background      : -webkit-linear-gradient(white, var(--color-separator)); /* For Safari 5.1 to 6.0 */
+        background      : -o-linear-gradient(white, var(--color-separator));      /* For Opera 11.1 to 12.0 */
+        background      : -moz-linear-gradient(white, var(--color-separator));    /* For Firefox 3.6 to 15 */
+        background      : linear-gradient(white, var(--color-separator));         /* Standard syntax */
         
-        /* TODO: the menu items overlap when the window is too small */
-        margin          : 0 3%;
-        border          : 1px solid var(--color-text);
+        margin          : 0 1.6%;
+        border          : 1px solid var(--color-separator);
         padding         : 2% 4%;
     }
 
@@ -935,7 +933,7 @@ div#bottom_pane {
     }
 
     #website_menu a.last_link {
-        border       : 1px solid var(--color-text);
+        border       : 1px solid var(--color-separator);
         padding-right: 4%;
     }
 
@@ -946,19 +944,23 @@ div#bottom_pane {
     }
 
     section.left_pane {
-        width  : 76%;
-        margin : 10% 6% 10% 6%;
-        padding: 6%;
+        box-shadow: 0 3px  6px 4px rgba(0, 0, 0, 0.12),
+                    0 4px 14px 6px rgba(0, 0, 0, 0.07);
+        
+        float     : none;
+        width     : 76%;
+        margin    : 10% 6% 10% 6%;
+        padding   : 6%;
     }
 
     section.left_pane:hover {
-        box-shadow: 0 4px  8px  6px rgba(0, 0, 0, 0.12),
-                    0 6px 20px 10px rgba(0, 0, 0, 0.07);
+        box-shadow: 0 3px  6px 4px rgba(0, 0, 0, 0.12),
+                    0 4px 14px 6px rgba(0, 0, 0, 0.07);
     }
 
     section.left_pane h1 {
         margin-bottom : 6%;
-        padding-bottom: 4%;
+        padding-bottom: 5%;
     }
 
     /* Begin: index.html */
@@ -980,7 +982,6 @@ div#bottom_pane {
     }
 
     section.left_pane figure.portfolio img {
-        clear     : left;
         display   : block;
         max-width : 100%;
         max-height: 100%;
@@ -1002,72 +1003,55 @@ div#bottom_pane {
 
     /* Begin: contact.html */
     section.left_pane label {
-        font-size    : 1.3em;
-        font-weight  : bold;
-
-        display      : block;
-        margin-bottom: 15px;
+        margin-bottom: 4%;
     }
 
     section.left_pane input {
-        font-size    : 1.1em;
-        
-        display      : block;
-        width        : 96%;
-        margin-bottom: 15px;
-        padding      : 8px 4px 8px 12px;
+        width        : 94%;
+        margin-bottom: 4%;
+        padding      : 2% 2% 2% 3%;
     }
 
     section.left_pane textarea {
-        font-family  : "Arial", "Helvetica Neue", Helvetica, sans-serif;
-        font-size    : 1.1em;
-
-        display      : block;
-        max-width    : 96%;
-        max-height   : 240px;
-        width        : 96%;
-        height       : 160px;
-        margin-bottom: 15px;
-        padding      : 8px 4px 8px 12px;
+        max-width    : 94%;
+        width        : 94%;
+        height       : auto;
+        margin-bottom: 4%;
+        padding      : 2% 2% 2% 3%;
     }
 
     section.left_pane input#form_submit {
-        background-color: var(--color-mint-green);
-        color           : var(--color-top-pane);
-        font-size       : 1.3em;
-        font-weight     : bold;
-        text-align      : center;
-        
-        display: block;
-        width: 30%;
-        margin-top: 40px;
-        padding: 10px 0;
+        width     : 40%;
+        margin-top: 10%;
+        padding   : 3%;
     }
     /* End: contact.html */
 
     section.left_pane p {
-        clear: both;
-        line-height   : 1.6em;
+        clear         : both;
         
-        padding-bottom: 20px;
+        padding-bottom: 5%;
     }
 
     section.right_pane {
-        clear  : both;
-        float  : none;
-        width  : 76%;
-        margin : 5% 6% 10% 6%;
-        padding: 6%;
+        box-shadow: 0 3px  6px 4px rgba(0, 0, 0, 0.12),
+                    0 4px 14px 6px rgba(0, 0, 0, 0.07);
+        
+        clear     : both;
+        float     : none;
+        width     : 76%;
+        margin    : 5% 6% 10% 6%;
+        padding   : 6%;
     }
 
     section.right_pane:hover {
-        box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.24),
-                    0 6px 8px 3px rgba(0, 0, 0, 0.16);
+        box-shadow: 0 3px  6px 4px rgba(0, 0, 0, 0.12),
+                    0 4px 14px 6px rgba(0, 0, 0, 0.07);
     }
 
     section.right_pane h2 {
         margin-bottom : 6%;
-        padding-bottom: 4%;
+        padding-bottom: 5%;
     }
 
     section.right_pane figure {
@@ -1088,10 +1072,10 @@ div#bottom_pane {
     /* All things related to the bottom pane */
     div#bottom_pane {
         border-top: 10px solid var(--color-mint-green);
-        padding   : 35px;
+        padding   : 8%;
     }
 
     #copyright {
-        line-height: 1.3em;
+        line-height: 1.5em;
     }
 }
