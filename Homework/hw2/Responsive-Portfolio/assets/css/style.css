@@ -1,7 +1,7 @@
 /****************************************************************************
  ****************************************************************************
     
-    Stylesheet for desktop (normal)
+    Default stylesheet
     
 *****************************************************************************
 *****************************************************************************/
@@ -74,17 +74,15 @@ div#top_pane {
 
     float           : left;
     width           : 25%;
-    padding         : 28px 22px;
+    padding         : 3% 2%;
 }
 
 #website_menu {
     font-size     : 1.3em;
     letter-spacing: 0.02em;
 
-    position      : absolute;
-    top           : 0;
-    right         : 0;
-    padding       : 35px 10px;
+    float         : right;
+    padding       : 3.5% 1%;
 }
 
 #website_menu a {
@@ -93,7 +91,7 @@ div#top_pane {
 
     border-right   : 2px solid var(--color-separator);
     margin         : 0 12.5px;
-    padding-right  : 35px;
+    padding-right  : 30px;
 }
 
 #website_menu a:hover {
@@ -301,7 +299,7 @@ div#bottom_pane {
 *****************************************************************************/
 @media all and (max-width: 980px) and (min-width: 769px), all and (max-device-width: 980px) and (min-device-width: 769px) {
     :root {
-        --color-mint-green: #b98109;
+        --color-mint-green: #b9c149;
     }
 
     body {
@@ -309,7 +307,7 @@ div#bottom_pane {
     }
 
     div.container {
-        width : 92%;
+        width : 98%;
         margin: auto;
     }
 
@@ -323,8 +321,8 @@ div#bottom_pane {
 
     #website_name {
         float  : left;
-        width  : 230px;
-        padding: 28px 22px;
+        width  : 240px;         /* 25% of 960px */
+        padding: 28.8px 19.2px; /* 3% and 2% of 960px */
     }
 
     #website_menu {
@@ -333,17 +331,8 @@ div#bottom_pane {
         position  : absolute;
         top       : 0;
         right     : 0;
-        width     : 480px;
-        padding   : 35px 10px;
-    }
-
-    #website_menu a {
-        margin       : 0 12.5px;
-        padding-right: 30px;
-    }
-
-    #website_menu a.last_link {
-        padding-right: 12.5px;
+        width     : 440px;
+        padding   : 33.6px 9.6px;
     }
 
 
@@ -375,7 +364,7 @@ div#bottom_pane {
         max-width : 100%;
         max-height: 100%;
         width     : 99%;
-        margin    : 0;
+        margin    : 0 0 6% 0;
     }
     /* End: index.html */
 
@@ -409,59 +398,38 @@ div#bottom_pane {
 
     /* Begin: contact.html */
     section.left_pane label {
-        font-size    : 1.3em;
-        font-weight  : bold;
-
-        display      : block;
-        margin-bottom: 15px;
+        margin-bottom: 4%;
     }
 
     section.left_pane input {
-        font-size    : 1.1em;
-        
-        display      : block;
-        width        : 96%;
-        margin-bottom: 15px;
-        padding      : 8px 4px 8px 12px;
+        width        : 94%;
+        margin-bottom: 4%;
+        padding      : 2% 2% 2% 3%;
     }
 
     section.left_pane textarea {
-        font-family  : "Arial", "Helvetica Neue", Helvetica, sans-serif;
-        font-size    : 1.1em;
-
-        display      : block;
-        max-width    : 96%;
-        max-height   : 240px;
-        width        : 96%;
-        height       : 160px;
-        margin-bottom: 15px;
-        padding      : 8px 4px 8px 12px;
+        max-width    : 94%;
+        width        : 94%;
+        height       : auto;
+        margin-bottom: 4%;
+        padding      : 2% 2% 2% 3%;
     }
 
     section.left_pane input#form_submit {
-        background-color: var(--color-mint-green);
-        color           : var(--color-top-pane);
-        font-size       : 1.3em;
-        font-weight     : bold;
-        text-align      : center;
-        
-        display: block;
-        width: 30%;
-        margin-top: 40px;
-        padding: 10px 0;
+        width     : 40%;
+        margin-top: 10%;
+        padding   : 3%;
     }
     /* End: contact.html */
 
     section.left_pane p {
-        line-height   : 1.6em;
-        
-        padding-bottom: 20px;
+        padding-bottom: 5%;
     }
 
     section.right_pane {
-        width  : 25%;
+        width  : 28%;
         margin : 5% 0 6% 0;
-        padding: 5%;
+        padding: 4%;
     }
 
     section.right_pane:hover {
@@ -491,20 +459,12 @@ div#bottom_pane {
 
     /* All things related to the bottom pane */
     div#bottom_pane {
-        background-color: var(--color-bottom-pane);
-        
-        border-top      : 15px solid var(--color-mint-green);
-        padding         : 40px;
+        border-top: 10px solid var(--color-mint-green);
+        padding   : 6%;
     }
 
     #copyright {
-        color         : var(--color-top-pane);
-        letter-spacing: 0.005em;
-        text-align    : center;
-    }
-
-    #copyright a {
-        color: var(--color-top-pane);
+        line-height: 1.5em;
     }
 }
 
@@ -518,20 +478,24 @@ div#bottom_pane {
 *****************************************************************************
 *****************************************************************************/
 @media all and (max-width: 768px) and (min-width: 641px), all and (max-device-width: 768px) and (min-device-width: 641px) {
+    :root {
+        --color-mint-green: #a68149;
+    }
+
     body {
-        font-size: 18px;
+        font-size: 14px;
         font-size: 2.2vw;
     }
     
     div.container {
-        width: 92%;
+        width: 98%;
     }
 
     /* All things related to top pane */
     #website_name {
         float  : left;
-        width  : 34%;
-        padding: 4% 3%;
+        width  : 31.89%;      /* 100% * (240px / (.98*768px)) */
+        padding: 3.83% 2.55%; /* 100% * (28.8px / (.98*768px)), 100% * (19.2px / (.98*768px)) */
     }
 
     #website_menu {
@@ -540,17 +504,17 @@ div#bottom_pane {
         position  : absolute;
         top       : 0;
         right     : 0;
-        width     : 60%;
-        padding   : 4.5% 0;
+        width     : 100%;
+        padding   : 4.38% 1.25%; /* 33.6px and 9.6px relative to (1*768px) */
     }
 
     #website_menu a {
-        margin : 0 2%;
-        padding: 2% 6% 2% 1%;
+        margin : 0 1.7%;
+        padding-right: 4%;
     }
 
     #website_menu a.last_link {
-        padding-right: 1%;
+        padding-right: 1.7%;
     }
 
 
@@ -699,9 +663,13 @@ div#bottom_pane {
 *****************************************************************************
 *****************************************************************************/
 @media all and (max-width: 640px), all and (max-device-width: 640px) {
+    :root {
+        --color-mint-green: #c81a4c;
+    }
+
     body {
         font-size: 18px;
-        font-size: 3.5vw;
+        font-size: 2.8vw;
     }
     
     div.container {
@@ -712,7 +680,7 @@ div#bottom_pane {
     #website_name {
         float  : none;
         width  : 100%;
-        padding: 6% 0;
+        padding: 5% 0;
     }
 
     #website_menu {
@@ -721,17 +689,17 @@ div#bottom_pane {
         float     : none;
         position  : static;
         width     : 100%;
-        padding   : 6.5% 0;
+        padding   : 5% 0;
     }
 
     #website_menu a {
         background-color: var(--color-separator);                                 /* Fallback */
         background      : -webkit-linear-gradient(white, var(--color-separator)); /* For Safari 5.1 to 6.0 */
-        background      : -o-linear-gradient(white, var(--color-separator));      /* For Opera 11.1 to 12.0 */
-        background      : -moz-linear-gradient(white, var(--color-separator));    /* For Firefox 3.6 to 15 */
-        background      : linear-gradient(white, var(--color-separator));         /* Standard syntax */
+        background      :      -o-linear-gradient(white, var(--color-separator)); /* For Opera 11.1 to 12.0 */
+        background      :    -moz-linear-gradient(white, var(--color-separator)); /* For Firefox 3.6 to 15 */
+        background      :         linear-gradient(white, var(--color-separator)); /* Standard syntax */
         
-        margin          : 0 1.6%;
+        margin          : 0 2.5%;
         border          : 1px solid var(--color-separator);
         padding         : 2% 4%;
     }
