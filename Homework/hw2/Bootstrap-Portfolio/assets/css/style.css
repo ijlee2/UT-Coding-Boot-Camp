@@ -82,9 +82,9 @@ figcaption strong {
 
 /* All things related to the middle pane */
 #middle_pane {
-    margin-top    : 120px;
-    padding-top   : 50px;
-    padding-bottom: 70px;
+    margin-top    : 120px !important;
+    padding-top   : 50px !important;
+    padding-bottom: 70px !important;
 }
 
 #middle_pane a, #bottom_pane a {
