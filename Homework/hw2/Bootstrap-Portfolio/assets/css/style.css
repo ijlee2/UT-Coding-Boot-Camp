@@ -23,7 +23,9 @@ body {
 }
 
 div.container {
-    width : 960px;
+    /*
+    width : 1170px;
+    */
     margin: auto;
 }
 
@@ -97,17 +99,24 @@ figcaption strong {
 #left_pane, #right_pane {
     background-color: var(--color-light-theme);
     border: 1px solid var(--color-separator);
+    /*
+    margin-top: 40px;
+    margin-bottom: 40px;
+    */
 }
 
 
 /* All things related to the bottom pane */
 #bottom_pane {
     background-color: var(--color-dark-theme);
-    color: var(--color-light-theme);
-    text-align: center;
-
-    border-top: 15px solid var(--color-mint-green);
-    padding: 40px 0 10px 0;
+    color           : var(--color-light-theme);
+    text-align      : center;
+    
+    /*
+    border-top      : 15px solid var(--color-mint-green);
+    padding-top     : 40px;
+    padding-bottom  : 10px;
+    */
 }
 
 #bottom_pane a {
@@ -122,7 +131,7 @@ figcaption strong {
     
 *****************************************************************************
 *****************************************************************************/
-@media all and (max-width: 980px) and (min-width: 769px), all and (max-device-width: 980px) and (min-device-width: 769px) {
+@media all and (max-width: 1200px) and (min-width: 993px), all and (max-device-width: 1200px) and (min-device-width: 993px) {
     :root {
         --color-mint-green: #b9c149;
     }
@@ -137,7 +146,7 @@ figcaption strong {
     
 *****************************************************************************
 *****************************************************************************/
-@media all and (max-width: 768px) and (min-width: 641px), all and (max-device-width: 768px) and (min-device-width: 641px) {
+@media all and (max-width: 992px) and (min-width: 769px), all and (max-device-width: 992px) and (min-device-width: 769px) {
     :root {
         --color-mint-green: #c81a4c;
     }
@@ -152,7 +161,7 @@ figcaption strong {
     
 *****************************************************************************
 *****************************************************************************/
-@media all and (max-width: 640px), all and (max-device-width: 640px) {
+@media all and (max-width: 768px), all and (max-device-width: 768px) {
     :root {
         --color-mint-green: #7486cb;
     }

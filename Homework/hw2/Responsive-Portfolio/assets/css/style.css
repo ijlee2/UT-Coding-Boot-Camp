@@ -59,7 +59,7 @@ figcaption strong {
 
 
 /* All things related to top pane */
-div#top_pane {
+#top_pane {
     background   : var(--color-light-theme);
     
     border-bottom: 2px solid var(--color-separator);
@@ -107,7 +107,7 @@ div#top_pane {
 
 
 /* All things related to the middle pane */
-div#middle_pane {
+#middle_pane {
     padding: 35px 0 40px 0;
 }
 
@@ -269,7 +269,7 @@ section.right_pane img:hover {
 
 
 /* All things related to the bottom pane */
-div#bottom_pane {
+#bottom_pane {
     background-color: var(--color-dark-theme);
     
     border-top      : 15px solid var(--color-mint-green);
@@ -453,7 +453,7 @@ div#bottom_pane {
 
 
     /* All things related to the middle pane */
-    div#middle_pane {
+    #middle_pane {
         padding: 4.56% 0 5.21% 0; /* 35px, 40px relative to 768px */
     }
 
@@ -546,7 +546,7 @@ div#bottom_pane {
 
 
     /* All things related to the bottom pane */
-    div#bottom_pane {
+    #bottom_pane {
         padding: 5.5%;
     }
 }
@@ -613,7 +613,7 @@ div#bottom_pane {
 
 
     /* All things related to the middle pane */
-    div#middle_pane {
+    #middle_pane {
         width  : 98%;
         padding: 5.47% 1% 6.25% 1%; /* 35px, 40px relative to 640 px */
     }
@@ -723,7 +723,7 @@ div#bottom_pane {
 
 
     /* All things related to the bottom pane */
-    div#bottom_pane {
+    #bottom_pane {
         padding: 5.5%;
     }
 }
