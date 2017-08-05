@@ -76,8 +76,8 @@ div#top_pane {
     text-align      : center;
 
     float           : left;
-    width           : 25%;
-    padding         : 3% 2%;
+    width           : 240px;         /* 25% of 960px */
+    padding         : 28.8px 19.2px; /* 3%, 2% of 960px */
 }
 
 #website_menu {
@@ -85,7 +85,7 @@ div#top_pane {
     letter-spacing: 0.02em;
 
     float         : right;
-    padding       : 3.5% 1%;
+    padding       : 33.6px 9.6px; /* 3.5%, 1% of 960px */
 }
 
 #website_menu a {
@@ -107,18 +107,15 @@ div#top_pane {
 }
 
 
-/*
-   All things related to the middle pane
-   The left and right panes have a width of 650px and 270px, respectively.
-*/
+/* All things related to the middle pane */
 div#middle_pane {
     padding: 35px 0 40px 0;
 }
 
 section.left_pane {
     background-color: var(--color-top-pane);
-    box-shadow      : 0 4px  8px  6px rgba(0, 0, 0, 0.12),
-                      0 6px 20px 10px rgba(0, 0, 0, 0.07);
+    box-shadow      : 0 3px  6px 4px rgba(0, 0, 0, 0.12),
+                      0 4px 14px 6px rgba(0, 0, 0, 0.07);
     
     float           : left;
     width           : 550px;
@@ -137,6 +134,7 @@ section.left_pane h1 {
     padding-bottom: 20px;
 }
 
+
 /* Begin: index.html */
 section.left_pane figure.profile_photo img {
     float       : left;
@@ -146,6 +144,7 @@ section.left_pane figure.profile_photo img {
     margin      : 0.4em 25px 0.4em 0; /* 50% of 0.8em (line height of p) */
 }
 /* End: index.html */
+
 
 /* Begin: portfolio.html */
 section.left_pane figure.portfolio {
@@ -184,6 +183,7 @@ section.left_pane figure.portfolio figcaption {
     padding         : 15px;
 }
 /* End: portfolio.html */
+
 
 /* Begin: contact.html */
 section.left_pane label {
@@ -224,22 +224,23 @@ section.left_pane input#form_submit {
     text-align      : center;
     
     display: block;
-    width: 30%;
-    margin-top: 40px;
-    padding: 10px 0;
+    width: 36%;
+    margin-top: 8%;
+    padding: 2% 0;
 }
 /* End: contact.html */
+
 
 section.left_pane p {
     line-height   : 1.8em;
     
-    padding-bottom: 20px;
+    padding-bottom: 1.2em;
 }
 
 section.right_pane {
     background-color: var(--color-top-pane);
-    box-shadow      : 0 4px  8px  6px rgba(0, 0, 0, 0.12),
-                      0 6px 20px 10px rgba(0, 0, 0, 0.07);
+    box-shadow      : 0 3px  6px 4px rgba(0, 0, 0, 0.12),
+                      0 4px 14px 6px rgba(0, 0, 0, 0.07);
     
     float           : right;
     width           : 220px;
@@ -314,19 +315,13 @@ div#bottom_pane {
     
 
     /* All things related to top pane */
-    #website_name {
-        width  : 240px;         /* 25% of 960px */
-        padding: 28.8px 19.2px; /* 3%, 2% of 960px */
-    }
-
     #website_menu {
         text-align: right;
         
         position  : absolute;
+        width     : 440px;
         top       : 0;
         right     : 0;
-        width     : 440px;
-        padding   : 33.6px 9.6px;
     }
 
 
@@ -334,21 +329,16 @@ div#bottom_pane {
     section.left_pane {
         font-size: 1.77vw;                  /* 17px relative to 960px */
 
-        float    : left;
         width    : 57.29%;                  /* 550px relative to 960px */
         margin   : 4.17% 0;                 /* 40px relative to 960px */
         padding  : 4.17% 5.21% 3.13% 5.21%; /* 40px, 50px, 30px, 50px relative to 960px */
-    }
-
-    section.left_pane:hover {
-        box-shadow: 0 4px  8px  6px rgba(250, 242, 203, 0.60),
-                    0 6px 20px 10px rgba(250, 242, 203, 0.52);
     }
 
     section.left_pane h1 {
         margin-bottom : 5.45%; /* 30px relative to 550px */
         padding-bottom: 3.64%; /* 20px relative to 550px */
     }
+
 
     /* Begin: index.html */
     section.left_pane figure.profile_photo img {
@@ -363,6 +353,7 @@ div#bottom_pane {
     }
     /* End: index.html */
 
+
     /* Begin: portfolio.html */
     section.left_pane figure.portfolio {
         float        : none;
@@ -375,43 +366,32 @@ div#bottom_pane {
     }
 
     section.left_pane figure.portfolio figcaption {
-        float           : none;
-        width           : 90.6%;
-        bottom          : 5%;
-        left            : 0;
-        padding         : 5%;
+        float  : none;
+        width  : 90.68%;
+        bottom : 5%;
+        left   : 0;
+        padding: 5%;
     }
     /* End: portfolio.html */
 
+
     /* Begin: contact.html */
     section.left_pane label {
-        margin-bottom: 4%;
+        margin-bottom: 2.73%; /* 15px relative to 550px */
     }
 
     section.left_pane input {
-        width        : 94%;
-        margin-bottom: 4%;
-        padding      : 2% 2% 2% 3%;
+        margin-bottom: 2.73%;                   /* 15px relative to 550px */
+        padding      : 1.45% 0.72% 1.45% 2.18%; /* 8px, 4px, 8px, 12px relative to 550px */
     }
 
     section.left_pane textarea {
-        max-width    : 94%;
-        width        : 94%;
-        height       : auto;
-        margin-bottom: 4%;
-        padding      : 2% 2% 2% 3%;
-    }
-
-    section.left_pane input#form_submit {
-        width     : 40%;
-        margin-top: 10%;
-        padding   : 3%;
+        height       : 29.09%;                  /* 160px relative to 550px */
+        margin-bottom: 2.73%;                   /* 15px relative to 550px */
+        padding      : 1.45% 0.72% 1.45% 2.18%; /* 8px, 4px, 8px, 12px relative to 550px */
     }
     /* End: contact.html */
 
-    section.left_pane p {
-        padding-bottom: 5%;
-    }
 
     section.right_pane {
         font-size: 1.77vw;                  /* 17px relative to 960px */
@@ -421,34 +401,14 @@ div#bottom_pane {
         padding  : 4.69% 2.60% 3.65% 2.60%; /* 45px, 25px, 35px, 25px relative to 960px */
     }
 
-    section.right_pane:hover {
-        box-shadow      : 0 2px 4px 2px rgba(250, 242, 203, 0.68),
-                          0 6px 8px 3px rgba(250, 242, 203, 0.54);
-    }
-
     section.right_pane h2 {
         margin-top    : 0.91%;  /* 2px relative to 220px */
         margin-bottom : 11.23%; /* 24.71px relative to 220px */
         padding-bottom: 8.18%;  /* 18px relative to 220px */
     }
 
-    section.right_pane figure {
-        margin: auto;
-    }
-
-    section.right_pane img {
-        width : 36%;
-        margin: 6%;
-    }
-
-    section.right_pane img:hover {
-        background-color: var(--color-separator);
-        opacity         : 0.65;
-    }
-
 
     /* All things related to the bottom pane */
-    /* No change needed */
 }
 
 
@@ -487,12 +447,12 @@ div#bottom_pane {
         top       : 0;
         right     : 0;
         width     : 100%;
-        padding   : 4.38% 1.25%; /* 33.6px, 9.6px relative to (1*768px) */
+        padding   : 4.38% 1.25%; /* 33.6px, 9.6px relative to 768px */
     }
 
     #website_menu a {
-        margin       : 0 1.63%; /* 12.5px relative to (1*768px) */
-        padding-right: 3.90%;   /* 30px relative to (1*768px) */
+        margin       : 0 1.63%; /* 12.5px relative to 768px */
+        padding-right: 3.90%;   /* 30px relative to 768px */
     }
 
     #website_menu a.last_link {
@@ -502,17 +462,14 @@ div#bottom_pane {
 
     /* All things related to the middle pane */
     div#middle_pane {
-        padding: 2% 0 4% 0;
+        padding: 4.56% 0 5.21% 0; /* 35px, 40px relative to 768px */
     }
 
     section.left_pane {
-        box-shadow: 0 3px  6px 4px rgba(0, 0, 0, 0.12),
-                    0 4px 14px 6px rgba(0, 0, 0, 0.07);
-        
         float     : none;
-        width     : 88%;
-        margin    : 8% 0 7% 0;
-        padding   : 6%;
+        width     : 89.58%;
+        margin    : 4.17% 0;                 /* Same as desktop */
+        padding   : 4.17% 5.21% 3.13% 5.21%; /* Same as desktop */
     }
 
     section.left_pane:hover {
@@ -521,19 +478,21 @@ div#bottom_pane {
     }
 
     section.left_pane h1 {
-        margin-bottom : 6%;
-        padding-bottom: 5%;
+        margin-bottom : 5.45%; /* Same as desktop */
+        padding-bottom: 3.64%; /* Same as desktop */
     }
+
 
     /* Begin: index.html */
     section.left_pane figure.profile_photo img {
         float     : left;
-        max-width : 45%;
-        max-height: 45%;
-        width     : 45%;
-        margin    : 0 5% 5% 0;
+        max-width : 27%;
+        max-height: 27%;
+        width     : 27%;
+        margin    : 0.4em 5% 1.6em 0;
     }
     /* End: index.html */
+
 
     /* Begin: portfolio.html */
     section.left_pane figure.portfolio {
@@ -542,58 +501,43 @@ div#bottom_pane {
     }
 
     section.left_pane figure.portfolio img {
-        width : 100%;
-        margin: 0;
+        width : 70%;
+        margin: auto;
     }
 
     section.left_pane figure.portfolio figcaption {
-        float           : none;
-        width           : 90.6%;
-        bottom          : 5%;
-        left            : 0;
-        padding         : 5%;
+        float  : none;
+        width  : 60.68%;
+        bottom : 5%;
+        left   : 14.66%;
+        padding: 5%;
     }
     /* End: portfolio.html */
 
+
     /* Begin: contact.html */
     section.left_pane label {
-        margin-bottom: 4%;
+        margin-bottom: 2.73%; /* 15px relative to 550px */
     }
 
     section.left_pane input {
-        width        : 94%;
-        margin-bottom: 4%;
-        padding      : 2% 2% 2% 3%;
+        margin-bottom: 2.73%;                   /* 15px relative to 550px */
+        padding      : 1.45% 0.72% 1.45% 2.18%; /* 8px, 4px, 8px, 12px relative to 550px */
     }
 
     section.left_pane textarea {
-        max-width    : 94%;
-        width        : 94%;
-        height       : auto;
-        margin-bottom: 4%;
-        padding      : 2% 2% 2% 3%;
-    }
-
-    section.left_pane input#form_submit {
-        width     : 40%;
-        margin-top: 10%;
-        padding   : 3%;
+        height       : 29.09%;                  /* 160px relative to 550px */
+        margin-bottom: 2.73%;                   /* 15px relative to 550px */
+        padding      : 1.45% 0.72% 1.45% 2.18%; /* 8px, 4px, 8px, 12px relative to 550px */
     }
     /* End: contact.html */
 
-    section.left_pane p {
-        padding-bottom: 5%;
-    }
-
     section.right_pane {
-        box-shadow: 0 3px  6px 4px rgba(0, 0, 0, 0.12),
-                    0 4px 14px 6px rgba(0, 0, 0, 0.07);
-        
-        clear     : both;
-        float     : none;
-        width     : 88%;
-        margin    : 7% 0 8% 0;
-        padding   : 6%;
+        clear  : both;
+        float  : none;
+        width  : 89.58%;
+        margin : 4.17% 0;                 /* Same as desktop */
+        padding: 4.17% 5.21% 3.13% 5.21%; /* Same as desktop */
     }
 
     section.right_pane:hover {
@@ -606,10 +550,6 @@ div#bottom_pane {
         padding-bottom: 5%;
     }
 
-    section.right_pane figure {
-        margin: auto;
-    }
-
     section.right_pane img {
         width : 15%;
         margin: 2%;
@@ -618,12 +558,7 @@ div#bottom_pane {
 
     /* All things related to the bottom pane */
     div#bottom_pane {
-        border-top: 10px solid var(--color-mint-green);
-        padding   : 6%;
-    }
-
-    #copyright {
-        line-height: 1.5em;
+        padding: 5.5%;
     }
 }
 
@@ -647,7 +582,7 @@ div#bottom_pane {
     }
     
     div.container {
-        width: 100%;
+        width: 98%;
     }
 
     /* All things related to top pane */
@@ -663,7 +598,7 @@ div#bottom_pane {
         float     : none;
         position  : static;
         width     : 100%;
-        padding   : 4% 0;
+        padding   : 5% 0;
     }
 
     #website_menu a {
@@ -690,17 +625,14 @@ div#bottom_pane {
 
     /* All things related to the middle pane */
     div#middle_pane {
-        padding: 4% 0 6% 0;
+        padding: 5.47% 0 6.25% 0; /* 35px, 40px relative to 640 px */
     }
 
     section.left_pane {
-        box-shadow: 0 3px  6px 4px rgba(0, 0, 0, 0.12),
-                    0 4px 14px 6px rgba(0, 0, 0, 0.07);
-        
         float     : none;
-        width     : 76%;
-        margin    : 10% 6% 10% 6%;
-        padding   : 6%;
+        width     : 89.58%;
+        margin    : 4.17% 0;                 /* Same as tablet */
+        padding   : 4.17% 5.21% 3.13% 5.21%; /* Same as tablet */
     }
 
     section.left_pane:hover {
@@ -713,6 +645,7 @@ div#bottom_pane {
         padding-bottom: 5%;
     }
 
+
     /* Begin: index.html */
     section.left_pane figure.profile_photo img {
         float     : none;
@@ -723,6 +656,7 @@ div#bottom_pane {
     }
     /* End: index.html */
 
+
     /* Begin: portfolio.html */
     section.left_pane figure.portfolio {
         float        : none;
@@ -730,60 +664,48 @@ div#bottom_pane {
     }
 
     section.left_pane figure.portfolio img {
-        width : 100%;
-        margin: 0;
+        width : 70%;
+        margin: auto;
     }
 
     section.left_pane figure.portfolio figcaption {
-        float           : none;
-        width           : 90.6%;
-        bottom          : 5%;
-        left            : 0;
-        padding         : 5%;
+        float  : none;
+        width  : 60.68%;
+        bottom : 5%;
+        left   : 14.66%;
+        padding: 5%;
     }
     /* End: portfolio.html */
 
+
     /* Begin: contact.html */
     section.left_pane label {
-        margin-bottom: 4%;
+        margin-bottom: 2.73%; /* 15px relative to 550px */
     }
 
     section.left_pane input {
-        width        : 94%;
-        margin-bottom: 4%;
-        padding      : 2% 2% 2% 3%;
+        margin-bottom: 2.73%;                   /* 15px relative to 550px */
+        padding      : 1.45% 0.72% 1.45% 2.18%; /* 8px, 4px, 8px, 12px relative to 550px */
     }
 
     section.left_pane textarea {
-        max-width    : 94%;
-        width        : 94%;
-        height       : auto;
-        margin-bottom: 4%;
-        padding      : 2% 2% 2% 3%;
-    }
-
-    section.left_pane input#form_submit {
-        width     : 40%;
-        margin-top: 10%;
-        padding   : 3%;
+        height       : 29.09%;                  /* 160px relative to 550px */
+        margin-bottom: 2.73%;                   /* 15px relative to 550px */
+        padding      : 1.45% 0.72% 1.45% 2.18%; /* 8px, 4px, 8px, 12px relative to 550px */
     }
     /* End: contact.html */
 
+
     section.left_pane p {
-        clear         : both;
-        
-        padding-bottom: 5%;
+        clear: both;
     }
 
     section.right_pane {
-        box-shadow: 0 3px  6px 4px rgba(0, 0, 0, 0.12),
-                    0 4px 14px 6px rgba(0, 0, 0, 0.07);
-        
-        clear     : both;
-        float     : none;
-        width     : 76%;
-        margin    : 5% 6% 10% 6%;
-        padding   : 6%;
+        clear  : both;
+        float  : none;
+        width  : 89.58%;
+        margin : 4.17% 0;                 /* Same as tablet */
+        padding: 4.17% 5.21% 3.13% 5.21%; /* Same as tablet */
     }
 
     section.right_pane:hover {
@@ -794,10 +716,6 @@ div#bottom_pane {
     section.right_pane h2 {
         margin-bottom : 6%;
         padding-bottom: 5%;
-    }
-
-    section.right_pane figure {
-        margin: auto;
     }
 
     section.right_pane img {
@@ -813,11 +731,6 @@ div#bottom_pane {
 
     /* All things related to the bottom pane */
     div#bottom_pane {
-        border-top: 10px solid var(--color-mint-green);
-        padding   : 8%;
-    }
-
-    #copyright {
-        line-height: 1.5em;
+        padding: 5.5%;
     }
 }
