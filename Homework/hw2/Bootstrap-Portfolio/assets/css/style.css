@@ -113,7 +113,7 @@ figcaption strong {
 }
 
 .left_pane figure.portfolio img {
-    border    : 2px solid var(--color-separator);
+    border: 2px solid var(--color-separator);
 }
 
 .left_pane figure.portfolio figcaption {
@@ -170,7 +170,6 @@ figcaption strong {
     margin          : 8% 0 4% 0;
     padding         : 1.5% 0;
 }
-
 /* End: contact.html */
 
 
@@ -256,6 +255,36 @@ figcaption strong {
 @media all and (max-width: 768px), all and (max-device-width: 768px) {
     :root {
         --color-mint-green: #7486cb;
+    }
+
+    nav {
+        float: left;
+        width: 100%;
+    }
+
+    .navbar-brand {
+        width: 100%;
+    }
+
+    #hamburger_menu {
+        background-color: var(--color-dark-theme);
+
+        position: absolute;
+        top     : 0;
+        right   : 0;
+        border  : 1px solid var(--color-light-theme);
+    }
+
+    #hamburger_menu span {
+        background-color: var(--color-light-theme);
+    }
+    
+    #top_pane button {
+        margin-top: 18px;
+    }
+
+    #top_pane button span.icon-bar {
+        margin: 6px 5px;
     }
 
     .left_pane {
