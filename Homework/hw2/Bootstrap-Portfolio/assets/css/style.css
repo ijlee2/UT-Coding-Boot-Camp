@@ -90,8 +90,8 @@ figcaption strong {
 #middle_pane a, #bottom_pane a {
     text-decoration: underline;
 
-    position       : static;
-    top            : 0;
+    position       : static !important;
+    top            : 0 !important;
 }
 
 .left_pane, .right_pane {
@@ -301,9 +301,9 @@ figcaption strong {
     }
     
     #middle_pane {
-        position  : relative;
-        margin-top: 0;
-        top       : 40px;
+        position  : relative !important;
+        margin-top: 0 !important;
+        top       : 40px !important;
     }
 
     .left_pane {
@@ -325,7 +325,7 @@ figcaption strong {
     }
 
     #bottom_pane {
-        position: relative;
-        top     : 40px;
+        position: relative !important;
+        top     : 40px !important;
     }
 }
