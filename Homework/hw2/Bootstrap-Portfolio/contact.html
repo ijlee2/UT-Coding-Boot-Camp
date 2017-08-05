@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="This is the official portfolio page of Isaac J. Lee, an aspiring full-stack developer.">
         <meta name="keywords" content="Isaac J. Lee, portfolio, biography, contact, full-stack, web developer">
         <meta name="author" content="Isaac J. Lee">
@@ -16,27 +17,29 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     </head>
     <body>
         <!-- Top pane -->
         <nav class="navbar navbar-default">
-            <div class="container">
+            <div id="top_pane" class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Isaac J. Lee</a>
+                    <a class="navbar-brand" href="index.html">Isaac J. Lee</a>
                 </div>
+
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index.html">About Me</a></li>
                     <li><a href="portfolio.html">Portfolio</a></li>
-                    <li class="active"><a href="#">Contact Me</a></li>
+                    <li class="active"><a href="#">Contact</a></li>
                 </ul>
           </div>
         </nav>
         
         <!-- Middle pane -->
-        <div class="container">
+        <div id="middle_pane" class="container">
             <div class="row">
                 <!-- Left pane -->
-                <div class="col-xs-12 col-md-8">
+                <div id="left_pane" class="col-xs-12 col-md-8">
                     <h1>Contact</h1>
                     <hr>
 
@@ -64,7 +67,7 @@
                 </div>
 
                 <!-- Right pane -->
-                <div class="col-xs-12 col-md-4">
+                <div id="right_pane" class="col-xs-12 col-md-4">
                     <h2>Connect with Me</h2>
                     <hr>
 
@@ -98,7 +101,7 @@
         </div>
 
         <!-- Bottom pane -->
-        <div class="container">
+        <div id="bottom_pane" class="container">
             <div class="row">
                 <div class="col-xs-12">
                     <p id="copyright">Copyright © 2017 by <a href="mailto:isaacjlee@hotmail.com">Isaac J. Lee</a>, all rights reserved.</p>
