@@ -137,18 +137,17 @@ section.left_pane h1 {
 
 /* Begin: index.html */
 section.left_pane figure.profile_photo img {
-    float       : left;
-    max-width   : 100%;
-    max-height  : 100%;
-    width       : 200px;
-    margin      : 0.4em 25px 0.4em 0; /* 50% of 0.8em (line height of p) */
+    float     : left;
+    max-width : 100%;
+    max-height: 100%;
+    width     : 200px;
+    margin    : 0.4em 25px 0.4em 0; /* 50% of 0.8em (line height of p) */
 }
 /* End: index.html */
 
 
 /* Begin: portfolio.html */
 section.left_pane figure.portfolio {
-    display      : table;
     float        : left;
     position     : relative; /* For figcaption (position: absolute) */
     margin-top   : 0.4em;
@@ -157,12 +156,11 @@ section.left_pane figure.portfolio {
 
 section.left_pane figure.portfolio img {
     border    : 2px solid var(--color-separator);
-
-    display   : table-cell;
+    
     max-width : 100%;
     max-height: 100%;
     width     : 226px;
-    margin    : 0 20px;
+    margin    : 0 20px 20px 20px;
 }
 
 section.left_pane figure.portfolio figcaption {
@@ -172,13 +170,9 @@ section.left_pane figure.portfolio figcaption {
     line-height     : 1.2em;
     text-align      : center;
 
-    display         : table-cell;
-    float           : left;
     position        : absolute;
-    max-width       : 100%;
-    max-height      : 20%;
     width           : 200px;
-    bottom          : 20px;
+    bottom          : 40px;
     left            : 20px;
     padding         : 15px;
 }
@@ -223,10 +217,10 @@ section.left_pane input#form_submit {
     font-weight     : bold;
     text-align      : center;
     
-    display: block;
-    width: 36%;
-    margin-top: 8%;
-    padding: 2% 0;
+    display         : block;
+    width           : 36%;
+    margin-top      : 8%;
+    padding         : 2% 0;
 }
 /* End: contact.html */
 
@@ -356,21 +350,20 @@ div#bottom_pane {
 
     /* Begin: portfolio.html */
     section.left_pane figure.portfolio {
-        float        : none;
-        margin-bottom: 4%;
+        width : 70%;
+        margin: 0 15% 4% 15%;
     }
 
     section.left_pane figure.portfolio img {
         width : 100%;
-        margin: 0;
+        margin: 1.82% auto;
     }
 
     section.left_pane figure.portfolio figcaption {
-        float  : none;
-        width  : 90.68%;
-        bottom : 5%;
+        width  : 90%;
+        bottom : 7.5%;
         left   : 0;
-        padding: 5%;
+        padding: 5.5%;
     }
     /* End: portfolio.html */
 
@@ -437,7 +430,7 @@ div#bottom_pane {
     /* All things related to top pane */
     #website_name {
         width  : 31.90%;      /* 240px relative to (.98*768px) */
-        padding: 3.83% 2.55%; /* 28.8px, 19.2px relative to (.98*768px)) */
+        padding: 3.83% 2.55%; /* 28.8px, 19.2px relative to (.98*768px) */
     }
 
     #website_menu {
@@ -466,10 +459,9 @@ div#bottom_pane {
     }
 
     section.left_pane {
-        float     : none;
-        width     : 89.58%;
-        margin    : 4.17% 0;                 /* Same as desktop */
-        padding   : 4.17% 5.21% 3.13% 5.21%; /* Same as desktop */
+        width  : 89.58%;
+        margin : 4.17% 0 7% 0;            /* Top margin same as desktop */
+        padding: 4.17% 5.21% 3.13% 5.21%; /* Same as desktop */
     }
 
     section.left_pane:hover {
@@ -485,7 +477,6 @@ div#bottom_pane {
 
     /* Begin: index.html */
     section.left_pane figure.profile_photo img {
-        float     : left;
         max-width : 27%;
         max-height: 27%;
         width     : 27%;
@@ -496,21 +487,20 @@ div#bottom_pane {
 
     /* Begin: portfolio.html */
     section.left_pane figure.portfolio {
-        float        : none;
-        margin-bottom: 4%;
+        width : 41.2%;
+        margin: 0 4% 5% 4%;
     }
 
     section.left_pane figure.portfolio img {
-        width : 70%;
-        margin: auto;
+        width : 100%;
+        margin: 1.5%;
     }
 
     section.left_pane figure.portfolio figcaption {
-        float  : none;
-        width  : 60.68%;
-        bottom : 5%;
-        left   : 14.66%;
-        padding: 5%;
+        width  : 94.5%;
+        bottom : 10%;
+        left   : 1.5%;
+        padding: 3.5%;
     }
     /* End: portfolio.html */
 
@@ -577,12 +567,12 @@ div#bottom_pane {
     }
 
     body {
-        font-size: 17px;
-        font-size: 2.66vw;
+        font-size: 18px;
+        font-size: 2.81vw;
     }
     
     div.container {
-        width: 98%;
+        width: 100%;
     }
 
     /* All things related to top pane */
@@ -625,14 +615,14 @@ div#bottom_pane {
 
     /* All things related to the middle pane */
     div#middle_pane {
-        padding: 5.47% 0 6.25% 0; /* 35px, 40px relative to 640 px */
+        width: 98%;
+        padding: 5.47% 1% 6.25% 1%; /* 35px, 40px relative to 640 px */
     }
 
     section.left_pane {
-        float     : none;
-        width     : 89.58%;
-        margin    : 4.17% 0;                 /* Same as tablet */
-        padding   : 4.17% 5.21% 3.13% 5.21%; /* Same as tablet */
+        width  : 89.58%;
+        margin : 4.17% 0 7% 0;            /* Same as tablet */
+        padding: 4.17% 5.21% 3.13% 5.21%; /* Same as tablet */
     }
 
     section.left_pane:hover {
@@ -648,32 +638,36 @@ div#bottom_pane {
 
     /* Begin: index.html */
     section.left_pane figure.profile_photo img {
-        float     : none;
-        max-width : 100%;
-        max-height: 100%;
-        width     : 100%;
-        margin    : 5% 0;
+        display      : block;
+        float        : none;
+        max-width    : 50%;
+        max-height   : 50%;
+        width        : 50%;
+        margin       : auto;
+        margin-top   : 0.4em;
+        margin-bottom: 1.6em;
     }
     /* End: index.html */
 
 
     /* Begin: portfolio.html */
     section.left_pane figure.portfolio {
-        float        : none;
-        margin-bottom: 4%;
+        width : 70%;
+        margin: 0 15% 4% 15%;
     }
 
     section.left_pane figure.portfolio img {
-        width : 70%;
-        margin: auto;
+        width        : 100%;
+        margin       : auto;
+        margin-top   : 1.82%;
+        margin-bottom: 1.82%;
     }
 
     section.left_pane figure.portfolio figcaption {
-        float  : none;
-        width  : 60.68%;
-        bottom : 5%;
-        left   : 14.66%;
-        padding: 5%;
+        width  : 90%;
+        bottom : 7.5%;
+        left   : 0;
+        padding: 5.5%;
     }
     /* End: portfolio.html */
 
