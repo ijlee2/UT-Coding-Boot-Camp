@@ -43,7 +43,7 @@ p {
     padding-bottom: 1.2em;
 }
 
-p strong {
+p strong, label strong {
     color      : var(--color-text-highlight);
     font-weight: bold;
 }
@@ -105,8 +105,73 @@ figcaption strong {
 /* Begin: index.html */
 /* End: index.html */
 
-/* Begin: index.html */
-/* End: index.html */
+
+/* Begin: portfolio.html */
+.left_pane figure.portfolio {
+    position: relative; /* For figcaption (position: absolute) */
+    margin-bottom: 20% !important;
+}
+
+.left_pane figure.portfolio img {
+    border    : 2px solid var(--color-separator);
+}
+
+.left_pane figure.portfolio figcaption {
+    background-color: var(--color-mint-green);
+    color           : var(--color-light-theme);
+    font-size       : 1.1em;
+    line-height     : 1.2em;
+    text-align      : center;
+
+    position        : absolute;
+    width           : 100%;
+    bottom          : 7.5%;
+    left            : 0;
+    padding         : 5.5%;
+}
+/* End: porfolio.html */
+
+
+/* Begin: contact.html */
+.left_pane label {
+    font-size    : 1.3em;
+    font-weight  : bold;
+
+    display      : block;
+    margin-bottom: 0.5em;
+}
+
+.left_pane input {
+    font-size    : 1.1em;
+    
+    display      : block;
+    margin-bottom: 0.5em;
+    padding      : 1em 0.5em 1em 0.75em;
+}
+
+.left_pane textarea {
+    font-family  : "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    font-size    : 1.1em;
+
+    display      : block;
+    margin-bottom: 0.5em;
+    padding      : 0.5em 0.5em 0.5em 0.75em;
+}
+
+.left_pane input#form_submit {
+    background-color: var(--color-mint-green);
+    color           : var(--color-light-theme);
+    font-size       : 1.3em;
+    font-weight     : bold;
+    text-align      : center;
+    
+    display         : block;
+    width           : 36%;
+    margin          : 8% 0 4% 0;
+    padding         : 1.5% 0;
+}
+
+/* End: contact.html */
 
 
 .right_pane img {
@@ -163,6 +228,10 @@ figcaption strong {
     :root {
         --color-mint-green: #c81a4c;
     }
+
+    .left_pane {
+        margin-bottom: 7% !important;
+    }
 }
 
 
@@ -179,8 +248,7 @@ figcaption strong {
         --color-mint-green: #7486cb;
     }
 
-    #middle_pane {
-        padding-top   : 4.56%; /* 35px relative to 768 px */
-        padding-bottom: 5.21%; /* 40px relative to 768 px */
+    .left_pane {
+        margin-bottom: 7% !important;
     }
 }
