@@ -89,6 +89,9 @@ figcaption strong {
 
 #middle_pane a, #bottom_pane a {
     text-decoration: underline;
+
+    position       : static;
+    top            : 0;
 }
 
 .left_pane, .right_pane {
