@@ -82,6 +82,7 @@ figcaption strong {
 
 /* All things related to the middle pane */
 #middle_pane {
+    margin-top    : 120px;
     padding-top   : 50px;
     padding-bottom: 70px;
 }
@@ -260,10 +261,15 @@ figcaption strong {
     body {
         font-size: 14px;
     }
-
+    
     nav {
         float: left;
         width: 100%;
+    }
+
+    .navbar-fixed-top {
+        position    : relative;
+        border-width: 0 0 1px;
     }
 
     .navbar-brand {
@@ -290,6 +296,12 @@ figcaption strong {
     #top_pane button span.icon-bar {
         margin: 6px 5px;
     }
+    
+    #middle_pane {
+        position  : relative;
+        margin-top: 0;
+        top       : 40px;
+    }
 
     .left_pane {
         margin-bottom: 7% !important;
@@ -307,5 +319,10 @@ figcaption strong {
     .right_pane img:hover {
         background-color: var(--color-light-theme);
         opacity         : 1;
+    }
+
+    #bottom_pane {
+        position: relative;
+        top     : 40px;
     }
 }
