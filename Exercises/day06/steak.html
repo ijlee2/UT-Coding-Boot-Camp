@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Steak?</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var likesSteak = confirm("Do you eat steak?");
+
+      var age = prompt("Enter your age:");
+
+      if (likesSteak) {
+        document.write("<h1>Here's a Steak Sandwich!</h1>");
+      } else {
+        document.write("<h1>Here's a Tofu Stir-Fry!</h1>");
+      }
+
+      if (parseInt(age) < 21) {
+        alert("No Sake for you!");
+      }
+    </script>
+  </body>
+</html>

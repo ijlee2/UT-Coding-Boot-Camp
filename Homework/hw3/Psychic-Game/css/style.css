@@ -1,0 +1,43 @@
+:root {
+    /* Define color scheme */
+    --color-light-theme   : #ffffff;
+    --color-dark-theme    : #666666;
+    --color-mint-green    : #4aaaa5;
+    --color-separator     : #d8d8d8;
+    --color-text          : #202020;
+    --color-text-highlight: #ff6600;
+}
+
+body {
+    font-family: "Architects Daughter", cursive;
+    font-size  : 30px;
+}
+
+/* Total width of 640px */
+.container {
+    width  : 520px;
+    margin : auto;
+    padding: 60px;
+}
+
+h1 {
+    color         : var(--color-mint-green);
+    font-family   : "The Girl Next Door", cursive;
+    font-size     : 1.8em;
+    font-weight   : bold;
+    letter-spacing: 0.02em;
+
+    margin        : 0 0 5% 0;
+}
+
+p {
+    letter-spacing: 0.015em;
+    line-height   : 1.3em;
+
+    margin        : 0 0 2% 0;
+}
+
+p strong {
+    color      : var(--color-text-highlight);
+    font-weight: bold;
+}

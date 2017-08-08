@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Exercise</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var myFavoriteBands = ["The Beatles", "Prince", "Daft Punk", "Tupac", "Otis Redding", "Litvintroll", "Earl Sweatshirt"];
+
+      var yourFavoriteBand = prompt("Enter your favorite band: ").toLowerCase();
+
+      var isAMatch = false;
+
+      for (var i = 0; i < myFavoriteBands.length; i++) {
+        if (yourFavoriteBand === myFavoriteBands[i].toLowerCase()) {
+          isAMatch = true;
+
+          break;
+        }
+      }
+
+      if (isAMatch) {
+        alert("YEAH, I LOVE THEM!");
+
+      } else {
+        alert("Nath, they're pretty lame...");
+
+      }
+
+    </script>
+  </body>
+</html>
