@@ -5,11 +5,8 @@
     
 *****************************************************************************
 *****************************************************************************/
-// Game stats and variables
 var numWins, numLosses;
 var answer;
-
-// User inputs
 var guesses, str_guesses, numTriesLeft;
 
 
@@ -23,7 +20,7 @@ var guesses, str_guesses, numTriesLeft;
 *****************************************************************************/
 function startNewGame() {
     // Create a random letter between a and z
-    answer = String.fromCharCode(Math.floor(Math.random() * 25 + 97));
+    answer = String.fromCharCode(Math.floor(26 * Math.random()) + 97);
 
     // Display the answer for debugging
     $("#answer").text(answer);
@@ -36,12 +33,19 @@ function startNewGame() {
     // Display variables
     $("#numWins").text(numWins);
     $("#numLosses").text(numLosses);
-
     $("#numTriesLeft").text(numTriesLeft);
     $("#guesses").text(str_guesses);
 }
 
-// Start a new game when the page loads for the first time
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Start a new game when the page loads for the first time
+    
+*****************************************************************************
+*****************************************************************************/
 $(document).ready(function() {
     // Reset stats
     numWins   = 0;
@@ -69,13 +73,15 @@ $(document).on("keypress", function(e) {
         if (guesses.indexOf(yourGuess) === -1) {
             numTriesLeft--;
 
+            $("#numTriesLeft").text(numTriesLeft);
+            
+            // Record the letter
             guesses.push(yourGuess);
             str_guesses += (yourGuess + " ");
 
-            $("#numTriesLeft").text(numTriesLeft);
             $("#guesses").text(str_guesses);
 
-            // Check if the guess is correct
+            // Check if the user has guessed the letter correctly
             if (yourGuess === answer) {
                 numWins++;
 
