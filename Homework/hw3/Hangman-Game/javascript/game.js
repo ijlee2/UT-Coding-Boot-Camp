@@ -5,11 +5,10 @@
     
 *****************************************************************************
 *****************************************************************************/
-// Game stats and variables
+// Game stats
 var numWins, numLosses;
-var answer, arr_answer, str_answer;
 
-// User inputs
+var answer, arr_answer, str_answer;
 var guesses, str_guesses, numTriesLeft;
 
 

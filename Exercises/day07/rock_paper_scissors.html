@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>Rock, Paper, Scissors Game</h1>
+
+<p>Choose either "r" for rock, "p" for paper, or "s" for scissors</p>
+
+<p>You chose: <span id="userChoice"></span></p>
+
+<p>Computer Chose: <span id="buttFace"></span></p>
+
+<p>Wins: <span id="wins"></span></p>
+<p>Losses:<span id="losses"></span></p>
+<p>Ties:<span id="ties"></span></p>
+
+
+<script type="text/javascript">
+
+	var myChoice, computerChoice;
+	var numWins = 0, numLosses = 0, numTies = 0;
+
+	document.onkeyup = function(event){
+		myChoice = event.key.toLowerCase();
+		
+		if ((myChoice === "r") || (myChoice === "p") || (myChoice === "s")) {
+			document.getElementById("userChoice").textContent = myChoice;
+
+			var choices = ["r","s","p"];
+			var index = Math.floor(Math.random() * 3);
+			computerChoice = choices[index];
+			document.getElementById("buttFace").textContent = computerChoice;
+		}  
+
+		if (myChoice === computerChoice){
+			numTies++;
+			document.getElementById("ties").textContent = numTies;
+
+		} else if (myChoice === "r"){
+			if (computerChoice === "s") {
+				numWins++;
+				document.getElementById("wins").textContent = numWins;
+			} else {
+				numLosses++;
+				document.getElementById("losses").textContent = numLosses;
+
+			}
+		} else if (myChoice === "p"){
+			if (computerChoice === "r") {
+				numWins++;
+				document.getElementById("wins").textContent = numWins;
+			} else {
+				numLosses++;
+				document.getElementById("losses").textContent = numLosses;
+			}
+		} else if (myChoice === "s"){
+			if (computerChoice === "p") {
+				numWins++;
+				document.getElementById("wins").textContent = numWins;
+			} else {
+				numLosses++;
+				document.getElementById("losses").textContent = numLosses;
+			}
+		}
+	}
+
+	
+
+
+
+</script>
+
+</body>
+</html>

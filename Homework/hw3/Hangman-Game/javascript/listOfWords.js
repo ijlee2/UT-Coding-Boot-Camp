@@ -5889,7 +5889,6 @@ var dictionary = [
 "verizon",
 "scored",
 "clone",
-"dicks",
 "velocity",
 "lambda",
 "relay",
