@@ -7,10 +7,10 @@
 *****************************************************************************/
 // Game stats and variables
 var numWins, numLosses;
-var answer, answer_array;
+var answer, arr_answer, str_answer;
 
 // User inputs
-var guesses, str_guesses, numGuessesLeft;
+var guesses, str_guesses, numTriesLeft;
 
 
 
@@ -26,27 +26,31 @@ function startNewGame() {
     answer            = getWord().toLowerCase();
     var answer_length = answer.length;
 
-    answer_array = new Array(answer_length);
+    // Initialize what the user sees
+    arr_answer = new Array(answer_length);
+
     for (var i = 0; i < answer_length; i++) {
-        answer_array[i] = "_";
+        arr_answer[i] = "_";
     }
+
+    str_answer = arr_answer.join("");
 
     // Display the answer for debugging
     $("#answer").text(answer);
 
     // What the user sees
-    $("#answer_display").text(answer_array.join(" "));
+    $("#answer_display").text(str_answer);
 
     // Reset variables
-    guesses        = [];
-    str_guesses    = "";
-    numGuessesLeft = Math.max(10, Math.min(answer_length + 4, 13));
-
+    guesses      = [];
+    str_guesses  = "";
+    numTriesLeft = Math.max(7, Math.min(18 - answer_length, 13));
+    
     // Display variables
     $("#numWins").text(numWins);
     $("#numLosses").text(numLosses);
 
-    $("#numGuessesLeft").text(numGuessesLeft);
+    $("#numTriesLeft").text(numTriesLeft);
     $("#guesses").text(str_guesses);
 }
 
@@ -80,34 +84,38 @@ $(document).on("keypress", function(e) {
             var index = answer.indexOf(yourGuess);
 
             if (index === -1) {
-                numGuessesLeft--;
+                numTriesLeft--;
+
+                $("#numTriesLeft").text(numTriesLeft);
 
             } else {
                 // Reveal all letters that match the guess
                 while (index >= 0) {
-                    answer_array[index] = yourGuess;
+                    arr_answer[index] = yourGuess;
 
                     index = answer.indexOf(yourGuess, index + 1);
                 }
 
-                $("#answer_display").text(answer_array.join(" "));
+                str_answer = arr_answer.join("");
+
+                $("#answer_display").text(str_answer);
+                
             }
 
             // Record the guess
             guesses.push(yourGuess);
             str_guesses += (yourGuess + " ");
 
-            $("#numGuessesLeft").text(numGuessesLeft);
             $("#guesses").text(str_guesses);
 
             // Check if the user has guessed the word correctly
-            if (yourGuess === answer) {
+            if (str_answer === answer) {
                 numWins++;
 
                 startNewGame();
 
             // Check if the user has run out of guesses
-            } else if (numGuessesLeft === 0) {
+            } else if (numTriesLeft === 0) {
                 numLosses++;
 
                 startNewGame();

@@ -47,3 +47,7 @@ p strong {
     width        : 50%;
     margin-bottom: 7.5%;
 }
+
+#answer_display {
+    letter-spacing: 0.35em;
+}
