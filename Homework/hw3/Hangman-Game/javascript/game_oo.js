@@ -8,10 +8,14 @@
 var game;
 
 var HangmanGame = function() {
-    // Game stats and variables
-    var numWins   = 0;
-    var numLosses = 0;
-
+    /************************************************************************
+     ************************************************************************
+        
+        Private variables
+        
+    *************************************************************************
+    *************************************************************************/
+    var numWins = 0, numLosses = 0;
     var answer, arr_answer, str_answer;
     var guesses, str_guesses, numTriesLeft;
 
@@ -25,7 +29,7 @@ var HangmanGame = function() {
     *************************************************************************/
     this.startNewGame = function() {
         // Choose a random word from the dictionary
-        answer = getWord().toLowerCase();
+        answer            = getWord().toLowerCase();
         var answer_length = answer.length;
 
         // Display the answer for debugging
@@ -38,12 +42,12 @@ var HangmanGame = function() {
             arr_answer[i] = "_";
         }
 
-        str_answer = arr_answer.join("");
+        this.updateStrAnswer();
 
-        // Reset variables
+        // Reset guesses
         guesses      = [];
         str_guesses  = "";
-        numTriesLeft = Math.max(7, Math.min(18 - answer_length, 13));
+        numTriesLeft = Math.max(6, Math.min(13 - Math.ceil(answer_length/2), 10));
 
         // Display messages
         this.displayProgress();
@@ -145,7 +149,7 @@ var HangmanGame = function() {
         
     *************************************************************************
     *************************************************************************/
-    this.isElementOfGuesses = function(x) {
+    this.isNewGuess = function(x) {
         return (guesses.indexOf(x) === -1);
     }
 }
@@ -181,9 +185,9 @@ $(document).on("keypress", function(e) {
     var yourGuess = String.fromCharCode(e.which).toLowerCase();
 
     if ("a" <= yourGuess && yourGuess <= "z") {
-        // Check if the guess has yet to be made
-        if (game.isElementOfGuesses(yourGuess)) {
-            // Check if the guess is correct
+        // Check if the letter is a new guess
+        if (game.isNewGuess(yourGuess)) {
+            // Check if the letter is a part of the word
             var index = answer.indexOf(yourGuess);
 
             if (index === -1) {
@@ -191,7 +195,7 @@ $(document).on("keypress", function(e) {
                 game.displayNumTriesLeft();
 
             } else {
-                // Reveal all letters that match the guess
+                // Reveal all letters that match the letter
                 while (index >= 0) {
                     game.updateArrAnswer(index, yourGuess);
 
@@ -203,7 +207,7 @@ $(document).on("keypress", function(e) {
                 
             }
 
-            // Record the guess
+            // Record the letter
             game.updateGuesses(yourGuess);
             game.updateStrGuesses(yourGuess);
             game.displayGuesses();
