@@ -51,3 +51,7 @@ p strong {
 #answer_display {
     letter-spacing: 0.35em;
 }
+
+#guesses {
+    letter-spacing: 0.75em;
+}

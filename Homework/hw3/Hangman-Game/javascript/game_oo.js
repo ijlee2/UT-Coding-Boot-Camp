@@ -134,7 +134,7 @@ var HangmanGame = function() {
     }
 
     this.updateStrGuesses = function(x) {
-        str_guesses += (x + " ");
+        str_guesses += x;
     }
 
     this.updateNumTriesLeft = function(changeBy) {
