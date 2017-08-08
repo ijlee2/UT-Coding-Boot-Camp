@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Isaac J. Lee">
+        
+        <title>Hangman Game</title>
+        
+        <link rel="stylesheet" type="text/css" href="css/reset.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Architects+Daughter|The+Girl+Next+Door">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript/listOfWords.js"></script>
+        <script type="text/javascript" src="javascript/game.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>The Hangman Game</h1>
+            
+            <p>Guess which word I'm thinking of!</p>
+            <p>(Hint: It's <span id="solution"></span>.)</p>
+            <br>
+
+            <p>Wins: <strong><span id="numWins"></span></strong></p>
+            <p>Losses: <strong><span id="numLosses"></span></strong></p>
+            <p>Guesses left: <strong><span id="numGuessesLeft"></span></strong></p>
+            <br>
+            
+            <p>Your guesses so far:</p>
+            <p><strong><span id="guesses"></span></strong></p>
+        </div>
+    </body>
+</html>
