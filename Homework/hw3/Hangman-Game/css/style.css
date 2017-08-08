@@ -1,14 +1,12 @@
 :root {
     /* Define color scheme */
-    --color-light-theme   : #ffffff;
-    --color-dark-theme    : #666666;
     --color-mint-green    : #4aaaa5;
-    --color-separator     : #d8d8d8;
     --color-text          : #202020;
     --color-text-highlight: #ff6600;
 }
 
 body {
+    color      : var(--color-text);
     font-family: "Architects Daughter", cursive;
     font-size  : 30px;
 }
