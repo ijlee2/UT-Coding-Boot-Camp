@@ -5,12 +5,12 @@
     
 *****************************************************************************
 *****************************************************************************/
-// Game stats
+// Game stats and variables
 var numWins, numLosses;
 var answer;
 
 // User inputs
-var guesses, str_guesses, numGuessesLeft;
+var guesses, str_guesses, numTriesLeft;
 
 
 
@@ -26,18 +26,18 @@ function startNewGame() {
     answer = String.fromCharCode(Math.floor(Math.random() * 25 + 97));
 
     // Display the answer for debugging
-    $("#solution").text(answer);
+    $("#answer").text(answer);
 
     // Reset variables
-    guesses        = [];
-    str_guesses    = "";
-    numGuessesLeft = 10;
+    guesses      = [];
+    str_guesses  = "";
+    numTriesLeft = 10;
 
     // Display variables
     $("#numWins").text(numWins);
     $("#numLosses").text(numLosses);
 
-    $("#numGuessesLeft").text(numGuessesLeft);
+    $("#numTriesLeft").text(numTriesLeft);
     $("#guesses").text(str_guesses);
 }
 
@@ -67,12 +67,12 @@ $(document).on("keypress", function(e) {
     if ("a" <= yourGuess && yourGuess <= "z") {
         // Check if the guess has yet to be made
         if (guesses.indexOf(yourGuess) === -1) {
-            numGuessesLeft--;
+            numTriesLeft--;
 
             guesses.push(yourGuess);
             str_guesses += (yourGuess + " ");
 
-            $("#numGuessesLeft").text(numGuessesLeft);
+            $("#numTriesLeft").text(numTriesLeft);
             $("#guesses").text(str_guesses);
 
             // Check if the guess is correct
@@ -82,7 +82,7 @@ $(document).on("keypress", function(e) {
                 startNewGame();
 
             // Check if the user has run out of guesses
-            } else if (numGuessesLeft === 0) {
+            } else if (numTriesLeft === 0) {
                 numLosses++;
 
                 startNewGame();

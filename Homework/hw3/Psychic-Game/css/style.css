@@ -41,3 +41,9 @@ p strong {
     color      : var(--color-text-highlight);
     font-weight: bold;
 }
+
+#userStats p {
+    float        : left;
+    width        : 50%;
+    margin-bottom: 7.5%;
+}

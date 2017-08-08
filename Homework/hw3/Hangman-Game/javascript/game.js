@@ -5,9 +5,9 @@
     
 *****************************************************************************
 *****************************************************************************/
-// Game stats
+// Game stats and variables
 var numWins, numLosses;
-var answer;
+var answer, answer_array;
 
 // User inputs
 var guesses, str_guesses, numGuessesLeft;
@@ -22,16 +22,25 @@ var guesses, str_guesses, numGuessesLeft;
 *****************************************************************************
 *****************************************************************************/
 function startNewGame() {
-    // Create a random letter between a and z
-    answer = getWord();
+    // Choose a random word from the dictionary
+    answer            = getWord().toLowerCase();
+    var answer_length = answer.length;
+
+    answer_array = new Array(answer_length);
+    for (var i = 0; i < answer_length; i++) {
+        answer_array[i] = "_";
+    }
 
     // Display the answer for debugging
-    $("#solution").text(answer);
+    $("#answer").text(answer);
+
+    // What the user sees
+    $("#answer_display").text(answer_array.join(" "));
 
     // Reset variables
     guesses        = [];
     str_guesses    = "";
-    numGuessesLeft = 10;
+    numGuessesLeft = Math.max(10, Math.min(answer_length + 4, 13));
 
     // Display variables
     $("#numWins").text(numWins);
@@ -67,15 +76,31 @@ $(document).on("keypress", function(e) {
     if ("a" <= yourGuess && yourGuess <= "z") {
         // Check if the guess has yet to be made
         if (guesses.indexOf(yourGuess) === -1) {
-            numGuessesLeft--;
+            // Check if the guess is correct
+            var index = answer.indexOf(yourGuess);
 
+            if (index === -1) {
+                numGuessesLeft--;
+
+            } else {
+                // Reveal all letters that match the guess
+                while (index >= 0) {
+                    answer_array[index] = yourGuess;
+
+                    index = answer.indexOf(yourGuess, index + 1);
+                }
+
+                $("#answer_display").text(answer_array.join(" "));
+            }
+
+            // Record the guess
             guesses.push(yourGuess);
             str_guesses += (yourGuess + " ");
 
             $("#numGuessesLeft").text(numGuessesLeft);
             $("#guesses").text(str_guesses);
 
-            // Check if the guess is correct
+            // Check if the user has guessed the word correctly
             if (yourGuess === answer) {
                 numWins++;
 

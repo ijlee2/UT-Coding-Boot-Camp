@@ -21,14 +21,16 @@
             <h1>The Hangman Game</h1>
             
             <p>Guess which word I'm thinking of!</p>
-            <p>(Hint: It's <span id="solution"></span>.)</p>
-            <br>
-
-            <p>Wins: <strong><span id="numWins"></span></strong></p>
-            <p>Losses: <strong><span id="numLosses"></span></strong></p>
-            <p>Guesses left: <strong><span id="numGuessesLeft"></span></strong></p>
+            <p>(Hint: It's <strong><span id="answer"></span></strong>.)</p>
             <br>
             
+            <div id="userStats">
+                <p>Wins: <strong><span id="numWins"></span></strong></p>
+                <p>Losses: <strong><span id="numLosses"></span></strong></p>
+            </div>
+            
+            <p><span id="answer_display"></span></p>
+            <p>Number of tries left: <strong><span id="numGuessesLeft"></span></strong></p>
             <p>Your guesses so far:</p>
             <p><strong><span id="guesses"></span></strong></p>
         </div>
