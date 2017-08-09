@@ -106,7 +106,7 @@ $(document).on("keypress", function(e) {
 
             // Record the letter
             guesses.push(yourGuess);
-            str_guesses += (yourGuess + " ");
+            str_guesses += yourGuess;
 
             $("#guesses").text(str_guesses);
 
