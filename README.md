@@ -16,8 +16,14 @@ If you find a bug in my code or have suggestions for making my code better and s
     - [x] CSS
     - [x] JavaScript
 1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/HW-Wireframe/) (easy), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/Basic-Portfolio) (hard)
-    - HTML, CSS
+    - [x] HTML
+    - [x] CSS
 2. [Portfolio w/ Responsive Design](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw2/Responsive-Portfolio/), [Portfolio w/ Bootstrap](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw2/Bootstrap-Portfolio/)
-    - HTML, CSS, Bootstrap
+    - [x] HTML
+    - [x] CSS
+    - [x] Bootstrap
 3. [Psychic Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw3/Psychic-Game/) (easy), [Hangman Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw3/Hangman-Game/) (hard)
-    - HTML, CSS, JavaScript, jQuery
+    - [x] HTML
+    - [x] CSS
+    - [x] JavaScript
+    - [x] jQuery
