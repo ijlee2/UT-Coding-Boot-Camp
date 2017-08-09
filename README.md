@@ -12,7 +12,9 @@ If you find a bug in my code or have suggestions for making my code better and s
 
 ## Homework
 0. [Pre-work assignments](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw0/Module-8/fanpage.html)
-    - HTML, CSS, JavaScript
+    - [x] HTML
+    - [x] CSS
+    - [x] JavaScript
 1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/HW-Wireframe/) (easy), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/Basic-Portfolio) (hard)
     - HTML, CSS
 2. [Portfolio w/ Responsive Design](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw2/Responsive-Portfolio/), [Portfolio w/ Bootstrap](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw2/Bootstrap-Portfolio/)
