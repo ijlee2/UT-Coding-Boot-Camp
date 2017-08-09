@@ -39,7 +39,7 @@ var HangmanGame = function() {
             answer_array[i] = "_";
         }
 
-        this.updateStrAnswer();
+        this.updateAnswerString();
 
         // Reset guesses_array
         guesses_array  = [];
@@ -92,7 +92,7 @@ var HangmanGame = function() {
         return answer;
     }
 
-    this.getStrAnswer = function() {
+    this.getAnswerString = function() {
         return answer_string;
     }
 
@@ -118,11 +118,11 @@ var HangmanGame = function() {
         keyEnabled = changeTo;
     }
 
-    this.updateArrAnswer = function(index, changeTo) {
+    this.updateAnswerArray = function(index, changeTo) {
         answer_array[index] = changeTo;
     }
 
-    this.updateStrAnswer = function() {
+    this.updateAnswerString = function() {
         answer_string = answer_array.join("");
     }
 
@@ -130,7 +130,7 @@ var HangmanGame = function() {
         guesses_array.push(changeBy);
     }
 
-    this.updateStrGuesses = function(changeBy) {
+    this.updateGuessesString = function(changeBy) {
         guesses_string += changeBy;
     }
 
@@ -203,23 +203,23 @@ $(document).on("keypress", function(e) {
             } else {
                 // Reveal all letters that match the letter
                 while (index >= 0) {
-                    game.updateArrAnswer(index, yourGuess);
+                    game.updateAnswerArray(index, yourGuess);
 
                     index = answer.indexOf(yourGuess, index + 1);
                 }
 
-                game.updateStrAnswer();
+                game.updateAnswerString();
                 game.displayProgress();
                 
             }
 
             // Record the letter
             game.updateGuesses(yourGuess);
-            game.updateStrGuesses(yourGuess);
+            game.updateGuessesString(yourGuess);
             game.displayGuesses();
 
             // Check if the user has guessed the word correctly
-            if (game.getStrAnswer() === answer) {
+            if (game.getAnswerString() === answer) {
                 game.updateNumWins(1);
 
                 $("#outputMessage").html("Yep, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
