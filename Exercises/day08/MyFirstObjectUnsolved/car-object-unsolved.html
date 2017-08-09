@@ -5,6 +5,7 @@
     <title>My First Object</title>
   </head>
   <body>
+    <p>Press "1" to drive to work, "2" to drive around the world, "3" to get a tune-up, and "4" to honk.</p>
 
     <script>
 
@@ -43,6 +44,13 @@
 
         honk: function() {
           alert("Honk! Honk!");
+        },
+
+        reWriteStats: function() {
+          console.log("Make: " + car.make);
+          console.log("Model: " + car.model);
+          console.log("Mileage: " + car.mileage);
+          console.log("Is working: " + car.isWorking);
         }
       };
 
@@ -50,6 +58,7 @@
       // How would we log...
 
       // The car's make?
+      /*
       console.log("Make: " + car.make);
 
       // The car's model?
@@ -66,16 +75,35 @@
 
       // How would we run the getTuneUp function?
       car.getTuneUp();
+      */
 
 
-      var instructor = {
-        "name"          : "Eric Scott",
-        "age"           : 33,
-        "gender"        : "m",
-        "hasFacialHair" : true,
-        "isApproachable": true
+      document.onkeyup = function(e) {
+        var keyPressed = String.fromCharCode(e.which).toLowerCase();
+
+        switch (keyPressed) {
+          case "1":
+            car.driveToWork();
+            car.reWriteStats();
+            break;
+
+          case "2":
+            car.driveAroundWorld();
+            car.reWriteStats();
+            break;
+
+          case "3":
+            car.getTuneUp();
+            car.reWriteStats();
+            break;
+
+          case "4":
+            car.honk();
+            car.reWriteStats();
+            break;
+
+        }
       }
-
     </script>
     
   </body>
