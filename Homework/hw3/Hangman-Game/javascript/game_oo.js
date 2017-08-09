@@ -45,9 +45,11 @@ var HangmanGame = function() {
         this.updateStrAnswer();
 
         // Reset guesses
-        guesses      = [];
-        str_guesses  = "";
-        numTriesLeft = Math.max(6, Math.min(13 - Math.ceil(answer_length/2), 10));
+        guesses     = [];
+        str_guesses = "";
+
+        // Allow more tries for shorter words
+        numTriesLeft = Math.max(6, Math.min(13 - Math.ceil(answer_length / 2), 10));
 
         // Display messages
         this.displayProgress();

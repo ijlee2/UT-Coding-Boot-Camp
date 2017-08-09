@@ -38,7 +38,9 @@ function startNewGame() {
     // Reset guesses
     guesses      = [];
     str_guesses  = "";
-    numTriesLeft = Math.max(6, Math.min(13 - Math.ceil(answer_length/2), 10));
+
+    // Allow more tries for shorter words
+    numTriesLeft = Math.max(6, Math.min(13 - Math.ceil(answer_length / 2), 10));
 
     // Display messages
     $("#answer_display").text(str_answer);
@@ -80,7 +82,7 @@ $(document).on("keypress", function(e) {
     var yourGuess = String.fromCharCode(e.which).toLowerCase();
 
     if ("a" <= yourGuess && yourGuess <= "z") {
-        // Check if the guess has yet to be made
+        // Check if the letter is a new guess
         if (guesses.indexOf(yourGuess) === -1) {
             // Check if the letter is a part of the word
             var index = answer.indexOf(yourGuess);
