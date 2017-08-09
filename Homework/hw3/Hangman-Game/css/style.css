@@ -78,14 +78,10 @@ p strong {
 }
 
 #lightBox p {
+    color      : #fff;
     font-size  : 1.3em;
     line-height: 1.4em;
     text-align : center;
-    color      : #fff;
-}
-
-#lightBox strong {
-    color: #fff;
 }
 
 /* Code modified from https://css-tricks.com/snippets/css/shake-css-keyframe-animation/ */
