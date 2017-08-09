@@ -1,4 +1,4 @@
-# UT-Coding-Boot-Camp
+# UT Coding Boot Camp
 Projects, homework, and exercises for UT Coding Boot Camp (Full Stack)
 
 ## Projects
