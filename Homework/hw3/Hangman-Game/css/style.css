@@ -72,15 +72,15 @@ p strong {
     position   : fixed;
     top        : 22.5%;
     left       : 50%;
-    width      : 520px;
+    width      : 460px;
     margin-left: -260px;
-    padding    : 60px;
+    padding    : 60px 30px;
 }
 
 #lightBox p {
     color      : #fff;
-    font-size  : 1.3em;
-    line-height: 1.4em;
+    font-size  : 1.15em;
+    line-height: 1.5em;
     text-align : center;
 }
 
