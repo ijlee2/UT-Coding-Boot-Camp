@@ -1,0 +1,26 @@
+BooTheDog.html
+
+Overall: Fix indentations
+Overall: Move Random Boo Fact, List of Boo's Favorite Things, Grow/Shrink, and Orange/Pink/Green around to match the grumpy cat page?
+
+Line 19: Surround the text with <h1> tag
+Lines 40-433:09 PM 7/21/2017: Break the paragraphs with <p> tag
+Line 43: Complete the <a> tag with the address in double quotations
+Line 50: Surround the text with angular bracket to create <img> tag
+Lines 72-76: Surround each item with <li> tag
+Lines 88-90: Match the id name with the text (color)
+Line 113: Change JavaScript source to logic.js
+
+
+logic.js
+
+Overall: Fix indentations
+
+Line 6: Break the array elements by finding complete sentences (thoughts)
+Line 9: Surround the text pink with double quotations
+Line 20, 25: Surround the click action with double quotations
+
+
+style.css
+
+Ok as is

@@ -1,0 +1,49 @@
+h1 {
+	text-align: center;
+}
+
+p.funText_red {
+	color: red;
+}
+
+p.funText_green {
+	color: green;
+}
+
+p.funText_blue {
+	color: blue;
+}
+
+p.funText_orange {
+    color: orange;
+}
+
+p.funText_big {
+    font-size: x-large;
+}
+
+p.funText_tiny {
+    font-size: x-small;
+}
+
+p.funText_center {
+	text-align: center
+}
+
+p.funText_bold {
+	font-weight: bold;
+}
+
+p.funText_differentFont{
+    font-family: Arial, Verdana, sans-serif;
+}
+
+p.styledFont {
+    color: green;
+    font-family: Arial, Verdana, sans-serif;
+    font-size: large;
+}
+
+#styledImage {
+    border: 10px solid orange;
+}

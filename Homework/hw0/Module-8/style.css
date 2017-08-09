@@ -1,0 +1,211 @@
+:root {
+	/* Define color scheme */
+	--color-background              : #202020;
+	--color-div                     : green;
+	--color-div-background-highlight: #232323;
+	--color-div-highlight           : #00a000;
+	--color-media                   : #383838;
+	--color-media-highlight         : #f0e182;
+	--color-text                    : #dedff0;
+	--color-text-highlight          : #f0e182;
+}
+
+body {
+	margin: 0;
+	
+    background : var(--color-background);
+    color      : var(--color-text);
+    font-family: Arial, Tahoma, sans-serif;
+}
+
+h1 {
+	padding-bottom: 30px;
+	
+	font-size     : 2.2em;
+	letter-spacing: 0.3em;
+	line-height   : 1.3em;
+    text-align    : center;
+    text-transform: uppercase;
+	word-wrap     : break-word;
+}
+
+h2 {
+	padding-bottom: 15px;
+	
+	font-size     : 1.6em;
+	letter-spacing: 0.05em;
+	line-height   : 1.3em;
+    text-align    : center;
+	word-wrap     : break-word;
+}
+
+h3 {
+	font-size     : 1.5em;
+	letter-spacing: 0.03em;
+	text-align    : center;
+	word-wrap     : break-word;
+}
+
+strong {
+	color    : var(--color-text-highlight);
+	font-size: 1.12em;
+}
+
+div.page_item {
+	margin       : 60px auto;
+	border       : 10px solid var(--color-div);
+	border-radius: 1px;
+    padding      : 30px 25px 40px;
+    width        : 24%;
+	
+	word-wrap    : break-word;
+
+	box-shadow   : 2px 4px 20px 4px rgba(0, 0, 0, 0.3);
+	z-index      : 1;
+}
+
+div.page_item:hover {
+	background  : var(--color-div-background-highlight);
+	border-color: var(--color-div-highlight);
+
+	box-shadow  : 4px 6px 24px 6px rgba(0, 0, 0, 0.18);
+	z-index     : 1.5;
+}
+
+div.page_item p, li {
+	font-size     : 1.15em;
+    letter-spacing: 0.03em;
+	line-height   : 1.8em;
+}
+
+div.page_item p {
+	padding: 0 9% 1%;
+}
+
+div.page_item ol, ul {
+	padding: 0 9% 2%;
+}
+
+div.page_item li {
+	padding-left  : 1%;
+}
+
+/* For hyperlinks not embedded in images */
+div.page_item a:not(.link_cover) {
+	border-bottom  : 1px solid var(--color-text);
+	padding-bottom : 1px;
+	
+	color          : var(--color-text);
+	text-decoration: none;
+}
+
+div.page_item div.albums {
+	padding-top   : 20px;
+	padding-bottom: 20px;
+}
+
+/* For album cover images */
+div.page_item div.albums a.link_cover {
+	display       : block;
+	padding-bottom: 5px;
+}
+
+div.page_item div.albums img.cover {
+	display           : block;
+	margin            : auto;
+	margin-bottom     : 40px;
+	border            : 7px solid var(--color-media);
+    border-radius     : 2px;
+    width             : 84%;
+	height            : auto;
+	
+	transition        : border-color 0.2s;
+	-webkit-transition: border-color 0.2s;
+}
+
+div.page_item div.albums img.cover:hover {
+	border-color      : var(--color-media-highlight);
+	
+	transition        : border-color 0.4s;
+	-webkit-transition: border-color 0.4s;
+}
+
+div.page_item div.albums div.video {
+	margin            : auto;
+	margin-top        : 40px;
+	margin-bottom     : 40px;
+	
+	border            : 7px solid var(--color-media);
+    border-radius     : 2px;
+	
+	/* Trick from https://alistapart.com/article/creating-intrinsic-ratios-for-video */
+	/* Ask all child elements to position themselves with respect to this container */
+	position          : relative;
+	
+	/* Set the height of the box 42% of its width */
+	padding-top       : 25px;
+	padding-bottom    : 42%;
+	
+	width             : 86%;
+	height            : 0;
+	
+	transition        : border-color 0.2s;
+	-webkit-transition: border-color 0.2s;
+}
+
+div.page_item div.albums div.video:hover {
+	border-color      : var(--color-media-highlight);
+	
+	transition        : border-color 0.4s;
+	-webkit-transition: border-color 0.4s;
+}
+
+div.page_item div.albums div.video iframe {
+	/* Free the element from the height boundary of its parent */
+	position: absolute;
+
+	/* Position the iframe to upperleft of its parent */
+	top     : 0;
+	left    : 0;
+
+	/* Stretch the iframe to the width and height of its parent */
+	width   : 100%;
+	height  : 100%;
+}
+
+div.page_item div.changePage {
+	padding-bottom: 50px;
+}
+
+div.page_item div.changePage a.button_prev {
+	float         : left;
+	margin-top    : 10px;
+	margin-left   : 5%;
+
+	font-size     : 1.2em;
+}
+
+div.page_item div.changePage a.button_next {
+	float         : right;
+	margin-top    : 10px;
+	margin-right  : 5%;
+
+	font-size     : 1.2em;
+}
+
+#site_author {
+	padding-top   : 20px;
+	padding-bottom: 40px;
+
+	color         : var(--color-text);
+	letter-spacing: 0.03em;
+	text-align    : center;
+}
+
+#site_author a {
+	border-bottom  : 1px solid var(--color-text);
+	padding-bottom : 1px;
+
+	color          : var(--color-text);
+	text-decoration: none;
+}

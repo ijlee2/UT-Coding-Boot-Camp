@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Enter the fan page to find out about Our Lady Peace and listen to their albums.">
+    <meta name="keywords" content="Our Lady Peace, band, biography, Raine Maida, members, listen, music, tracks, discography, Spotify">
+    <meta name="author" content="Isaac J. Lee">
+    
+    <title>Our Lady Peace Fan Page</title>
+    
+    <!-- Update favicon and stylesheets -->
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    
+    <!-- Load custom JavaScript files -->
+    <script type="text/javascript" src="./display_albums.js"></script>
+</head>
+
+<!-- Show the most recent album when loading -->
+<body onload="changeAlbum(0);">
+    <!-- Biography -->
+    <div class="page_item" id="about_olp">
+        <h1>About OLP</h1>
+        <p>
+            <strong>Our Lady Peace</strong> was one of the most successful Canadian bands of the post-grunge era, issuing
+            platinum-selling album after platinum-selling album while also enjoying modest acclaim in America.
+        </p>
+        <p>
+            The group formed at the University of Toronto in 1992, where vocalist <strong>Raine Maida</strong> and
+            guitarist <strong>Mike Turner</strong> (a British expatriate) first banded together under the name As If.
+            They later recruited bassist <strong>Chris Eacrett</strong> and jazz drummer <strong>Jeremy Taggart</strong>,
+            and the quartet changed its name to Our Lady Peace in tribute to a Mark Van Dorem poem.
+        </p>
+        <p>
+            Credits to <a href="https://www.spotify.com/" target="_blank">Spotify</a> (John Bush & Andrew Leahey, Rovi)
+        </p>
+    </div>
+
+    <!-- Band members -->
+    <div class="page_item" id="members">
+        <h1>Members</h1>
+            <h2>Current</h2>
+            <ul>
+                <li>Raine Maida</li>
+                <li>Duncan Coutts</li>
+                <li>Steve Mazur</li>
+                <li>Jason Pierce</li>
+            </ul>
+            
+            <h2>Past</h2>
+            <ul>
+                <li>Jeremy Taggart</li>
+                <li>Mike Turner</li>
+                <li>Jamie Edwards</li>
+                <li>Robin Hatch</li>
+                <li>Chris Eacrett</li>
+                <li>Jim Newell</li>
+                <li>Paul Martin</li>
+            </ul>
+    </div>
+    
+    <!-- Released albums -->
+    <div class="page_item" id="albums">
+        <h1>Albums</h1>
+        <p>Click on the cover to listen to the album on <a href="https://www.spotify.com/" target="_blank">Spotify</a>.</p>
+        
+        <div>
+            <div class="albums" id="albums_curve">
+                <h2>Curve (2012)</h2>
+                <a class="link_cover" href="spotify:album:5gblwqbAM3oB6OapvubMgq">
+                    <img class="cover" src="./album_covers/olp_curve.jpg" alt="Album cover of Curve">
+                </a>
+                
+                <h3>Tracks</h3>
+                <ol id="tracks_curve">
+                    <li>Allowance</li>
+                    <li>Fire in the Hen House</li>
+                    <li>Heavyweight</li>
+                    <li>Window Seat</li>
+                    <li>As Fast As You Can</li>
+                    <li>If This Is It</li>
+                    <li>Will Someday Change</li>
+                    <li>Find Our Way</li>
+                    <li>Rabbits</li>
+                    <li>Mettle</li>
+                </ol>
+            </div>
+
+            <div class="albums" id="albums_burn_burn">
+                <h2>Burn Burn (2009)</h2>
+                <a class="link_cover" href="spotify:album:3sPnsIgh9m3fXIg6RAfyMG">
+                    <img class="cover" src="./album_covers/olp_burn_burn.jpg" alt="Album cover of Burn Burn">
+                </a>
+                
+                <h3>Tracks</h3>
+                <ol id="tracks_burn_burn">
+                    <li>All You Did Was Save My Life</li>
+                    <li>Dreamland</li>
+                    <li>Monkey Brains</li>
+                    <li>The End Is Where We Begin</li>
+                    <li>Escape Artist</li>
+                    <li>Refuge</li>
+                    <li>Never Get Over You</li>
+                    <li>White Flags</li>
+                    <li>Signs of Life</li>
+                    <li>Paper Moon</li>
+                </ol>
+            </div>
+            
+            <div class="albums" id="albums_healthy">
+                <h2>Healthy in Paranoid Times (2005)</h2>
+                <a class="link_cover" href="spotify:album:2cYErFIJBRRP9qEYzXOcLB">
+                    <img class="cover" src="./album_covers/olp_healthy.jpg" alt="Album cover of Healthy in Paranoid Times">
+                </a>
+
+                <h3>Tracks</h3>
+                <ol id="tracks_healthy">
+                    <li>Angels/Losing/Sleep</li>
+                    <li>Will the Future Blame Us</li>
+                    <li>Picture</li>
+                    <li>Where Are You</li>
+                    <li>Wipe That Smile Off Your Face</li>
+                    <li>Love and Trust</li>
+                    <li>Boy</li>
+                    <li>Apology</li>
+                    <li>The World on a String</li>
+                    <li>Don't Stop</li>
+                    <li>Walking in Circles</li>
+                    <li>Al Genina (Leave the Light On)</li>
+                </ol>
+            </div>
+
+            <div class="albums" id="albums_gravity">
+                <h2>Gravity (2002)</h2>
+                <a class="link_cover" href="spotify:album:6jno7QiWnaOHtMiZctBJBd">
+                    <img class="cover" src="./album_covers/olp_gravity.jpg" alt="Album cover of Gravity">
+                </a>
+                
+                <div class="video">
+                    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8SzFaEqbLRM?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+                
+                <h3>Tracks</h3>
+                <ol id="tracks_gravity">
+                    <li>All For You</li>
+                    <li>Do You Like It</li>
+                    <li>Somewhere Out There</li>
+                    <li>Innocent</li>
+                    <li>Made of Steel</li>
+                    <li>Not Enough</li>
+                    <li>Sell My Soul</li>
+                    <li>Sorry</li>
+                    <li>Bring Back the Sun</li>
+                    <li>A Story About a Girl</li>
+                </ol>
+            </div>
+
+            <div class="albums" id="albums_spiritual_machines">
+                <h2>Spiritual Machines (2000)</h2>
+                <a class="link_cover" href="spotify:album:341DoqBcJDTwNzoGH1fP0K">
+                    <img class="cover" src="./album_covers/olp_spiritual_machines.jpg" alt="Album cover of Spiritual Machines">
+                </a>
+                
+                <h3>Tracks</h3>
+                <ol id="tracks_spiritual_machines">
+                    <li>R.K. Intro</li>
+                    <li>Right Behind You (Mafia)</li>
+                    <li>R.K. 2029</li>
+                    <li>In Repair</li>
+                    <li>Life</li>
+                    <li>Middle of Yesterday</li>
+                    <li>Are You Sad?</li>
+                    <li>R.K. 2029 (Part 2)</li>
+                    <li>Made to Heal</li>
+                    <li>R.K. 1949-97</li>
+                    <li>Everyone's a Junkie</li>
+                    <li>R.K. on Death</li>
+                    <li>All My Friends</li>
+                    <li>If You Believe</li>
+                    <li>The Wonderful Future</li>
+                </ol>
+            </div>
+            
+            <div class="albums" id="albums_happiness">
+                <h2>Happiness... Is Not a Fish That You Can Catch (1999)</h2>
+                <a class="link_cover" href="spotify:album:6zlcEv6OCgGoVlF5Fm4cSd">
+                    <img class="cover" src="./album_covers/olp_happiness.jpg" alt="Album cover of Happiness... Is Not a Fish That You Can Catch">
+                </a>
+                
+                <div class="video">
+                    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EPUvpRLakzc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+
+                <h3>Tracks</h3>
+                <ol id="tracks_happiness">
+                    <li>One Man's Army</li>
+                    <li>Happiness & The Fish</li>
+                    <li>Potato Girl</li>
+                    <li>Blister</li>
+                    <li>Is Anybody Home?</li>
+                    <li>Waited</li>
+                    <li>Thief</li>
+                    <li>Lying Awake</li>
+                    <li>Annie</li>
+                    <li>Consequence of Laughing</li>
+                    <li>Stealing Babies</li>
+                </ol>
+            </div>
+
+            <div class="albums" id="albums_clumsy">
+                <h2>Clumsy (1997)</h2>
+                <a class="link_cover" href="spotify:album:4qR92pgYZPRNV6GA9gC7OC">
+                    <img class="cover" src="./album_covers/olp_clumsy.jpg" alt="Album cover of Clumsy">
+                </a>
+
+                <h3>Tracks</h3>
+                <ol id="tracks_clumsy">
+                    <li>Superman's Dead</li>
+                    <li>Automatic Flowers</li>
+                    <li>Carnival</li>
+                    <li>Big Dumb Rocket</li>
+                    <li>4am</li>
+                    <li>Shaking</li>
+                    <li>Clumsy</li>
+                    <li>Hello Oskar</li>
+                    <li>Let You Down</li>
+                    <li>The Story of 100 Aisles</li>
+                    <li>Car Crash</li>
+                </ol>
+            </div>
+
+            <div class="albums" id="albums_naveed">
+                <h2>Naveed (1994)</h2>
+                <a class="link_cover" href="spotify:album:6hnMN6eI1uxEg1iWbbVhPl">
+                    <img class="cover" src="./album_covers/olp_naveed.jpg" alt="Album cover of Naveed">
+                </a>
+                
+                <h3>Tracks</h3>
+                <ol id="tracks_naveed">
+                    <li>The Birdman</li>
+                    <li>Supersatellite</li>
+                    <li>Starseed</li>
+                    <li>Hope</li>
+                    <li>Naveed</li>
+                    <li>Dirty Walls</li>
+                    <li>Denied</li>
+                    <li>Is It Safe?</li>
+                    <li>Julia</li>
+                    <li>Under Zenith</li>
+                    <li>Neon Crossing</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="changePage">
+            <a href="#albums_view" class="button_prev" onclick="changeAlbum(-1);">&#171; Prev</a>
+            <a href="#albums_view" class="button_next" onclick="changeAlbum( 1);">Next &#187;</a>
+        </div>
+    </div>
+    
+    <!-- Copyright information -->
+    <p id="site_author">Created by <a href="mailto:isaacjlee@hotmail.com">Isaac J. Lee</a></p>
+</body>
+</html>
