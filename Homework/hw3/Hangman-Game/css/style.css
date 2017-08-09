@@ -1,6 +1,7 @@
 :root {
     /* Define color scheme */
     --color-mint-green    : #4aaaa5;
+    --color-peppermint-red: #c81a4c;
     --color-text          : #202020;
     --color-text-highlight: #ff6600;
 }
@@ -15,7 +16,7 @@ body {
 .container {
     width  : 520px;
     margin : auto;
-    padding: 60px;
+    padding: 60px 0;
 }
 
 h1 {
@@ -25,14 +26,14 @@ h1 {
     font-weight   : bold;
     letter-spacing: 0.02em;
 
-    margin        : 0 0 5% 0;
+    margin-bottom : 5%;
 }
 
 p {
     letter-spacing: 0.015em;
     line-height   : 1.3em;
 
-    margin        : 0 0 2% 0;
+    margin-bottom : 2%;
 }
 
 p strong {
@@ -46,10 +47,75 @@ p strong {
     margin-bottom: 7.5%;
 }
 
-#answer_display {
+#answerProgress {
     letter-spacing: 0.35em;
 }
 
 #guesses {
     letter-spacing: 0.75em;
+}
+
+
+
+/* Lightbox */
+#lightBox_background {
+    display : none;
+    opacity : 0;
+
+    position: fixed;
+    top     : 0;
+    left    : 0;
+    width   : 100%;
+    height  : 100%;
+}
+
+#lightBox {
+    display    : none;
+    
+    position   : fixed;
+    top        : 22.5%;
+    left       : 50%;
+    width      : 520px;
+    margin-left: -260px;
+    padding    : 60px;
+}
+
+#lightBox p {
+    font-size  : 1.3em;
+    line-height: 1.4em;
+    text-align : center;
+    color      : #fff;
+}
+
+#lightBox strong {
+    color: #fff;
+}
+
+/* Code modified from https://css-tricks.com/snippets/css/shake-css-keyframe-animation/ */
+#lightBox {
+  animation: slide_down 0.80s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes slide_down {
+    0% {
+        transform: translate(0, -15px);
+    }
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate(-1px, 0);
+    }
+    
+    20%, 80% {
+        transform: translate(2px, 0);
+    }
+    
+    30%, 50%, 70% {
+        transform: translate(-4px, 0);
+    }
+    
+    40%, 60% {
+        transform: translate(4px, 0);
+    }
 }

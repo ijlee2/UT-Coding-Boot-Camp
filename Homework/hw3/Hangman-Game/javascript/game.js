@@ -5,9 +5,13 @@
     
 *****************************************************************************
 *****************************************************************************/
-var numWins, numLosses;
-var answer, arr_answer, str_answer;
-var guesses, str_guesses, numTriesLeft;
+// Variables for the game
+var numWins = 0, numLosses = 0;
+var keyEnabled = true;
+
+// Variables for the user
+var answer, answer_array, answer_string;
+var guesses_array, guesses_string, numTriesLeft;
 
 
 
@@ -24,30 +28,27 @@ function startNewGame() {
     var answer_length = answer.length;
 
     // Initialize what the user sees
-    arr_answer = new Array(answer_length);
+    answer_array = new Array(answer_length);
 
     for (var i = 0; i < answer_length; i++) {
-        arr_answer[i] = "_";
+        answer_array[i] = "_";
     }
 
-    str_answer = arr_answer.join("");
+    answer_string = answer_array.join("");
 
-    // Display the answer for debugging
-    $("#answer").text(answer);
-
-    // Reset guesses
-    guesses      = [];
-    str_guesses  = "";
+    // Reset guesses_array
+    guesses_array  = [];
+    guesses_string = "";
 
     // Allow more tries for shorter words
     numTriesLeft = Math.max(6, Math.min(13 - Math.ceil(answer_length / 2), 10));
 
     // Display messages
-    $("#answer_display").text(str_answer);
+    $("#answerProgress").text(answer_string);
     $("#numWins").text(numWins);
     $("#numLosses").text(numLosses);
     $("#numTriesLeft").text(numTriesLeft);
-    $("#guesses").text(str_guesses);
+    $("#guesses").text(guesses_string);
 }
 
 
@@ -60,11 +61,6 @@ function startNewGame() {
 *****************************************************************************
 *****************************************************************************/
 $(document).ready(function() {
-    // Reset stats
-    numWins   = 0;
-    numLosses = 0;
-
-    // Start a new game
     startNewGame();
 });
 
@@ -78,53 +74,84 @@ $(document).ready(function() {
 *****************************************************************************
 *****************************************************************************/
 $(document).on("keypress", function(e) {
+    if (!keyEnabled) {
+        keyEnabled = true;
+        displayLightBox(false);
+
+        return;
+    }
+
     // Find out which key was pressed
     var yourGuess = String.fromCharCode(e.which).toLowerCase();
 
     if ("a" <= yourGuess && yourGuess <= "z") {
         // Check if the letter is a new guess
-        if (guesses.indexOf(yourGuess) === -1) {
+        if (guesses_array.indexOf(yourGuess) === -1) {
             // Check if the letter is a part of the word
             var index = answer.indexOf(yourGuess);
 
             if (index === -1) {
                 numTriesLeft--;
-
                 $("#numTriesLeft").text(numTriesLeft);
 
             } else {
                 // Reveal all letters that match the letter
                 while (index >= 0) {
-                    arr_answer[index] = yourGuess;
+                    answer_array[index] = yourGuess;
 
                     index = answer.indexOf(yourGuess, index + 1);
                 }
 
-                str_answer = arr_answer.join("");
-
-                $("#answer_display").text(str_answer);
+                answer_string = answer_array.join("");
+                $("#answerProgress").text(answer_string);
                 
             }
 
             // Record the letter
-            guesses.push(yourGuess);
-            str_guesses += yourGuess;
-
-            $("#guesses").text(str_guesses);
+            guesses_array.push(yourGuess);
+            guesses_string += yourGuess;
+            $("#guesses").text(guesses_string);
 
             // Check if the user has guessed the word correctly
-            if (str_answer === answer) {
+            if (answer_string === answer) {
                 numWins++;
+                
+                $("#outputMessage").html("Yep, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
+                $("#lightBox").css({"animation-name"  : "slide_down",
+                                    "background-color": "var(--color-mint-green)"});
+                $("#lightBox strong").css({"color": "#fff896"});
+                displayLightBox(true);
 
                 startNewGame();
 
-            // Check if the user has run out of guesses
+            // Check if the user has run out of guesses_array
             } else if (numTriesLeft === 0) {
                 numLosses++;
 
+                $("#outputMessage").html("Nah, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
+                $("#lightBox").css({"animation-name"  : "shake",
+                                    "background-color": "#c81a4c"});
+                $("#lightBox strong").css({"color": "#beffad"});
+                displayLightBox(true);
+                
                 startNewGame();
 
             }
         }
     }
 });
+
+
+function displayLightBox(lightBoxOn) {
+    keyEnabled = !lightBoxOn;
+
+    if (lightBoxOn) {
+        $("#lightBox_background").css({"display": "block"});
+        $("#lightBox").css({"display": "block"});
+
+    } else {
+        $("#lightBox_background").css({"display": "none"});
+        $("#lightBox").css({"display": "none"});
+
+    }
+}

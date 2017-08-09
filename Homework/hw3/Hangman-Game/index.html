@@ -26,13 +26,20 @@
             </div>
             
             <p>Guess which word I'm thinking of!</p>
-            <!--<p>(Hint: It's <strong><span id="answer"></span></strong>.)</p>-->
-            <p><span id="answer_display"></span></p>
+            <p><span id="answerProgress"></span></p>
             <br>
             
             <p>Number of tries left: <strong><span id="numTriesLeft"></span></strong></p>
             <p>Your guesses so far:</p>
             <p><strong><span id="guesses"></span></strong></p>
         </div>
+
+        <!-- Lightbox -->
+        <div id="lightBox_background" onclick="displayLightBox(false);">
+        </div>
+
+        <div id="lightBox" class="container">
+            <p id="outputMessage"></p>
+        </div> 
     </body>
 </html>

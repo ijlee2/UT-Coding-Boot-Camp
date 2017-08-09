@@ -9,44 +9,41 @@ var game;
 
 var HangmanGame = function() {
     /************************************************************************
-     ************************************************************************
         
         Private variables
         
-    *************************************************************************
     *************************************************************************/
+    // Variables for the game
     var numWins = 0, numLosses = 0;
-    var answer, arr_answer, str_answer;
-    var guesses, str_guesses, numTriesLeft;
+    var keyEnabled = true;
+
+    // Variables for the user
+    var answer, answer_array, answer_string;
+    var guesses_array, guesses_string, numTriesLeft;
 
 
     /************************************************************************
-     ************************************************************************
         
         Start a new game
         
-    *************************************************************************
     *************************************************************************/
     this.startNewGame = function() {
         // Choose a random word from the dictionary
         answer            = getWord().toLowerCase();
         var answer_length = answer.length;
 
-        // Display the answer for debugging
-        $("#answer").text(answer);
-
         // Initialize what the user sees
-        arr_answer = new Array(answer_length);
+        answer_array = new Array(answer_length);
 
         for (var i = 0; i < answer_length; i++) {
-            arr_answer[i] = "_";
+            answer_array[i] = "_";
         }
 
         this.updateStrAnswer();
 
-        // Reset guesses
-        guesses     = [];
-        str_guesses = "";
+        // Reset guesses_array
+        guesses_array  = [];
+        guesses_string = "";
 
         // Allow more tries for shorter words
         numTriesLeft = Math.max(6, Math.min(13 - Math.ceil(answer_length / 2), 10));
@@ -61,14 +58,12 @@ var HangmanGame = function() {
 
     
     /************************************************************************
-     ************************************************************************
         
         Display methods
         
-    *************************************************************************
     *************************************************************************/
     this.displayProgress = function() {
-        $("#answer_display").text(str_answer);
+        $("#answerProgress").text(answer_string);
     }
 
     this.displayNumWins = function() {
@@ -84,23 +79,21 @@ var HangmanGame = function() {
     }
 
     this.displayGuesses = function() {
-        $("#guesses").text(str_guesses);
+        $("#guesses").text(guesses_string);
     }
 
 
     /************************************************************************
-     ************************************************************************
         
         Get methods
         
-    *************************************************************************
     *************************************************************************/
     this.getAnswer = function() {
         return answer;
     }
 
     this.getStrAnswer = function() {
-        return str_answer;
+        return answer_string;
     }
 
     this.getNumTriesLeft = function() {
@@ -109,11 +102,9 @@ var HangmanGame = function() {
     
 
     /************************************************************************
-     ************************************************************************
         
         Set (update) methods
         
-    *************************************************************************
     *************************************************************************/
     this.updateNumWins = function(changeBy) {
         numWins += changeBy;
@@ -123,20 +114,24 @@ var HangmanGame = function() {
         numLosses += changeBy;
     }
 
+    this.updateKeyEnabled = function(changeTo) {
+        keyEnabled = changeTo;
+    }
+
     this.updateArrAnswer = function(index, changeTo) {
-        arr_answer[index] = changeTo;
+        answer_array[index] = changeTo;
     }
 
     this.updateStrAnswer = function() {
-        str_answer = arr_answer.join("");
+        answer_string = answer_array.join("");
     }
 
-    this.updateGuesses = function(x) {
-        guesses.push(x);
+    this.updateGuesses = function(changeBy) {
+        guesses_array.push(changeBy);
     }
 
-    this.updateStrGuesses = function(x) {
-        str_guesses += x;
+    this.updateStrGuesses = function(changeBy) {
+        guesses_string += changeBy;
     }
 
     this.updateNumTriesLeft = function(changeBy) {
@@ -145,14 +140,16 @@ var HangmanGame = function() {
 
 
     /************************************************************************
-     ************************************************************************
         
         Query methods
         
-    *************************************************************************
     *************************************************************************/
+    this.isKeyEnabled = function() {
+        return keyEnabled;
+    }
+
     this.isNewGuess = function(x) {
-        return (guesses.indexOf(x) === -1);
+        return (guesses_array.indexOf(x) === -1);
     }
 }
 
@@ -181,6 +178,13 @@ $(document).ready(function() {
 *****************************************************************************
 *****************************************************************************/
 $(document).on("keypress", function(e) {
+    if (!game.isKeyEnabled()) {
+        game.updateKeyEnabled(true);
+        displayLightBox(false);
+
+        return;
+    }
+
     var answer = game.getAnswer();
 
     // Find out which key was pressed
@@ -217,14 +221,43 @@ $(document).on("keypress", function(e) {
             // Check if the user has guessed the word correctly
             if (game.getStrAnswer() === answer) {
                 game.updateNumWins(1);
+
+                $("#outputMessage").html("Yep, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
+                $("#lightBox").css({"animation-name"  : "slide_down",
+                                    "background-color": "var(--color-mint-green)"});
+                $("#lightBox strong").css({"color": "#fff896"});
+                displayLightBox(true);
+                
                 game.startNewGame();
 
-            // Check if the user has run out of guesses
+            // Check if the user has run out of guesses_array
             } else if (game.getNumTriesLeft() === 0) {
                 game.updateNumLosses(1);
+
+                $("#outputMessage").html("Nah, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
+                $("#lightBox").css({"animation-name"  : "shake",
+                                    "background-color": "#c81a4c"});
+                $("#lightBox strong").css({"color": "#beffad"});
+                displayLightBox(true);
+                
                 game.startNewGame();
 
             }
         }
     }
 });
+
+
+function displayLightBox(lightBoxOn) {
+    game.updateKeyEnabled(!lightBoxOn);
+
+    if (lightBoxOn) {
+        $("#lightBox_background").css({"display": "block"});
+        $("#lightBox").css({"display": "block"});
+
+    } else {
+        $("#lightBox_background").css({"display": "none"});
+        $("#lightBox").css({"display": "none"});
+
+    }
+}
