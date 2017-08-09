@@ -7,6 +7,6 @@ Projects, homework, and exercises for UT Coding Boot Camp (Full Stack)
 3. 
 ## Homework
 0. [Pre-work assignments](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw0/Module-8/fanpage.html)
-1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/HW-Wireframe/), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/Basic-Portfolio)
+1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/HW-Wireframe/) (easy), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/Basic-Portfolio) (hard)
 2. [Portfolio w/ Responsive Design](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw2/Responsive-Portfolio/), [Portfolio w/ Bootstrap](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw2/Bootstrap-Portfolio/)
-3. [Psychic Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw3/Psychic-Game/), [Hangman Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw3/Hangman-Game/)
+3. [Psychic Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw3/Psychic-Game/) (easy), [Hangman Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw3/Hangman-Game/) (hard)
