@@ -230,7 +230,7 @@ $(document).on("keypress", function(e) {
                 
                 game.startNewGame();
 
-            // Check if the user has run out of guesses_array
+            // Check if the user has run out of guesses
             } else if (game.getNumTriesLeft() === 0) {
                 game.updateNumLosses(1);
 

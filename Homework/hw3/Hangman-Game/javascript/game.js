@@ -124,7 +124,7 @@ $(document).on("keypress", function(e) {
 
                 startNewGame();
 
-            // Check if the user has run out of guesses_array
+            // Check if the user has run out of guesses
             } else if (numTriesLeft === 0) {
                 numLosses++;
 
