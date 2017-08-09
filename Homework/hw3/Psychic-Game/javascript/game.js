@@ -5,9 +5,12 @@
     
 *****************************************************************************
 *****************************************************************************/
+// Variables for the game
 var numWins, numLosses;
+
+// Variables for the user
 var answer;
-var guesses, str_guesses, numTriesLeft;
+var guesses_array, guesses_string, numTriesLeft;
 
 
 
@@ -26,15 +29,15 @@ function startNewGame() {
     $("#answer").text(answer);
 
     // Reset variables
-    guesses      = [];
-    str_guesses  = "";
-    numTriesLeft = 10;
+    guesses_array  = [];
+    guesses_string = "";
+    numTriesLeft   = 10;
 
     // Display variables
     $("#numWins").text(numWins);
     $("#numLosses").text(numLosses);
     $("#numTriesLeft").text(numTriesLeft);
-    $("#guesses").text(str_guesses);
+    $("#guesses").text(guesses_string);
 }
 
 
@@ -70,16 +73,16 @@ $(document).on("keypress", function(e) {
 
     if ("a" <= yourGuess && yourGuess <= "z") {
         // Check if the guess has yet to be made
-        if (guesses.indexOf(yourGuess) === -1) {
+        if (guesses_array.indexOf(yourGuess) === -1) {
             numTriesLeft--;
 
             $("#numTriesLeft").text(numTriesLeft);
             
             // Record the letter
-            guesses.push(yourGuess);
-            str_guesses += yourGuess;
+            guesses_array.push(yourGuess);
+            guesses_string += yourGuess;
 
-            $("#guesses").text(str_guesses);
+            $("#guesses").text(guesses_string);
 
             // Check if the user has guessed the letter correctly
             if (yourGuess === answer) {
