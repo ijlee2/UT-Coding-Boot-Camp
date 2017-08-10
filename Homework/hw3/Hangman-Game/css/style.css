@@ -28,6 +28,12 @@ h1 {
     margin-bottom : 5%;
 }
 
+@-moz-document url-prefix() {
+h1 {
+    letter-spacing: 0;
+}
+}
+
 p {
     letter-spacing: 0.015em;
     line-height   : 1.3em;
