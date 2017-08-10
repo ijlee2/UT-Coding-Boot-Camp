@@ -1,3 +1,7 @@
+var numWins = 0, numLosses = 0;
+$("#numWins").text(numWins);
+$("#numLosses").text(numLosses);
+
 var targetSum = 50;
 var currentSum = 0;
 
