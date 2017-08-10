@@ -148,7 +148,7 @@ var HangmanGame = function() {
         return keyEnabled;
     }
 
-    this.isNewGuess = function(x) {
+    this.isGuessNew = function(x) {
         return (guesses_array.indexOf(x) === -1);
     }
 }
@@ -192,7 +192,7 @@ $(document).on("keypress", function(e) {
 
     if ("a" <= yourGuess && yourGuess <= "z") {
         // Check if the letter is a new guess
-        if (game.isNewGuess(yourGuess)) {
+        if (game.isGuessNew(yourGuess)) {
             // Check if the letter is a part of the word
             var index = answer.indexOf(yourGuess);
 
