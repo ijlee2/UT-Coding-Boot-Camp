@@ -247,6 +247,7 @@ $(document).on("keypress", function(e) {
     }
 });
 
+
 function displayLightBox(lightBoxOn) {
     game.updateKeyEnabled(!lightBoxOn);
 
