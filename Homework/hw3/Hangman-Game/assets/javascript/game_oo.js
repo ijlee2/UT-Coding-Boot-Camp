@@ -178,6 +178,7 @@ $(document).ready(function() {
 *****************************************************************************
 *****************************************************************************/
 $(document).on("keypress", function(e) {
+    // Allow the user to press any key to hide the lightbox
     if (!game.isKeyEnabled()) {
         game.updateKeyEnabled(true);
         displayLightBox(false);

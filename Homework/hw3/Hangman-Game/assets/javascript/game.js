@@ -74,6 +74,7 @@ $(document).ready(function() {
 *****************************************************************************
 *****************************************************************************/
 $(document).on("keypress", function(e) {
+    // Allow the user to press any key to hide the lightbox
     if (!keyEnabled) {
         keyEnabled = true;
         displayLightBox(false);
