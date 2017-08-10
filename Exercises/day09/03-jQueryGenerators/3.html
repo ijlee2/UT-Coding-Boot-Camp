@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic jQuery Dump</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="empty-div"></div>
+
+  <!-- Here we're adding a bit of CSS -->
+  <style>
+    .fancy {
+      font-size: 100px;
+      color: green;
+    }
+  </style>
+
+  <script type="text/javascript">
+
+    $("#empty-div").html("<h1>Hello friends!</h1>");
+
+    var newDiv = $("<div>");
+    newDiv.html("A pleasure to meet you!");
+
+    $("#empty-div").append(newDiv);
+
+    // If we need to apply some CSS, we can quickly do so, using the jQuery ".attr" method.
+    newDiv.attr("class", "fancy");
+
+  </script>
+
+</body>
+</html>

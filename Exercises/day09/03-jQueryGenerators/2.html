@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic jQuery Dump</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+  <div id="empty-div"></div>
+
+  <script type="text/javascript">
+
+    $("#empty-div").html("<h1>Hello friends!</h1>");
+
+    // If we needed each line to be its own div, we could just as easily create a new div.
+    var newDiv = $("<div>");
+    newDiv.html("A pleasure to meet you!");
+
+    // We can then  append it to the other div using the same ".append" method.
+    $("#empty-div").append(newDiv);
+
+  </script>
+
+</body>
+</html>
