@@ -42,47 +42,46 @@ function startNewGame() {
 
 $(document).ready(function() {
     startNewGame();
-});
 
-
-
-/****************************************************************************
- ****************************************************************************
     
-    Respond to user's actions
-    
-*****************************************************************************
-*****************************************************************************/
-$(document).on("keypress", function(e) {
-    // Find out which key was pressed
-    var yourGuess = String.fromCharCode(e.which).toLowerCase();
+    /************************************************************************
+     ************************************************************************
+        
+        Respond to user's actions
+        
+    *************************************************************************
+    *************************************************************************/
+    $(document).on("keypress", function(e) {
+        // Find out which key was pressed
+        var yourGuess = String.fromCharCode(e.which).toLowerCase();
 
-    if ("a" <= yourGuess && yourGuess <= "z") {
-        // Check if the guess has yet to be made
-        if (guesses_array.indexOf(yourGuess) === -1) {
-            numTriesLeft--;
+        if ("a" <= yourGuess && yourGuess <= "z") {
+            // Check if the guess has yet to be made
+            if (guesses_array.indexOf(yourGuess) === -1) {
+                numTriesLeft--;
 
-            $("#numTriesLeft").text(numTriesLeft);
-            
-            // Record the letter
-            guesses_array.push(yourGuess);
-            guesses_string += yourGuess;
+                $("#numTriesLeft").text(numTriesLeft);
+                
+                // Record the letter
+                guesses_array.push(yourGuess);
+                guesses_string += yourGuess;
 
-            $("#guesses").text(guesses_string);
+                $("#guesses").text(guesses_string);
 
-            // Check if the user has guessed the letter correctly
-            if (yourGuess === answer) {
-                numWins++;
+                // Check if the user has guessed the letter correctly
+                if (yourGuess === answer) {
+                    numWins++;
 
-                startNewGame();
+                    startNewGame();
 
-            // Check if the user has run out of guesses
-            } else if (numTriesLeft === 0) {
-                numLosses++;
+                // Check if the user has run out of guesses
+                } else if (numTriesLeft === 0) {
+                    numLosses++;
 
-                startNewGame();
+                    startNewGame();
 
+                }
             }
         }
-    }
+    });
 });

@@ -166,86 +166,85 @@ $(document).ready(function() {
     game = new HangmanGame();
 
     game.startNewGame();
-});
 
 
+    /************************************************************************
+     ************************************************************************
+        
+        Respond to user's actions
+        
+    *************************************************************************
+    *************************************************************************/
+    $(document).on("keypress", function(e) {
+        // Allow the user to press any key to hide the lightbox
+        if (!game.isKeyEnabled()) {
+            game.updateKeyEnabled(true);
+            displayLightBox(false);
 
-/****************************************************************************
- ****************************************************************************
-    
-    Respond to user's actions
-    
-*****************************************************************************
-*****************************************************************************/
-$(document).on("keypress", function(e) {
-    // Allow the user to press any key to hide the lightbox
-    if (!game.isKeyEnabled()) {
-        game.updateKeyEnabled(true);
-        displayLightBox(false);
+            return;
+        }
 
-        return;
-    }
+        var answer = game.getAnswer();
 
-    var answer = game.getAnswer();
+        // Find out which key was pressed
+        var yourGuess = String.fromCharCode(e.which).toLowerCase();
 
-    // Find out which key was pressed
-    var yourGuess = String.fromCharCode(e.which).toLowerCase();
+        if ("a" <= yourGuess && yourGuess <= "z") {
+            // Check if the letter is a new guess
+            if (game.isGuessNew(yourGuess)) {
+                // Check if the letter is a part of the word
+                var index = answer.indexOf(yourGuess);
 
-    if ("a" <= yourGuess && yourGuess <= "z") {
-        // Check if the letter is a new guess
-        if (game.isGuessNew(yourGuess)) {
-            // Check if the letter is a part of the word
-            var index = answer.indexOf(yourGuess);
+                if (index === -1) {
+                    game.updateNumTriesLeft(-1);
+                    game.displayNumTriesLeft();
 
-            if (index === -1) {
-                game.updateNumTriesLeft(-1);
-                game.displayNumTriesLeft();
+                } else {
+                    // Reveal all letters that match the letter
+                    while (index >= 0) {
+                        game.updateAnswerArray(index, yourGuess);
 
-            } else {
-                // Reveal all letters that match the letter
-                while (index >= 0) {
-                    game.updateAnswerArray(index, yourGuess);
+                        index = answer.indexOf(yourGuess, index + 1);
+                    }
 
-                    index = answer.indexOf(yourGuess, index + 1);
+                    game.updateAnswerString();
+                    game.displayProgress();
+                    
                 }
 
-                game.updateAnswerString();
-                game.displayProgress();
-                
-            }
+                // Record the letter
+                game.updateGuesses(yourGuess);
+                game.updateGuessesString(yourGuess);
+                game.displayGuesses();
 
-            // Record the letter
-            game.updateGuesses(yourGuess);
-            game.updateGuessesString(yourGuess);
-            game.displayGuesses();
+                // Check if the user has guessed the word correctly
+                if (game.getAnswerString() === answer) {
+                    game.updateNumWins(1);
 
-            // Check if the user has guessed the word correctly
-            if (game.getAnswerString() === answer) {
-                game.updateNumWins(1);
+                    $("#outputMessage").html("Yep, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
+                    $("#lightBox").css({"animation-name"  : "slide_down",
+                                        "background-color": "var(--color-mint-green)"});
+                    $("#lightBox strong").css({"color": "#fff896"});
+                    displayLightBox(true);
+                    
+                    game.startNewGame();
 
-                $("#outputMessage").html("Yep, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
-                $("#lightBox").css({"animation-name"  : "slide_down",
-                                    "background-color": "var(--color-mint-green)"});
-                $("#lightBox strong").css({"color": "#fff896"});
-                displayLightBox(true);
-                
-                game.startNewGame();
+                // Check if the user has run out of guesses
+                } else if (game.getNumTriesLeft() === 0) {
+                    game.updateNumLosses(1);
 
-            // Check if the user has run out of guesses
-            } else if (game.getNumTriesLeft() === 0) {
-                game.updateNumLosses(1);
+                    $("#outputMessage").html("Nah, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
+                    $("#lightBox").css({"animation-name"  : "shake",
+                                        "background-color": "#c81a4c"});
+                    $("#lightBox strong").css({"color": "#beffad"});
+                    displayLightBox(true);
+                    
+                    game.startNewGame();
 
-                $("#outputMessage").html("Nah, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
-                $("#lightBox").css({"animation-name"  : "shake",
-                                    "background-color": "#c81a4c"});
-                $("#lightBox strong").css({"color": "#beffad"});
-                displayLightBox(true);
-                
-                game.startNewGame();
-
+                }
             }
         }
-    }
+    });
 });
 
 

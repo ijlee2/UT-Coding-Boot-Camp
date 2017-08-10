@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Trigger Clicked</title>
+
+  <!-- Added link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+  <h1>Click to Eat Sandwich</h1>
+  <h3 id="pbj">Peanut Butter Jelly</h3>
+  <h3 id="grillcheese">Grilled Cheese</h3>
+  <h3 id="roastbeef">Roast Beef</h3>
+  <div id="sandwich_image"></div>
+
+  <script type="text/javascript">
+
+    // This document.ready isn't necessary in this example... but is needed in cases where the HTML is complex.
+    // This code makes sure that the JavaScript doesn't get run until the HTML is finished loading
+    // It's useful to become familiar with now.
+
+    $(document).ready(function() {
+
+      // VARIABLES
+      // ====================================================================
+      // Here we create variables for tracking the number of sandwiches eaten
+      var numPBJEaten = 0, numGrillCheeseEaten = 0, numRoastBeefEaten = 0;
+
+      // FUNCTIONS
+      // ====================================================================
+      // Here we create various on "click" functions which capture the clicks
+      // Inside each click event is the code to create an alert, update the counter, then show the updated count.
+      $("#pbj").on("click", function() {
+        alert("Peanut butter and jelly");
+
+        numPBJEaten++;
+        alert("Number of PBJ eaten: " + numPBJEaten);
+
+        $("#sandwich_image").html('<img src="https://afterhoursdenver.org/wp-content/uploads/2013/01/pbj.png" width="300">');
+      });
+
+      $("#grillcheese").on("click", function() {
+        alert("Grill cheese");
+
+        numGrillCheeseEaten++;
+        alert("Number of grill cheese eaten: " + numGrillCheeseEaten);
+
+        $("#sandwich_image").html('<img src="http://www.seriouseats.com/recipes/assets_c/2013/04/20130416-grilled-cheese-variations-2-10-thumb-625xauto-319712.jpg" width="300">');
+      });
+
+      $("#roastbeef").on("click", function() {
+        alert("Grill cheese");
+
+        numRoastBeefEaten++;
+        alert("Number of roast beef eaten: " + numRoastBeefEaten);
+
+        $("#sandwich_image").html('<img src="https://static01.nyt.com/images/2015/04/15/dining/15APPE1/15APPE1-master675.jpg" width="300">');
+      });
+
+    });
+
+</script>
+
+</body>
+
+</html>
