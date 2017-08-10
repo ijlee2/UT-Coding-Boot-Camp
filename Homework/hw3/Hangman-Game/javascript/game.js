@@ -141,7 +141,6 @@ $(document).on("keypress", function(e) {
     }
 });
 
-
 function displayLightBox(lightBoxOn) {
     keyEnabled = !lightBoxOn;
 
