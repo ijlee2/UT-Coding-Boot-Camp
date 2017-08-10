@@ -65,8 +65,6 @@
 
       // MAJOR TASK #1: DYNAMICALLY CREATE BUTTONS
       // =================================================================================
-
-      // 1. Create a for-loop to iterate through the letters array.
       for (var i = 0; i < letters.length; i++) {
         var letterBtn = $("<button>" + letters[i] + "</button>");
 
@@ -80,6 +78,8 @@
         $("#buttons").append(letterBtn);
       }
 
+      // MAJOR TASK #2: ATTACH ON-CLICK EVENTS TO "LETTER" BUTTONS
+      // =================================================================================
       $(".letter-button").on("click", function() {
         var fridgeMagnet = $("<div>");
 
