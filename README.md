@@ -30,3 +30,9 @@ If you have suggestions for making my code better and simpler, please let me kno
     - [x] CSS
     - [x] JavaScript
     - [x] jQuery
+
+4. Crystal Collector Game (easy), Star Wars RPG Game (hard)
+    - [x] HTML
+    - [x] CSS
+    - [x] JavaScript
+    - [x] jQuery
