@@ -138,11 +138,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#lightBox_background").on("click", function() {
-        displayLightBox(false);
-    });
-
-    $("#lightBox").on("click", function() {
+    $("#lightBox_background, #lightBox").on("click", function() {
         displayLightBox(false);
     });
 });
