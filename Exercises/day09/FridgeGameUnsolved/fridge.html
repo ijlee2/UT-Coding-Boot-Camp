@@ -84,6 +84,8 @@
         var fridgeMagnet = $("<div>");
 
         fridgeMagnet.attr("class", "letter fridge-color");
+        // "this" is inside the event handler, so this refers to the object
+        // that has been clicked
         fridgeMagnet.text($(this).attr("data-letter"));
 
         $("#display").append(fridgeMagnet);
