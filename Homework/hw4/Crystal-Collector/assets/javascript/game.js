@@ -83,6 +83,14 @@ var CrystalCollectorGame = function() {
         Set (update) methods
         
     *************************************************************************/
+    this.updateNumWins = function(changeBy) {
+        numWins += changeBy;
+    }
+
+    this.updateNumLosses = function(changeBy) {
+        numLosses += changeBy;
+    }
+
     this.updateCurrentSum = function(changeBy) {
         currentSum += changeBy;
     }
@@ -93,8 +101,20 @@ var CrystalCollectorGame = function() {
         Query methods
         
     *************************************************************************/
-    this.isCurrentSumOver = function() {
-        return (currentSum > targetSum);
+    this.checkCurrentSum = function() {
+        if (currentSum < targetSum) {
+            // Still good to go
+            return 0;
+
+        } else if (currentSum === targetSum) {
+            // Win condition
+            return 1;
+
+        } else {
+            // Loss condition
+            return -1;
+
+        }
     }
 }
 
@@ -128,13 +148,55 @@ $(document).ready(function() {
 
             game.displayCurrentSum();
 
-            if (game.isCurrentSumOver()) {
-//                console.log("You lost.");
+            switch (game.checkCurrentSum()) {
+                // If the user reached the target sum
+                case 1:
+                    game.updateNumWins(1);
 
-            } else {
-//                console.log("Keep going!");
+                    $("#outputMessage").html("Congratulations!<br>Press any key to continue.");
+                    $("#lightBox").css({"animation-name"  : "slide_down",
+                                        "background-color": "var(--color-mint-green)"});
+                    $("#lightBox strong").css({"color": "#fff896"});
+                    displayLightBox(true);
+                    
+                    game.startNewGame();
+
+                    break;
+
+                // If the user went over the target sum
+                case -1:
+                    game.updateNumLosses(1);
+
+                    $("#outputMessage").html("Sorry, try again!<br>Press any key to continue.");
+                    $("#lightBox").css({"animation-name"  : "shake",
+                                        "background-color": "#c81a4c"});
+                    $("#lightBox strong").css({"color": "#beffad"});
+                    displayLightBox(true);
+                    
+                    game.startNewGame();
+
+                    break;
 
             }
         });
     });
+
+    $("#lightBox_background, #lightBox").on("click", function() {
+        displayLightBox(false);
+    });
 });
+
+
+function displayLightBox(lightBoxOn) {
+//    game.updateKeyEnabled(!lightBoxOn);
+
+    if (lightBoxOn) {
+        $("#lightBox_background").css({"display": "block"});
+        $("#lightBox").css({"display": "block"});
+
+    } else {
+        $("#lightBox_background").css({"display": "none"});
+        $("#lightBox").css({"display": "none"});
+
+    }
+}
