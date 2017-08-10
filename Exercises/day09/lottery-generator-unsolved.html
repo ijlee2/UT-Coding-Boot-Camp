@@ -27,30 +27,26 @@
   </div>
 
   <!-- Here we have div called "random-number" where our random number will go -->
-  <div class="text-center" id="random-number"></div>
+  <h1 class="text-center" id="random-number"></h1>
 
   <script type="text/javascript">
     function createDigit() {
       return Math.floor(10 * Math.random());
     }
 
-    var lottery_numbers_string = "";
-
     $(document).ready(function() {
       var number_area = $("#random-number");
 
       // CREATE THE MISSING CODE HERE. Your code should add content to the random-number div.
       $("#random-button").on("click", function() {
-        var randomNumber = "";
+        var lotteryNumber = "";
 
         // Random number between 000000000 and 999999999
         for (var i = 0; i < 10; i++) {
-          randomNumber += createDigit();
+          lotteryNumber += createDigit();
         }
 
-        lottery_numbers_string = ("<h1>" + randomNumber + "</h1><br>") + lottery_numbers_string;
-
-        number_area.html(lottery_numbers_string);
+        $("#random-number").prepend(lotteryNumber + "<hr>");
       });
     });
 
