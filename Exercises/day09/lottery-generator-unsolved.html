@@ -30,7 +30,10 @@
   <div class="text-center" id="random-number"></div>
 
   <script type="text/javascript">
-//    var lottery_numbers = [];
+    function createDigit() {
+      return Math.floor(10 * Math.random());
+    }
+
     var lottery_numbers_string = "";
 
     $(document).ready(function() {
@@ -38,10 +41,13 @@
 
       // CREATE THE MISSING CODE HERE. Your code should add content to the random-number div.
       $("#random-button").on("click", function() {
-        // Random number between 100,000,000 and 999,999,999
-        var randomNumber = Math.floor(900000000 * Math.random()) + 100000000;
+        var randomNumber = "";
 
-//        lottery_numbers.unshift(randomNumber);
+        // Random number between 000000000 and 999999999
+        for (var i = 0; i < 10; i++) {
+          randomNumber += createDigit();
+        }
+
         lottery_numbers_string = ("<h1>" + randomNumber + "</h1><br>") + lottery_numbers_string;
 
         number_area.html(lottery_numbers_string);
