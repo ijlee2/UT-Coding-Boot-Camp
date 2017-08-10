@@ -41,7 +41,7 @@ var HangmanGame = function() {
 
         this.updateAnswerString();
 
-        // Reset guesses_array
+        // Reset guesses
         guesses_array  = [];
         guesses_string = "";
 

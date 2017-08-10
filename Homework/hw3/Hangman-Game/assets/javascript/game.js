@@ -36,7 +36,7 @@ function startNewGame() {
 
     answer_string = answer_array.join("");
 
-    // Reset guesses_array
+    // Reset guesses
     guesses_array  = [];
     guesses_string = "";
 
