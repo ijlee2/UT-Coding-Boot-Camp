@@ -19,12 +19,13 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numPages = 3, pageNumber = 0;
+    var numPages = 3, currentPage = 0;
     var numWins = 0, numLosses = 0;
 
     // Variables for the user
     var characterID, enemyID;
-    var numCharacters = 4, characters = new Array(numCharacters);
+    var numCharacters   = 4;
+    var characters      = new Array(numCharacters);
     var character_names = ["Rey", "Luke Skywalker", "Darth Vader", "Stormtrooper"];
     
 
@@ -39,8 +40,6 @@ var StarWarsRPGGame = function() {
             characters[i] = {"name"  : character_names[i],
                              "hp"    : 10 * randomInteger(10) + 100,
                              "damage": randomInteger(10)};
-            
-            console.log(characters[i]);
         }
 
         // Display messages
@@ -59,7 +58,7 @@ var StarWarsRPGGame = function() {
     *************************************************************************/
     this.displayPage = function() {
         for (var i = 0; i < numPages; i++) {
-            if (i === pageNumber) {
+            if (i === currentPage) {
                 $(".page:nth-child(" + (i + 1) + ")").css({"display": "block"});
 
             } else {
@@ -102,12 +101,11 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     this.updatePage = function(changeBy) {
-        pageNumber = (pageNumber + changeBy + numPages) % numPages;
+        currentPage = (currentPage + changeBy + numPages) % numPages;
     }
 
     this.updateCharacter = function(changeTo) {
         characterID = changeTo;
-        console.log("You are now " + characters[changeTo].name + "!");
     }
 
     this.updateNumWins = function(changeBy) {
@@ -176,16 +174,16 @@ $(document).ready(function() {
     });
 
     $.each(game.getCharacters(), function(index, value) {
-        $(".character:nth-child(" + (index + 1) + ")").on("click", function() {
+        $(".characters:nth-child(" + (index + 1) + ")").on("click", function() {
             game.updateCharacter(index);
 
             // Hide the character from the list of enemies
             for (var i = 0; i < game.getCharacters().length; i++) {
                 if (i === index) {
-                    $(".enemy:nth-child(" + (i + 1) + ")").css({"display": "none"});
+                    $(".enemies:nth-child(" + (i + 1) + ")").css({"display": "none"});
 
                 } else {
-                    $(".enemy:nth-child(" + (i + 1) + ")").css({"display": "block"});
+                    $(".enemies:nth-child(" + (i + 1) + ")").css({"display": "block"});
 
                 }
             }
