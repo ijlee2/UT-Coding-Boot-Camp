@@ -95,15 +95,11 @@
             number_string = $(this).attr("value");
 
             if (operationStep === 0) {
-                operationStep++;
-
                 firstNumber += number_string;
 
                 $("#first-number").text(firstNumber);
 
-            } else if (operationStep === 2) {
-                operationStep++;
-
+            } else if (operationStep === 1 && operator !== "") {
                 secondNumber += number_string;
 
                 $("#second-number").text(secondNumber);
@@ -112,11 +108,13 @@
         });
 
         $("button.operator").on("click", function() {
-            if (operationStep === 1) {
+            if (operationStep === 0 && firstNumber !== "") {
                 operationStep++;
 
                 firstNumber = parseInt(firstNumber);
+            }
 
+            if (operationStep === 1 && secondNumber === "") {
                 operator = $(this).children().html();
 
                 $("#operator").html(operator);
@@ -124,7 +122,7 @@
         });
 
         $("button.equal").on("click", function() {
-            if (operationStep === 3) {
+            if (operationStep === 1 && secondNumber !== "") {
                 operationStep++;
 
                 secondNumber = parseInt(secondNumber);
