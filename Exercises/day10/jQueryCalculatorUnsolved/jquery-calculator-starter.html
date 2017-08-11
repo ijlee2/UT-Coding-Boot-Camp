@@ -93,13 +93,13 @@
         resetVariables();
 
         $("button.number").on("click", function() {
-            // If the operator is empty, then the user has yet to finish entering the 1st number
+            // If the operator is empty, then the user hasn't finished entering the 1st number
             if (operator === "") {
                 firstNumber += $(this).attr("value");
 
                 $("#first-number").text(firstNumber);
 
-            // If the operator is something but the result is empty, then the user has yet to finish entering the 2nd number
+            // If the operator isn't empty but the result is, then the user hasn't finished entering the 2nd number
             } else if (operator !== "" && result === "") {
                 secondNumber += $(this).attr("value");
 
@@ -109,7 +109,7 @@
         });
 
         $("button.operator").on("click", function() {
-            // If the first number is something but the second number is empty, then the user has yet to finish entering the operator
+            // If the first number isn't empty but the second number is, then the user hasn't finished entering the operator
             if (firstNumber !== "" && secondNumber === "") {
                 operator = $(this).children().html();
 
@@ -118,10 +118,10 @@
         });
 
         $("button.equal").on("click", function() {
-            // If the second number is something but the result is empty, then the user has yet to click on the equal sign
+            // If the second number isn't empty but the result is, then the user has yet to click on the equal sign
             if (secondNumber !== "" && result === "") {
                 // Change the variable type from String to number
-                firstNumber = parseInt(firstNumber);
+                firstNumber  = parseInt(firstNumber);
                 secondNumber = parseInt(secondNumber);
 
                 switch (operator) {
