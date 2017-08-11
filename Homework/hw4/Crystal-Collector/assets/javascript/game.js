@@ -7,6 +7,11 @@
 *****************************************************************************/
 var game;
 
+// Generate a random number between 1 and n
+var randomInteger = function(n) {
+    return Math.floor(n * Math.random()) + 1;
+}
+
 var CrystalCollectorGame = function() {
     /************************************************************************
         
@@ -14,6 +19,7 @@ var CrystalCollectorGame = function() {
         
     *************************************************************************/
     // Variables for the game
+    var numPages = 2, pageNumber = 0;
     var numWins = 0, numLosses = 0;
 
     // Variables for the user
@@ -28,17 +34,18 @@ var CrystalCollectorGame = function() {
     *************************************************************************/
     this.startNewGame = function() {
         // Choose a random sum between 19 and 120
-        targetSum = Math.floor(102 * Math.random()) + 19;
+        targetSum = randomInteger(102) + 18;
 
         // Reset current sum
         currentSum = 0;
 
         // Assign a value between 1 and 12 to each crystal
         for (var i = 0; i < numCrystals; i++) {
-            crystalValues[i] = Math.floor(12 * Math.random()) + 1;
+            crystalValues[i] = randomInteger(12);
         }
 
         // Display messages
+        this.displayPage();
         this.displayNumWins();
         this.displayNumLosses();
         this.displayTargetSum();
@@ -51,6 +58,18 @@ var CrystalCollectorGame = function() {
         Display methods
         
     *************************************************************************/
+    this.displayPage = function() {
+        for (var i = 0; i < numPages; i++) {
+            if (i === pageNumber) {
+                $(".page:nth-child(" + (i + 1) + ")").css({"display": "block"});
+
+            } else {
+                $(".page:nth-child(" + (i + 1) + ")").css({"display": "none"});
+
+            }
+        }
+    }
+
     this.displayNumWins = function() {
         $("#numWins").text(numWins);
     }
@@ -83,6 +102,10 @@ var CrystalCollectorGame = function() {
         Set (update) methods
         
     *************************************************************************/
+    this.updatePage = function(changeBy) {
+        pageNumber = (pageNumber + changeBy + numPages) % numPages;
+    }
+
     this.updateNumWins = function(changeBy) {
         numWins += changeBy;
     }
@@ -138,12 +161,14 @@ $(document).ready(function() {
         Respond to user's actions
         
     *************************************************************************/
+    $(".page_next").on("click", function() {
+        game.updatePage(1);
+        game.displayPage();
+    });
+
+
     $.each(game.getCrystalValues(), function(index, value) {
-//        console.log("Crystal " + (index + 1) + ": " + value);
-
-        var elementTag = ".crystal:nth-child(" + (index + 1) + ")";
-
-        $(elementTag).on("click", function() {
+        $(".crystal:nth-child(" + (index + 1) + ")").on("click", function() {
             game.updateCurrentSum(value);
 
             game.displayCurrentSum();

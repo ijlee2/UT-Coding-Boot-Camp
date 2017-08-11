@@ -11,7 +11,6 @@ body {
     font-size  : 30px;
 }
 
-/* Total width of 640px */
 .container {
     width  : 520px;
     margin : auto;
@@ -32,7 +31,7 @@ h1 {
     letter-spacing: 0.02em;
     text-align    : center;
 
-    margin-bottom : 5%;
+    margin-bottom : 6%;
 }
 
 @-moz-document url-prefix() {
@@ -41,16 +40,44 @@ h1 {
 }
 }
 
+h2 {
+    color         : var(--color-text-highlight);
+    font-size     : 1.3em;
+    letter-spacing: 0.01em;
+
+    margin-bottom : 3%;
+}
+
 p {
     letter-spacing: 0.015em;
     line-height   : 1.3em;
 
-    margin-bottom : 2%;
+    margin-bottom : 3%;
 }
 
 p strong {
     color      : var(--color-text-highlight);
     font-weight: bold;
+}
+
+img {
+    background-color: #d7f4f2;
+    
+    float           : left;
+    width           : 21%;
+    margin          : 5% 1% 0 1%;
+    padding         : 1%;
+}
+
+
+/* Specific to pages */
+.page_next {
+    background-color: var(--color-mint-green);
+    color           : #fff;
+
+    float           : right;
+    margin-top      : 3%;
+    padding         : 3% 5%;
 }
 
 #userStats p {
@@ -59,15 +86,8 @@ p strong {
     margin-bottom: 7.5%;
 }
 
-img {
-    background-color: #d7f4f2;
-    float: left;
-    width: 21%;
-    margin: 5% 1% 0 1%;
-    padding: 1%;
-}
 
-/* Lightbox */
+/* Specific to lightbox */
 #lightBox_background {
     display : none;
     opacity : 0;
@@ -97,7 +117,6 @@ img {
     text-align : center;
 }
 
-/* Code modified from https://css-tricks.com/snippets/css/shake-css-keyframe-animation/ */
 #lightBox {
   animation: slide_down 0.80s cubic-bezier(.36, .07, .19, .97) both;
 }
