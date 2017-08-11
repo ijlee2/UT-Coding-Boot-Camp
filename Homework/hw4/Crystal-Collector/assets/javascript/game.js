@@ -33,15 +33,23 @@ var CrystalCollectorGame = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
-        // Choose a random sum between 19 and 120
-        targetSum = randomInteger(102) + 18;
-
-        // Reset current sum
+        // Reset variables
+        targetSum = 0;
         currentSum = 0;
 
         // Assign a value between 1 and 12 to each crystal
         for (var i = 0; i < numCrystals; i++) {
             crystalValues[i] = randomInteger(12);
+            targetSum += crystalValues[i] * randomInteger(6);
+        }
+
+        // Ensure that the target sum is between 19 and 120
+        while (targetSum < 19 || targetSum > 120) {
+            targetSum = 0;
+
+            for (var i = 0; i < numCrystals; i++) {
+                targetSum += crystalValues[i] * randomInteger(6);
+            }
         }
 
         // Display messages
