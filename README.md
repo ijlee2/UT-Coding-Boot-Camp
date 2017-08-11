@@ -16,7 +16,7 @@ If you have suggestions for making my code better and simpler, please let me kno
     - [x] CSS
     - [x] JavaScript
     
-1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/HW-Wireframe/) (easy), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/Basic-Portfolio) (hard)
+1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/Wireframe/) (easy), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/Basic-Portfolio) (hard)
     - [x] HTML
     - [x] CSS
     
@@ -31,7 +31,7 @@ If you have suggestions for making my code better and simpler, please let me kno
     - [x] JavaScript
     - [x] jQuery
 
-4. Crystal Collector Game (easy), Star Wars RPG Game (hard)
+4. [Crystal Collector] (ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw4/Crystal-Collector/) (easy), [Star Wars RPG] (ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw4/Star-Wars-RPG) (hard)
     - [x] HTML
     - [x] CSS
     - [x] JavaScript
