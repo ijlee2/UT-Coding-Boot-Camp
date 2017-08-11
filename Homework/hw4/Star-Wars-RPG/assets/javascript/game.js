@@ -12,14 +12,14 @@ var randomInteger = function(n) {
     return Math.floor(n * Math.random()) + 1;
 }
 
-var CrystalCollectorGame = function() {
+var StarWarsRPGGame = function() {
     /************************************************************************
         
         Private variables
         
     *************************************************************************/
     // Variables for the game
-    var numPages = 2, pageNumber = 0;
+    var numPages = 3, pageNumber = 0;
     var numWins = 0, numLosses = 0;
 
     // Variables for the user
@@ -159,7 +159,7 @@ var CrystalCollectorGame = function() {
 *****************************************************************************
 *****************************************************************************/
 $(document).ready(function() {
-    game = new CrystalCollectorGame();
+    game = new StarWarsRPGGame();
 
     game.startNewGame();
 
