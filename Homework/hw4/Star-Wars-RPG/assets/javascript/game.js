@@ -23,8 +23,9 @@ var StarWarsRPGGame = function() {
     var numWins = 0, numLosses = 0;
 
     // Variables for the user
-    var targetSum, currentSum;
-    var numCrystals = 4, crystalValues = new Array(numCrystals);
+    var characterID;
+    var numCharacters = 4, characters = new Array(numCharacters);
+    var character_names = ["Rey", "Luke Skywalker", "Darth Vader", "Stormtrooper"];
     
 
     /************************************************************************
@@ -33,31 +34,21 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
-        // Reset variables
-        targetSum = 0;
-        currentSum = 0;
-
         // Assign a value between 1 and 12 to each crystal
-        for (var i = 0; i < numCrystals; i++) {
-            crystalValues[i] = randomInteger(12);
-            targetSum += crystalValues[i] * randomInteger(6);
-        }
-
-        // Ensure that the target sum is between 19 and 120
-        while (targetSum < 19 || targetSum > 120) {
-            targetSum = 0;
-
-            for (var i = 0; i < numCrystals; i++) {
-                targetSum += crystalValues[i] * randomInteger(6);
-            }
+        for (var i = 0; i < numCharacters; i++) {
+            characters[i] = {"name"  : character_names[i],
+                             "hp"    : 10 * randomInteger(10) + 100,
+                             "damage": randomInteger(10)};
+            
+            console.log(characters[i]);
         }
 
         // Display messages
         this.displayPage();
-        this.displayNumWins();
-        this.displayNumLosses();
-        this.displayTargetSum();
-        this.displayCurrentSum();
+//        this.displayNumWins();
+//        this.displayNumLosses();
+//        this.displayTargetSum();
+//        this.displayCurrentSum();
     }
 
     
@@ -100,8 +91,8 @@ var StarWarsRPGGame = function() {
         Get methods
         
     *************************************************************************/
-    this.getCrystalValues = function() {
-        return crystalValues;
+    this.getcharacters = function() {
+        return characters;
     }
 
 
@@ -179,7 +170,7 @@ $(document).ready(function() {
         game.displayPage();
     });
 
-    $.each(game.getCrystalValues(), function(index, value) {
+    $.each(game.getcharacters(), function(index, value) {
         $(".crystal:nth-child(" + (index + 1) + ")").on("click", function() {
             game.updateCurrentSum(value);
 
@@ -192,7 +183,7 @@ $(document).ready(function() {
 
                     $("#outputMessage").html("Congratulations!<br>Press any key to continue.");
                     $("#lightBox").css({"animation-name"  : "slide_down",
-                                        "background-color": "var(--color-mint-green)"});
+                                        "background-color": "var(--color-star-wars-yellow)"});
 //                    $("#lightBox strong").css({"color": "#fff896"});
                     displayLightBox(true);
                     

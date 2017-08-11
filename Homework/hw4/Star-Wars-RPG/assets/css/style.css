@@ -1,11 +1,13 @@
 :root {
     /* Define color scheme */
-    --color-mint-green    : #4aaaa5;
-    --color-text          : #202020;
-    --color-text-highlight: #ff6600;
+    --color-background      : #000000;
+    --color-star-wars-yellow: #f7e739;
+    --color-text            : #f7f7f7;
+    --color-text-highlight  : #ff6600;
 }
 
 body {
+    background-color: var(--color-background);
     color      : var(--color-text);
     font-family: "Amiri", cursive;
     font-size  : 30px;
@@ -24,7 +26,7 @@ body {
 }
 
 h1 {
-    color         : var(--color-mint-green);
+    color         : var(--color-star-wars-yellow);
     font-family   : "Bungee", cursive;
     font-size     : 1.8em;
     letter-spacing: 0.02em;
@@ -71,8 +73,8 @@ img {
 
 /* Specific to pages */
 .page_prev, .page_next {
-    background-color: var(--color-mint-green);
-    color           : #fff;
+    background-color: var(--color-star-wars-yellow);
+    color           : var(--color-background);
 
     margin-top      : 3%;
     padding         : 3% 5%;
