@@ -83,10 +83,10 @@
     var result;
 
     function resetVariables() {
-        firstNumber = "";
-        operator = "";
+        firstNumber  = "";
+        operator     = "";
         secondNumber = "";
-        result = "";
+        result       = "";
     }
 
     $(document).ready(function() {
@@ -111,9 +111,10 @@
         $("button.operator").on("click", function() {
             // If the first number isn't empty but the second number is, then the user hasn't finished entering the operator
             if (firstNumber !== "" && secondNumber === "") {
-                operator = $(this).children().html();
+                // Allow the user to change the operator if they selected another by mistake
+                operator = $(this).text();
 
-                $("#operator").html(operator);
+                $("#operator").text(operator);
             }
         });
 
