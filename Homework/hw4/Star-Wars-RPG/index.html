@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Isaac J. Lee">
+
+        <title>Star Wars RPG Game</title>
+        
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Amiri|Bungee">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <div class="page container">
+            <h1>Star Wars RPG</h1>
+            <h2>Directions:</h2>
+            
+            <p>Choose your character and fend off the remaining 3 characters.</p>
+            <p>With each attack, your force increases.</p>
+            <p>Be strategic!</p>
+
+            <div class="page_next">Start</div>
+        </div>
+        
+        <div class="page container">
+            <h1>Star Wars RPG</h1>
+            
+            <div id="userStats">
+                <p>Wins: <strong><span id="numWins"></span></strong></p>
+                <p>Losses: <strong><span id="numLosses"></span></strong></p>
+            </div>
+
+            <p>Make a sum of <span id="targetSum"></span>!</p>
+            <p>Your sum is <strong><span id="currentSum"></span></strong>.</p>
+            
+            <div id="crystals" class="clearfix">
+                <img class="crystal" src="assets/images/crystal1.png" alt="red crystal">
+                <img class="crystal" src="assets/images/crystal2.png" alt="blue crystal">
+                <img class="crystal" src="assets/images/crystal3.png" alt="green crystal">
+                <img class="crystal" src="assets/images/crystal4.png" alt="purple crystal">
+            </div>
+
+            <div class="page_prev">Directions</div>
+        </div>
+
+        <!-- Lightbox -->
+        <div id="lightBox_background">
+        </div>
+
+        <div id="lightBox" class="container">
+            <p id="outputMessage"></p>
+        </div>
+
+        <script type="text/javascript" src="assets/javascript/game.js"></script>
+    </body>
+</html>
