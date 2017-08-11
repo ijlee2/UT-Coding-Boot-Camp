@@ -193,7 +193,7 @@ $(document).ready(function() {
                     $("#outputMessage").html("Congratulations!<br>Press any key to continue.");
                     $("#lightBox").css({"animation-name"  : "slide_down",
                                         "background-color": "var(--color-mint-green)"});
-                    $("#lightBox strong").css({"color": "#fff896"});
+//                    $("#lightBox strong").css({"color": "#fff896"});
                     displayLightBox(true);
                     
                     game.startNewGame();
@@ -204,10 +204,10 @@ $(document).ready(function() {
                 case -1:
                     game.updateNumLosses(1);
 
-                    $("#outputMessage").html("Sorry, try again!<br>Press any key to continue.");
+                    $("#outputMessage").html("Sorry, you got greedy!<br>Press any key to continue.");
                     $("#lightBox").css({"animation-name"  : "shake",
                                         "background-color": "#c81a4c"});
-                    $("#lightBox strong").css({"color": "#beffad"});
+//                    $("#lightBox strong").css({"color": "#beffad"});
                     displayLightBox(true);
                     
                     game.startNewGame();
