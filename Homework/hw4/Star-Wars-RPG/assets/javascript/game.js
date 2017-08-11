@@ -91,7 +91,7 @@ var StarWarsRPGGame = function() {
         Get methods
         
     *************************************************************************/
-    this.getcharacters = function() {
+    this.getCharacters = function() {
         return characters;
     }
 
@@ -175,9 +175,20 @@ $(document).ready(function() {
         game.displayPage();
     });
 
-    $.each(game.getcharacters(), function(index, value) {
+    $.each(game.getCharacters(), function(index, value) {
         $(".character:nth-child(" + (index + 1) + ")").on("click", function() {
             game.updateCharacter(index);
+
+            // Hide the character from the list of enemies
+            for (var i = 0; i < game.getCharacters().length; i++) {
+                if (i === index) {
+                    $(".enemy:nth-child(" + (i + 1) + ")").css({"display": "none"});
+
+                } else {
+                    $(".enemy:nth-child(" + (i + 1) + ")").css({"display": "block"});
+
+                }
+            }
         });
     });
 
