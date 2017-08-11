@@ -61,13 +61,47 @@ p strong {
     font-weight: bold;
 }
 
-img {
-    background-color: #d7f4f2;
-    
-    float           : left;
-    width           : 21%;
-    margin          : 5% 1% 0 1%;
-    padding         : 1%;
+div.characters, div.enemies {
+    float    : left;
+    position : relative; /* For figcaption (position: absolute) */
+    max-width: 40%;
+    width    : 40%;
+    margin   : 2% 5% 4% 5%;
+}
+
+div.characters img, div.enemies img {
+    width  : 100%;
+    margin : 5% 1% 0 1%;
+    padding: 1%;
+}
+
+div.characters img {
+    border: 2px solid #d7f4f2;
+}
+
+div.enemies img {
+    border: 2px solid #e22;
+}
+
+div.characters div, div.enemies div {
+    background-color: #c6c6c6;
+    color           : var(--color-background);
+
+    position: absolute;
+    width  : 94.5%;
+    bottom : 6%;
+    left   : 1.5%;
+    padding: 3.5%;
+}
+
+div.characters p:nth-child(1), div.enemies p:nth-child(1) {
+    float: left;
+    margin-bottom: 0;
+}
+
+div.characters p:nth-child(2), div.enemies p:nth-child(2) {
+    float: right;
+    margin-bottom: 0;
 }
 
 
@@ -75,6 +109,7 @@ img {
 .page_prev, .page_next {
     background-color: var(--color-star-wars-yellow);
     color           : var(--color-background);
+    font-weight     : bold;
 
     margin-top      : 3%;
     padding         : 3% 5%;
