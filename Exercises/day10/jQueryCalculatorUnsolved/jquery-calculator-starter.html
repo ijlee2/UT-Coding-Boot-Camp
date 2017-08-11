@@ -76,15 +76,16 @@
 </div>
 
 <script type="text/javascript">
-    var operationStep;
-    var firstNumber, operator, secondNumber;
+    // Global variables
+    var firstNumber;
+    var operator;
+    var secondNumber;
     var result;
-    
-    var number_string;
 
     function resetVariables() {
-        operationStep = 0;
-        firstNumber = "", operator = "", secondNumber = "";
+        firstNumber = "";
+        operator = "";
+        secondNumber = "";
         result = "";
     }
 
@@ -92,15 +93,15 @@
         resetVariables();
 
         $("button.number").on("click", function() {
-            number_string = $(this).attr("value");
-
-            if (operationStep === 0) {
-                firstNumber += number_string;
+            // If the operator is empty, then the user has yet to finish entering the 1st number
+            if (operator === "") {
+                firstNumber += $(this).attr("value");
 
                 $("#first-number").text(firstNumber);
 
-            } else if (operationStep === 1 && operator !== "") {
-                secondNumber += number_string;
+            // If the operator is something but the result is empty, then the user has yet to finish entering the 2nd number
+            } else if (operator !== "" && result === "") {
+                secondNumber += $(this).attr("value");
 
                 $("#second-number").text(secondNumber);
 
@@ -108,13 +109,8 @@
         });
 
         $("button.operator").on("click", function() {
-            if (operationStep === 0 && firstNumber !== "") {
-                operationStep++;
-
-                firstNumber = parseInt(firstNumber);
-            }
-
-            if (operationStep === 1 && secondNumber === "") {
+            // If the first number is something but the second number is empty, then the user has yet to finish entering the operator
+            if (firstNumber !== "" && secondNumber === "") {
                 operator = $(this).children().html();
 
                 $("#operator").html(operator);
@@ -122,9 +118,10 @@
         });
 
         $("button.equal").on("click", function() {
-            if (operationStep === 1 && secondNumber !== "") {
-                operationStep++;
-
+            // If the second number is something but the result is empty, then the user has yet to click on the equal sign
+            if (secondNumber !== "" && result === "") {
+                // Change the variable type from String to number
+                firstNumber = parseInt(firstNumber);
                 secondNumber = parseInt(secondNumber);
 
                 switch (operator) {
