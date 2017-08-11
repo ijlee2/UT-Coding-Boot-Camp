@@ -1,7 +1,7 @@
 /****************************************************************************
  ****************************************************************************
     
-    Create an object of Crystal Collector game
+    Create an object of Star Wars RPG game
     
 *****************************************************************************
 *****************************************************************************/
@@ -23,7 +23,7 @@ var StarWarsRPGGame = function() {
     var numWins = 0, numLosses = 0;
 
     // Variables for the user
-    var characterID;
+    var characterID, enemyID;
     var numCharacters = 4, characters = new Array(numCharacters);
     var character_names = ["Rey", "Luke Skywalker", "Darth Vader", "Stormtrooper"];
     
@@ -34,7 +34,7 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
-        // Assign a value between 1 and 12 to each crystal
+        // Assign random stats to each character
         for (var i = 0; i < numCharacters; i++) {
             characters[i] = {"name"  : character_names[i],
                              "hp"    : 10 * randomInteger(10) + 100,
@@ -105,6 +105,11 @@ var StarWarsRPGGame = function() {
         pageNumber = (pageNumber + changeBy + numPages) % numPages;
     }
 
+    this.updateCharacter = function(changeTo) {
+        characterID = changeTo;
+        console.log("You are now " + characters[changeTo].name + "!");
+    }
+
     this.updateNumWins = function(changeBy) {
         numWins += changeBy;
     }
@@ -171,41 +176,8 @@ $(document).ready(function() {
     });
 
     $.each(game.getcharacters(), function(index, value) {
-        $(".crystal:nth-child(" + (index + 1) + ")").on("click", function() {
-            game.updateCurrentSum(value);
-
-            game.displayCurrentSum();
-
-            switch (game.checkCurrentSum()) {
-                // If the user reached the target sum
-                case 1:
-                    game.updateNumWins(1);
-
-                    $("#outputMessage").html("Congratulations!<br>Press any key to continue.");
-                    $("#lightBox").css({"animation-name"  : "slide_down",
-                                        "background-color": "var(--color-star-wars-yellow)"});
-//                    $("#lightBox strong").css({"color": "#fff896"});
-                    displayLightBox(true);
-                    
-                    game.startNewGame();
-
-                    break;
-
-                // If the user went over the target sum
-                case -1:
-                    game.updateNumLosses(1);
-
-                    $("#outputMessage").html("Sorry, you got greedy!<br>Press any key to continue.");
-                    $("#lightBox").css({"animation-name"  : "shake",
-                                        "background-color": "#c81a4c"});
-//                    $("#lightBox strong").css({"color": "#beffad"});
-                    displayLightBox(true);
-                    
-                    game.startNewGame();
-
-                    break;
-
-            }
+        $(".character:nth-child(" + (index + 1) + ")").on("click", function() {
+            game.updateCharacter(index);
         });
     });
 
