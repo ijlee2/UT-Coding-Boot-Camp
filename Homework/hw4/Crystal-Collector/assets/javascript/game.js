@@ -161,11 +161,15 @@ $(document).ready(function() {
         Respond to user's actions
         
     *************************************************************************/
+    $(".page_prev").on("click", function() {
+        game.updatePage(-1);
+        game.displayPage();
+    });
+
     $(".page_next").on("click", function() {
         game.updatePage(1);
         game.displayPage();
     });
-
 
     $.each(game.getCrystalValues(), function(index, value) {
         $(".crystal:nth-child(" + (index + 1) + ")").on("click", function() {
