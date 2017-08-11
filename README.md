@@ -31,7 +31,7 @@ If you have suggestions for making my code better and simpler, please let me kno
     - [x] JavaScript
     - [x] jQuery
 
-4. [Crystal Collector](ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw4/Crystal-Collector/) (easy), [Star Wars RPG](ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw4/Star-Wars-RPG) (hard)
+4. [Crystal Collector](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw4/Crystal-Collector/) (easy), [Star Wars RPG](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw4/Star-Wars-RPG) (hard)
     - [x] HTML
     - [x] CSS
     - [x] JavaScript
