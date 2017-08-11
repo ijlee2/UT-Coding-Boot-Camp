@@ -35,12 +35,6 @@ h1 {
     margin-bottom : 6%;
 }
 
-@-moz-document url-prefix() {
-h1 {
-    letter-spacing: 0;
-}
-}
-
 h2 {
     color         : var(--color-text-highlight);
     font-size     : 1.3em;
@@ -61,7 +55,9 @@ p strong {
     font-weight: bold;
 }
 
-div.characters, div.enemies {
+
+/* Character selection */
+.characters, .enemies {
     float    : left;
     position : relative; /* For figcaption (position: absolute) */
     max-width: 40%;
@@ -69,21 +65,21 @@ div.characters, div.enemies {
     margin   : 2% 5% 4% 5%;
 }
 
-div.characters img, div.enemies img {
+.characters img, .enemies img {
     width  : 100%;
     margin : 5% 1% 0 1%;
     padding: 1%;
 }
 
-div.characters img {
+.characters img {
     border: 2px solid #d7f4f2;
 }
 
-div.enemies img {
+.enemies img {
     border: 2px solid #e22;
 }
 
-div.characters div, div.enemies div {
+.characters div, .enemies div {
     background-color: #c6c6c6;
     color           : var(--color-background);
 
@@ -94,18 +90,18 @@ div.characters div, div.enemies div {
     padding: 3.5%;
 }
 
-div.characters p:nth-child(1), div.enemies p:nth-child(1) {
+.characters .name, .enemies .name {
     float: left;
     margin-bottom: 0;
 }
 
-div.characters p:nth-child(2), div.enemies p:nth-child(2) {
+.characters .hp, .enemies .hp {
     float: right;
     margin-bottom: 0;
 }
 
 
-/* Specific to pages */
+/* Page selection */
 .page_prev, .page_next {
     background-color: var(--color-star-wars-yellow);
     color           : var(--color-background);
@@ -129,12 +125,8 @@ div.characters p:nth-child(2), div.enemies p:nth-child(2) {
     margin-bottom: 7.5%;
 }
 
-#crystals {
-    margin-bottom: 5%
-}
 
-
-/* Specific to lightbox */
+/* Lightbox */
 #lightBox_background {
     display : none;
     opacity : 0;

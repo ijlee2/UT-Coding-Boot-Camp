@@ -69,10 +69,10 @@ var CrystalCollectorGame = function() {
     this.displayPage = function() {
         for (var i = 0; i < numPages; i++) {
             if (i === pageNumber) {
-                $(".page:nth-child(" + (i + 1) + ")").css({"display": "block"});
+                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
 
             } else {
-                $(".page:nth-child(" + (i + 1) + ")").css({"display": "none"});
+                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "none"});
 
             }
         }
@@ -154,7 +154,7 @@ var CrystalCollectorGame = function() {
 /****************************************************************************
  ****************************************************************************
     
-    Start a new game when the page loads for the first time
+    Start a new game when the page loads
     
 *****************************************************************************
 *****************************************************************************/
@@ -180,7 +180,7 @@ $(document).ready(function() {
     });
 
     $.each(game.getCrystalValues(), function(index, value) {
-        $(".crystal:nth-child(" + (index + 1) + ")").on("click", function() {
+        $(".crystal:nth-of-type(" + (index + 1) + ")").on("click", function() {
             game.updateCurrentSum(value);
 
             game.displayCurrentSum();

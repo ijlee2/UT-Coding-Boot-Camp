@@ -7,11 +7,6 @@
 *****************************************************************************/
 var game;
 
-// Generate a random number between 1 and n
-var randomInteger = function(n) {
-    return Math.floor(n * Math.random()) + 1;
-}
-
 var StarWarsRPGGame = function() {
     /************************************************************************
         
@@ -20,14 +15,24 @@ var StarWarsRPGGame = function() {
     *************************************************************************/
     // Variables for the game
     var numPages = 3, currentPage = 0;
-    var numWins = 0, numLosses = 0;
 
     // Variables for the user
     var characterID, enemyID;
     var numCharacters   = 4;
     var characters      = new Array(numCharacters);
-    var character_names = ["Rey", "Luke Skywalker", "Darth Vader", "Stormtrooper"];
-    
+    var characters_name = ["Rey", "Luke", "Darth", "Storm"];
+
+
+    /************************************************************************
+        
+        Private functions
+        
+    *************************************************************************/
+    // Generate a random number between 1 and n
+    var randomInteger = function(n) {
+        return Math.floor(n * Math.random()) + 1;
+    }
+
 
     /************************************************************************
         
@@ -37,17 +42,15 @@ var StarWarsRPGGame = function() {
     this.startNewGame = function() {
         // Assign random stats to each character
         for (var i = 0; i < numCharacters; i++) {
-            characters[i] = {"name"  : character_names[i],
+            characters[i] = {"player": false,
+                             "name"  : characters_name[i],
                              "hp"    : 10 * randomInteger(10) + 100,
                              "damage": randomInteger(10)};
         }
+        console.log(characters);
 
         // Display messages
         this.displayPage();
-//        this.displayNumWins();
-//        this.displayNumLosses();
-//        this.displayTargetSum();
-//        this.displayCurrentSum();
     }
 
     
@@ -57,31 +60,19 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     this.displayPage = function() {
+        var targetElement;
+
         for (var i = 0; i < numPages; i++) {
+            targetElement = ".page:nth-of-type(" + (i + 1) + ")";
+
             if (i === currentPage) {
-                $(".page:nth-child(" + (i + 1) + ")").css({"display": "block"});
+                $(targetElement).css({"display": "block"});
 
             } else {
-                $(".page:nth-child(" + (i + 1) + ")").css({"display": "none"});
+                $(targetElement).css({"display": "none"});
 
             }
         }
-    }
-
-    this.displayNumWins = function() {
-        $("#numWins").text(numWins);
-    }
-
-    this.displayNumLosses = function() {
-        $("#numLosses").text(numLosses);        
-    }
-
-    this.displayTargetSum = function() {
-        $("#targetSum").text(targetSum);
-    }
-
-    this.displayCurrentSum = function() {
-        $("#currentSum").text(currentSum);
     }
 
 
@@ -90,6 +81,10 @@ var StarWarsRPGGame = function() {
         Get methods
         
     *************************************************************************/
+    this.getNumCharacters = function() {
+        return numCharacters;
+    }
+
     this.getCharacters = function() {
         return characters;
     }
@@ -101,23 +96,14 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     this.updatePage = function(changeBy) {
+        // Allow pages to move in a carousel
         currentPage = (currentPage + changeBy + numPages) % numPages;
     }
 
     this.updateCharacter = function(changeTo) {
         characterID = changeTo;
-    }
 
-    this.updateNumWins = function(changeBy) {
-        numWins += changeBy;
-    }
-
-    this.updateNumLosses = function(changeBy) {
-        numLosses += changeBy;
-    }
-
-    this.updateCurrentSum = function(changeBy) {
-        currentSum += changeBy;
+//        characters[changeTo].player = true;
     }
 
 
@@ -126,21 +112,7 @@ var StarWarsRPGGame = function() {
         Query methods
         
     *************************************************************************/
-    this.checkCurrentSum = function() {
-        if (currentSum < targetSum) {
-            // Still good to go
-            return 0;
 
-        } else if (currentSum === targetSum) {
-            // Win condition
-            return 1;
-
-        } else {
-            // Loss condition
-            return -1;
-
-        }
-    }
 }
 
 
@@ -148,7 +120,7 @@ var StarWarsRPGGame = function() {
 /****************************************************************************
  ****************************************************************************
     
-    Start a new game when the page loads for the first time
+    Start a new game when the page loads
     
 *****************************************************************************
 *****************************************************************************/
@@ -173,21 +145,27 @@ $(document).ready(function() {
         game.displayPage();
     });
 
-    $.each(game.getCharacters(), function(index, value) {
-        $(".characters:nth-child(" + (index + 1) + ")").on("click", function() {
-            game.updateCharacter(index);
+    // Character selection
+    $(".characters").on("click", function() {
+        var index = parseInt($(this).attr("value"));
+        game.updateCharacter(index);
 
-            // Hide the character from the list of enemies
-            for (var i = 0; i < game.getCharacters().length; i++) {
-                if (i === index) {
-                    $(".enemies:nth-child(" + (i + 1) + ")").css({"display": "none"});
+        // Hide the character from the list of enemies
+        var targetElement1, targetElement2;
 
-                } else {
-                    $(".enemies:nth-child(" + (i + 1) + ")").css({"display": "block"});
+        for (var i = 0; i < game.getNumCharacters(); i++) {
+            targetElement1 = ".characters:nth-of-type(" + (i + 1) + ")";
 
-                }
+            if (i === index) {
+                console.log(targetElement1 + " img");
+                // Highlight the character
+                $(targetElement1 + " img").css({"border-color": "magenta"});
+
+            } else {
+                $(targetElement1 + " img").css({"border-color": "white"});
+
             }
-        });
+        }
     });
 
     $("#lightBox_background, #lightBox").on("click", function() {
@@ -197,8 +175,6 @@ $(document).ready(function() {
 
 
 function displayLightBox(lightBoxOn) {
-//    game.updateKeyEnabled(!lightBoxOn);
-
     if (lightBoxOn) {
         $("#lightBox_background").css({"display": "block"});
         $("#lightBox").css({"display": "block"});
