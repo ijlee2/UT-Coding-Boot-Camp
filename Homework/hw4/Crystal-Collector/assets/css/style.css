@@ -93,11 +93,6 @@ img {
     margin-bottom: 7.5%;
 }
 
-#targetSum, #currentSum {
-    text-decoration: underline;
-    margin-right: 0.15em;
-}
-
 #crystals {
     margin-bottom: 5%
 }
