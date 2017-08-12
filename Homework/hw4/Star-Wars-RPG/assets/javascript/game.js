@@ -44,7 +44,7 @@ var StarWarsRPGGame = function() {
             // Assign random stats (hit points, attack points)
             characters[i] = {"name"  : characters_name[i],
                              "hp"    : 10 * randomInteger(10, 20),
-                             "ap"    : randomInteger(5, 15)};
+                             "ap"    : randomInteger(6, 20)};
 
             // Damage will increase for the player, but not for the enemies
             characters[i].damage = characters[i].ap;
