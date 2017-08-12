@@ -14,7 +14,7 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numPages = 5, currentPage = 0;
+    var numPages = $(".page").length, currentPage = 0;
 
     // Variables for the user
     var characters_name = ["Rey", "Luke", "Darth", "Storm"];

@@ -14,7 +14,7 @@ var CrystalCollectorGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numPages = 2, currentPage = 0;
+    var numPages = $(".page").length, currentPage = 0;
     var numWins = 0, numLosses = 0;
 
     // Variables for the user
