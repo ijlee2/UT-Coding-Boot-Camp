@@ -45,7 +45,7 @@ var StarWarsRPGGame = function() {
             // Assign random stats (hit points, attack points)
             characters[i] = {"name"  : characters_name[i],
                              "hp"    : 10 * randomInteger(10, 20),
-                             "ap"    : randomInteger(6, 20)};
+                             "ap"    : randomInteger(6, 25)};
 
             // Damage will increase for the player, but not for the enemies
             characters[i].damage = characters[i].ap;
@@ -215,6 +215,24 @@ var StarWarsRPGGame = function() {
                 $("#battle_player .damageReceived").replaceWith($("#battle_player .damageReceived").clone());
                 $("#battle_player .hp").text("HP." + player.hp);
             }, 600);
+
+            if (player.hp === 0) {
+                numEnemiesLeft = 0;
+
+                setTimeout(function() {
+                    $("#battle_player .damageReceived").text("");
+                    $("#battle_player .damageReceived").css({"display": "none", "animation": "none"});
+                    
+                    $("#battle_enemy .damageReceived").text("");
+                    $("#battle_enemy .damageReceived").css({"display": "none", "animation": "none"});
+                    
+                    $("#battle_button").text("You lost!");
+                }, 600);
+
+                setTimeout(function() {
+                    $("#battle_button").text("Next");
+                }, 1800);
+            }
 
         } else {
             numEnemiesLeft--;
