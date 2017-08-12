@@ -34,9 +34,9 @@ var StarWarsRPG = function() {
 
         for (var i = 0; i < numCharacters; i++) {
             // Assign random stats (hit points, attack points, damage)
-            characters[i] = {"name"  : characters_name[i],
-                             "hp"    : 10 * randomInteger(10, 20),
-                             "ap"    : randomInteger(6, 25)};
+            characters[i] = {"name": characters_name[i],
+                             "hp"  : 10 * randomInteger(10, 20),
+                             "ap"  : randomInteger(6, 25)};
 
             // Damage will increase for the player, but not for the enemies
             characters[i].damage = characters[i].ap;
@@ -84,10 +84,9 @@ var StarWarsRPG = function() {
     }
 
     var resetBattlePage = function() {
+        // Elements such as #battle_player img, #battle_enemy img can be
+        // overwritten later
         $(".damageReceived").text("");
-        $(".damageReceived").css({"display": "block"});
-        $("#battle_player img").attr("src", "");
-        $("#battle_enemy img").attr("src", "");
         $("#battle_button").text("Attack!");
     }
 
@@ -109,10 +108,6 @@ var StarWarsRPG = function() {
         return enemyID;
     }
 
-    this.getNumEnemiesLeft = function() {
-        return numEnemiesLeft;
-    }
-
 
     /************************************************************************
         
@@ -126,6 +121,8 @@ var StarWarsRPG = function() {
         switch (currentPage) {
             // Enemy selection
             case 2:
+                // Reset enemy ID
+                enemyID = -1;
                 resetBattlePage();
 
                 // Hide the player's character and enemies who died
@@ -299,7 +296,7 @@ $(document).ready(function() {
 
             case "Restart":
                 game.startNewGame();
-                game.updatePage(-3);
+                game.updatePage(1);
 
                 break;
 
