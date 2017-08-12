@@ -50,7 +50,7 @@ var CrystalCollector = function() {
             }
         }
 
-        // Display messages
+        // Display to the browser
         displayCurrentPage();
         displayNumWins();
         displayNumLosses();

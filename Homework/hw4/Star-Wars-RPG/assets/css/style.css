@@ -75,6 +75,7 @@ p {
 }
 
 div.damageReceived {
+    animation  : slide_and_fade 1.80s cubic-bezier(.36, .07, .19, .97) both;
     color      : var(--color-enemy);
     font-size  : 1.8em;
     font-weight: bold;
