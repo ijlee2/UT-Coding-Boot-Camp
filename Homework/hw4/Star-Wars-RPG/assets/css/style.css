@@ -4,7 +4,7 @@
     --color-star-wars-yellow: #f7e739;
     --color-text            : #f7f7f7;
     --color-text-highlight  : #ff6600;
-    --color-character       : #ff22e0;
+    --color-character       : green;
     --color-enemy           : #ee2222;
 }
 
@@ -65,7 +65,7 @@ p {
 .characters img, .enemies img, #battle_character img, #battle_enemy img {
     width  : 100%;
     margin : 5% 1% 0 1%;
-    border : 2px solid white;
+    border : 5px dotted white;
     padding: 1%;
 }
 
@@ -95,6 +95,7 @@ span.hp {
 .page_prev, .page_next, .button_attack {
     background-color: var(--color-star-wars-yellow);
     color           : var(--color-background);
+    font-family     : "Bungee", cursive;
     font-weight     : bold;
 
     margin-top      : 3%;
@@ -105,8 +106,17 @@ span.hp {
     float: left;
 }
 
-.page_next, .button_attack {
+.page_next {
     float: right;
+}
+
+.button_attack {
+    font-family   : "Bungee", cursive;
+    font-size     : 1.8em;
+    letter-spacing: 0.02em;
+    text-align: center;
+
+    display: block;
 }
 
 
