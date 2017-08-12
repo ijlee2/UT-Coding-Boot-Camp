@@ -58,6 +58,10 @@ p {
 }
 
 /* Page selection */
+.page {
+    display: none;
+}
+
 .page_prev, .page_next, #battle_button {
     background-color: var(--color-star-wars-yellow);
     color           : var(--color-background);

@@ -77,6 +77,10 @@ img {
 
 
 /* Specific to pages */
+.page {
+    display: none;
+}
+
 .page_prev, .page_next {
     background-color: var(--color-mint-green);
     color           : white;
