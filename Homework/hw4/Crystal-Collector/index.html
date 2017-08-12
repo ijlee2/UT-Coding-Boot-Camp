@@ -15,36 +15,39 @@
     </head>
 
     <body>
-        <div class="page container">
+        <div class="container">
             <h1>Crystal Collector</h1>
-            <h2>Directions:</h2>
-            
-            <p>There are 4 crystals, each worth a certain amount of points.</p>
-            <p>Find out the value of each crystal to hit the target sum!</p>
-            <p>Note, there is always a solution.</p>
 
-            <div class="page_next">Start</div>
-        </div>
-        
-        <div class="page container">
-            <h1>Crystal Collector</h1>
-            
-            <div id="userStats">
-                <p>Wins: <strong><span id="numWins"></span></strong></p>
-                <p>Losses: <strong><span id="numLosses"></span></strong></p>
+            <!-- Page 0: Directions -->
+            <div class="page">
+                <h2>Directions:</h2>
+                
+                <p>There are 4 crystals, each worth a certain amount of points.</p>
+                <p>Find out the value of each crystal to hit the target sum!</p>
+                <p>Note, there is always a solution.</p>
+
+                <div class="page_next">Start</div>
             </div>
-
-            <p>Make a sum of <span id="targetSum"></span>!</p>
-            <p>Your sum is <strong><span id="currentSum"></span></strong>.</p>
             
-            <div class="clearfix">
-                <img class="crystals" src="assets/images/crystal_orange.png" alt="orange crystal">
-                <img class="crystals" src="assets/images/crystal_blue.png" alt="blue crystal">
-                <img class="crystals" src="assets/images/crystal_green.png" alt="green crystal">
-                <img class="crystals" src="assets/images/crystal_purple.png" alt="purple crystal">
-            </div>
+            <!-- Page 1: Game Screen -->
+            <div class="page">
+                <div id="userStats">
+                    <p>Wins: <strong><span id="numWins"></span></strong></p>
+                    <p>Losses: <strong><span id="numLosses"></span></strong></p>
+                </div>
 
-            <div class="page_prev">Directions</div>
+                <p>Make a sum of <span id="targetSum"></span>!</p>
+                <p>Your sum is <strong><span id="currentSum"></span></strong>.</p>
+                
+                <div class="clearfix">
+                    <img class="crystals" src="assets/images/crystal_orange.png" alt="orange crystal">
+                    <img class="crystals" src="assets/images/crystal_blue.png" alt="blue crystal">
+                    <img class="crystals" src="assets/images/crystal_green.png" alt="green crystal">
+                    <img class="crystals" src="assets/images/crystal_purple.png" alt="purple crystal">
+                </div>
+
+                <div class="page_prev">Directions</div>
+            </div>
         </div>
 
         <!-- Lightbox -->
