@@ -40,14 +40,26 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
+        var temp;
+
         // Assign random stats to each character
         for (var i = 0; i < numCharacters; i++) {
             characters[i] = {"player": false,
                              "name"  : characters_name[i],
                              "hp"    : 10 * randomInteger(10) + 100,
                              "damage": randomInteger(10)};
+
+            // Display stats in character selection
+            temp = ".characters:nth-of-type(" + (i + 1) + ")";
+            
+            $(temp + " .name").text(characters[i].name);
+            $(temp + " .hp").text("HP." + characters[i].hp);
+
+            temp = ".enemies:nth-of-type(" + (i + 1) + ")";
+            
+            $(temp + " .name").text(characters[i].name);
+            $(temp + " .hp").text("HP." + characters[i].hp);
         }
-        console.log(characters);
 
         // Display messages
         this.displayPage();
@@ -60,16 +72,16 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     this.displayPage = function() {
-        var targetElement;
+        var temp;
 
         for (var i = 0; i < numPages; i++) {
-            targetElement = ".page:nth-of-type(" + (i + 1) + ")";
+            temp = ".page:nth-of-type(" + (i + 1) + ")";
 
             if (i === currentPage) {
-                $(targetElement).css({"display": "block"});
+                $(temp).css({"display": "block"});
 
             } else {
-                $(targetElement).css({"display": "none"});
+                $(temp).css({"display": "none"});
 
             }
         }
@@ -151,18 +163,21 @@ $(document).ready(function() {
         game.updateCharacter(index);
 
         // Hide the character from the list of enemies
-        var targetElement1, targetElement2;
+        var temp1, temp2;
 
         for (var i = 0; i < game.getNumCharacters(); i++) {
-            targetElement1 = ".characters:nth-of-type(" + (i + 1) + ")";
+            temp1 = ".characters:nth-of-type(" + (i + 1) + ") img";
+            temp2 = ".enemies:nth-of-type(" + (i + 1) + ")";
 
+            // If selected, highlight the character and
+            // hide it from the list of enemies
             if (i === index) {
-                console.log(targetElement1 + " img");
-                // Highlight the character
-                $(targetElement1 + " img").css({"border-color": "magenta"});
+                $(temp1).css({"border-color": "magenta"});
+                $(temp2).css({"display": "none"});
 
             } else {
-                $(targetElement1 + " img").css({"border-color": "white"});
+                $(temp1).css({"border-color": "white"});
+                $(temp2).css({"display": "block"});
 
             }
         }
