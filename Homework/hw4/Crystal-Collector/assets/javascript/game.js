@@ -7,11 +7,6 @@
 *****************************************************************************/
 var game;
 
-// Generate a random number between 1 and n
-var randomInteger = function(n) {
-    return Math.floor(n * Math.random()) + 1;
-}
-
 var CrystalCollectorGame = function() {
     /************************************************************************
         
@@ -19,12 +14,24 @@ var CrystalCollectorGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numPages = 2, pageNumber = 0;
+    var numPages = 2, currentPage = 0;
     var numWins = 0, numLosses = 0;
 
     // Variables for the user
+    var numCrystals   = 4;
+    var crystalValues = new Array(numCrystals);
     var targetSum, currentSum;
-    var numCrystals = 4, crystalValues = new Array(numCrystals);
+    
+
+    /************************************************************************
+        
+        Private functions
+        
+    *************************************************************************/
+    // Generate a random number between a and b
+    var randomInteger = function(a, b) {
+        return Math.floor((b - a + 1) * Math.random()) + a;
+    }
     
 
     /************************************************************************
@@ -34,13 +41,15 @@ var CrystalCollectorGame = function() {
     *************************************************************************/
     this.startNewGame = function() {
         // Reset variables
-        targetSum = 0;
+        targetSum  = 0;
         currentSum = 0;
 
         // Assign a value between 1 and 12 to each crystal
         for (var i = 0; i < numCrystals; i++) {
-            crystalValues[i] = randomInteger(12);
-            targetSum += crystalValues[i] * randomInteger(6);
+            crystalValues[i] = randomInteger(1, 12);
+
+            // Take a linear combination
+            targetSum += crystalValues[i] * randomInteger(1, 6);
         }
 
         // Ensure that the target sum is between 19 and 120
@@ -48,7 +57,7 @@ var CrystalCollectorGame = function() {
             targetSum = 0;
 
             for (var i = 0; i < numCrystals; i++) {
-                targetSum += crystalValues[i] * randomInteger(6);
+                targetSum += crystalValues[i] * randomInteger(1, 6);
             }
         }
 
@@ -67,12 +76,16 @@ var CrystalCollectorGame = function() {
         
     *************************************************************************/
     this.displayPage = function() {
+        var temp;
+
         for (var i = 0; i < numPages; i++) {
-            if (i === pageNumber) {
-                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
+            temp = ".page:nth-of-type(" + (i + 1) + ")";
+
+            if (i === currentPage) {
+                $(temp).css({"display": "block"});
 
             } else {
-                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "none"});
+                $(temp).css({"display": "none"});
 
             }
         }
@@ -100,8 +113,8 @@ var CrystalCollectorGame = function() {
         Get methods
         
     *************************************************************************/
-    this.getCrystalValues = function() {
-        return crystalValues;
+    this.getCrystalValue = function(index) {
+        return crystalValues[index];
     }
 
 
@@ -111,7 +124,7 @@ var CrystalCollectorGame = function() {
         
     *************************************************************************/
     this.updatePage = function(changeBy) {
-        pageNumber = (pageNumber + changeBy + numPages) % numPages;
+        currentPage = (currentPage + changeBy + numPages) % numPages;
     }
 
     this.updateNumWins = function(changeBy) {
@@ -179,43 +192,41 @@ $(document).ready(function() {
         game.displayPage();
     });
 
-    $.each(game.getCrystalValues(), function(index, value) {
-        $(".crystal:nth-of-type(" + (index + 1) + ")").on("click", function() {
-            game.updateCurrentSum(value);
+    $(".crystals").on("click", function() {
+        var index = $(".crystals").index(this);
 
-            game.displayCurrentSum();
+        game.updateCurrentSum(game.getCrystalValue(index));
 
-            switch (game.checkCurrentSum()) {
-                // If the user reached the target sum
-                case 1:
-                    game.updateNumWins(1);
+        game.displayCurrentSum();
 
-                    $("#outputMessage").html("Congratulations!<br>Press any key to continue.");
-                    $("#lightBox").css({"animation-name"  : "slide_down",
-                                        "background-color": "var(--color-mint-green)"});
-//                    $("#lightBox strong").css({"color": "#fff896"});
-                    displayLightBox(true);
-                    
-                    game.startNewGame();
+        switch (game.checkCurrentSum()) {
+            // If the user reached the target sum
+            case 1:
+                game.updateNumWins(1);
 
-                    break;
+                $("#outputMessage").html("Congratulations!<br>Press any key to continue.");
+                $("#lightBox").css({"animation-name"  : "slide_down",
+                                    "background-color": "var(--color-mint-green)"});
+                displayLightBox(true);
+                
+                game.startNewGame();
 
-                // If the user went over the target sum
-                case -1:
-                    game.updateNumLosses(1);
+                break;
 
-                    $("#outputMessage").html("Sorry, you got greedy!<br>Press any key to continue.");
-                    $("#lightBox").css({"animation-name"  : "shake",
-                                        "background-color": "#c81a4c"});
-//                    $("#lightBox strong").css({"color": "#beffad"});
-                    displayLightBox(true);
-                    
-                    game.startNewGame();
+            // If the user went over the target sum
+            case -1:
+                game.updateNumLosses(1);
 
-                    break;
+                $("#outputMessage").html("Sorry, you got greedy!<br>Press any key to continue.");
+                $("#lightBox").css({"animation-name"  : "shake",
+                                    "background-color": "#c81a4c"});
+                displayLightBox(true);
+                
+                game.startNewGame();
 
-            }
-        });
+                break;
+
+        }
     });
 
     $("#lightBox_background, #lightBox").on("click", function() {
@@ -225,15 +236,11 @@ $(document).ready(function() {
 
 
 function displayLightBox(lightBoxOn) {
-//    game.updateKeyEnabled(!lightBoxOn);
-
     if (lightBoxOn) {
-        $("#lightBox_background").css({"display": "block"});
-        $("#lightBox").css({"display": "block"});
+        $("#lightBox_background, #lightBox").css({"display": "block"});
 
     } else {
-        $("#lightBox_background").css({"display": "none"});
-        $("#lightBox").css({"display": "none"});
+        $("#lightBox_background, #lightBox").css({"display": "none"});
 
     }
 }

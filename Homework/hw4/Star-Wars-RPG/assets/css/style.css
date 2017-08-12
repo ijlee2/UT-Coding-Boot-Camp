@@ -50,11 +50,6 @@ p {
     margin-bottom : 3%;
 }
 
-p strong {
-    color      : var(--color-text-highlight);
-    font-weight: bold;
-}
-
 
 /* Character selection */
 .characters, .enemies {
@@ -102,27 +97,21 @@ p strong {
 
 
 /* Page selection */
-.page_prev, .page_next {
+.button_left, .button_right {
     background-color: var(--color-star-wars-yellow);
     color           : var(--color-background);
     font-weight     : bold;
 
     margin-top      : 3%;
-    padding         : 3% 5%;
+    padding         : 3% 6%;
 }
 
-.page_prev {
+.button_left {
     float: left;
 }
 
-.page_next {
+.button_right {
     float: right;
-}
-
-#userStats p {
-    float        : left;
-    width        : 50%;
-    margin-bottom: 7.5%;
 }
 
 

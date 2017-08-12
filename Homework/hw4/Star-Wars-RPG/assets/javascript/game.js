@@ -17,20 +17,20 @@ var StarWarsRPGGame = function() {
     var numPages = 3, currentPage = 0;
 
     // Variables for the user
-    var characterID, enemyID;
     var numCharacters   = 4;
     var characters      = new Array(numCharacters);
     var characters_name = ["Rey", "Luke", "Darth", "Storm"];
-
+    var myID, enemyID;
+    
 
     /************************************************************************
         
         Private functions
         
     *************************************************************************/
-    // Generate a random number between 1 and n
-    var randomInteger = function(n) {
-        return Math.floor(n * Math.random()) + 1;
+    // Generate a random number between a and b
+    var randomInteger = function(a, b) {
+        return Math.floor((b - a + 1) * Math.random()) + a;
     }
 
 
@@ -44,10 +44,9 @@ var StarWarsRPGGame = function() {
 
         // Assign random stats to each character
         for (var i = 0; i < numCharacters; i++) {
-            characters[i] = {"player": false,
-                             "name"  : characters_name[i],
-                             "hp"    : 10 * randomInteger(10) + 100,
-                             "damage": randomInteger(10)};
+            characters[i] = {"name"  : characters_name[i],
+                             "hp"    : 10 * randomInteger(10, 20),
+                             "damage": randomInteger(5, 15)};
 
             // Display stats in character selection
             temp = ".characters:nth-of-type(" + (i + 1) + ")";
@@ -59,6 +58,9 @@ var StarWarsRPGGame = function() {
             
             $(temp + " .name").text(characters[i].name);
             $(temp + " .hp").text("HP." + characters[i].hp);
+
+            myID    = undefined;
+            enemyID = undefined;
         }
 
         // Display messages
@@ -93,12 +95,24 @@ var StarWarsRPGGame = function() {
         Get methods
         
     *************************************************************************/
+    this.getPage = function() {
+        return currentPage;
+    }
+
     this.getNumCharacters = function() {
         return numCharacters;
     }
 
     this.getCharacters = function() {
         return characters;
+    }
+
+    this.getMyId = function() {
+        return myID;
+    }
+
+    this.getEnemyId = function() {
+        return enemyID;
     }
 
 
@@ -112,10 +126,12 @@ var StarWarsRPGGame = function() {
         currentPage = (currentPage + changeBy + numPages) % numPages;
     }
 
-    this.updateCharacter = function(changeTo) {
-        characterID = changeTo;
+    this.updateMyId = function(changeTo) {
+        myID = changeTo;
+    }
 
-//        characters[changeTo].player = true;
+    this.updateEnemyId = function(changeTo) {
+        enemyID = changeTo;
     }
 
 
@@ -153,16 +169,20 @@ $(document).ready(function() {
     });
 
     $(".page_next").on("click", function() {
-        game.updatePage(1);
-        game.displayPage();
+        if ((game.getPage() === 0) ||
+            (game.getPage() === 1 && typeof game.getMyId() !== "undefined") ||
+            (game.getPage() === 2 && typeof game.getEnemyId() !== "undefined")) {
+            game.updatePage(1);
+            game.displayPage();
+        }
     });
 
     // Character selection
     $(".characters").on("click", function() {
-        var index = parseInt($(this).attr("value"));
-        game.updateCharacter(index);
+        var index = $(".characters").index(this);
 
-        // Hide the character from the list of enemies
+        game.updateMyId(index);
+
         var temp1, temp2;
 
         for (var i = 0; i < game.getNumCharacters(); i++) {
@@ -183,6 +203,9 @@ $(document).ready(function() {
         }
     });
 
+    // Enemy selection
+
+    // Lightbox
     $("#lightBox_background, #lightBox").on("click", function() {
         displayLightBox(false);
     });
@@ -191,12 +214,10 @@ $(document).ready(function() {
 
 function displayLightBox(lightBoxOn) {
     if (lightBoxOn) {
-        $("#lightBox_background").css({"display": "block"});
-        $("#lightBox").css({"display": "block"});
+        $("#lightBox_background, #lightBox").css({"display": "block"});
 
     } else {
-        $("#lightBox_background").css({"display": "none"});
-        $("#lightBox").css({"display": "none"});
+        $("#lightBox_background, #lightBox").css({"display": "none"});
 
     }
 }
