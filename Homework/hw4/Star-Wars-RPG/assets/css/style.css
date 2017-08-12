@@ -57,8 +57,27 @@ p {
     margin-bottom : 3%;
 }
 
+/* Page selection */
+.page_prev, .page_next, #battle_button {
+    background-color: var(--color-star-wars-yellow);
+    color           : var(--color-background);
+    font-family     : "Bungee", cursive;
+    font-weight     : bold;
 
-/* Character selection */
+    margin-top      : 3%;
+    border          : 6px solid var(--color-dark-yellow);
+    padding         : 3% 6%;
+}
+
+.page_prev {
+    float: left;
+}
+
+.page_next {
+    float: right;
+}
+
+/* Character and enemy */
 .characters, .enemies, #battle_player, #battle_enemy {
     float    : left;
     position : relative;
@@ -75,7 +94,7 @@ p {
 }
 
 div.damageReceived {
-    animation  : slide_and_fade 1.80s cubic-bezier(.36, .07, .19, .97) both;
+    animation  : slide_and_fade 1.30s cubic-bezier(.36, .07, .19, .97) both;
     color      : var(--color-enemy);
     font-size  : 1.8em;
     font-weight: bold;
@@ -109,27 +128,6 @@ span.hp {
     margin-bottom: 0;
 }
 
-
-/* Page selection */
-.page_prev, .page_next, #battle_button {
-    background-color: var(--color-star-wars-yellow);
-    color           : var(--color-background);
-    font-family     : "Bungee", cursive;
-    font-weight     : bold;
-
-    margin-top      : 3%;
-    border          : 6px solid var(--color-dark-yellow);
-    padding         : 3% 6%;
-}
-
-.page_prev {
-    float: left;
-}
-
-.page_next {
-    float: right;
-}
-
 #battle_button {
     font-family   : "Bungee", cursive;
     font-size     : 1.8em;
@@ -140,6 +138,7 @@ span.hp {
     border-width  : 14px;
 }
 
+/* Animation */
 @keyframes slide_and_fade {
     0% {
         opacity  : 1;
@@ -151,20 +150,22 @@ span.hp {
     }
 }
 
-@keyframes shake {
-    10%, 90% {
-        transform: translate(-1px, -2px);
+@keyframes attack_left {
+    8%, 15% {
+        transform: translate(-25%, 0);
     }
     
-    20%, 80% {
-        transform: translate(2px, 4px);
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes attack_right {
+    8%, 15% {
+        transform: translate(25%, 0);
     }
     
-    30%, 50%, 70% {
-        transform: translate(0, -6px);
-    }
-    
-    40%, 60% {
-        transform: translate(-1px, 6px);
+    100% {
+        transform: translate(0, 0);
     }
 }

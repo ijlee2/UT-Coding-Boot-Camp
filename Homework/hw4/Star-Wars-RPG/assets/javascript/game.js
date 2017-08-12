@@ -15,6 +15,7 @@ var StarWarsRPG = function() {
     *************************************************************************/
     // Variables for the game
     var numPages = $(".page").length, currentPage = 0;
+    var clickDisabled = false;
 
     // Variables for the user
     var characters_name = ["Rey", "Luke", "Darth", "Storm"];
@@ -81,6 +82,7 @@ var StarWarsRPG = function() {
     var resetBattlePage = function() {
         // Elements such as #battle_player img, #battle_enemy img can be
         // overwritten later
+        $("#battle_player, #battle_enemy").css({"animation": "none"});
         $(".damageReceived").text("");
         $("#battle_button").text("Attack!");
     }
@@ -93,6 +95,10 @@ var StarWarsRPG = function() {
     *************************************************************************/
     this.getPage = function() {
         return currentPage;
+    }
+
+    this.getClickDisabled = function() {
+        return clickDisabled;
     }
 
     this.getMyID = function() {
@@ -149,6 +155,10 @@ var StarWarsRPG = function() {
         displayCurrentPage();
     }
 
+    this.updateClickDisabled = function(changeTo) {
+        clickDisabled = changeTo;
+    }
+
     this.updateMyID = function(changeTo) {
         myID = changeTo;
 
@@ -192,42 +202,68 @@ var StarWarsRPG = function() {
         var player = characters[myID];
         var enemy  = characters[enemyID];
 
-        // Prevent mashing the button
         if (player.hp === 0 || enemy.hp === 0) {
             return;
         }
         
-        // The player attacks the enemy
+
+        /********************************************************************
+        
+            The player attacks the enemy
+        
+        *********************************************************************/
         enemy.hp = Math.max(enemy.hp - player.damage, 0);
 
-        // Without cloning, the opacity cannot be reset to 1
-        $("#battle_enemy .damageReceived").text(-player.damage);
-        $("#battle_enemy .damageReceived").replaceWith($("#battle_enemy .damageReceived").clone());
-        $("#battle_enemy .hp").text("HP." + enemy.hp);
+        $("#battle_player").css({"animation": "attack_right 1.00s cubic-bezier(.36, .07, .19, .97) both"});
+        $("#battle_player").replaceWith($("#battle_player").clone());
 
-        // The player's damage increases after attack
-        player.damage += player.ap;
+        setTimeout(function() {
+            $("#battle_enemy .hp").text("HP." + enemy.hp);
+            $("#battle_enemy .damageReceived").text(-player.damage);
+            $("#battle_enemy .damageReceived").replaceWith($("#battle_enemy .damageReceived").clone());
 
-        // If the enemy survives, the enemy attacks the player
+            // The player's damage increases after attack
+            player.damage += player.ap;
+        }, 200);
+
+
+        /********************************************************************
+        
+            If the enemy is alive, the enemy attacks the player
+        
+        *********************************************************************/
         if (enemy.hp > 0) {
             player.hp = Math.max(player.hp - enemy.damage, 0);
 
             setTimeout(function() {
+                $("#battle_enemy .damageReceived").text("");
+                $("#battle_enemy").css({"animation": "attack_left 1.00s cubic-bezier(.36, .07, .19, .97) both"});
+                $("#battle_enemy").replaceWith($("#battle_enemy").clone());
+            }, 1500);
+
+            setTimeout(function() {
+                $("#battle_player .hp").text("HP." + player.hp);
                 $("#battle_player .damageReceived").text(-enemy.damage);
                 $("#battle_player .damageReceived").replaceWith($("#battle_player .damageReceived").clone());
-                $("#battle_player .hp").text("HP." + player.hp);
-            }, 600);
+            }, 1700);
+
+            setTimeout(function() {
+                $("#battle_player .damageReceived").text("");
+            }, 3000);
 
             if (player.hp === 0) {
+                clickDisabled = false;
+
                 setTimeout(function() { $("#battle_button").text("You lost!"); }, 600);
-                setTimeout(function() { $("#battle_button").text("Restart"); }, 1800);
+                setTimeout(function() { $("#battle_button").text("Restart"); }, 3000);
             }
 
         } else {
+            clickDisabled = false;
             numEnemiesLeft--;
 
             setTimeout(function() { $("#battle_button").text("You won!"); }, 600);
-            setTimeout(function() { $("#battle_button").text((numEnemiesLeft > 0) ? "Next" : "Restart"); }, 1800);
+            setTimeout(function() { $("#battle_button").text((numEnemiesLeft > 0) ? "Next" : "Restart"); }, 3000);
 
         }
     }
@@ -279,6 +315,14 @@ $(document).ready(function() {
 
     // Battle
     $("#battle_button").on("click", function() {
+        if (game.getClickDisabled()) {
+            return;
+        }
+
+        game.updateClickDisabled(true);
+
+        setTimeout(function() { game.updateClickDisabled(false); }, 3000);
+
         switch ($(this).text()) {
             case "Attack!":
                 game.attack();
