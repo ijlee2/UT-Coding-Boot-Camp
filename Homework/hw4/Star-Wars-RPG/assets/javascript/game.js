@@ -254,16 +254,16 @@ var StarWarsRPG = function() {
             if (player.hp === 0) {
                 clickDisabled = false;
 
-                setTimeout(function() { $("#battle_button").text("You lost!"); }, 600);
-                setTimeout(function() { $("#battle_button").text("Restart"); }, 3000);
+                setTimeout(function() { $("#battle_button").text("You lost!"); }, 2500);
+                setTimeout(function() { $("#battle_button").text("Restart"); }, 3800);
             }
 
         } else {
             clickDisabled = false;
             numEnemiesLeft--;
 
-            setTimeout(function() { $("#battle_button").text("You won!"); }, 600);
-            setTimeout(function() { $("#battle_button").text((numEnemiesLeft > 0) ? "Next" : "Restart"); }, 3000);
+            setTimeout(function() { $("#battle_button").text("You won!"); }, 1000);
+            setTimeout(function() { $("#battle_button").text((numEnemiesLeft > 0) ? "Next" : "Restart"); }, 2300);
 
         }
     }
