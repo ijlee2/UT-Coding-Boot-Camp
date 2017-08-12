@@ -65,13 +65,13 @@ var CrystalCollector = function() {
         
     *************************************************************************/
     var displayCurrentPage = function() {
+        $(".page").css({"display": "none"});
+
         for (var i = 0; i < numPages; i++) {
             if (i === currentPage) {
                 $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
 
-            } else {
-                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "none"});
-
+                break;
             }
         }
     }

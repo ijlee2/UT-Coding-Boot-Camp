@@ -82,7 +82,7 @@ var StarWarsRPG = function() {
     var resetBattlePage = function() {
         // Elements such as #battle_player img, #battle_enemy img can be
         // overwritten later
-        $("#battle_player, #battle_enemy").css({"animation": "none"});
+        $("#battle_player, #battle_enemy").css({"animation-name": "none"});
         $(".damageReceived").text("");
         $("#battle_button").text("Attack!");
     }
