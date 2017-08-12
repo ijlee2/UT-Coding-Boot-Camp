@@ -79,13 +79,13 @@ $(document).ready(function() {
         }
 
         // Find out which key was pressed
-        var yourGuess = String.fromCharCode(e.which).toLowerCase();
+        var letter = String.fromCharCode(e.which).toLowerCase();
 
-        if ("a" <= yourGuess && yourGuess <= "z") {
+        if ("a" <= letter && letter <= "z") {
             // Check if the letter is a new guess
-            if (guesses_array.indexOf(yourGuess) === -1) {
+            if (guesses_array.indexOf(letter) === -1) {
                 // Check if the letter is a part of the word
-                var index = answer.indexOf(yourGuess);
+                var index = answer.indexOf(letter);
 
                 if (index === -1) {
                     numTriesLeft--;
@@ -94,9 +94,9 @@ $(document).ready(function() {
                 } else {
                     // Reveal all letters that match the letter
                     while (index >= 0) {
-                        answer_array[index] = yourGuess;
+                        answer_array[index] = letter;
 
-                        index = answer.indexOf(yourGuess, index + 1);
+                        index = answer.indexOf(letter, index + 1);
                     }
 
                     answer_string = answer_array.join("");
@@ -105,8 +105,8 @@ $(document).ready(function() {
                 }
 
                 // Record the letter
-                guesses_array.push(yourGuess);
-                guesses_string += yourGuess;
+                guesses_array.push(letter);
+                guesses_string += letter;
                 $("#guesses").text(guesses_string);
 
                 // Check if the user has guessed the word correctly
@@ -117,6 +117,7 @@ $(document).ready(function() {
                     $("#lightBox").css({"animation-name"  : "slide_down",
                                         "background-color": "var(--color-mint-green)"});
                     $("#lightBox strong").css({"color": "#fff896"});
+
                     displayLightBox(true);
 
                     startNewGame();
@@ -129,6 +130,7 @@ $(document).ready(function() {
                     $("#lightBox").css({"animation-name"  : "shake",
                                         "background-color": "#c81a4c"});
                     $("#lightBox strong").css({"color": "#beffad"});
+                    
                     displayLightBox(true);
                     
                     startNewGame();
@@ -148,12 +150,10 @@ function displayLightBox(lightBoxOn) {
     keyEnabled = !lightBoxOn;
 
     if (lightBoxOn) {
-        $("#lightBox_background").css({"display": "block"});
-        $("#lightBox").css({"display": "block"});
+        $("#lightBox_background, #lightBox").css({"display": "block"});
 
     } else {
-        $("#lightBox_background").css({"display": "none"});
-        $("#lightBox").css({"display": "none"});
+        $("#lightBox_background, #lightBox").css({"display": "none"});
 
     }
 }
