@@ -172,7 +172,12 @@ span.hp {
 
 @keyframes slide_down {
     0% {
-        transform: translate(0, -15px);
+        opacity  : 1;
+    }
+    
+    100% {
+        opacity  : 0;
+        transform: translate(0, 15px);
     }
 }
 

@@ -17,15 +17,15 @@ var StarWarsRPGGame = function() {
     var numPages = 4, currentPage = 0;
 
     // Variables for the user
-    var numCharacters   = 4;
-    var characters      = new Array(numCharacters);
     var characters_name = ["Rey", "Luke", "Darth", "Storm"];
+    var numCharacters   = characters_name.length;
+    var characters      = new Array(numCharacters);
     var myID, enemyID;
     
 
     /************************************************************************
         
-        Private functions
+        Helper functions
         
     *************************************************************************/
     // Generate a random number between a and b
@@ -41,10 +41,12 @@ var StarWarsRPGGame = function() {
     *************************************************************************/
     this.startNewGame = function() {
         for (var i = 0; i < numCharacters; i++) {
-            // Assign random stats to each character
+            // Assign random stats (hit points, attack points)
             characters[i] = {"name"  : characters_name[i],
                              "hp"    : 10 * randomInteger(10, 20),
                              "ap"    : randomInteger(5, 15)};
+
+            // Damage will increase for the player, but not for the enemies
             characters[i].damage = characters[i].ap;
 
             // Display stats in character selection
@@ -64,7 +66,7 @@ var StarWarsRPGGame = function() {
     
     /************************************************************************
         
-        Display methods
+        Display functions
         
     *************************************************************************/
     var displayCurrentPage = function() {
@@ -79,22 +81,24 @@ var StarWarsRPGGame = function() {
         }
     }
 
+    this.displayLightBox = function(lightBoxOn) {
+        if (lightBoxOn) {
+            $("#lightBox_background, #lightBox").css({"display": "block"});
+
+        } else {
+            $("#lightBox_background, #lightBox").css({"display": "none"});
+
+        }
+    }
+
 
     /************************************************************************
         
-        Get methods
+        Get functions
         
     *************************************************************************/
     this.getPage = function() {
         return currentPage;
-    }
-
-    this.getNumCharacters = function() {
-        return numCharacters;
-    }
-
-    this.getCharacters = function() {
-        return characters;
     }
 
     this.getMyID = function() {
@@ -108,7 +112,7 @@ var StarWarsRPGGame = function() {
 
     /************************************************************************
         
-        Set (update) methods
+        Set (update) functions
         
     *************************************************************************/
     this.updatePage = function(changeBy) {
@@ -168,21 +172,43 @@ var StarWarsRPGGame = function() {
         }
     }
 
-    this.updateHP = function(index, changeBy) {
-        characters[index].hp += changeBy;
-    }
-
-    this.updateDamage = function(index, changeBy) {
-        characters[index].damage += changeBy;
-    }
-
 
     /************************************************************************
         
-        Query methods
+        Game mechanics functions
         
     *************************************************************************/
+    this.attack = function() {
+        var player = characters[myID];
+        var enemy  = characters[enemyID];
+        
+        // The player attacks the enemy first
+        enemy.hp -= player.damage;
 
+        $("#battle_enemy .damageReceived").text(-player.damage);
+        $("#battle_enemy .damageReceived").css({"animation": "slide_down 1.80s cubic-bezier(.36, .07, .19, .97) both"});
+        $("#battle_enemy .damageReceived").replaceWith($("#battle_enemy .damageReceived").clone());
+        $("#battle_enemy .hp").text("HP." + enemy.hp);
+
+        // The player's damage increases after attack
+        player.damage += player.ap;
+
+        // If the enemy surives, the enemy attacks the player
+        if (enemy.hp > 0) {
+            player.hp -= enemy.damage;
+
+            setTimeout(function() {
+                $("#battle_player .damageReceived").text(-enemy.damage);
+                $("#battle_player .damageReceived").css({"animation": "slide_down 1.80s cubic-bezier(.36, .07, .19, .97) both"});
+                $("#battle_player .damageReceived").replaceWith($("#battle_player .damageReceived").clone());
+                $("#battle_player .hp").text("HP." + player.hp);
+            }, 600);
+
+        } else {
+            console.log("You won!");
+
+        }
+    }
 }
 
 
@@ -211,9 +237,7 @@ $(document).ready(function() {
     });
 
     $(".page_next").on("click", function() {
-        if ((game.getPage() === 0) ||
-            (game.getPage() === 1 && game.getMyID() >= 0) ||
-            (game.getPage() === 2 && game.getEnemyID() >= 0)) {
+        if (game.getPage() === 0 || (game.getPage() === 1 && game.getMyID() >= 0) || (game.getPage() === 2 && game.getEnemyID() >= 0)) {
             game.updatePage(1);
         }
     });
@@ -234,41 +258,11 @@ $(document).ready(function() {
 
     // Battle
     $(".attackButton").on("click", function() {
-        var character = game.getCharacters()[game.getMyID()];
-        var enemy     = game.getCharacters()[game.getEnemyID()];
-        
-        // The character attacks enemy first
-        game.updateHP(game.getEnemyID(), -character.damage);
-        game.updateDamage(game.getMyID(), character.ap);
-
-        // If the enemy surives, enemy attacks the character
-        if (enemy.hp > 0) {
-            game.updateHP(game.getMyID(), -enemy.damage);
-
-        } else {
-            console.log("You won!");
-
-        }
-        
-        console.log("-------------------");
-        console.log(character);
-        console.log(enemy);
-
+        game.attack();
     });
 
     // Lightbox
     $("#lightBox_background, #lightBox").on("click", function() {
-        displayLightBox(false);
+        game.displayLightBox(false);
     });
 });
-
-
-function displayLightBox(lightBoxOn) {
-    if (lightBoxOn) {
-        $("#lightBox_background, #lightBox").css({"display": "block"});
-
-    } else {
-        $("#lightBox_background, #lightBox").css({"display": "none"});
-
-    }
-}
