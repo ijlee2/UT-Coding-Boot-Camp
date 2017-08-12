@@ -14,13 +14,14 @@ var StarWarsRPGGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numPages = 4, currentPage = 0;
+    var numPages = 5, currentPage = 0;
 
     // Variables for the user
     var characters_name = ["Rey", "Luke", "Darth", "Storm"];
     var numCharacters   = characters_name.length;
     var characters      = new Array(numCharacters);
     var myID, enemyID;
+    var numEnemiesLeft;
     
 
     /************************************************************************
@@ -57,6 +58,7 @@ var StarWarsRPGGame = function() {
 
             myID    = -1;
             enemyID = -1;
+            numEnemiesLeft = numCharacters - 1;
         }
 
         // Display messages
@@ -97,6 +99,10 @@ var StarWarsRPGGame = function() {
 
     this.getEnemyID = function() {
         return enemyID;
+    }
+
+    this.getNumEnemiesLeft = function() {
+        return numEnemiesLeft;
     }
 
 
@@ -211,6 +217,8 @@ var StarWarsRPGGame = function() {
             }, 600);
 
         } else {
+            numEnemiesLeft--;
+
             setTimeout(function() {
                 $("#battle_player .damageReceived").text("");
                 $("#battle_player .damageReceived").css({"display": "none", "animation": "none"});
@@ -223,7 +231,7 @@ var StarWarsRPGGame = function() {
 
             setTimeout(function() {
                 $("#battle_button").text("Next");
-            }, 2400);
+            }, 1800);
 
         }
     }
@@ -234,7 +242,7 @@ var StarWarsRPGGame = function() {
 /****************************************************************************
  ****************************************************************************
     
-   q Start a new game when the page loads
+    Start a new game when the page loads
     
 *****************************************************************************
 *****************************************************************************/
@@ -282,10 +290,19 @@ $(document).ready(function() {
                 break;
 
             case "Next":
-                $(".bat")
-                game.updatePage(-1);
+                if (game.getNumEnemiesLeft() > 0) {
+                    game.updatePage(-1);
+                } else {
+                    game.updatePage(1);
+                }
+
                 break;
 
         }
+    });
+
+    // Lightbox
+    $("#lightBox_background, #lightBox").on("click", function() {
+        game.displayLightBox(false);
     });
 });
