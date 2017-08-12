@@ -54,7 +54,7 @@ p {
 
 
 /* Character selection */
-.characters, .enemies {
+.characters, .enemies, #battle_character, #battle_enemy {
     float    : left;
     position : relative; /* For figcaption (position: absolute) */
     max-width: 40%;
@@ -62,14 +62,14 @@ p {
     margin   : 2% 5% 4% 5%;
 }
 
-.characters img, .enemies img {
+.characters img, .enemies img, #battle_character img, #battle_enemy img {
     width  : 100%;
     margin : 5% 1% 0 1%;
     border : 2px solid white;
     padding: 1%;
 }
 
-.characters div, .enemies div {
+.characters div, .enemies div, #battle_character div, #battle_enemy div {
     background-color: #c6c6c6;
     color           : var(--color-background);
 
@@ -80,12 +80,12 @@ p {
     padding: 3.5%;
 }
 
-.characters .name, .enemies .name {
+.characters .name, .enemies .name, #battle_character .name, #battle_enemy .name {
     float: left;
     margin-bottom: 0;
 }
 
-.characters .hp, .enemies .hp {
+.characters .hp, .enemies .hp, #battle_character .hp, #battle_enemy .hp {
     float: right;
     margin-bottom: 0;
 }
