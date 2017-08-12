@@ -30,8 +30,6 @@ var StarWarsRPG = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
-        var element;
-
         for (var i = 0; i < numCharacters; i++) {
             // Assign random stats (hit points, attack points, damage)
             characters[i] = {"name": characters_name[i],
@@ -42,18 +40,15 @@ var StarWarsRPG = function() {
             characters[i].damage = characters[i].ap;
 
             // Reset character selection page
-            element = ".characters:nth-of-type(" + (i + 1) + ")";
-            $(element).css({"display": "block"});
-            $(element + " img").css({"border-color": "var(--color-text)"});
-            $(element + " .hp").text("HP." + characters[i].hp);
+            $(".characters:nth-of-type(" + (i + 1) + ") .hp").text("HP." + characters[i].hp);
             
             // Reset enemy selection page
-            element = ".enemies:nth-of-type(" + (i + 1) + ")";
-            $(element).css({"display": "block"});
-            $(element + " img").css({"border-color": "var(--color-text)"});
-            $(element + " .hp").text("HP." + characters[i].hp);
-
+            $(".enemies:nth-of-type(" + (i + 1) + ") .hp").text("HP." + characters[i].hp);
         }
+
+        // Reset character and enemy selection pages
+        $(".characters, .enemies").css({"display": "block"});
+        $(".characters img, .enemies img").css({"border-color": "var(--color-text)"});
 
         // Reset variables
         myID    = -1;
@@ -72,13 +67,13 @@ var StarWarsRPG = function() {
         
     *************************************************************************/
     var displayCurrentPage = function() {
+        $(".page").css({"display": "none"});
+
         for (var i = 0; i < numPages; i++) {
             if (i === currentPage) {
                 $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
 
-            } else {
-                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "none"});
-
+                break;
             }
         }
     }
@@ -157,13 +152,13 @@ var StarWarsRPG = function() {
     this.updateMyID = function(changeTo) {
         myID = changeTo;
 
+        $(".characters img").css({"border-color": "var(--color-text)"});
+
         for (var i = 0; i < numCharacters; i++) {
             if (i === myID) {
                 $(".characters:nth-of-type(" + (i + 1) + ") img").css({"border-color": "var(--color-character)"});
 
-            } else {
-                $(".characters:nth-of-type(" + (i + 1) + ") img").css({"border-color": "var(--color-text)"});
-
+                break;
             }
         }
     }
@@ -171,13 +166,13 @@ var StarWarsRPG = function() {
     this.updateEnemyID = function(changeTo) {
         enemyID = changeTo;
 
+        $(".enemies img").css({"border-color": "var(--color-text)"});
+
         for (var i = 0; i < numCharacters; i++) {
             if (i === enemyID) {
                 $(".enemies:nth-of-type(" + (i + 1) + ") img").css({"border-color": "var(--color-enemy)"});
 
-            } else {
-                $(".enemies:nth-of-type(" + (i + 1) + ") img").css({"border-color": "var(--color-text)"});
-
+                break;
             }
         }
     }
@@ -205,6 +200,7 @@ var StarWarsRPG = function() {
         // The player attacks the enemy
         enemy.hp = Math.max(enemy.hp - player.damage, 0);
 
+        // Without cloning, the opacity cannot be reset to 1
         $("#battle_enemy .damageReceived").text(-player.damage);
         $("#battle_enemy .damageReceived").replaceWith($("#battle_enemy .damageReceived").clone());
         $("#battle_enemy .hp").text("HP." + enemy.hp);
