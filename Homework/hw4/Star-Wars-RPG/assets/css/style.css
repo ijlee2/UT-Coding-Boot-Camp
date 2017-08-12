@@ -2,6 +2,7 @@
     /* Define color scheme */
     --color-background      : #000000;
     --color-star-wars-yellow: #f7e739;
+    --color-dark-yellow     : #ac8f47;
     --color-text            : #f7f7f7;
     --color-text-highlight  : #ff6600;
     --color-character       : green;
@@ -92,13 +93,14 @@ span.hp {
 
 
 /* Page selection */
-.page_prev, .page_next, .button_attack {
+.page_prev, .page_next, .attackButton {
     background-color: var(--color-star-wars-yellow);
     color           : var(--color-background);
     font-family     : "Bungee", cursive;
     font-weight     : bold;
 
     margin-top      : 3%;
+    border          : 6px solid var(--color-dark-yellow);
     padding         : 3% 6%;
 }
 
@@ -110,13 +112,14 @@ span.hp {
     float: right;
 }
 
-.button_attack {
+.attackButton {
     font-family   : "Bungee", cursive;
     font-size     : 1.8em;
     letter-spacing: 0.02em;
-    text-align: center;
+    text-align    : center;
 
-    display: block;
+    display       : block;
+    border-width  : 14px;
 }
 
 

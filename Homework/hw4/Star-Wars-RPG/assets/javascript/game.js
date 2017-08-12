@@ -48,7 +48,8 @@ var StarWarsRPGGame = function() {
 
             characters[i] = {"name"  : characters_name[i],
                              "hp"    : 10 * randomInteger(10, 20),
-                             "damage": randomInteger(5, 15)};
+                             "ap"    : randomInteger(5, 15)};
+            characters[i].damage = characters[i].ap;
 
             // Display stats in character selection
             $(".characters:nth-of-type(" + ip1 + ") .hp").text("HP." + characters[i].hp);
@@ -100,11 +101,11 @@ var StarWarsRPGGame = function() {
         return characters;
     }
 
-    this.getMyId = function() {
+    this.getMyID = function() {
         return myID;
     }
 
-    this.getEnemyId = function() {
+    this.getEnemyID = function() {
         return enemyID;
     }
 
@@ -119,12 +120,20 @@ var StarWarsRPGGame = function() {
         currentPage = (currentPage + changeBy + numPages) % numPages;
     }
 
-    this.updateMyId = function(changeTo) {
+    this.updateMyID = function(changeTo) {
         myID = changeTo;
     }
 
-    this.updateEnemyId = function(changeTo) {
+    this.updateEnemyID = function(changeTo) {
         enemyID = changeTo;
+    }
+
+    this.updateHP = function(index, changeBy) {
+        characters[index].hp += changeBy;
+    }
+
+    this.updateDamage = function(index, changeBy) {
+        characters[index].damage += changeBy;
     }
 
 
@@ -163,8 +172,8 @@ $(document).ready(function() {
 
     $(".page_next").on("click", function() {
         if ((game.getPage() === 0) ||
-            (game.getPage() === 1 && game.getMyId() >= 0) ||
-            (game.getPage() === 2 && game.getEnemyId() >= 0)) {
+            (game.getPage() === 1 && game.getMyID() >= 0) ||
+            (game.getPage() === 2 && game.getEnemyID() >= 0)) {
             game.updatePage(1);
             game.displayPage();
         }
@@ -175,7 +184,7 @@ $(document).ready(function() {
         var index = $(".characters").index(this);
         var ip1;
 
-        game.updateMyId(index);
+        game.updateMyID(index);
 
         for (var i = 0; i < game.getNumCharacters(); i++) {
             ip1 = i + 1;
@@ -210,7 +219,7 @@ $(document).ready(function() {
         var index = $(".enemies").index(this);
         var ip1;
 
-        game.updateEnemyId(index);
+        game.updateEnemyID(index);
 
         for (var i = 0; i < game.getNumCharacters(); i++) {
             ip1 = i + 1;
@@ -232,6 +241,30 @@ $(document).ready(function() {
 
             }
         }
+    });
+
+    // Battle
+    $(".attackButton").on("click", function() {
+        var character = game.getCharacters()[game.getMyID()];
+        var enemy     = game.getCharacters()[game.getEnemyID()];
+        
+        // The character attacks enemy first
+        game.updateHP(game.getEnemyID(), -character.damage);
+        game.updateDamage(game.getMyID(), character.ap);
+
+        // If the enemy surives, enemy attacks the character
+        if (enemy.hp > 0) {
+            game.updateHP(game.getMyID(), -enemy.damage);
+
+        } else {
+            console.log("You won!");
+
+        }
+        
+        console.log("-------------------");
+        console.log(character);
+        console.log(enemy);
+
     });
 
     // Lightbox
