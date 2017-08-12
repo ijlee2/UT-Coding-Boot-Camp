@@ -214,7 +214,9 @@ var StarWarsRPG = function() {
         *********************************************************************/
         enemy.hp = Math.max(enemy.hp - player.damage, 0);
 
-        $("#battle_player").css({"animation": "attack_right 1.00s cubic-bezier(.36, .07, .19, .97) both"});
+        $("#battle_enemy").css({"z-index": "0"});
+        $("#battle_player").css({"animation": "attack_right 1.00s cubic-bezier(.36, .07, .19, .97) both",
+                                 "z-index"  : "1"});
         $("#battle_player").replaceWith($("#battle_player").clone());
 
         setTimeout(function() {
@@ -236,8 +238,10 @@ var StarWarsRPG = function() {
             player.hp = Math.max(player.hp - enemy.damage, 0);
 
             setTimeout(function() {
+                $("#battle_player").css({"z-index": "0"});
                 $("#battle_enemy .damageReceived").text("");
-                $("#battle_enemy").css({"animation": "attack_left 1.00s cubic-bezier(.36, .07, .19, .97) both"});
+                $("#battle_enemy").css({"animation": "attack_left 1.00s cubic-bezier(.36, .07, .19, .97) both",
+                                        "z-index"  : "1"});
                 $("#battle_enemy").replaceWith($("#battle_enemy").clone());
             }, 1500);
 

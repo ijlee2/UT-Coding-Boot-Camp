@@ -66,6 +66,7 @@ p {
     background-color: var(--color-star-wars-yellow);
     color           : var(--color-background);
     font-family     : "Bungee", cursive;
+    font-size       : 1.15em;
     font-weight     : bold;
 
     margin-top      : 3%;
@@ -98,7 +99,7 @@ p {
 }
 
 div.damageReceived {
-    animation  : slide_and_fade 1.30s cubic-bezier(.36, .07, .19, .97) both;
+    animation  : slide_down_and_fade 1.30s cubic-bezier(.36, .07, .19, .97) both;
     color      : var(--color-enemy);
     font-size  : 1.8em;
     font-weight: bold;
@@ -143,7 +144,7 @@ span.hp {
 }
 
 /* Animation */
-@keyframes slide_and_fade {
+@keyframes slide_down_and_fade {
     0% {
         opacity  : 1;
     }
@@ -156,7 +157,7 @@ span.hp {
 
 @keyframes attack_left {
     8%, 15% {
-        transform: translate(-25%, 0);
+        transform: translate(-30%, 0);
     }
     
     100% {
@@ -166,7 +167,7 @@ span.hp {
 
 @keyframes attack_right {
     8%, 15% {
-        transform: translate(25%, 0);
+        transform: translate(30%, 0);
     }
     
     100% {
