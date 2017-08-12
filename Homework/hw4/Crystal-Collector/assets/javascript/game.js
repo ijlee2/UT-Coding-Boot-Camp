@@ -63,9 +63,9 @@ var CrystalCollectorGame = function() {
 
         // Display messages
         displayCurrentPage();
-        this.displayNumWins();
-        this.displayNumLosses();
-        this.displayTargetSum();
+        displayNumWins();
+        displayNumLosses();
+        displayTargetSum();
         displayCurrentSum();
     }
 
@@ -87,30 +87,30 @@ var CrystalCollectorGame = function() {
         }
     }
 
-    this.displayNumWins = function() {
+    this.displayLightBox = function(lightBoxOn) {
+        if (lightBoxOn) {
+            $("#lightBox_background, #lightBox").css({"display": "block"});
+
+        } else {
+            $("#lightBox_background, #lightBox").css({"display": "none"});
+
+        }
+    }
+
+    var displayNumWins = function() {
         $("#numWins").text(numWins);
     }
 
-    this.displayNumLosses = function() {
+    var displayNumLosses = function() {
         $("#numLosses").text(numLosses);        
     }
 
-    this.displayTargetSum = function() {
+    var displayTargetSum = function() {
         $("#targetSum").text(targetSum);
     }
 
     var displayCurrentSum = function() {
         $("#currentSum").text(currentSum);
-    }
-
-
-    /************************************************************************
-        
-        Get functions
-        
-    *************************************************************************/
-    this.getCrystalValue = function(index) {
-        return crystalValues[index];
     }
 
 
@@ -125,16 +125,16 @@ var CrystalCollectorGame = function() {
         displayCurrentPage();
     }
 
-    this.updateNumWins = function(changeBy) {
+    var updateNumWins = function(changeBy) {
         numWins += changeBy;
     }
 
-    this.updateNumLosses = function(changeBy) {
+    var updateNumLosses = function(changeBy) {
         numLosses += changeBy;
     }
 
-    this.updateCurrentSum = function(changeBy) {
-        currentSum += changeBy;
+    this.updateCurrentSum = function(index) {
+        currentSum += crystalValues[index];
 
         displayCurrentSum();
     }
@@ -146,17 +146,33 @@ var CrystalCollectorGame = function() {
         
     *************************************************************************/
     this.checkCurrentSum = function() {
+        // Still good to go
         if (currentSum < targetSum) {
-            // Still good to go
-            return 0;
+            return;
 
+        // Win condition
         } else if (currentSum === targetSum) {
-            // Win condition
-            return 1;
+            updateNumWins(1);
 
+            $("#outputMessage").html("Congratulations!<br>Click anywhere to continue.");
+            $("#lightBox").css({"animation-name"  : "slide_down",
+                                "background-color": "var(--color-mint-green)"});
+
+            this.displayLightBox(true);
+            
+            this.startNewGame();
+
+        // Loss condition
         } else {
-            // Loss condition
-            return -1;
+            updateNumLosses(1);
+
+            $("#outputMessage").html("You got greedy!<br>Click anywhere to continue.");
+            $("#lightBox").css({"animation-name"  : "shake",
+                                "background-color": "#c81a4c"});
+
+            this.displayLightBox(true);
+            
+            this.startNewGame();
 
         }
     }
@@ -182,6 +198,7 @@ $(document).ready(function() {
         Respond to user's actions
         
     *************************************************************************/
+    // Page selection
     $(".page_prev").on("click", function() {
         game.updatePage(-1);
     });
@@ -190,53 +207,17 @@ $(document).ready(function() {
         game.updatePage(1);
     });
 
+    // Crystal collection
     $(".crystals").on("click", function() {
         var index = $(".crystals").index(this);
 
-        game.updateCurrentSum(game.getCrystalValue(index));
+        game.updateCurrentSum(index);
 
-        switch (game.checkCurrentSum()) {
-            // If the user reached the target sum
-            case 1:
-                game.updateNumWins(1);
-
-                $("#outputMessage").html("Congratulations!<br>Press any key to continue.");
-                $("#lightBox").css({"animation-name"  : "slide_down",
-                                    "background-color": "var(--color-mint-green)"});
-                displayLightBox(true);
-                
-                game.startNewGame();
-
-                break;
-
-            // If the user went over the target sum
-            case -1:
-                game.updateNumLosses(1);
-
-                $("#outputMessage").html("Sorry, you got greedy!<br>Press any key to continue.");
-                $("#lightBox").css({"animation-name"  : "shake",
-                                    "background-color": "#c81a4c"});
-                displayLightBox(true);
-                
-                game.startNewGame();
-
-                break;
-
-        }
+        game.checkCurrentSum();
     });
 
+    // Lightbox
     $("#lightBox_background, #lightBox").on("click", function() {
-        displayLightBox(false);
+        game.displayLightBox(false);
     });
 });
-
-
-function displayLightBox(lightBoxOn) {
-    if (lightBoxOn) {
-        $("#lightBox_background, #lightBox").css({"display": "block"});
-
-    } else {
-        $("#lightBox_background, #lightBox").css({"display": "none"});
-
-    }
-}

@@ -33,8 +33,41 @@ var StarWarsRPGGame = function() {
         return Math.floor((b - a + 1) * Math.random()) + a;
     }
 
-    // Display the current page on the browser
-    var displayPage = function() {
+
+    /************************************************************************
+        
+        Start a new game
+        
+    *************************************************************************/
+    this.startNewGame = function() {
+        for (var i = 0; i < numCharacters; i++) {
+            // Assign random stats to each character
+            characters[i] = {"name"  : characters_name[i],
+                             "hp"    : 10 * randomInteger(10, 20),
+                             "ap"    : randomInteger(5, 15)};
+            characters[i].damage = characters[i].ap;
+
+            // Display stats in character selection
+            $(".characters:nth-of-type(" + (i + 1) + ") .hp").text("HP." + characters[i].hp);
+            
+            // Display stats in enemy selection
+            $(".enemies:nth-of-type(" + (i + 1) + ") .hp").text("HP." + characters[i].hp);
+
+            myID    = -1;
+            enemyID = -1;
+        }
+
+        // Display messages
+        displayCurrentPage();
+    }
+
+    
+    /************************************************************************
+        
+        Display methods
+        
+    *************************************************************************/
+    var displayCurrentPage = function() {
         for (var i = 0; i < numPages; i++) {
             if (i === currentPage) {
                 $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
@@ -45,45 +78,6 @@ var StarWarsRPGGame = function() {
             }
         }
     }
-
-
-    /************************************************************************
-        
-        Start a new game
-        
-    *************************************************************************/
-    this.startNewGame = function() {
-        var ip1;
-
-        // Assign random stats to each character
-        for (var i = 0; i < numCharacters; i++) {
-            ip1 = i + 1;
-
-            characters[i] = {"name"  : characters_name[i],
-                             "hp"    : 10 * randomInteger(10, 20),
-                             "ap"    : randomInteger(5, 15)};
-            characters[i].damage = characters[i].ap;
-
-            // Display stats in character selection
-            $(".characters:nth-of-type(" + ip1 + ") .hp").text("HP." + characters[i].hp);
-            
-            // Display stats in enemy selection
-            $(".enemies:nth-of-type(" + ip1 + ") .hp").text("HP." + characters[i].hp);
-
-            myID    = -1;
-            enemyID = -1;
-        }
-
-        // Display messages
-        displayPage();
-    }
-
-    
-    /************************************************************************
-        
-        Display methods
-        
-    *************************************************************************/
 
 
     /************************************************************************
@@ -121,15 +115,57 @@ var StarWarsRPGGame = function() {
         // Allow pages to move in a carousel
         currentPage = (currentPage + changeBy + numPages) % numPages;
 
-        displayPage();
+        displayCurrentPage();
     }
 
     this.updateMyID = function(changeTo) {
         myID = changeTo;
+
+        for (var i = 0; i < numCharacters; i++) {
+            if (i === myID) {
+                // For character selection
+                $(".characters:nth-of-type(" + (i + 1) + ") img").css({"border-color": "var(--color-character)"});
+
+                // For enemy selection
+                $(".enemies:nth-of-type(" + (i + 1) + ")").css({"display": "none"});
+
+                // For battle
+                $("#battle_player img").attr("src", "assets/images/" + characters[i].name + ".jpg");
+                $("#battle_player img").css("border-color", "var(--color-character)");
+                $("#battle_player .name").text(characters[i].name);
+                $("#battle_player .hp").text("HP." + characters[i].hp);
+
+            } else {
+                // For character selection
+                $(".characters:nth-of-type(" + (i + 1) + ") img").css({"border-color": "white"});
+                
+                // For enemy selection
+                $(".enemies:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
+
+            }
+        }
     }
 
     this.updateEnemyID = function(changeTo) {
         enemyID = changeTo;
+
+        for (var i = 0; i < numCharacters; i++) {
+            if (i === enemyID) {
+                // For enemy selection
+                $(".enemies:nth-of-type(" + (i + 1) + ") img").css({"border-color": "var(--color-enemy)"});
+
+                // For battle
+                $("#battle_enemy img").attr("src", "assets/images/" + characters[i].name + ".jpg");
+                $("#battle_enemy img").css("border-color", "var(--color-enemy)");
+                $("#battle_enemy .name").text(characters[i].name);
+                $("#battle_enemy .hp").text("HP." + characters[i].hp);
+
+            } else {
+                // For enemy selection
+                $(".enemies:nth-of-type(" + (i + 1) + ") img").css({"border-color": "white"});
+
+            }
+        }
     }
 
     this.updateHP = function(index, changeBy) {
@@ -169,6 +205,7 @@ $(document).ready(function() {
         Respond to user's actions
         
     *************************************************************************/
+    // Page selection
     $(".page_prev").on("click", function() {
         game.updatePage(-1);
     });
@@ -184,65 +221,15 @@ $(document).ready(function() {
     // Character selection
     $(".characters").on("click", function() {
         var index = $(".characters").index(this);
-        var ip1;
 
         game.updateMyID(index);
-
-        for (var i = 0; i < game.getNumCharacters(); i++) {
-            ip1 = i + 1;
-
-            if (i === index) {
-                $(".characters:nth-of-type(" + ip1 + ") img").css({"border-color": "var(--color-character)"});
-
-                // For enemy selection
-                $(".enemies:nth-of-type(" + ip1 + ")").css({"display": "none"});
-
-                // For battle
-                var character = game.getCharacters()[i];
-                var fileName = "assets/images/" + character.name + ".jpg";
-
-                $("#battle_player img").attr("src", fileName);
-                $("#battle_player img").css("border-color", "var(--color-character)");
-                $("#battle_player .name").text(character.name);
-                $("#battle_player .hp").text("HP." + character.hp);
-
-            } else {
-                $(".characters:nth-of-type(" + ip1 + ") img").css({"border-color": "white"});
-                
-                // For enemy selection
-                $(".enemies:nth-of-type(" + ip1 + ")").css({"display": "block"});
-
-            }
-        }
     });
 
     // Enemy selection
     $(".enemies").on("click", function() {
         var index = $(".enemies").index(this);
-        var ip1;
 
         game.updateEnemyID(index);
-
-        for (var i = 0; i < game.getNumCharacters(); i++) {
-            ip1 = i + 1;
-
-            if (i === index) {
-                $(".enemies:nth-of-type(" + ip1 + ") img").css({"border-color": "var(--color-enemy)"});
-
-                // For battle
-                var enemy = game.getCharacters()[i];
-                var fileName = "assets/images/" + enemy.name + ".jpg";
-
-                $("#battle_enemy img").attr("src", fileName);
-                $("#battle_enemy img").css("border-color", "var(--color-enemy)");
-                $("#battle_enemy .name").text(enemy.name);
-                $("#battle_enemy .hp").text("HP." + enemy.hp);
-
-            } else {
-                $(".enemies:nth-of-type(" + ip1 + ") img").css({"border-color": "white"});
-
-            }
-        }
     });
 
     // Battle
