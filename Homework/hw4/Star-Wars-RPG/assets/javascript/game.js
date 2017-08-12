@@ -150,6 +150,7 @@ var StarWarsRPG = function() {
                 $("#battle_enemy .hp").text("HP." + characters[enemyID].hp);
 
                 break;
+                
         }
 
         displayCurrentPage();
