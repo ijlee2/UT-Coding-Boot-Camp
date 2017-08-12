@@ -193,6 +193,11 @@ var StarWarsRPGGame = function() {
     this.attack = function() {
         var player = characters[myID];
         var enemy  = characters[enemyID];
+
+        // Prevent mashing the button
+        if (enemy.hp === 0) {
+            return;
+        }
         
         // The player attacks the enemy first
         enemy.hp = Math.max(enemy.hp - player.damage, 0);
@@ -217,8 +222,6 @@ var StarWarsRPGGame = function() {
             }, 600);
 
             if (player.hp === 0) {
-                numEnemiesLeft = 0;
-
                 setTimeout(function() {
                     $("#battle_player .damageReceived").text("");
                     $("#battle_player .damageReceived").css({"display": "none", "animation": "none"});
@@ -230,7 +233,7 @@ var StarWarsRPGGame = function() {
                 }, 600);
 
                 setTimeout(function() {
-                    $("#battle_button").text("Next");
+                    $("#battle_button").text("Restart");
                 }, 1800);
             }
 
@@ -247,9 +250,17 @@ var StarWarsRPGGame = function() {
                 $("#battle_button").text("You won!");
             }, 600);
 
-            setTimeout(function() {
-                $("#battle_button").text("Next");
-            }, 1800);
+            if (numEnemiesLeft > 0) {
+                setTimeout(function() {
+                    $("#battle_button").text("Next");
+                }, 1800);
+
+            } else {
+                setTimeout(function() {
+                    $("#battle_button").text("Restart");
+                }, 1800);
+
+            }
 
         }
     }
@@ -308,12 +319,12 @@ $(document).ready(function() {
                 break;
 
             case "Next":
-                if (game.getNumEnemiesLeft() > 0) {
-                    game.updatePage(-1);
-                } else {
-                    game.updatePage(1);
-                }
+                game.updatePage(-1);
+                break;
 
+            case "Restart":
+                game.startNewGame();
+                game.updatePage(-3);
                 break;
 
         }
