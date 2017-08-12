@@ -70,14 +70,14 @@ p {
 }
 
 div.stats {
-    background-color: #c6c6c6;
-    color           : var(--color-background);
+    color      : white;
+    text-shadow: 2px 2px 8px black;
 
-    position        : absolute;
-    width           : 94.5%;
-    bottom          : 6%;
-    left            : 1.5%;
-    padding         : 3.5%;
+    position   : absolute;
+    width      : 84%;
+    bottom     : 6%;
+    left       : 5%;
+    padding    : 4% 7%;
 }
 
 span.name {

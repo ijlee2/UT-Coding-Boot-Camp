@@ -51,11 +51,9 @@ var StarWarsRPGGame = function() {
                              "damage": randomInteger(5, 15)};
 
             // Display stats in character selection
-            $(".characters:nth-of-type(" + ip1 + ") .name").text(characters[i].name);
             $(".characters:nth-of-type(" + ip1 + ") .hp").text("HP." + characters[i].hp);
             
             // Display stats in enemy selection
-            $(".enemies:nth-of-type(" + ip1 + ") .name").text(characters[i].name);
             $(".enemies:nth-of-type(" + ip1 + ") .hp").text("HP." + characters[i].hp);
 
             myID    = -1;
