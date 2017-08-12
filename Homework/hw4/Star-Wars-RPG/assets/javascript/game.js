@@ -193,6 +193,7 @@ $(document).ready(function() {
                 var fileName = "assets/images/" + character.name + ".jpg";
 
                 $("#battle_character img").attr("src", fileName);
+                $("#battle_character img").css("border-color", "var(--color-character)");
                 $("#battle_character .name").text(character.name);
                 $("#battle_character .hp").text("HP." + character.hp);
 
@@ -224,6 +225,7 @@ $(document).ready(function() {
                 var fileName = "assets/images/" + enemy.name + ".jpg";
 
                 $("#battle_enemy img").attr("src", fileName);
+                $("#battle_enemy img").css("border-color", "var(--color-enemy)");
                 $("#battle_enemy .name").text(enemy.name);
                 $("#battle_enemy .hp").text("HP." + enemy.hp);
 

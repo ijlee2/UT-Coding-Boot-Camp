@@ -69,30 +69,30 @@ p {
     padding: 1%;
 }
 
-.characters div, .enemies div, #battle_character div, #battle_enemy div {
+div.stats {
     background-color: #c6c6c6;
     color           : var(--color-background);
 
-    position: absolute;
-    width  : 94.5%;
-    bottom : 6%;
-    left   : 1.5%;
-    padding: 3.5%;
+    position        : absolute;
+    width           : 94.5%;
+    bottom          : 6%;
+    left            : 1.5%;
+    padding         : 3.5%;
 }
 
-.characters .name, .enemies .name, #battle_character .name, #battle_enemy .name {
-    float: left;
+span.name {
+    float        : left;
     margin-bottom: 0;
 }
 
-.characters .hp, .enemies .hp, #battle_character .hp, #battle_enemy .hp {
-    float: right;
+span.hp {
+    float        : right;
     margin-bottom: 0;
 }
 
 
 /* Page selection */
-.button_left, .button_right {
+.page_prev, .page_next, .button_attack {
     background-color: var(--color-star-wars-yellow);
     color           : var(--color-background);
     font-weight     : bold;
@@ -101,11 +101,11 @@ p {
     padding         : 3% 6%;
 }
 
-.button_left {
+.page_prev {
     float: left;
 }
 
-.button_right {
+.page_next, .button_attack {
     float: right;
 }
 
