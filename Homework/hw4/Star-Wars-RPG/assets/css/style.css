@@ -55,19 +55,32 @@ p {
 
 
 /* Character selection */
-.characters, .enemies, #battle_character, #battle_enemy {
+.characters, .enemies, #battle_player, #battle_enemy {
     float    : left;
-    position : relative; /* For figcaption (position: absolute) */
+    position : relative;
     max-width: 40%;
     width    : 40%;
     margin   : 2% 5% 4% 5%;
 }
 
-.characters img, .enemies img, #battle_character img, #battle_enemy img {
+.characters img, .enemies img, #battle_player img, #battle_enemy img {
     width  : 100%;
     margin : 5% 1% 0 1%;
     border : 5px dotted white;
     padding: 1%;
+}
+
+div.damageReceived {
+    color      : var(--color-enemy);
+    font-size  : 1.8em;
+    font-weight: bold;
+    text-align : center;
+    text-shadow: 2px 2px 8px black;
+
+    position   : absolute;
+    width      : 100%;
+    top        : 15%;
+    left       : 4%;
 }
 
 div.stats {

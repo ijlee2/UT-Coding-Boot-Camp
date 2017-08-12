@@ -199,10 +199,10 @@ $(document).ready(function() {
                 var character = game.getCharacters()[i];
                 var fileName = "assets/images/" + character.name + ".jpg";
 
-                $("#battle_character img").attr("src", fileName);
-                $("#battle_character img").css("border-color", "var(--color-character)");
-                $("#battle_character .name").text(character.name);
-                $("#battle_character .hp").text("HP." + character.hp);
+                $("#battle_player img").attr("src", fileName);
+                $("#battle_player img").css("border-color", "var(--color-character)");
+                $("#battle_player .name").text(character.name);
+                $("#battle_player .hp").text("HP." + character.hp);
 
             } else {
                 $(".characters:nth-of-type(" + ip1 + ") img").css({"border-color": "white"});
