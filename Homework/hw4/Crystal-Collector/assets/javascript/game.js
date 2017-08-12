@@ -25,7 +25,7 @@ var CrystalCollectorGame = function() {
 
     /************************************************************************
         
-        Private functions
+        Helper functions
         
     *************************************************************************/
     // Generate a random number between a and b
@@ -62,30 +62,26 @@ var CrystalCollectorGame = function() {
         }
 
         // Display messages
-        this.displayPage();
+        displayCurrentPage();
         this.displayNumWins();
         this.displayNumLosses();
         this.displayTargetSum();
-        this.displayCurrentSum();
+        displayCurrentSum();
     }
 
     
     /************************************************************************
         
-        Display methods
+        Display functions
         
     *************************************************************************/
-    this.displayPage = function() {
-        var temp;
-
+    var displayCurrentPage = function() {
         for (var i = 0; i < numPages; i++) {
-            temp = ".page:nth-of-type(" + (i + 1) + ")";
-
             if (i === currentPage) {
-                $(temp).css({"display": "block"});
+                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
 
             } else {
-                $(temp).css({"display": "none"});
+                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "none"});
 
             }
         }
@@ -103,14 +99,14 @@ var CrystalCollectorGame = function() {
         $("#targetSum").text(targetSum);
     }
 
-    this.displayCurrentSum = function() {
+    var displayCurrentSum = function() {
         $("#currentSum").text(currentSum);
     }
 
 
     /************************************************************************
         
-        Get methods
+        Get functions
         
     *************************************************************************/
     this.getCrystalValue = function(index) {
@@ -120,11 +116,13 @@ var CrystalCollectorGame = function() {
 
     /************************************************************************
         
-        Set (update) methods
+        Set (update) functions
         
     *************************************************************************/
     this.updatePage = function(changeBy) {
         currentPage = (currentPage + changeBy + numPages) % numPages;
+
+        displayCurrentPage();
     }
 
     this.updateNumWins = function(changeBy) {
@@ -137,12 +135,14 @@ var CrystalCollectorGame = function() {
 
     this.updateCurrentSum = function(changeBy) {
         currentSum += changeBy;
+
+        displayCurrentSum();
     }
 
 
     /************************************************************************
         
-        Query methods
+        Query functions
         
     *************************************************************************/
     this.checkCurrentSum = function() {
@@ -184,20 +184,16 @@ $(document).ready(function() {
     *************************************************************************/
     $(".page_prev").on("click", function() {
         game.updatePage(-1);
-        game.displayPage();
     });
 
     $(".page_next").on("click", function() {
         game.updatePage(1);
-        game.displayPage();
     });
 
     $(".crystals").on("click", function() {
         var index = $(".crystals").index(this);
 
         game.updateCurrentSum(game.getCrystalValue(index));
-
-        game.displayCurrentSum();
 
         switch (game.checkCurrentSum()) {
             // If the user reached the target sum

@@ -33,6 +33,19 @@ var StarWarsRPGGame = function() {
         return Math.floor((b - a + 1) * Math.random()) + a;
     }
 
+    // Display the current page on the browser
+    var displayPage = function() {
+        for (var i = 0; i < numPages; i++) {
+            if (i === currentPage) {
+                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
+
+            } else {
+                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "none"});
+
+            }
+        }
+    }
+
 
     /************************************************************************
         
@@ -62,7 +75,7 @@ var StarWarsRPGGame = function() {
         }
 
         // Display messages
-        this.displayPage();
+        displayPage();
     }
 
     
@@ -71,17 +84,6 @@ var StarWarsRPGGame = function() {
         Display methods
         
     *************************************************************************/
-    this.displayPage = function() {
-        for (var i = 0; i < numPages; i++) {
-            if (i === currentPage) {
-                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
-
-            } else {
-                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "none"});
-
-            }
-        }
-    }
 
 
     /************************************************************************
@@ -118,6 +120,8 @@ var StarWarsRPGGame = function() {
     this.updatePage = function(changeBy) {
         // Allow pages to move in a carousel
         currentPage = (currentPage + changeBy + numPages) % numPages;
+
+        displayPage();
     }
 
     this.updateMyID = function(changeTo) {
@@ -167,7 +171,6 @@ $(document).ready(function() {
     *************************************************************************/
     $(".page_prev").on("click", function() {
         game.updatePage(-1);
-        game.displayPage();
     });
 
     $(".page_next").on("click", function() {
@@ -175,7 +178,6 @@ $(document).ready(function() {
             (game.getPage() === 1 && game.getMyID() >= 0) ||
             (game.getPage() === 2 && game.getEnemyID() >= 0)) {
             game.updatePage(1);
-            game.displayPage();
         }
     });
 
