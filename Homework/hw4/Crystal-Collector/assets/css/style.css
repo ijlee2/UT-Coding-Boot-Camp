@@ -60,6 +60,11 @@ p strong {
     font-weight: bold;
 }
 
+#targetSum {
+    font-weight    : bold;
+    text-decoration: underline;
+}
+
 img {
     background-color: #d7f4f2;
     
