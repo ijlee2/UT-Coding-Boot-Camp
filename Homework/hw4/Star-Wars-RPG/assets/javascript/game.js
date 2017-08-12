@@ -183,10 +183,10 @@ var StarWarsRPGGame = function() {
         var enemy  = characters[enemyID];
         
         // The player attacks the enemy first
-        enemy.hp -= player.damage;
+        enemy.hp = Math.max(enemy.hp - player.damage, 0);
 
         $("#battle_enemy .damageReceived").text(-player.damage);
-        $("#battle_enemy .damageReceived").css({"animation": "slide_down 1.80s cubic-bezier(.36, .07, .19, .97) both"});
+        $("#battle_enemy .damageReceived").css({"animation": "slide_and_fade 1.80s cubic-bezier(.36, .07, .19, .97) both"});
         $("#battle_enemy .damageReceived").replaceWith($("#battle_enemy .damageReceived").clone());
         $("#battle_enemy .hp").text("HP." + enemy.hp);
 
@@ -195,17 +195,19 @@ var StarWarsRPGGame = function() {
 
         // If the enemy surives, the enemy attacks the player
         if (enemy.hp > 0) {
-            player.hp -= enemy.damage;
+            player.hp = Math.max(player.hp - enemy.damage, 0);
 
             setTimeout(function() {
                 $("#battle_player .damageReceived").text(-enemy.damage);
-                $("#battle_player .damageReceived").css({"animation": "slide_down 1.80s cubic-bezier(.36, .07, .19, .97) both"});
+                $("#battle_player .damageReceived").css({"animation": "slide_and_fade 1.80s cubic-bezier(.36, .07, .19, .97) both"});
                 $("#battle_player .damageReceived").replaceWith($("#battle_player .damageReceived").clone());
                 $("#battle_player .hp").text("HP." + player.hp);
             }, 600);
 
         } else {
-            console.log("You won!");
+            $("#outputMessage").html("You won!<br>Click anywhere to continue.");
+
+            this.displayLightBox(true);
 
         }
     }

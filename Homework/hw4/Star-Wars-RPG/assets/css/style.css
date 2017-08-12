@@ -149,32 +149,29 @@ span.hp {
 }
 
 #lightBox {
-    display    : none;
+    background-color: var(--color-star-wars-yellow);
+    display         : none;
     
-    position   : fixed;
-    top        : 22.5%;
-    left       : 50%;
-    width      : 460px;
-    margin-left: -260px;
-    padding    : 75px 30px;
+    position        : fixed;
+    top             : 22.5%;
+    left            : 50%;
+    width           : 460px;
+    margin-left     : -260px;
+    padding         : 75px 30px;
 }
 
 #lightBox p {
-    color      : #fff;
+    color      : var(--color-background);;
     font-size  : 1.15em;
     line-height: 1.5em;
     text-align : center;
 }
 
-#lightBox {
-  animation: slide_down 0.80s cubic-bezier(.36, .07, .19, .97) both;
-}
-
-@keyframes slide_down {
+@keyframes slide_and_fade {
     0% {
         opacity  : 1;
     }
-    
+
     100% {
         opacity  : 0;
         transform: translate(0, 15px);
