@@ -7,7 +7,7 @@
 *****************************************************************************/
 var game;
 
-var StarWarsRPGGame = function() {
+var StarWarsRPG = function() {
     /************************************************************************
         
         Private variables
@@ -22,17 +22,6 @@ var StarWarsRPGGame = function() {
     var characters      = new Array(numCharacters);
     var myID, enemyID;
     var numEnemiesLeft;
-    
-
-    /************************************************************************
-        
-        Helper functions
-        
-    *************************************************************************/
-    // Generate a random number between a and b
-    var randomInteger = function(a, b) {
-        return Math.floor((b - a + 1) * Math.random()) + a;
-    }
 
 
     /************************************************************************
@@ -42,7 +31,7 @@ var StarWarsRPGGame = function() {
     *************************************************************************/
     this.startNewGame = function() {
         for (var i = 0; i < numCharacters; i++) {
-            // Assign random stats (hit points, attack points)
+            // Assign random stats (hit points, attack points, damage)
             characters[i] = {"name"  : characters_name[i],
                              "hp"    : 10 * randomInteger(10, 20),
                              "ap"    : randomInteger(6, 25)};
@@ -51,15 +40,18 @@ var StarWarsRPGGame = function() {
             characters[i].damage = characters[i].ap;
 
             // Display stats in character selection
+            $(".characters:nth-of-type(" + (i + 1) + ") img").css({"border-color": "white"});
             $(".characters:nth-of-type(" + (i + 1) + ") .hp").text("HP." + characters[i].hp);
             
             // Display stats in enemy selection
+            $(".enemies:nth-of-type(" + (i + 1) + ") img").css({"border-color": "white"});
             $(".enemies:nth-of-type(" + (i + 1) + ") .hp").text("HP." + characters[i].hp);
-
-            myID    = -1;
-            enemyID = -1;
-            numEnemiesLeft = numCharacters - 1;
         }
+
+        // Reset variables
+        myID    = -1;
+        enemyID = -1;
+        numEnemiesLeft = numCharacters - 1;
 
         // Display messages
         displayCurrentPage();
@@ -190,6 +182,11 @@ var StarWarsRPGGame = function() {
         Game mechanics
         
     *************************************************************************/
+    // Generate a random number between a and b
+    var randomInteger = function(a, b) {
+        return Math.floor((b - a + 1) * Math.random()) + a;
+    }
+
     this.attack = function() {
         var player = characters[myID];
         var enemy  = characters[enemyID];
@@ -276,7 +273,7 @@ var StarWarsRPGGame = function() {
 *****************************************************************************
 *****************************************************************************/
 $(document).ready(function() {
-    game = new StarWarsRPGGame();
+    game = new StarWarsRPG();
 
     game.startNewGame();
 

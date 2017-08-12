@@ -21,18 +21,7 @@ var CrystalCollector = function() {
     var numCrystals   = 4;
     var crystalValues = new Array(numCrystals);
     var targetSum, currentSum;
-    
 
-    /************************************************************************
-        
-        Helper functions
-        
-    *************************************************************************/
-    // Generate a random number between a and b
-    var randomInteger = function(a, b) {
-        return Math.floor((b - a + 1) * Math.random()) + a;
-    }
-    
 
     /************************************************************************
         
@@ -139,6 +128,11 @@ var CrystalCollector = function() {
         Game mechanics
         
     *************************************************************************/
+    // Generate a random number between a and b
+    var randomInteger = function(a, b) {
+        return Math.floor((b - a + 1) * Math.random()) + a;
+    }
+    
     this.collectCrystal = function(index) {
         // Update the current sum
         currentSum += crystalValues[index];
