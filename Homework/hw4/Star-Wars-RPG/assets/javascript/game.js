@@ -81,16 +81,6 @@ var StarWarsRPGGame = function() {
         }
     }
 
-    this.displayLightBox = function(lightBoxOn) {
-        if (lightBoxOn) {
-            $("#lightBox_background, #lightBox").css({"display": "block"});
-
-        } else {
-            $("#lightBox_background, #lightBox").css({"display": "none"});
-
-        }
-    }
-
 
     /************************************************************************
         
@@ -118,6 +108,22 @@ var StarWarsRPGGame = function() {
     this.updatePage = function(changeBy) {
         // Allow pages to move in a carousel
         currentPage = (currentPage + changeBy + numPages) % numPages;
+
+        // Enemy selection
+        if (currentPage === 2) {
+            for (var i = 0; i < numCharacters; i++) {
+                if (characters[i].hp === 0) {
+                    // For enemy selection
+                    $(".enemies:nth-of-type(" + (i + 1) + ")").css({"display": "none"});
+                }
+            }
+
+            $("#battle_player .damageReceived").css({"display": "block"});
+            $("#battle_enemy .damageReceived").css({"display": "block"});
+
+            // Change the functionality of the button
+            $("#battle_button").text("Attack!");
+        }
 
         displayCurrentPage();
     }
@@ -205,9 +211,19 @@ var StarWarsRPGGame = function() {
             }, 600);
 
         } else {
-            $("#outputMessage").html("You won!<br>Click anywhere to continue.");
+            setTimeout(function() {
+                $("#battle_player .damageReceived").text("");
+                $("#battle_player .damageReceived").css({"display": "none", "animation": "none"});
+                
+                $("#battle_enemy .damageReceived").text("");
+                $("#battle_enemy .damageReceived").css({"display": "none", "animation": "none"});
+                
+                $("#battle_button").text("You won!");
+            }, 600);
 
-            this.displayLightBox(true);
+            setTimeout(function() {
+                $("#battle_button").text("Next");
+            }, 2400);
 
         }
     }
@@ -218,7 +234,7 @@ var StarWarsRPGGame = function() {
 /****************************************************************************
  ****************************************************************************
     
-    Start a new game when the page loads
+   q Start a new game when the page loads
     
 *****************************************************************************
 *****************************************************************************/
@@ -259,12 +275,17 @@ $(document).ready(function() {
     });
 
     // Battle
-    $(".attackButton").on("click", function() {
-        game.attack();
-    });
+    $("#battle_button").on("click", function() {
+        switch ($(this).text()) {
+            case "Attack!":
+                game.attack();
+                break;
 
-    // Lightbox
-    $("#lightBox_background, #lightBox").on("click", function() {
-        game.displayLightBox(false);
+            case "Next":
+                $(".bat")
+                game.updatePage(-1);
+                break;
+
+        }
     });
 });
