@@ -187,7 +187,7 @@ var StarWarsRPGGame = function() {
 
     /************************************************************************
         
-        Game mechanics functions
+        Game mechanics
         
     *************************************************************************/
     this.attack = function() {

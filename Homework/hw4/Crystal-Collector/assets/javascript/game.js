@@ -7,7 +7,7 @@
 *****************************************************************************/
 var game;
 
-var CrystalCollectorGame = function() {
+var CrystalCollector = function() {
     /************************************************************************
         
         Private variables
@@ -133,24 +133,21 @@ var CrystalCollectorGame = function() {
         numLosses += changeBy;
     }
 
-    this.updateCurrentSum = function(index) {
-        currentSum += crystalValues[index];
-
-        displayCurrentSum();
-    }
-
 
     /************************************************************************
         
-        Query functions
+        Game mechanics
         
     *************************************************************************/
-    this.checkCurrentSum = function() {
-        // Still good to go
+    this.collectCrystal = function(index) {
+        // Update the current sum
+        currentSum += crystalValues[index];
+
+        displayCurrentSum();
+
         if (currentSum < targetSum) {
             return;
 
-        // Win condition
         } else if (currentSum === targetSum) {
             updateNumWins(1);
 
@@ -162,7 +159,6 @@ var CrystalCollectorGame = function() {
             
             this.startNewGame();
 
-        // Loss condition
         } else {
             updateNumLosses(1);
 
@@ -188,7 +184,7 @@ var CrystalCollectorGame = function() {
 *****************************************************************************
 *****************************************************************************/
 $(document).ready(function() {
-    game = new CrystalCollectorGame();
+    game = new CrystalCollector();
 
     game.startNewGame();
 
@@ -207,13 +203,11 @@ $(document).ready(function() {
         game.updatePage(1);
     });
 
-    // Crystal collection
+    // Game mechanics
     $(".crystals").on("click", function() {
         var index = $(".crystals").index(this);
 
-        game.updateCurrentSum(index);
-
-        game.checkCurrentSum();
+        game.collectCrystal(index);
     });
 
     // Lightbox
