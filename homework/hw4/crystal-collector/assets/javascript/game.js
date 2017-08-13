@@ -70,7 +70,7 @@ var CrystalCollector = function() {
     }
 
     this.displayLightBox = function(lightBoxOn) {
-        $("#lightBox_background, #lightBox").css({"display": ((lightBoxOn) ? "block" : "none")});
+        $("#lightBox_background, #lightBox").css({"display": (lightBoxOn ? "block" : "none")});
     }
 
     var displayNumWins = function() {
