@@ -69,14 +69,7 @@ var StarWarsRPG = function() {
     *************************************************************************/
     var displayCurrentPage = function() {
         $(".page").css({"display": "none"});
-
-        for (var i = 0; i < numPages; i++) {
-            if (i === currentPage) {
-                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
-
-                break;
-            }
-        }
+        $(".page:nth-of-type(" + (currentPage + 1) + ")").css({"display": "block"});
     }
 
     var resetBattlePage = function() {
@@ -164,28 +157,14 @@ var StarWarsRPG = function() {
         myID = changeTo;
 
         $(".characters img").css({"border-color": "var(--color-text)"});
-
-        for (var i = 0; i < numCharacters; i++) {
-            if (i === myID) {
-                $(".characters:nth-of-type(" + (i + 1) + ") img").css({"border-color": "var(--color-character)"});
-
-                break;
-            }
-        }
+        $(".characters:nth-of-type(" + (myID + 1) + ") img").css({"border-color": "var(--color-character)"});
     }
 
     this.updateEnemyID = function(changeTo) {
         enemyID = changeTo;
 
         $(".enemies img").css({"border-color": "var(--color-text)"});
-
-        for (var i = 0; i < numCharacters; i++) {
-            if (i === enemyID) {
-                $(".enemies:nth-of-type(" + (i + 1) + ") img").css({"border-color": "var(--color-enemy)"});
-
-                break;
-            }
-        }
+        $(".enemies:nth-of-type(" + (enemyID + 1) + ") img").css({"border-color": "var(--color-enemy)"});
     }
 
 
@@ -324,8 +303,8 @@ $(document).ready(function() {
             return;
         }
 
+        // Prevent button mashing
         game.updateClickDisabled(true);
-
         setTimeout(function() { game.updateClickDisabled(false); }, 3000);
 
         switch ($(this).text()) {

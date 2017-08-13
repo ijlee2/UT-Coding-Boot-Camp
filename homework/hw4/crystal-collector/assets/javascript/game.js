@@ -66,14 +66,7 @@ var CrystalCollector = function() {
     *************************************************************************/
     var displayCurrentPage = function() {
         $(".page").css({"display": "none"});
-
-        for (var i = 0; i < numPages; i++) {
-            if (i === currentPage) {
-                $(".page:nth-of-type(" + (i + 1) + ")").css({"display": "block"});
-
-                break;
-            }
-        }
+        $(".page:nth-of-type(" + (currentPage + 1) + ")").css({"display": "block"});
     }
 
     this.displayLightBox = function(lightBoxOn) {
