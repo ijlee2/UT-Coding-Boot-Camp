@@ -11,8 +11,8 @@ If you have suggestions for making my code better and simpler, please let me kno
 3. 
 
 ## Homework
-0. [Pre-work assignments](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw0/Module-8/fanpage.html)
-1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/Wireframe/) (easy), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw1/Basic-Portfolio) (hard)
-2. [Portfolio w/ Responsive Design](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw2/Responsive-Portfolio/), [Portfolio w/ Bootstrap](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw2/Bootstrap-Portfolio/)
-3. [Psychic Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw3/Psychic-Game/) (easy), [Hangman Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw3/Hangman-Game/) (hard)
-4. [Crystal Collector](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw4/Crystal-Collector/) (easy), [Star Wars RPG](https://ijlee2.github.io/UT-Coding-Boot-Camp/Homework/hw4/Star-Wars-RPG) (hard)
+0. [Pre-work assignments](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw0/module-8/fanpage.html)
+1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw1/wireframe/) (easy), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw1/basic-portfolio) (hard)
+2. [Portfolio w/ Responsive Design](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw2/responsive-portfolio/), [Portfolio w/ Bootstrap](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw2/bootstrap-portfolio/)
+3. [Psychic Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw3/psychic-game/) (easy), [Hangman Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw3/hangman-game/) (hard)
+4. [Crystal Collector](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/crystal-collector/) (easy), [Star Wars RPG](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/star-wars-rpg) (hard)
