@@ -14,15 +14,15 @@ If you have suggestions for making my code better and simpler, please let me kno
 0. [Pre-work assignments](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw0/module-8/fanpage.html)
     - [x] HTML, CSS, JavaScript
     
-1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw1/wireframe/), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw1/basic-portfolio)
+1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw1/wireframe/) (easy), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw1/basic-portfolio) (hard)
     - [x] HTML, CSS
     
 2. [Portfolio w/ Responsive Design](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw2/responsive-portfolio/), [Portfolio w/ Bootstrap](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw2/bootstrap-portfolio/)
-    - [x] HTML, CSS (+ math!), Bootstrap
+    - [x] HTML, CSS + math!, Bootstrap
     
-3. [Psychic Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw3/psychic-game/), [Hangman Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw3/hangman-game/)
+3. [Psychic Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw3/psychic-game/) (easy), [Hangman Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw3/hangman-game/) (hard)
     - [x] HTML, CSS, JavaScript, jQuery
     
-4. [Crystal Collector](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/crystal-collector/), [Star Wars RPG](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/star-wars-rpg)
+4. [Crystal Collector](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/crystal-collector/) (easy), [Star Wars RPG](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/star-wars-rpg) (hard)
     - [x] HTML, CSS, JavaScript, jQuery
     
