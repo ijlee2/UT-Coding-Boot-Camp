@@ -38,7 +38,7 @@ var CrystalCollector = function() {
             crystalValues[i] = randomInteger(1, 12);
 
             // Take a linear combination
-            targetSum += crystalValues[i] * randomInteger(1, 6);
+            targetSum += randomInteger(1, 6) * crystalValues[i];
         }
 
         // Ensure that the target sum is between 19 and 120
@@ -46,7 +46,7 @@ var CrystalCollector = function() {
             targetSum = 0;
 
             for (var i = 0; i < numCrystals; i++) {
-                targetSum += crystalValues[i] * randomInteger(1, 6);
+                targetSum += randomInteger(1, 6) * crystalValues[i];
             }
         }
 
@@ -70,13 +70,7 @@ var CrystalCollector = function() {
     }
 
     this.displayLightBox = function(lightBoxOn) {
-        if (lightBoxOn) {
-            $("#lightBox_background, #lightBox").css({"display": "block"});
-
-        } else {
-            $("#lightBox_background, #lightBox").css({"display": "none"});
-
-        }
+        $("#lightBox_background, #lightBox").css({"display": ((lightBoxOn) ? "block" : "none")});
     }
 
     var displayNumWins = function() {

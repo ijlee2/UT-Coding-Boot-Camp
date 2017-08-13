@@ -206,6 +206,7 @@ var StarWarsRPG = function() {
 
             // The player's damage increases after attack
             player.damage += player.ap;
+
         }, 200);
 
 
@@ -223,16 +224,19 @@ var StarWarsRPG = function() {
                 $("#battle_enemy").css({"animation": "attack_left 1.00s cubic-bezier(.36, .07, .19, .97) both",
                                         "z-index"  : "1"});
                 $("#battle_enemy").replaceWith($("#battle_enemy").clone());
+
             }, 1500);
 
             setTimeout(function() {
                 $("#battle_player .hp").text("HP." + player.hp);
                 $("#battle_player .damageReceived").text(-enemy.damage);
                 $("#battle_player .damageReceived").replaceWith($("#battle_player .damageReceived").clone());
+
             }, 1700);
 
             setTimeout(function() {
                 $("#battle_player .damageReceived").text("");
+                
             }, 3000);
 
             if (player.hp === 0) {
