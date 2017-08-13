@@ -18,7 +18,7 @@ If you have suggestions for making my code better and simpler, please let me kno
     - [x] HTML, CSS
     
 2. [Portfolio w/ Responsive Design](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw2/responsive-portfolio/), [Portfolio w/ Bootstrap](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw2/bootstrap-portfolio/)
-    - [x] HTML, CSS, Bootstrap
+    - [x] HTML, CSS (+ math!), Bootstrap
     
 3. [Psychic Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw3/psychic-game/) (easy), [Hangman Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw3/hangman-game/) (hard)
     - [x] HTML, CSS, JavaScript, jQuery
