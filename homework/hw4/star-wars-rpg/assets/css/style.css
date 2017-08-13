@@ -2,11 +2,11 @@
     /* Define color scheme */
     --color-background      : #000000;
     --color-star-wars-yellow: #f7e739;
-    --color-dark-yellow     : #ac8f47;
+    --color-dark-yellow     : #beb250;
     --color-text            : #f7f7f7;
     --color-text-highlight  : #ff6600;
-    --color-character       : green;
-    --color-enemy           : #ee2222;
+    --color-character       : #1db94c;
+    --color-enemy           : #f93816;
 }
 
 body {
@@ -69,7 +69,7 @@ p {
     font-size       : 1.15em;
     font-weight     : bold;
 
-    margin-top      : 3%;
+    margin-top      : 4.5%;
     border          : 6px solid var(--color-dark-yellow);
     padding         : 3% 6%;
 }
