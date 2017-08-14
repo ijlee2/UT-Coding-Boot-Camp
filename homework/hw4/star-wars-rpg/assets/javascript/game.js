@@ -86,7 +86,7 @@ var StarWarsRPG = function() {
         Get functions
         
     *************************************************************************/
-    this.getPage = function() {
+    this.getCurrentPage = function() {
         return currentPage;
     }
 
@@ -280,7 +280,7 @@ $(document).ready(function() {
 
     $(".page_next").on("click", function() {
         // Make sure that the user has selected a character
-        if ((game.getPage() === 1 && game.getMyID() === -1) || (game.getPage() === 2 && game.getEnemyID() === -1)) {
+        if ((game.getCurrentPage() === 1 && game.getMyID() === -1) || (game.getCurrentPage() === 2 && game.getEnemyID() === -1)) {
             return;
         }
 
