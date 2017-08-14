@@ -186,9 +186,7 @@ $(document).ready(function() {
 
     // Game mechanics
     $(".crystals").on("click", function() {
-        var index = $(".crystals").index(this);
-
-        game.collectCrystal(index);
+        game.collectCrystal($(".crystals").index(this));
     });
 
     // Lightbox
