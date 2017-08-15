@@ -1,0 +1,121 @@
+:root {
+    /* Define color scheme */
+    --color-background      : #000000;
+    --color-star-wars-yellow: #f7e739;
+    --color-dark-yellow     : #beb250;
+    --color-text            : #202020;
+    --color-text-highlight  : #ff6600;
+    --color-character       : #1db94c;
+    --color-enemy           : #f93816;
+}
+
+body {
+    color      : var(--color-text);
+    font-family: "Amiri", cursive;
+    font-size  : 30px;
+}
+
+.container {
+    width  : 740px;
+    margin : auto;
+    padding: 60px 0;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear  : both;
+}
+
+h1 {
+    color         : var(--color-star-wars-yellow);
+    font-family   : "Bungee", cursive;
+    font-size     : 2em;
+    letter-spacing: 0.02em;
+    text-align    : center;
+
+    margin-bottom : 7.5%;
+}
+
+h2 {
+    color         : var(--color-text-highlight);
+    font-size     : 1.3em;
+    letter-spacing: 0.01em;
+    
+    margin-bottom : 3%;
+}
+
+p {
+    letter-spacing: 0.015em;
+    line-height   : 1.3em;
+    
+    margin-bottom : 3%;
+}
+
+/* Page selection */
+.page {
+    display: none;
+}
+
+.page_prev, .page_next, #battle_button {
+    background-color: var(--color-star-wars-yellow);
+    color           : var(--color-background);
+    font-family     : "Bungee", cursive;
+    font-size       : 1.15em;
+    font-weight     : bold;
+
+    margin-top      : 4.5%;
+    border          : 6px solid var(--color-dark-yellow);
+    padding         : 3% 6%;
+}
+
+.page_prev {
+    float: left;
+}
+
+.page_next {
+    float: right;
+}
+
+/* Questions */
+.questions .category { 
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.questions .prompt, .questions .choices {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+}
+
+/* Animation */
+@keyframes slide_down_and_fade {
+    0% {
+        opacity  : 1;
+    }
+
+    100% {
+        opacity  : 0;
+        transform: translate(0, 15px);
+    }
+}
+
+@keyframes attack_left {
+    8%, 15% {
+        transform: translate(-30%, 0);
+    }
+    
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes attack_right {
+    8%, 15% {
+        transform: translate(30%, 0);
+    }
+    
+    100% {
+        transform: translate(0, 0);
+    }
+}
