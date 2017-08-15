@@ -14,11 +14,11 @@ var TriviaGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numPages = $(".page").length, currentPage = 0;
+    var numPages = $(".page").length, currentPage;
+    var intervalID;
     
     // Variables for the game
-    var numQuestions = 10, currentQuestion;
-    var numQuestionsCorrect = 0;
+    var numQuestions = 10, numQuestionsCorrect, currentQuestion;
     var timeAllowed = 3, timeLeft;
     
 
@@ -28,7 +28,11 @@ var TriviaGame = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
+        currentPage = 0;
         displayCurrentPage();
+
+        numQuestionsCorrect = 0;
+        currentQuestion = 0;
         displayQuestions();
     }
 
@@ -100,48 +104,32 @@ var TriviaGame = function() {
                                              "border-bottom" : "4px double black",
                                              "padding-bottom": "0"});
 
+                // Handle click events
+                $(".choices").on("click", function() {
+                    if ($(".choices").index(this) === correctAnswers[currentQuestion]) {
+                        numQuestionsCorrect++;
+                    }
+
+                    updateQuestion();
+                });
+
 
                 /************************************************************
                     
                     Display the first question
                     
                 *************************************************************/
-                currentQuestion = 0;
-
                 displayCurrentQuestion();
 
                 resetTimer();
 
                 // Display the remaining questions
-                var intervalID = setInterval(function() {
+                intervalID = setInterval(function() {
                     updateTimer();
 
-                    $(".choices").on("click", function() {
-                        if ($(".choices").index(this) === correctAnswers[currentQuestion]) {
-                            numQuestionsCorrect++;
-
-                            console.log("Correct!");
-
-                        } else {
-                            console.log("Incorrect!");
-
-                        }
-                    });
-
                     if (timeLeft < 0) {
-                        resetTimer();
-
-                        currentQuestion++;
-
-                        if (currentQuestion === numQuestions) {
-                            clearInterval(intervalID);
-
-                            updatePage(1);
-                        }
-
-                        displayCurrentQuestion();
+                        updateQuestion();
                     }
-
                 }, 1000);
 
             // Load default questions
@@ -169,6 +157,23 @@ var TriviaGame = function() {
         currentPage = (currentPage + changeBy + numPages) % numPages;
 
         displayCurrentPage();
+    }
+
+    var updateQuestion = function() {
+        // Stop the timer
+        currentQuestion++;
+
+        if (currentQuestion === numQuestions) {
+            clearInterval(intervalID);
+
+            updatePage(1);
+
+        } else {
+            displayCurrentQuestion();
+
+            resetTimer();
+
+        }
     }
 
     var updateTimer = function() {
