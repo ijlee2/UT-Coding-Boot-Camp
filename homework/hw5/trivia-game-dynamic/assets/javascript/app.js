@@ -34,9 +34,7 @@ var TriviaGame = function() {
 
         numQuestionsCorrect = 0;
         currentQuestion = 0;
-
-        getQuestions();
-        setTimeout(displayQuestions, 1000);
+        displayQuestions();
     }
 
     
@@ -59,29 +57,28 @@ var TriviaGame = function() {
         $("#timer").text(timeLeft);
     }
 
-    var getQuestions = function() {
-        var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
-        api_url = "assets/javascript/questions.js";
+    var displayQuestions = function() {
+        var api_url    = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
+        var backup_url = "assets/javascript/app.js";
         
         // Making JSON synchronous can make the code below more modular,
         // but the async property will be deprecated in the future
         // $.ajaxSetup({ async: false });
 
 -        $.getJSON(api_url, function(json) {
-            console.log(json);
-            
+            // Temporary variables
+            var output = "";
+            var data;
+            var correctAnswers = new Array(numQuestions);
+            var choices;
+
+
             /****************************************************************
                 
                 Load questions from an online database
                 
             *****************************************************************/
-            if (json.response_code === 0) {
-                // Temporary variables
-                var output = "";
-                var data;
-                var correctAnswers = new Array(numQuestions);
-                var choices;
-
+            if (json.response_code !== 0) {
                 for (var i = 0; i < numQuestions; i++) {
                     // Get the question category, prompt, and answer choices
                     data    = json.results[i];
@@ -103,7 +100,32 @@ var TriviaGame = function() {
                     output += "</div>";
                 }
 
-//                console.log(correctAnswers.join(", "));
+            } else {
+                $.getScript(backup_url, function(data) {
+                    for (var i = 0; i < numQuestions; i++) {
+                        // Get the question category, prompt, and answer choices
+                        choices = data.incorrect_answers;
+                        
+                        // Insert the correct answer
+                        correctAnswers[i] = Math.floor(numChoicesPerQuestion * Math.random());
+                        choices.splice(correctAnswers[i], 0, data.correct_answer);
+
+                        // Write to HTML
+                        output += `<div class=\"questions\" id=\"question${i}\">
+                                   <div class=\"category\"><p>${data.category}</p></div>
+                                   <div class=\"prompt\"><p>Question ${i + 1}. ${data.question}</p></div>`;
+
+                        for (var j = 0; j < choices.length; j++) {
+                            output += `<div class=\"choices question${i}\">${String.fromCharCode(65 + j)}. ${choices[j]}</div>`;
+                        }
+
+                        output += "</div>";
+                    }
+                });
+
+            }
+
+                console.log(correctAnswers.join(", "));
 
                 $("#display").html(output);
                 $(".questions .prompt").css({"margin-bottom" : "0.5em",
@@ -121,31 +143,26 @@ var TriviaGame = function() {
                     updateQuestion();
                 });
 
-            } else {
 
-            }
+                /************************************************************
+                    
+                    Display the questions
+                    
+                *************************************************************/
+                // Display the 1st question
+                displayCurrentQuestion();
+
+                resetTimer();
+
+                // Display the remaining questions
+                intervalID = setInterval(function() {
+                    updateTimer();
+
+                    if (timeLeft < 0) {
+                        updateQuestion();
+                    }
+                }, 1000);
         });
-    }
-
-    var displayQuestions = function() {
-        /************************************************************
-            
-            Display the questions
-            
-        *************************************************************/
-        // Display the 1st question
-        displayCurrentQuestion();
-
-        resetTimer();
-
-        // Display the remaining questions
-        intervalID = setInterval(function() {
-            updateTimer();
-
-            if (timeLeft < 0) {
-                updateQuestion();
-            }
-        }, 1000);
     }
 
     
