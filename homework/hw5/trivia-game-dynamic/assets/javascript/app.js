@@ -34,7 +34,9 @@ var TriviaGame = function() {
 
         numQuestionsCorrect = 0;
         currentQuestion = 0;
-        displayQuestions();
+
+        getQuestions();
+        setTimeout(displayQuestions, 1000);
     }
 
     
@@ -57,8 +59,9 @@ var TriviaGame = function() {
         $("#timer").text(timeLeft);
     }
 
-    var displayQuestions = function() {
+    var getQuestions = function() {
         var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
+        api_url = "assets/javascript/questions.js";
         
         // Making JSON synchronous can make the code below more modular,
         // but the async property will be deprecated in the future
@@ -98,7 +101,7 @@ var TriviaGame = function() {
                     output += "</div>";
                 }
 
-                console.log(correctAnswers.join(", "));
+//                console.log(correctAnswers.join(", "));
 
                 $("#display").html(output);
                 $(".questions .prompt").css({"margin-bottom" : "0.5em",
@@ -116,30 +119,31 @@ var TriviaGame = function() {
                     updateQuestion();
                 });
 
-
-                /************************************************************
-                    
-                    Display the first question
-                    
-                *************************************************************/
-                displayCurrentQuestion();
-
-                resetTimer();
-
-                // Display the remaining questions
-                intervalID = setInterval(function() {
-                    updateTimer();
-
-                    if (timeLeft < 0) {
-                        updateQuestion();
-                    }
-                }, 1000);
-
-            // Load default questions
             } else {
 
             }
         });
+    }
+
+    var displayQuestions = function() {
+        /************************************************************
+            
+            Display the questions
+            
+        *************************************************************/
+        // Display the 1st question
+        displayCurrentQuestion();
+
+        resetTimer();
+
+        // Display the remaining questions
+        intervalID = setInterval(function() {
+            updateTimer();
+
+            if (timeLeft < 0) {
+                updateQuestion();
+            }
+        }, 1000);
     }
 
     
