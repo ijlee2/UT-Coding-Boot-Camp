@@ -18,8 +18,9 @@ var TriviaGame = function() {
     var intervalID;
     
     // Variables for the game
-    var numQuestions = 10, numQuestionsCorrect, currentQuestion;
-    var timeAllowed = 3, timeLeft;
+    var numQuestions = 10, numChoicesPerQuestion = 4;
+    var numQuestionsCorrect, currentQuestion;
+    var timeAllowed = 5, timeLeft;
     
 
     /************************************************************************
@@ -82,10 +83,8 @@ var TriviaGame = function() {
                     choices = data.incorrect_answers;
                     
                     // Insert the correct answer
-                    correctAnswers[i] = Math.floor(4 * Math.random());
+                    correctAnswers[i] = Math.floor(numChoicesPerQuestion * Math.random());
                     choices.splice(correctAnswers[i], 0, data.correct_answer);
-
-                    console.log("Hint: Correct answer is "+ (correctAnswers[i] + 1));
 
                     // Write to HTML
                     output += `<div class=\"questions\" id=\"question${i}\">
@@ -93,11 +92,13 @@ var TriviaGame = function() {
                                <div class=\"prompt\"><p>Question ${i + 1}. ${data.question}</p></div>`;
 
                     for (var j = 0; j < choices.length; j++) {
-                        output += `<div class=\"choices\">${String.fromCharCode(65 + j)}. ${choices[j]}</div>`;
+                        output += `<div class=\"choices question${i}\">${String.fromCharCode(65 + j)}. ${choices[j]}</div>`;
                     }
 
                     output += "</div>";
                 }
+
+                console.log(correctAnswers.join(", "));
 
                 $("#display").html(output);
                 $(".questions .prompt").css({"margin-bottom" : "0.5em",
@@ -106,7 +107,9 @@ var TriviaGame = function() {
 
                 // Handle click events
                 $(".choices").on("click", function() {
-                    if ($(".choices").index(this) === correctAnswers[currentQuestion]) {
+                    var myChoice = $(".choices").index(this) % numChoicesPerQuestion;
+
+                    if (myChoice === correctAnswers[currentQuestion]) {
                         numQuestionsCorrect++;
                     }
 
@@ -165,6 +168,9 @@ var TriviaGame = function() {
 
         if (currentQuestion === numQuestions) {
             clearInterval(intervalID);
+
+            $("#numQuestionsCorrect").text(numQuestionsCorrect);
+            $("#numQuestions").text(numQuestions);
 
             updatePage(1);
 
