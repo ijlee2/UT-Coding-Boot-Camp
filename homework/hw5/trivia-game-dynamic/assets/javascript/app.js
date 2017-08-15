@@ -14,8 +14,7 @@ var TriviaGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numQuestions = 10;
-    var timeAllowed = 5;
+    var numQuestions = 10, timeAllowed = 5;
     var questions;
 
 
@@ -37,34 +36,44 @@ var TriviaGame = function() {
     var displayQuestions = function() {
         var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
         
+
+        /********************************************************************
+        
+            Load questions from an online database
+        
+        *********************************************************************/
         // Making JSON synchronous as shown below fixes the problem, but the async will be deprecated
         // $.ajaxSetup({ async: false });
 
         var output = "";
-
-        $.getJSON(api_url, function(data) {
+        var data;
+        
+        $.getJSON(api_url, function(json) {
             // The API returned results successfully
-            if (data.response_code === 0) {
-                // Iterate over the questions
-                $.each(data.results, function(key, value) {
+            if (json.response_code === 0) {
+                for (var i = 0; i < numQuestions; i++) {
+                    // Get the question category, prompt, and answer choices
+                    data = json.results[i];
+
                     // Insert the correct answer somewhere
                     var index_answer = Math.floor(4 * Math.random());
-                    var choices      = value.incorrect_answers;
-                    choices.splice(index_answer, 0, value.correct_answer);
+                    var choices      = data.incorrect_answers;
+                    choices.splice(index_answer, 0, data.correct_answer);
 
-                    output += `<div class=\"questions\" id=\"question${key + 1}\">
-                               <div class=\"category\">${value.category}</div>
-                               <div class=\"prompt\"><p>Question ${key + 1}. ${value.question}</p></div>`;
+                    output += `<div class=\"questions\" id=\"question${i + 1}\">
+                               <div class=\"category\">${data.category}</div>
+                               <div class=\"prompt\"><p>Question ${i + 1}. ${data.question}</p></div>`;
 
-                    for (var i = 0; i < choices.length; i++) {
-                        output += `<div class=\"choices\">${choices[i]}</div>`;
+                    for (var j = 0; j < choices.length; j++) {
+                        output += `<div class=\"choices\">${choices[j]}</div>`;
                     }
 
                     output += "</div>";
-                });
+                }
 
                 $("#display").html(output);
 
+                // Display the 1st question
                 var currentQuestion = 1;
                 $(".questions").css({"display": "none"});
                 $("#question" + currentQuestion).css({"display": "block"});
@@ -72,6 +81,7 @@ var TriviaGame = function() {
                 var secondsLeft = timeAllowed;
                 $("#timer").text(secondsLeft);
 
+                // Display the remaining questions
                 var intervalID = setInterval(function() {
                     secondsLeft--;
                     $("#timer").text(secondsLeft);
@@ -93,6 +103,10 @@ var TriviaGame = function() {
                     }
 
                 }, 1000);
+
+            // Load default questions
+            } else {
+
             }
         });
     }
