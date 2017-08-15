@@ -85,7 +85,12 @@ p {
 
 .questions .prompt, .questions .choices {
     font-size: 1em;
-    margin-bottom: 0.5em;
+    padding: 0.5em;
+}
+
+.questions .choices:hover {
+    background-color: var(--color-star-wars-yellow);
+    padding: 0.5em;
 }
 
 /* Animation */
