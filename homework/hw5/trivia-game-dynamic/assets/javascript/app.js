@@ -59,7 +59,7 @@ var TriviaGame = function() {
 
     var displayQuestions = function() {
         var api_url    = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
-        var backup_url = "assets/javascript/app.js";
+        var backup_url = "assets/javascript/questions.js";
         
         // Making JSON synchronous can make the code below more modular,
         // but the async property will be deprecated in the future
