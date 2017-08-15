@@ -78,6 +78,19 @@ p {
 }
 
 /* Questions */
+#display {
+    float: left;
+    width: 82%;
+}
+
+#timer {
+    font-size: 2.5em;
+    text-align: center;
+
+    float: right;
+    width: 15%;
+}
+
 .questions .category { 
     font-size: 1.5em;
     margin-bottom: 0.5em;

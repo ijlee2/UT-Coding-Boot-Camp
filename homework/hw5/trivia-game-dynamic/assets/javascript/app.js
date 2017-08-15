@@ -15,6 +15,7 @@ var TriviaGame = function() {
     *************************************************************************/
     // Variables for the game
     var numQuestions = 10;
+    var timeAllowed = 5;
     var questions;
 
 
@@ -62,27 +63,36 @@ var TriviaGame = function() {
                     output += "</div>";
                 });
 
-                $("#debugMessage").html(output);
+                $("#display").html(output);
 
                 var currentQuestion = 1;
                 $(".questions").css({"display": "none"});
                 $("#question" + currentQuestion).css({"display": "block"});
 
+                var secondsLeft = timeAllowed;
+                $("#timer").text(secondsLeft);
+
                 var intervalID = setInterval(function() {
-                    currentQuestion++;
-
-                    if (currentQuestion > numQuestions) {
-                        clearInterval(intervalID);
-                    }
-
-                    $(".questions").css({"display": "none"});
-                    $("#question" + currentQuestion).css({"display": "block"});
+                    secondsLeft--;
+                    $("#timer").text(secondsLeft);
 
                     $(".choices").on("click", function() {
                         console.log("Div #" + $(".choices").index(this) + "was clicked.");
                     });
 
-                }, 2000);
+                    if (secondsLeft === 0) {
+                        secondsLeft = timeAllowed;
+                        currentQuestion++;
+
+                        if (currentQuestion > numQuestions) {
+                            clearInterval(intervalID);
+                        }
+
+                        $(".questions").css({"display": "none"});
+                        $("#question" + currentQuestion).css({"display": "block"});
+                    }
+
+                }, 1000);
             }
         });
     }
