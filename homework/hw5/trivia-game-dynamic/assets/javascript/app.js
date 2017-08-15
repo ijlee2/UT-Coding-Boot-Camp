@@ -14,7 +14,8 @@ var TriviaGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numQuestions = 10, timeAllowed = 5;
+    var numQuestions = 10, numQuestionsCorrect = 0;
+    var timeAllowed = 5;
     var questions;
 
 
@@ -47,6 +48,7 @@ var TriviaGame = function() {
 
         var output = "";
         var data;
+        var index_answer = new Array(numQuestions);
         
         $.getJSON(api_url, function(json) {
             // The API returned results successfully
@@ -56,13 +58,14 @@ var TriviaGame = function() {
                     data = json.results[i];
 
                     // Insert the correct answer somewhere
-                    var index_answer = Math.floor(4 * Math.random());
-                    var choices      = data.incorrect_answers;
-                    choices.splice(index_answer, 0, data.correct_answer);
+                    index_answer[i] = Math.floor(4 * Math.random());
+                    var choices         = data.incorrect_answers;
+                    choices.splice(index_answer[i], 0, data.correct_answer);
+                    console.log("Hint: Correct answer is "+ (index_answer[i] + 1));
 
-                    output += `<div class=\"questions\" id=\"question${i + 1}\">
+                    output += `<div class=\"questions\" id=\"question${i}\">
                                <div class=\"category\">${data.category}</div>
-                               <div class=\"prompt\"><p>Question ${i + 1}. ${data.question}</p></div>`;
+                               <div class=\"prompt\"><p>Question ${i}. ${data.question}</p></div>`;
 
                     for (var j = 0; j < choices.length; j++) {
                         output += `<div class=\"choices\">${choices[j]}</div>`;
@@ -74,7 +77,7 @@ var TriviaGame = function() {
                 $("#display").html(output);
 
                 // Display the 1st question
-                var currentQuestion = 1;
+                var currentQuestion = 0;
                 $(".questions").css({"display": "none"});
                 $("#question" + currentQuestion).css({"display": "block"});
 
@@ -87,14 +90,22 @@ var TriviaGame = function() {
                     $("#timer").text(secondsLeft);
 
                     $(".choices").on("click", function() {
-                        console.log("Div #" + $(".choices").index(this) + "was clicked.");
+                        if ($(".choices").index(this) === index_answer[currentQuestion]) {
+                            numQuestionsCorrect++;
+
+                            console.log("Correct!");
+
+                        } else {
+                            console.log("Incorrect!");
+
+                        }
                     });
 
                     if (secondsLeft === 0) {
                         secondsLeft = timeAllowed;
                         currentQuestion++;
 
-                        if (currentQuestion > numQuestions) {
+                        if (currentQuestion === numQuestions) {
                             clearInterval(intervalID);
                         }
 
