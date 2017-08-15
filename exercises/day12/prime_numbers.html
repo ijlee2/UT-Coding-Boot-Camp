@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<script>
+
+var n = 200;
+var numbers = [];
+
+// Create an array of numbers between 1 and n
+for (var i = 1; i <= n; i++) {
+    numbers.push(i);
+}
+
+// Sieve method
+for (var i = 2; i <= Math.floor(Math.sqrt(n)); i++) {
+    if (numbers[i] === "") {
+        continue;
+    }
+
+    // Eliminate composite numbers
+    for (var j = 2*i; j <= n; j += i) {
+        // JavaScript is 0-indexed
+        numbers[j - 1] = "";
+    }
+}
+
+// 1 is not a prime number
+numbers[0] = "";
+
+// Display prime numbers
+console.log(numbers);
+
+</script>
+</body>
+</html>

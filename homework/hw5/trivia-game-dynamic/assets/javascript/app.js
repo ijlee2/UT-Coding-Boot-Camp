@@ -18,7 +18,7 @@ var TriviaGame = function() {
     
     // Variables for the game
     var numQuestions = 10, numQuestionsCorrect = 0;
-    var timeAllowed = 2;
+    var timeAllowed = 5;
     var questions;
 
 
