@@ -14,11 +14,6 @@ var TriviaGame = function() {
         
     *************************************************************************/
     // Variables for the game
-//    var numPages = $(".page").length, currentPage = 0;
-//    var clickDisabled = false;
-
-    // Variables for the user
-    // The API limits the number of questions to 50
     var numQuestions = 10;
     var questions;
 
@@ -29,24 +24,7 @@ var TriviaGame = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
-        var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&type=multiple";
-
-        $.getJSON(api_url, function(data) {
-            console.log(data);
-
-            // The API returned results successfully
-            if (data.response_code === 0) {
-                questions = data.results;
-
-                /*
-                $.each(data.results[0], function(key, value) {
-                    console.log(key + ": " + value);
-                });
-                */
-            }
-        });
-
-        console.log("questions: " + questions);
+        displayQuestions();
     }
 
     
@@ -55,14 +33,47 @@ var TriviaGame = function() {
         Display functions
         
     *************************************************************************/
-    this.displayQuestions = function() {
-        var output;
+    var displayQuestions = function() {
+        var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
+        
+        // Making JSON synchronous as shown below fixes the problem, but the async will be deprecated
+        // $.ajaxSetup({ async: false });
 
-        for (var i = 0; i < numQuestions; i++) {
-            output = "<p>Category: " + questions[i].category + "</p>";
-            
-            $("#debugMessage").append(output);
-        }
+        var output = "";
+
+        $.getJSON(api_url, function(data) {
+            // The API returned results successfully
+            if (data.response_code === 0) {
+                console.log(data);
+
+                $.each(data.results, function(key, value) {
+                    var choices = value.incorrect_answers;
+                    var index_answer = Math.floor(4 * Math.random());
+                    choices.splice(index_answer, 0, value.correct_answer);
+
+                    console.log(index_answer);
+
+                    output += `<p>Category: ${value.category}</p>
+                               <p>Question ${key + 1}. ${value.question}</p>`;
+
+                    for (var i = 0; i < choices.length; i++) {
+                        output += "<p>" + choices[i] + "</p>";
+                    }
+                });
+
+                $("#debugMessage").html(output);
+            }
+        });
+    }
+
+    
+    /************************************************************************
+        
+        Get functions
+        
+    *************************************************************************/
+    this.getQuestions = function() {
+
     }
 }
 
