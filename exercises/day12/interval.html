@@ -32,11 +32,19 @@
 
     $("#resume").on("click", run);
 
+    var running = false;
+
     function run() {
+      // Prevent button mashing to speed up the timer and hit a negative time left
+      if (running) {
+        return;
+      }
+
       intervalId = setInterval(decrement, 1000);
     }
 
     function decrement() {
+      running = true;
 
       number--;
 
@@ -51,8 +59,9 @@
     }
 
     function stop() {
-
       clearInterval(intervalId);
+
+      running = false;
     }
 
     run();
