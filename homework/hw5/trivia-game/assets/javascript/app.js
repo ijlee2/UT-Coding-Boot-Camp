@@ -44,24 +44,28 @@ var TriviaGame = function() {
         $.getJSON(api_url, function(data) {
             // The API returned results successfully
             if (data.response_code === 0) {
-                console.log(data);
+//                console.log(data);
 
                 $.each(data.results, function(key, value) {
                     var choices = value.incorrect_answers;
                     var index_answer = Math.floor(4 * Math.random());
                     choices.splice(index_answer, 0, value.correct_answer);
 
-                    console.log(index_answer);
-
-                    output += `<p>Category: ${value.category}</p>
-                               <p>Question ${key + 1}. ${value.question}</p>`;
+                    output += `<div class=\"questions\" id=\"question${key + 1}\">
+                               <div class=\"category\">${value.category}</div>
+                               <div class=\"prompt\"><p>Question ${key + 1}. ${value.question}</p></div>`;
 
                     for (var i = 0; i < choices.length; i++) {
-                        output += "<p>" + choices[i] + "</p>";
+                        output += `<div class=\"choices\">${choices[i]}</div>`;
                     }
+
+                    output += "</div>";
                 });
 
                 $("#debugMessage").html(output);
+
+                $(".questions").css({"display": "none"});
+                $("#question1").css({"display": "block"});
             }
         });
     }
@@ -72,9 +76,6 @@ var TriviaGame = function() {
         Get functions
         
     *************************************************************************/
-    this.getQuestions = function() {
-
-    }
 }
 
 
@@ -90,5 +91,4 @@ $(document).ready(function() {
     game = new TriviaGame();
 
     game.startNewGame();
-    game.displayQuestions();
 });
