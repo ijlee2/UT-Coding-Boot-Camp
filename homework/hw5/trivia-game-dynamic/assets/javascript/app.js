@@ -82,7 +82,7 @@ var TriviaGame = function() {
                         console.log("Div #" + $(".choices").index(this) + "was clicked.");
                     });
 
-                }, 200);
+                }, 2000);
             }
         });
     }
