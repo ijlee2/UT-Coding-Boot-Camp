@@ -102,6 +102,8 @@ var TriviaGame = function() {
 
             } else {
                 $.getScript(backup_url, function(data) {
+                    console.log(data);
+
                     for (var i = 0; i < numQuestions; i++) {
                         // Get the question category, prompt, and answer choices
                         choices = data.incorrect_answers;
@@ -124,8 +126,6 @@ var TriviaGame = function() {
                 });
 
             }
-
-                console.log(correctAnswers.join(", "));
 
                 $("#display").html(output);
                 $(".questions .prompt").css({"margin-bottom" : "0.5em",
