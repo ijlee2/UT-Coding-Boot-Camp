@@ -64,12 +64,16 @@ var TriviaGame = function() {
 
                 $("#debugMessage").html(output);
 
-                $(".questions").css({"display": "none"});
-                $("#question1").css({"display": "block"});
+                for (var i = 0; i < numQuestions; i++) {
+                    setTimeout(function() {
+                        $(".questions").css({"display": "none"});
+                        $("#question" + i).css({"display": "block"});
 
-                $(".choices").on("click", function() {
-                    console.log("Div #" + $(".choices").index(this) + "was clicked.");
-                });
+                        $(".choices").on("click", function() {
+                            console.log("Div #" + $(".choices").index(this) + "was clicked.");
+                        });
+                    }, 2000);
+                }
             }
         });
     }
