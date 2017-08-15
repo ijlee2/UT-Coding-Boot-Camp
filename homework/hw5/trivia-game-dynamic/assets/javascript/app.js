@@ -14,8 +14,11 @@ var TriviaGame = function() {
         
     *************************************************************************/
     // Variables for the game
+    var numPages = $(".page").length, currentPage = 0;
+    
+    // Variables for the game
     var numQuestions = 10, numQuestionsCorrect = 0;
-    var timeAllowed = 5;
+    var timeAllowed = 1;
     var questions;
 
 
@@ -25,6 +28,7 @@ var TriviaGame = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
+        displayCurrentPage();
         displayQuestions();
     }
 
@@ -34,6 +38,11 @@ var TriviaGame = function() {
         Display functions
         
     *************************************************************************/
+    var displayCurrentPage = function() {
+        $(".page").css({"display": "none"});
+        $(".page:nth-of-type(" + (currentPage + 1) + ")").css({"display": "block"});
+    }
+
     var displayQuestions = function() {
         var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
         
@@ -65,7 +74,7 @@ var TriviaGame = function() {
 
                     output += `<div class=\"questions\" id=\"question${i}\">
                                <div class=\"category\">${data.category}</div>
-                               <div class=\"prompt\"><p>Question ${i}. ${data.question}</p></div>`;
+                               <div class=\"prompt\"><p>Question ${i + 1}. ${data.question}</p></div>`;
 
                     for (var j = 0; j < choices.length; j++) {
                         output += `<div class=\"choices\">${choices[j]}</div>`;
@@ -107,6 +116,8 @@ var TriviaGame = function() {
 
                         if (currentQuestion === numQuestions) {
                             clearInterval(intervalID);
+
+                            updatePage(1);
                         }
 
                         $(".questions").css({"display": "none"});
@@ -128,6 +139,19 @@ var TriviaGame = function() {
         Get functions
         
     *************************************************************************/
+
+
+    /************************************************************************
+        
+        Set (update) functions
+        
+    *************************************************************************/
+    var updatePage = function(changeBy) {
+        // Allow pages to move in a carousel
+        currentPage = (currentPage + changeBy + numPages) % numPages;
+
+        displayCurrentPage();
+    }
 }
 
 
