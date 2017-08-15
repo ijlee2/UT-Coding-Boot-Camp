@@ -44,11 +44,11 @@ var TriviaGame = function() {
         $.getJSON(api_url, function(data) {
             // The API returned results successfully
             if (data.response_code === 0) {
-//                console.log(data);
-
+                // Iterate over the questions
                 $.each(data.results, function(key, value) {
-                    var choices = value.incorrect_answers;
+                    // Insert the correct answer somewhere
                     var index_answer = Math.floor(4 * Math.random());
+                    var choices      = value.incorrect_answers;
                     choices.splice(index_answer, 0, value.correct_answer);
 
                     output += `<div class=\"questions\" id=\"question${key + 1}\">
@@ -66,6 +66,10 @@ var TriviaGame = function() {
 
                 $(".questions").css({"display": "none"});
                 $("#question1").css({"display": "block"});
+
+                $(".choices").on("click", function() {
+                    console.log("Div #" + $(".choices").index(this) + "was clicked.");
+                });
             }
         });
     }
