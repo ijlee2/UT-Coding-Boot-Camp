@@ -64,16 +64,25 @@ var TriviaGame = function() {
 
                 $("#debugMessage").html(output);
 
-//                for (var i = 0; i < numQuestions; i++) {
-//                    setTimeout(function() {
-                        $(".questions").css({"display": "none"});
-                        $("#question" + 1).css({"display": "block"});
+                var currentQuestion = 1;
+                $(".questions").css({"display": "none"});
+                $("#question" + currentQuestion).css({"display": "block"});
 
-                        $(".choices").on("click", function() {
-                            console.log("Div #" + $(".choices").index(this) + "was clicked.");
-                        });
-//                    }, 2000);
-//                }
+                var intervalID = setInterval(function() {
+                    currentQuestion++;
+
+                    if (currentQuestion > numQuestions) {
+                        clearInterval(intervalID);
+                    }
+
+                    $(".questions").css({"display": "none"});
+                    $("#question" + currentQuestion).css({"display": "block"});
+
+                    $(".choices").on("click", function() {
+                        console.log("Div #" + $(".choices").index(this) + "was clicked.");
+                    });
+
+                }, 200);
             }
         });
     }
