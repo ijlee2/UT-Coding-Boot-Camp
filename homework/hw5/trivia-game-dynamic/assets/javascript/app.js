@@ -58,8 +58,7 @@ var TriviaGame = function() {
     }
 
     var displayQuestions = function() {
-        var api_url    = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
-        var backup_url = "assets/javascript/questions.js";
+        var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
         
         // Making JSON synchronous can make the code below more modular,
         // but the async property will be deprecated in the future
@@ -71,14 +70,13 @@ var TriviaGame = function() {
             var data;
             var correctAnswers = new Array(numQuestions);
             var choices;
-
-
+            
             /****************************************************************
                 
                 Load questions from an online database
                 
             *****************************************************************/
-            if (json.response_code !== 0) {
+            if (json.response_code === 0) {
                 for (var i = 0; i < numQuestions; i++) {
                     // Get the question category, prompt, and answer choices
                     data    = json.results[i];
@@ -100,32 +98,7 @@ var TriviaGame = function() {
                     output += "</div>";
                 }
 
-            } else {
-                $.getScript(backup_url, function(data) {
-                    console.log(data);
-
-                    for (var i = 0; i < numQuestions; i++) {
-                        // Get the question category, prompt, and answer choices
-                        choices = data.incorrect_answers;
-                        
-                        // Insert the correct answer
-                        correctAnswers[i] = Math.floor(numChoicesPerQuestion * Math.random());
-                        choices.splice(correctAnswers[i], 0, data.correct_answer);
-
-                        // Write to HTML
-                        output += `<div class=\"questions\" id=\"question${i}\">
-                                   <div class=\"category\"><p>${data.category}</p></div>
-                                   <div class=\"prompt\"><p>Question ${i + 1}. ${data.question}</p></div>`;
-
-                        for (var j = 0; j < choices.length; j++) {
-                            output += `<div class=\"choices question${i}\">${String.fromCharCode(65 + j)}. ${choices[j]}</div>`;
-                        }
-
-                        output += "</div>";
-                    }
-                });
-
-            }
+                console.log(correctAnswers.join(", "));
 
                 $("#display").html(output);
                 $(".questions .prompt").css({"margin-bottom" : "0.5em",
@@ -162,6 +135,7 @@ var TriviaGame = function() {
                         updateQuestion();
                     }
                 }, 1000);
+            }
         });
     }
 
