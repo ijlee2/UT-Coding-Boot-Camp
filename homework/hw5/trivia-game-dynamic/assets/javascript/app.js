@@ -18,7 +18,7 @@ var TriviaGame = function() {
     
     // Variables for the game
     var numQuestions = 10, numQuestionsCorrect = 0;
-    var timeAllowed = 1;
+    var timeAllowed = 2;
     var questions;
 
 
@@ -55,20 +55,22 @@ var TriviaGame = function() {
         // Making JSON synchronous as shown below fixes the problem, but the async will be deprecated
         // $.ajaxSetup({ async: false });
 
-        var output = "";
-        var data;
-        var index_answer = new Array(numQuestions);
-        
         $.getJSON(api_url, function(json) {
             // The API returned results successfully
             if (json.response_code === 0) {
+                // Temporary variables
+                var output = "";
+                var data;
+                var index_answer = new Array(numQuestions);
+                var choices;
+
                 for (var i = 0; i < numQuestions; i++) {
                     // Get the question category, prompt, and answer choices
                     data = json.results[i];
 
                     // Insert the correct answer somewhere
                     index_answer[i] = Math.floor(4 * Math.random());
-                    var choices         = data.incorrect_answers;
+                    choices         = data.incorrect_answers;
                     choices.splice(index_answer[i], 0, data.correct_answer);
                     console.log("Hint: Correct answer is "+ (index_answer[i] + 1));
 
@@ -110,8 +112,10 @@ var TriviaGame = function() {
                         }
                     });
 
-                    if (secondsLeft === 0) {
+                    if (secondsLeft < 0) {
                         secondsLeft = timeAllowed;
+                        $("#timer").text(secondsLeft);
+
                         currentQuestion++;
 
                         if (currentQuestion === numQuestions) {
