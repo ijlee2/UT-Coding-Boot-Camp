@@ -67,13 +67,13 @@ var TriviaGame = function() {
 //                for (var i = 0; i < numQuestions; i++) {
 //                    setTimeout(function() {
                         $(".questions").css({"display": "none"});
-                        $("#question" + 0).css({"display": "block"});
+                        $("#question" + 1).css({"display": "block"});
 
                         $(".choices").on("click", function() {
                             console.log("Div #" + $(".choices").index(this) + "was clicked.");
                         });
 //                    }, 2000);
-                }
+//                }
             }
         });
     }
