@@ -80,7 +80,7 @@ p {
 /* Questions */
 #display {
     float: left;
-    width: 82%;
+    width: 80%;
 }
 
 #timer {
@@ -89,22 +89,24 @@ p {
 
     float: right;
     width: 15%;
+    border: 5px solid var(--color-enemy);
+    padding-top: 0.1em;
 }
 
 .questions .category { 
     font-size: 1.5em;
-    margin-bottom: 0.5em;
+    border-bottom: 4px double black;
 }
 
 .questions .prompt, .questions .choices {
     font-size: 1em;
     padding: 0.5em;
-    border-radius: 0.2em;
 }
 
 .questions .choices:hover {
     background-color: var(--color-star-wars-yellow);
     padding: 0.5em;
+    border-radius: 0.2em;
 }
 
 /* Animation */

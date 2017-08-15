@@ -18,7 +18,7 @@ var TriviaGame = function() {
     
     // Variables for the game
     var numQuestions = 10, numQuestionsCorrect = 0;
-    var timeAllowed = 5;
+    var timeAllowed = 60;
     var questions;
 
 
@@ -75,17 +75,21 @@ var TriviaGame = function() {
                     console.log("Hint: Correct answer is "+ (index_answer[i] + 1));
 
                     output += `<div class=\"questions\" id=\"question${i}\">
-                               <div class=\"category\">${data.category}</div>
+                               <div class=\"category\"><p>${data.category}</p></div>
                                <div class=\"prompt\"><p>Question ${i + 1}. ${data.question}</p></div>`;
 
                     for (var j = 0; j < choices.length; j++) {
-                        output += `<div class=\"choices\">${choices[j]}</div>`;
+                        output += `<div class=\"choices\">${String.fromCharCode(65 + j)}. ${choices[j]}</div>`;
                     }
 
                     output += "</div>";
                 }
 
                 $("#display").html(output);
+                $(".questions .prompt").css({"margin-bottom": "0.5em",
+                                             "border-bottom": "4px double black",
+                                             "padding-bottom": "0"
+                                            });
 
                 // Display the 1st question
                 var currentQuestion = 0;
