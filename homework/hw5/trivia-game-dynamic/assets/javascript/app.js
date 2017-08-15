@@ -68,6 +68,8 @@ var TriviaGame = function() {
         // $.ajaxSetup({ async: false });
 
 -        $.getJSON(api_url, function(json) {
+            console.log(json);
+            
             /****************************************************************
                 
                 Load questions from an online database
