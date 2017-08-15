@@ -17,10 +17,10 @@ var TriviaGame = function() {
     var numPages = $(".page").length, currentPage = 0;
     
     // Variables for the game
-    var numQuestions = 10, numQuestionsCorrect = 0;
-    var timeAllowed = 60;
-    var questions;
-
+    var numQuestions = 10, currentQuestion;
+    var numQuestionsCorrect = 0;
+    var timeAllowed = 3, timeLeft;
+    
 
     /************************************************************************
         
@@ -43,37 +43,47 @@ var TriviaGame = function() {
         $(".page:nth-of-type(" + (currentPage + 1) + ")").css({"display": "block"});
     }
 
+    var displayCurrentQuestion = function() {
+        $(".questions").css({"display": "none"});
+        $("#question" + currentQuestion).css({"display": "block"});
+    }
+
+    var displayTimeLeft = function() {
+        $("#timer").text(timeLeft);
+    }
+
     var displayQuestions = function() {
         var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
         
-
-        /********************************************************************
-        
-            Load questions from an online database
-        
-        *********************************************************************/
-        // Making JSON synchronous as shown below fixes the problem, but the async will be deprecated
+        // Making JSON synchronous can make the code below more modular,
+        // but the async property will be deprecated in the future
         // $.ajaxSetup({ async: false });
 
-        $.getJSON(api_url, function(json) {
-            // The API returned results successfully
+-        $.getJSON(api_url, function(json) {
+            /****************************************************************
+                
+                Load questions from an online database
+                
+            *****************************************************************/
             if (json.response_code === 0) {
                 // Temporary variables
                 var output = "";
                 var data;
-                var index_answer = new Array(numQuestions);
+                var correctAnswers = new Array(numQuestions);
                 var choices;
 
                 for (var i = 0; i < numQuestions; i++) {
                     // Get the question category, prompt, and answer choices
-                    data = json.results[i];
+                    data    = json.results[i];
+                    choices = data.incorrect_answers;
+                    
+                    // Insert the correct answer
+                    correctAnswers[i] = Math.floor(4 * Math.random());
+                    choices.splice(correctAnswers[i], 0, data.correct_answer);
 
-                    // Insert the correct answer somewhere
-                    index_answer[i] = Math.floor(4 * Math.random());
-                    choices         = data.incorrect_answers;
-                    choices.splice(index_answer[i], 0, data.correct_answer);
-                    console.log("Hint: Correct answer is "+ (index_answer[i] + 1));
+                    console.log("Hint: Correct answer is "+ (correctAnswers[i] + 1));
 
+                    // Write to HTML
                     output += `<div class=\"questions\" id=\"question${i}\">
                                <div class=\"category\"><p>${data.category}</p></div>
                                <div class=\"prompt\"><p>Question ${i + 1}. ${data.question}</p></div>`;
@@ -86,26 +96,28 @@ var TriviaGame = function() {
                 }
 
                 $("#display").html(output);
-                $(".questions .prompt").css({"margin-bottom": "0.5em",
-                                             "border-bottom": "4px double black",
-                                             "padding-bottom": "0"
-                                            });
+                $(".questions .prompt").css({"margin-bottom" : "0.5em",
+                                             "border-bottom" : "4px double black",
+                                             "padding-bottom": "0"});
 
-                // Display the 1st question
-                var currentQuestion = 0;
-                $(".questions").css({"display": "none"});
-                $("#question" + currentQuestion).css({"display": "block"});
 
-                var secondsLeft = timeAllowed;
-                $("#timer").text(secondsLeft);
+                /************************************************************
+                    
+                    Display the first question
+                    
+                *************************************************************/
+                currentQuestion = 0;
+
+                displayCurrentQuestion();
+
+                resetTimer();
 
                 // Display the remaining questions
                 var intervalID = setInterval(function() {
-                    secondsLeft--;
-                    $("#timer").text(secondsLeft);
+                    updateTimer();
 
                     $(".choices").on("click", function() {
-                        if ($(".choices").index(this) === index_answer[currentQuestion]) {
+                        if ($(".choices").index(this) === correctAnswers[currentQuestion]) {
                             numQuestionsCorrect++;
 
                             console.log("Correct!");
@@ -116,9 +128,8 @@ var TriviaGame = function() {
                         }
                     });
 
-                    if (secondsLeft < 0) {
-                        secondsLeft = timeAllowed;
-                        $("#timer").text(secondsLeft);
+                    if (timeLeft < 0) {
+                        resetTimer();
 
                         currentQuestion++;
 
@@ -128,8 +139,7 @@ var TriviaGame = function() {
                             updatePage(1);
                         }
 
-                        $(".questions").css({"display": "none"});
-                        $("#question" + currentQuestion).css({"display": "block"});
+                        displayCurrentQuestion();
                     }
 
                 }, 1000);
@@ -159,6 +169,18 @@ var TriviaGame = function() {
         currentPage = (currentPage + changeBy + numPages) % numPages;
 
         displayCurrentPage();
+    }
+
+    var updateTimer = function() {
+        timeLeft--;
+
+        displayTimeLeft();
+    }
+
+    var resetTimer = function() {
+        timeLeft = timeAllowed;
+
+        displayTimeLeft();
     }
 }
 
