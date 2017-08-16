@@ -20,7 +20,7 @@ var TriviaGame = function() {
     // Variables for the user
     var timeAllowed  = 3, timeLeft;
     var numQuestions = 10, numChoicesPerQuestion = 4;
-    var answerKey, numCorrectAnswers, currentQuestion;
+    var answers, numCorrectAnswers, currentQuestion;
 
     // Load questions from an online database
     var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
@@ -37,7 +37,7 @@ var TriviaGame = function() {
 
     this.startQuiz = function() {
         // Reset variables
-        answerKey         = new Array(numQuestions);
+        answers           = new Array(numQuestions);
         numCorrectAnswers = 0;
         currentQuestion   = 0;
         
@@ -47,10 +47,10 @@ var TriviaGame = function() {
 
         $.getJSON(api_url, function(json) {
             // Parse the JSON given by the API (if successful)
-            var htmlOutput = parseData((json.response_code === 0) ? json.results : sampleResults);
+            var output = parseData((json.response_code === 0) ? json.results : sampleResults);
 
             // Write questions to the DOM
-            updateDOM(htmlOutput);
+            updateDOM(output);
 
             // Display questions one by one
             displayCurrentQuestion();
@@ -95,21 +95,26 @@ var TriviaGame = function() {
         }
     }
 
-    var displayAnswer = function(answer) {
+    var displayAnswer = function(index) {
         clearInterval(intervalID);
 
         $("#question, #timer").css({"display": "none"});
         $("#answer").css({"display": "block"});
 
-        if (answer === answerKey[currentQuestion]) {
-            numCorrectAnswers++;
+        var output;
 
-            $("#answer").html("Correct!");
+        if (index === answers[currentQuestion].index) {
+            numCorrectAnswers++;
+            output = "<h2>Correct!</h2>";
 
         } else {
-            $("#answer").html("Incorrect!");
+            output = "<h2>Incorrect!</h2>";
 
         }
+        
+        output += `<p>The answer is <strong>${answers[currentQuestion].value}</strong>.</p>`;
+
+        $("#answer").html(output);
 
         setTimeout(updateQuestion, 2000);
     }
@@ -156,9 +161,10 @@ var TriviaGame = function() {
             // Insert the correct answer among the incorrect ones
             choices = data[i].incorrect_answers;
             
-            answerKey[i] = Math.floor(numChoicesPerQuestion * Math.random());
+            answers[i] = {"index": Math.floor(numChoicesPerQuestion * Math.random()),
+                            "value": data[i].correct_answer};
             
-            choices.splice(answerKey[i], 0, data[i].correct_answer);
+            choices.splice(answers[i].index, 0, answers[i].value);
             
             // Write to HTML
             output += `<div class=\"questions\" id=\"q${i}\">
@@ -175,9 +181,9 @@ var TriviaGame = function() {
         return output;
     }
 
-    var updateDOM = function(htmlOutput) {
+    var updateDOM = function(output) {
         // Display the questions
-        $("#question").html(htmlOutput);
+        $("#question").html(output);
 
         $(".questions").css({"display": "none"});
         
