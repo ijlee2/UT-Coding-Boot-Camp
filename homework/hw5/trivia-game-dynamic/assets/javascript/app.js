@@ -14,7 +14,7 @@ var TriviaGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numPages = $(".page").length, currentPage;
+    var numPages = $(".page").length;
     var intervalID;
     
     // Variables for the game
@@ -32,7 +32,7 @@ var TriviaGame = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
-        updateCurrentPage(0);
+        displayPage(0);
     }
 
     this.startQuiz = function() {
@@ -40,10 +40,12 @@ var TriviaGame = function() {
         numQuestionsCorrect = 0;
         currentQuestion     = 0;
         
-        updateCurrentPage(1);
+        // Reset quiz page
+        $("#display, #timer").empty();
+        displayPage(1);
 
         $.getJSON(api_url, function(json) {
-            // Parse the JSON provided by the API (if successful)
+            // Parse the JSON given by the API (if successful)
             var dataParsed = parseData((json.response_code === 0) ? json.results : sampleResults);
             
             // Write questions to the DOM
@@ -52,8 +54,6 @@ var TriviaGame = function() {
             // Display the 1st question
             displayCurrentQuestion();
 
-            resetTimer();
-
             // Display the remaining questions
             intervalID = setInterval(function() {
                 updateTimer();
@@ -61,6 +61,7 @@ var TriviaGame = function() {
                 if (timeLeft < 0) {
                     updateQuestion();
                 }
+
             }, 1000);
         });
     }
@@ -71,21 +72,28 @@ var TriviaGame = function() {
         Display methods
         
     *************************************************************************/
+    var displayPage = function(page) {
+        $(".page").css({"display": "none"});
+        $(".page:nth-of-type(" + (page + 1) + ")").css({"display": "block"});
+    }
+
     var displayCurrentQuestion = function() {
-        $(".questions").css({"display": "none"});
-        $("#question" + currentQuestion).css({"display": "block"});
-    }
+        if (currentQuestion < numQuestions) {
+            $(".questions").css({"display": "none"});
+            $("#question" + currentQuestion).css({"display": "block"});
 
-    var displayTimeLeft = function() {
-        $("#timer").text(timeLeft);
-    }
+            resetTimer();
 
-    
-    /************************************************************************
-        
-        Get methods
-        
-    *************************************************************************/
+        } else {
+            clearInterval(intervalID);
+
+            $("#numQuestionsCorrect").text(numQuestionsCorrect);
+            $("#numQuestions").text(numQuestions);
+
+            displayPage(2);
+
+        }
+    }
 
 
     /************************************************************************
@@ -93,41 +101,19 @@ var TriviaGame = function() {
         Set (update) methods
         
     *************************************************************************/
-    var updateCurrentPage = function(currentPage) {
-        $(".page").css({"display": "none"});
-        $(".page:nth-of-type(" + (currentPage + 1) + ")").css({"display": "block"});
-    }
-
     var updateQuestion = function() {
-        // Stop the timer
         currentQuestion++;
-
-        if (currentQuestion === numQuestions) {
-            clearInterval(intervalID);
-
-            $("#numQuestionsCorrect").text(numQuestionsCorrect);
-            $("#numQuestions").text(numQuestions);
-
-            updateCurrentPage(2);
-
-        } else {
-            displayCurrentQuestion();
-
-            resetTimer();
-
-        }
+        displayCurrentQuestion();
     }
 
     var updateTimer = function() {
         timeLeft--;
-
-        displayTimeLeft();
+        $("#timer").text(timeLeft);
     }
 
     var resetTimer = function() {
         timeLeft = timeAllowed;
-
-        displayTimeLeft();
+        $("#timer").text(timeLeft);
     }
 
 
