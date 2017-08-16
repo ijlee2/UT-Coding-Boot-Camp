@@ -14,7 +14,6 @@ var TriviaGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numPages = $(".page").length;
     var intervalID;
     
     // Variables for the user
