@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Movies</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <h2>Basic Table</h2>
+    <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Movie Name</th>
+          <th>Year</th>
+          <th>Actors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- Example Movie 1 -->
+          <td>BLAH</td>
+          <td>BLAH</td>
+          <td>BLAH</td>
+        </tr>
+        <tr>
+          <td>BLAH</td>
+          <td>BLAH</td>
+          <td>BLAH</td>
+        </tr>
+        <tr>
+          <td>BLAH</td>
+          <td>BLAH</td>
+          <td>BLAH</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    // The below code fills in the first row of the table
+    var type = "mr+nobody";
+    var queryURL = "http://www.omdbapi.com/?t=" + type + "&y=&plot=short&apikey=40e9cece";
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).done(function(response) {
+
+      // Getting the first row of the table
+      var firstRowTds = $("table")
+        .children()
+        .eq(1)
+        .children("tr")
+        .eq(0)
+        .children("td");
+
+      // Setting the inner text of each td in the first row
+      firstRowTds.eq(0).text(response.Title);
+
+      firstRowTds.eq(1).text(response.Year);
+
+      firstRowTds.eq(2).text(response.Actors);
+    });
+
+    // Step 2: copy the above and try and figure out what to change to fill in the
+    // second row.
+    type = "the+little+mermaid";
+    queryURL = "http://www.omdbapi.com/?t=" + type + "&y=&plot=short&apikey=40e9cece";
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).done(function(response) {
+
+      // Getting the first row of the table
+      var secondRowTds = $("table")
+        .children()
+        .eq(1)
+        .children("tr")
+        .eq(1)
+        .children("td");
+
+      // Setting the inner text of each td in the first row
+      secondRowTds.eq(0).text(response.Title);
+
+      secondRowTds.eq(1).text(response.Year);
+
+      secondRowTds.eq(2).text(response.Actors);
+    });
+
+    // Step 3: using the same logic, fill in the third row
+    type = "the+lion+king";
+    queryURL = "http://www.omdbapi.com/?t=" + type + "&y=&plot=short&apikey=40e9cece";
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).done(function(response) {
+
+      // Getting the first row of the table
+      var thirdRowTds = $("table")
+        .children()
+        .eq(1)
+        .children("tr")
+        .eq(2)
+        .children("td");
+
+      // Setting the inner text of each td in the first row
+      thirdRowTds.eq(0).text(response.Title);
+
+      thirdRowTds.eq(1).text(response.Year);
+
+      thirdRowTds.eq(2).text(response.Actors);
+    });
+  </script>
+</body>
+
+</html>
