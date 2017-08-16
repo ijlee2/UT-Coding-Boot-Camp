@@ -176,6 +176,7 @@ p {
     .container {
         width : 90%;
         margin: auto;
+        padding: 5% 0;
     }
 
     body {

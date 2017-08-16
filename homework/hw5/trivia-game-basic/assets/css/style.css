@@ -26,7 +26,7 @@ body {
 .container {
     width  : 840px;
     margin : auto;
-    padding: 60px 0;
+    padding: 4% 0;
 }
 
 .clearfix::after {
@@ -197,9 +197,14 @@ p {
     .container {
         width : 90%;
         margin: auto;
+        padding: 5% 0;
     }
 
     body {
         font-size: 4vw;
+    }
+
+    #button_submit {
+        border: 2vw solid var(--color-dark-blue);
     }
 }
