@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AJAX demo</title>
+    </head>
+    <body>
+        <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            var title = "space+jam";
+            var queryURL = "http://www.omdbapi.com/?t=" + title + "&apikey=40e9cece";
+
+            var test = $.ajax({
+                url: queryURL,
+                method: "GET"
+
+            }).done(function(response) {
+                console.log("received1");
+                console.log(response);
+
+                console.log(response.Title);
+
+                title = "kazaam";
+                queryURL = "http://www.omdbapi.com/?t=" + title + "&apikey=40e9cece";
+                
+                var test = $.ajax({
+                    url: queryURL,
+                    method: "GET"
+
+                }).done(function(response) {
+                    console.log("received2");
+                    console.log(response);
+
+                    console.log(response.Title);
+                    
+                });
+                console.log("sent2");
+                
+            });
+            console.log("sent1");
+        </script>
+    </body>
+</html>
