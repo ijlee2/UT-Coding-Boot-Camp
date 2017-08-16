@@ -18,10 +18,10 @@ var TriviaGame = function() {
     var intervalID;
     
     // Variables for the game
+    var timeAllowed = 5, timeLeft;
     var numQuestions = 10, numChoicesPerQuestion = 4;
     var numQuestionsCorrect, currentQuestion;
-    var timeAllowed = 5, timeLeft;
-
+    
     // Load questions from an online database
     var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
     
@@ -55,14 +55,7 @@ var TriviaGame = function() {
             displayCurrentQuestion();
 
             // Display the remaining questions
-            intervalID = setInterval(function() {
-                updateTimer();
-
-                if (timeLeft < 0) {
-                    updateQuestion();
-                }
-
-            }, 1000);
+            intervalID = setInterval(updateTimer, 1000);
         });
     }
 
@@ -109,6 +102,10 @@ var TriviaGame = function() {
     var updateTimer = function() {
         timeLeft--;
         $("#timer").text(timeLeft);
+        
+        if (timeLeft < 0) {
+            updateQuestion();
+        }
     }
 
     var resetTimer = function() {
