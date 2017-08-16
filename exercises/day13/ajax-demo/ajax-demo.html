@@ -15,10 +15,12 @@
 
             }).done(function(response) {
                 console.log("received1");
-                console.log(response);
 
-                console.log(response.Title);
+                console.log("Title: " + response.Title);
+                console.log("Actors: " + response.Actors);
+                console.log("Release date: " + response.Released);
 
+                // Can nest AJAX requests
                 title = "kazaam";
                 queryURL = "http://www.omdbapi.com/?t=" + title + "&apikey=40e9cece";
                 
@@ -28,9 +30,10 @@
 
                 }).done(function(response) {
                     console.log("received2");
-                    console.log(response);
 
-                    console.log(response.Title);
+                    console.log("Title: " + response.Title);
+                    console.log("Actors: " + response.Actors);
+                    console.log("Release date: " + response.Released);
                     
                 });
                 console.log("sent2");
