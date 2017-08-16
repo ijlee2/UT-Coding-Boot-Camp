@@ -21,6 +21,9 @@ var TriviaGame = function() {
     var numQuestions = 10, numChoicesPerQuestion = 4;
     var numQuestionsCorrect, currentQuestion;
     var timeAllowed = 5, timeLeft;
+
+    // Load questions from an online database
+    var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
     
 
     /************************************************************************
@@ -29,25 +32,45 @@ var TriviaGame = function() {
         
     *************************************************************************/
     this.startNewGame = function() {
-        currentPage = 0;
-        displayCurrentPage();
+        updateCurrentPage(0);
+    }
 
+    this.startQuiz = function() {
+        // Reset variables
         numQuestionsCorrect = 0;
-        currentQuestion = 0;
-        displayQuestions();
+        currentQuestion     = 0;
+        
+        updateCurrentPage(1);
+
+        $.getJSON(api_url, function(json) {
+            // Parse the JSON provided by the API (if successful)
+            var dataParsed = parseData((json.response_code === 0) ? json.results : sampleResults);
+            
+            // Write questions to the DOM
+            updateDOM(dataParsed);
+
+            // Display the 1st question
+            displayCurrentQuestion();
+
+            resetTimer();
+
+            // Display the remaining questions
+            intervalID = setInterval(function() {
+                updateTimer();
+
+                if (timeLeft < 0) {
+                    updateQuestion();
+                }
+            }, 1000);
+        });
     }
 
     
     /************************************************************************
         
-        Display functions
+        Display methods
         
     *************************************************************************/
-    var displayCurrentPage = function() {
-        $(".page").css({"display": "none"});
-        $(".page:nth-of-type(" + (currentPage + 1) + ")").css({"display": "block"});
-    }
-
     var displayCurrentQuestion = function() {
         $(".questions").css({"display": "none"});
         $("#question" + currentQuestion).css({"display": "block"});
@@ -57,106 +80,22 @@ var TriviaGame = function() {
         $("#timer").text(timeLeft);
     }
 
-    var displayQuestions = function() {
-        var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
-        
-        // Making JSON synchronous can make the code below more modular,
-        // but the async property will be deprecated in the future
-        // $.ajaxSetup({ async: false });
-
--        $.getJSON(api_url, function(json) {
-            // Temporary variables
-            var output = "";
-            var data;
-            var correctAnswers = new Array(numQuestions);
-            var choices;
-            
-            /****************************************************************
-                
-                Load questions from an online database
-                
-            *****************************************************************/
-            if (json.response_code === 0) {
-                for (var i = 0; i < numQuestions; i++) {
-                    // Get the question category, prompt, and answer choices
-                    data    = json.results[i];
-                    choices = data.incorrect_answers;
-                    
-                    // Insert the correct answer
-                    correctAnswers[i] = Math.floor(numChoicesPerQuestion * Math.random());
-                    choices.splice(correctAnswers[i], 0, data.correct_answer);
-
-                    // Write to HTML
-                    output += `<div class=\"questions\" id=\"question${i}\">
-                               <div class=\"category\"><p>${data.category}</p></div>
-                               <div class=\"prompt\"><p>Question ${i + 1}. ${data.question}</p></div>`;
-
-                    for (var j = 0; j < choices.length; j++) {
-                        output += `<div class=\"choices question${i}\">${String.fromCharCode(65 + j)}. ${choices[j]}</div>`;
-                    }
-
-                    output += "</div>";
-                }
-
-                console.log(correctAnswers.join(", "));
-
-                $("#display").html(output);
-                $(".questions .prompt").css({"margin-bottom" : "0.5em",
-                                             "border-bottom" : "4px double black",
-                                             "padding-bottom": "0"});
-
-                // Handle click events
-                $(".choices").on("click", function() {
-                    var myChoice = $(".choices").index(this) % numChoicesPerQuestion;
-
-                    if (myChoice === correctAnswers[currentQuestion]) {
-                        numQuestionsCorrect++;
-                    }
-
-                    updateQuestion();
-                });
-
-
-                /************************************************************
-                    
-                    Display the questions
-                    
-                *************************************************************/
-                // Display the 1st question
-                displayCurrentQuestion();
-
-                resetTimer();
-
-                // Display the remaining questions
-                intervalID = setInterval(function() {
-                    updateTimer();
-
-                    if (timeLeft < 0) {
-                        updateQuestion();
-                    }
-                }, 1000);
-            }
-        });
-    }
-
     
     /************************************************************************
         
-        Get functions
+        Get methods
         
     *************************************************************************/
 
 
     /************************************************************************
         
-        Set (update) functions
+        Set (update) methods
         
     *************************************************************************/
-    var updatePage = function(changeBy) {
-        // Allow pages to move in a carousel
-        currentPage = (currentPage + changeBy + numPages) % numPages;
-
-        displayCurrentPage();
+    var updateCurrentPage = function(currentPage) {
+        $(".page").css({"display": "none"});
+        $(".page:nth-of-type(" + (currentPage + 1) + ")").css({"display": "block"});
     }
 
     var updateQuestion = function() {
@@ -169,7 +108,7 @@ var TriviaGame = function() {
             $("#numQuestionsCorrect").text(numQuestionsCorrect);
             $("#numQuestions").text(numQuestions);
 
-            updatePage(1);
+            updateCurrentPage(2);
 
         } else {
             displayCurrentQuestion();
@@ -190,6 +129,68 @@ var TriviaGame = function() {
 
         displayTimeLeft();
     }
+
+
+    /************************************************************************
+        
+        Helper methods
+        
+    *************************************************************************/
+    var parseData = function(data) {
+        // Variables that we will return
+        var output  = "";
+        var answers = new Array(numQuestions);
+        
+        // Temporary variables
+        var i, j;
+        var choices;
+        
+        for (i = 0; i < numQuestions; i++) {
+            // Insert the correct answer among the incorrect ones
+            choices = data[i].incorrect_answers;
+            
+            answers[i] = Math.floor(numChoicesPerQuestion * Math.random());
+            
+            choices.splice(answers[i], 0, data[i].correct_answer);
+            
+            // Write to HTML
+            output += `<div class=\"questions\" id=\"question${i}\">
+                       <div class=\"category\"><p>${data[i].category}</p></div>
+                       <div class=\"prompt\"><p>Question ${i + 1}. ${data[i].question}</p></div>`;
+
+            for (j = 0; j < numChoicesPerQuestion; j++) {
+                output += `<div class=\"choices question${i}\">${String.fromCharCode(65 + j)}. ${choices[j]}</div>`;
+            }
+
+            output += "</div>";
+        }
+
+        return {"output": output, "answers": answers};
+    }
+
+    var updateDOM = function(dataParsed) {
+        // For clarity
+        var output  = dataParsed.output;
+        var answers = dataParsed.answers;
+
+        // Display the questions
+        $("#display").html(output);
+        
+        $(".questions .prompt").css({"margin-bottom" : "0.5em",
+                                     "border-bottom" : "4px double black",
+                                     "padding-bottom": "0"});
+
+        // Handle click events
+        $(".choices").on("click", function() {
+            var myChoice = $(".choices").index(this) % numChoicesPerQuestion;
+
+            if (myChoice === answers[currentQuestion]) {
+                numQuestionsCorrect++;
+            }
+
+            updateQuestion();
+        });
+    }
 }
 
 
@@ -205,4 +206,19 @@ $(document).ready(function() {
     game = new TriviaGame();
 
     game.startNewGame();
+
+
+    /************************************************************************
+        
+        Respond to user's actions
+        
+    *************************************************************************/
+    // Page selection
+    $("#button_start").on("click", function() {
+        game.startQuiz();
+    });
+
+    $("#button_restart").on("click", function() {
+        game.startNewGame();
+    });
 });

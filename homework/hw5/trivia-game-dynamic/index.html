@@ -20,17 +20,29 @@
         <div class="container">
             <h1>Trivia Game</h1>
             
-            <!-- Page 0: Questions & Answers -->
+            <!-- Page 0: Directions -->
+            <div class="page">
+                <h2>Directions:</h2>
+                
+                <p>10 trivia questions.</p>
+                <p>How many will you get right?</p>
+
+                <div class="page_next" id="button_start">Start</div>
+            </div>
+            
+            <!-- Page 1: Quiz -->
             <div class="page">
                 <!-- Output message from debugging -->
                 <div id="display"></div>
                 <div id="timer"></div>
             </div>
             
-            <!-- Page 1: Results -->
+            <!-- Page 2: Results -->
             <div class="page">
                 <h2>Results:</h2>
                 <p>You got <span id="numQuestionsCorrect"></span> out of <span id="numQuestions"></span> questions correct!</p>
+
+                <div class="page_next" id="button_restart">Restart</div>
             </div>
         </div>
 
