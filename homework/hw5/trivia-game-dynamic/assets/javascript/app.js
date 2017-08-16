@@ -17,11 +17,11 @@ var TriviaGame = function() {
     var numPages = $(".page").length;
     var intervalID;
     
-    // Variables for the game
-    var timeAllowed = 5, timeLeft;
+    // Variables for the user
+    var timeAllowed  = 3, timeLeft;
     var numQuestions = 10, numChoicesPerQuestion = 4;
-    var numQuestionsCorrect, currentQuestion;
-    
+    var answerKey, numCorrectAnswers, currentQuestion;
+
     // Load questions from an online database
     var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
     
@@ -37,25 +37,23 @@ var TriviaGame = function() {
 
     this.startQuiz = function() {
         // Reset variables
-        numQuestionsCorrect = 0;
-        currentQuestion     = 0;
+        answerKey         = new Array(numQuestions);
+        numCorrectAnswers = 0;
+        currentQuestion   = 0;
         
         // Reset quiz page
-        $("#display, #timer").empty();
+        $("#question, #answer, #timer").empty();
         displayPage(1);
 
         $.getJSON(api_url, function(json) {
             // Parse the JSON given by the API (if successful)
-            var dataParsed = parseData((json.response_code === 0) ? json.results : sampleResults);
-            
+            var htmlOutput = parseData((json.response_code === 0) ? json.results : sampleResults);
+
             // Write questions to the DOM
-            updateDOM(dataParsed);
+            updateDOM(htmlOutput);
 
-            // Display the 1st question
+            // Display questions one by one
             displayCurrentQuestion();
-
-            // Display the remaining questions
-            intervalID = setInterval(updateTimer, 1000);
         });
     }
 
@@ -71,21 +69,49 @@ var TriviaGame = function() {
     }
 
     var displayCurrentQuestion = function() {
+        $("#question, #timer").css({"display": "block"});
+        $("#answer").css({"display": "none"});
+
         if (currentQuestion < numQuestions) {
-            $(".questions").css({"display": "none"});
-            $("#question" + currentQuestion).css({"display": "block"});
+            // Hide the previous question
+            if (currentQuestion > 0) {
+                $("#q" + (currentQuestion - 1)).css({"display": "none"});
+            }
+
+            // Display the current question
+            $("#q" + currentQuestion).css({"display": "block"});
 
             resetTimer();
+
+            intervalID = setInterval(updateTimer, 1000);
 
         } else {
             clearInterval(intervalID);
 
-            $("#numQuestionsCorrect").text(numQuestionsCorrect);
+            $("#numCorrectAnswers").text(numCorrectAnswers);
             $("#numQuestions").text(numQuestions);
-
             displayPage(2);
 
         }
+    }
+
+    var displayAnswer = function(answer) {
+        clearInterval(intervalID);
+
+        $("#question, #timer").css({"display": "none"});
+        $("#answer").css({"display": "block"});
+
+        if (answer === answerKey[currentQuestion]) {
+            numCorrectAnswers++;
+
+            $("#answer").html("Correct!");
+
+        } else {
+            $("#answer").html("Incorrect!");
+
+        }
+
+        setTimeout(updateQuestion, 2000);
     }
 
 
@@ -104,7 +130,7 @@ var TriviaGame = function() {
         $("#timer").text(timeLeft);
         
         if (timeLeft < 0) {
-            updateQuestion();
+            displayAnswer(-1);
         }
     }
 
@@ -120,9 +146,7 @@ var TriviaGame = function() {
         
     *************************************************************************/
     var parseData = function(data) {
-        // Variables that we will return
         var output  = "";
-        var answers = new Array(numQuestions);
         
         // Temporary variables
         var i, j;
@@ -132,46 +156,38 @@ var TriviaGame = function() {
             // Insert the correct answer among the incorrect ones
             choices = data[i].incorrect_answers;
             
-            answers[i] = Math.floor(numChoicesPerQuestion * Math.random());
+            answerKey[i] = Math.floor(numChoicesPerQuestion * Math.random());
             
-            choices.splice(answers[i], 0, data[i].correct_answer);
+            choices.splice(answerKey[i], 0, data[i].correct_answer);
             
             // Write to HTML
-            output += `<div class=\"questions\" id=\"question${i}\">
+            output += `<div class=\"questions\" id=\"q${i}\">
                        <div class=\"category\"><p>${data[i].category}</p></div>
                        <div class=\"prompt\"><p>Question ${i + 1}. ${data[i].question}</p></div>`;
 
             for (j = 0; j < numChoicesPerQuestion; j++) {
-                output += `<div class=\"choices question${i}\">${String.fromCharCode(65 + j)}. ${choices[j]}</div>`;
+                output += `<div class=\"choices choices_q${i}\">${String.fromCharCode(65 + j)}. ${choices[j]}</div>`;
             }
 
             output += "</div>";
         }
 
-        return {"output": output, "answers": answers};
+        return output;
     }
 
-    var updateDOM = function(dataParsed) {
-        // For clarity
-        var output  = dataParsed.output;
-        var answers = dataParsed.answers;
-
+    var updateDOM = function(htmlOutput) {
         // Display the questions
-        $("#display").html(output);
+        $("#question").html(htmlOutput);
+
+        $(".questions").css({"display": "none"});
         
-        $(".questions .prompt").css({"margin-bottom" : "0.5em",
-                                     "border-bottom" : "4px double black",
-                                     "padding-bottom": "0"});
+        $(".prompt").css({"margin-bottom" : "0.5em",
+                          "border-bottom" : "4px double black",
+                          "padding-bottom": "0"});
 
         // Handle click events
         $(".choices").on("click", function() {
-            var myChoice = $(".choices").index(this) % numChoicesPerQuestion;
-
-            if (myChoice === answers[currentQuestion]) {
-                numQuestionsCorrect++;
-            }
-
-            updateQuestion();
+            displayAnswer($(".choices").index(this) % numChoicesPerQuestion);
         });
     }
 }
