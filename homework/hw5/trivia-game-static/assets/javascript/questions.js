@@ -1,3 +1,4 @@
+var sampleResults = 
 [{"category":"Entertainment: Video Games",
   "type":"multiple",
   "difficulty":"hard",
@@ -68,4 +69,4 @@
   "correct_answer":"Wild Wiggler",
   "incorrect_answers":["Bone Rattler","B Dasher","300 SL Roadster"]
  }
-]
+];

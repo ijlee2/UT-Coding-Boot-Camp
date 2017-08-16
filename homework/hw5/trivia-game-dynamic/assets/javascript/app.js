@@ -204,11 +204,7 @@ var TriviaGame = function() {
         $("#question").html(output);
 
         $(".questions").css({"display": "none"});
-        /*
-        $(".prompt").css({"margin-bottom" : "0.5em",
-                          "border-bottom" : "0.1em double black",
-                          "padding-bottom": "0"});
-*/
+        
         // Handle click events
         $(".choices").on("click", function() {
             displayAnswer($(".choices").index(this) % numChoicesPerQuestion);
@@ -237,11 +233,7 @@ $(document).ready(function() {
         
     *************************************************************************/
     // Page selection
-    $("#button_start").on("click", function() {
-        game.startQuiz();
-    });
+    $("#button_start").on("click", game.startQuiz);
 
-    $("#button_restart").on("click", function() {
-        game.startNewGame();
-    });
+    $("#button_restart").on("click", game.startNewGame);
 });

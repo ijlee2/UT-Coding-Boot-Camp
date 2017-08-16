@@ -20,8 +20,32 @@
         <div class="container">
             <h1>Trivia Game</h1>
             
-            <!-- Output message from debugging -->
-            <div id="debugMessage"></div>
+            <!-- Page 0: Directions -->
+            <div class="page">
+                <h2>Directions:</h2>
+                
+                <p>10 trivia questions.</p>
+                <p>How many will you get right?</p>
+
+                <div class="page_next" id="button_start">Start</div>
+            </div>
+            
+            <!-- Page 1: Quiz -->
+            <div class="page" id="quizForm">
+                <div id="question"></div>
+                <div class="container_fixed">
+                    <div id="timer"></div>
+                </div>
+                <div id="button_submit">Submit</div>
+            </div>
+            
+            <!-- Page 2: Results -->
+            <div class="page">
+                <h2>Results:</h2>
+                <p>You got <span id="numCorrectAnswers"></span> out of <span id="numQuestions"></span> questions correct!</p>
+
+                <div class="page_next" id="button_restart">Restart</div>
+            </div>
         </div>
 
         <script type="text/javascript" src="assets/javascript/questions.js"></script>

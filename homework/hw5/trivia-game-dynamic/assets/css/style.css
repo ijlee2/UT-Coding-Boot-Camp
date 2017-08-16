@@ -87,7 +87,7 @@ p {
     text-align    : center;
 
     float         : right;
-    width         : 15%;
+    width         : 1.5em;
     margin-top    : 0.2em;
     border        : 0.08em solid var(--color-text-highlight);
     padding-top   : 0.3em;
