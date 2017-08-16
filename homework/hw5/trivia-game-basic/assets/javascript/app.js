@@ -129,7 +129,7 @@ var TriviaGame = function() {
         
     *************************************************************************/
     var parseData = function(data) {
-        var output  = "";
+        var output = "";
         
         // Temporary variables
         var i, j;
