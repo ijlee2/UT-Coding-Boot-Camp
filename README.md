@@ -28,3 +28,6 @@ If you have suggestions for making my code better and simpler, please let me kno
     
 5. [Trivia Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw5/trivia-game-basic/) (easy), [Trivia Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw5/trivia-game-advanced/) (hard)
     - [x] HTML, CSS, JavaScript, jQuery, AJAX
+
+## Exercises
+A collection of codes made from scratch or from a starter template.
