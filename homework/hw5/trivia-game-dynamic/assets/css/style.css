@@ -1,12 +1,10 @@
 :root {
     /* Define color scheme */
-    --color-background      : #000000;
-    --color-star-wars-yellow: #f7e739;
-    --color-dark-yellow     : #beb250;
-    --color-text            : #202020;
-    --color-text-highlight  : #ff6600;
-    --color-character       : #1db94c;
-    --color-enemy           : #f93816;
+    --color-background    : #000000;
+    --color-light-yellow  : #f7e739;
+    --color-dark-yellow   : #beb250;
+    --color-text          : #202020;
+    --color-text-highlight: #ff6600;
 }
 
 body {
@@ -28,13 +26,13 @@ body {
 }
 
 h1 {
-    color         : var(--color-star-wars-yellow);
+    color         : var(--color-light-yellow);
     font-family   : "Bungee", cursive;
     font-size     : 2em;
     letter-spacing: 0.02em;
     text-align    : center;
 
-    margin-bottom : 7.5%;
+    margin-bottom : 0.8em;
 }
 
 h2, .category {
@@ -42,7 +40,7 @@ h2, .category {
     font-size     : 1.5em;
     letter-spacing: 0.01em;
     
-    margin-bottom : 3%;
+    margin-bottom : 0.8em;
 }
 
 p {
@@ -57,8 +55,8 @@ p {
     display: none;
 }
 
-.page_prev, .page_next, #battle_button {
-    background-color: var(--color-star-wars-yellow);
+.page_prev, .page_next {
+    background-color: var(--color-light-yellow);
     color           : var(--color-background);
     font-family     : "Bungee", cursive;
     font-size       : 1.15em;
@@ -84,28 +82,37 @@ p {
 }
 
 #timer {
-    font-size: 2.5em;
-    text-align: center;
+    animation     : none;
+    font-size     : 2.5em;
+    text-align    : center;
 
-    float: right;
-    width: 15%;
-    border: 5px solid var(--color-enemy);
-    padding-top: 0.1em;
+    float         : right;
+    width         : 15%;
+    margin-top    : 0.2em;
+    border        : 0.08em solid var(--color-text-highlight);
+    padding-top   : 0.3em;
+    padding-bottom: 0.15em;
 }
 
 .category {
+    margin-bottom: 0.5em;
     border-bottom: 4px double black;
 }
 
-.prompt, .choices {
-    font-size: 1em;
-    padding: 0.5em;
+.prompt {
+    margin       : 0.8em 0;
+    padding      : 0.5em;
+    border-bottom: 4px double black;
+}
+
+.choices {
+    margin : 0.2em 0;
+    padding: 0.6em 0.5em;
 }
 
 .choices:hover {
-    background-color: var(--color-star-wars-yellow);
-    padding: 0.5em;
-    border-radius: 0.2em;
+    background-color: var(--color-light-yellow);
+    border-radius   : 0.2em;
 }
 
 /* Animation */
@@ -120,22 +127,20 @@ p {
     }
 }
 
-@keyframes attack_left {
-    8%, 15% {
-        transform: translate(-30%, 0);
+@keyframes shake {
+    10%, 90% {
+        transform: translate(-1px, -2px);
     }
     
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-@keyframes attack_right {
-    8%, 15% {
-        transform: translate(30%, 0);
+    20%, 80% {
+        transform: translate(2px, 4px);
     }
     
-    100% {
-        transform: translate(0, 0);
+    30%, 50%, 70% {
+        transform: translate(0, -6px);
+    }
+    
+    40%, 60% {
+        transform: translate(-1px, 6px);
     }
 }

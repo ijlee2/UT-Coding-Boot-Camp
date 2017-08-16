@@ -18,7 +18,7 @@ var TriviaGame = function() {
     var intervalID;
     
     // Variables for the user
-    var timeAllowed  = 3, timeLeft;
+    var timeAllowed  = 10, timeLeft;
     var numQuestions = 10, numChoicesPerQuestion = 4;
     var answers, numCorrectAnswers, currentQuestion;
 
@@ -107,8 +107,11 @@ var TriviaGame = function() {
             numCorrectAnswers++;
             output = "<h2>Correct!</h2>";
 
-        } else {
+        } else if (index !== -1) {
             output = "<h2>Incorrect!</h2>";
+
+        } else {
+            output = "<h2>Time's up!</h2>";
 
         }
         
@@ -132,15 +135,22 @@ var TriviaGame = function() {
 
     var updateTimer = function() {
         timeLeft--;
+
+        if (timeLeft < 5 && $("#timer").css("animation-name") !== "shake") {
+            $("#timer").css({"animation": "shake 0.80s cubic-bezier(.36, .07, .19, .97) both"});
+        }
         $("#timer").text(timeLeft);
+        $("#timer").replaceWith($("#timer").clone());
         
-        if (timeLeft < 0) {
+        if (timeLeft === 0) {
             displayAnswer(-1);
         }
     }
 
     var resetTimer = function() {
         timeLeft = timeAllowed;
+
+        $("#timer").css({"animation": "none"});
         $("#timer").text(timeLeft);
     }
 
@@ -158,11 +168,19 @@ var TriviaGame = function() {
         var choices;
         
         for (i = 0; i < numQuestions; i++) {
+            // Display the subcategory
+            var index = data[i].category.indexOf(":");
+
+            if (index >= 0) {
+                // Account for the space after colon
+                data[i].category = data[i].category.substring(index + 2, data[i].category.length);
+            }
+
             // Insert the correct answer among the incorrect ones
             choices = data[i].incorrect_answers;
             
             answers[i] = {"index": Math.floor(numChoicesPerQuestion * Math.random()),
-                            "value": data[i].correct_answer};
+                          "value": data[i].correct_answer};
             
             choices.splice(answers[i].index, 0, answers[i].value);
             
@@ -186,11 +204,11 @@ var TriviaGame = function() {
         $("#question").html(output);
 
         $(".questions").css({"display": "none"});
-        
+        /*
         $(".prompt").css({"margin-bottom" : "0.5em",
-                          "border-bottom" : "4px double black",
+                          "border-bottom" : "0.1em double black",
                           "padding-bottom": "0"});
-
+*/
         // Handle click events
         $(".choices").on("click", function() {
             displayAnswer($(".choices").index(this) % numChoicesPerQuestion);
