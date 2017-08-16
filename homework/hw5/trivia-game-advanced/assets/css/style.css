@@ -1,16 +1,19 @@
 :root {
     /* Define color scheme */
-    --color-background    : #000000;
+    --color-background    : #f0f2f0;
     --color-light-yellow  : #f7e739;
-    --color-dark-yellow   : #beb250;
+    --color-light-blue    : #78b6ed;
+    --color-dark-blue     : #3773a8;
     --color-text          : #202020;
+    --color-text-contrast : #f9f6e3;
     --color-text-highlight: #ff6600;
 }
 
 body {
-    color      : var(--color-text);
-    font-family: "Amiri", cursive;
-    font-size  : 30px;
+    background-color: var(--color-background);
+    color           : var(--color-text);
+    font-family     : "Quicksand", sans-serif;
+    font-size       : 30px;
 }
 
 .container {
@@ -26,26 +29,29 @@ body {
 }
 
 h1 {
-    color         : var(--color-light-yellow);
-    font-family   : "Bungee", cursive;
-    font-size     : 2em;
-    letter-spacing: 0.02em;
-    text-align    : center;
+    color        : var(--color-dark-blue);
+    font-family  : "Montserrat Subrayada", sans-serif;
+    font-size    : 2.8em;
+    font-weight  : bold;
+    text-align   : center;
+    text-shadow  : 0 3px 6px var(--color-light-yellow),
+                   0 6px 8px var(--color-light-blue);
 
-    margin-bottom : 0.8em;
+    margin-bottom: 0.8em;
 }
 
 h2, .category {
     color         : var(--color-text-highlight);
     font-size     : 1.5em;
-    letter-spacing: 0.01em;
+    font-weight   : bold;
+    letter-spacing: 0.04em;
     
     margin-bottom : 0.8em;
 }
 
 p {
-    letter-spacing: 0.015em;
-    line-height   : 1.3em;
+    letter-spacing: 0.03em;
+    line-height   : 1.5em;
     
     margin-bottom : 3%;
 }
@@ -56,14 +62,16 @@ p {
 }
 
 .page_prev, .page_next {
-    background-color: var(--color-light-yellow);
-    color           : var(--color-background);
-    font-family     : "Bungee", cursive;
+    background-color: var(--color-light-blue);
+    color           : var(--color-text-contrast);
+    font-family     : "Quicksand", sans-serif;
     font-size       : 1.15em;
     font-weight     : bold;
+    letter-spacing  : 0.03em;
+    text-align      : center;
 
     margin-top      : 4.5%;
-    border          : 6px solid var(--color-dark-yellow);
+    border          : 5px solid var(--color-dark-blue);
     padding         : 3% 6%;
 }
 
@@ -83,15 +91,17 @@ p {
 
 #timer {
     animation     : none;
-    font-size     : 2.5em;
+    font-size     : 2.25em;
+    font-weight   : bold;
     text-align    : center;
 
     float         : right;
-    width         : 1.5em;
+    width         : 1.6em;
     margin-top    : 0.2em;
-    border        : 0.08em solid var(--color-text-highlight);
-    padding-top   : 0.3em;
-    padding-bottom: 0.15em;
+    border        : 0.09em solid var(--color-text-highlight);
+    border-radius : 4px;
+    padding-top   : 0.25em;
+    padding-bottom: 0.25em;
 }
 
 .category {
@@ -106,13 +116,14 @@ p {
 }
 
 .choices {
-    margin : 0.2em 0;
-    padding: 0.6em 0.5em;
+    margin       : 0.2em 0;
+    padding      : 0.6em 0.5em;
+    border-radius: 0.2em;
 }
 
 .choices:hover {
-    background-color: var(--color-light-yellow);
-    border-radius   : 0.2em;
+    background-color: var(--color-light-blue);
+    color           : var(--color-text-contrast);
 }
 
 /* Animation */

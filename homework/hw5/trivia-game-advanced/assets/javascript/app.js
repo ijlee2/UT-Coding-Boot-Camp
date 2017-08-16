@@ -42,7 +42,8 @@ var TriviaGame = function() {
         currentQuestion   = 0;
         
         // Reset quiz page
-        $("#question, #answer, #timer").empty();
+        $("#question, #answer, #timer").css({"display": "none"});
+        resetTimer();
         displayPage(1);
 
         $.getJSON(api_url, function(json) {

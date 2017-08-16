@@ -44,9 +44,8 @@ var TriviaGame = function() {
         }
         
         // Reset quiz page
-        $("#question, #timer").empty();
         $("#question, #timer, #button_submit").css({"display": "none"});
-        
+        resetTimer();
         displayPage(1);
 
         $.getJSON(api_url, function(json) {
@@ -182,8 +181,10 @@ var TriviaGame = function() {
             answers_user[currentQuestion] = answer;
 
             // TODO: Why (answer + 3)?
-            $(".choices_q" + currentQuestion).css({"background-color": "white"});
-            $(".choices_q" + currentQuestion + ":nth-of-type(" + (answer + 3) + ")").css({"background-color": "var(--color-light-yellow)"});
+            $(".choices_q" + currentQuestion).css({"background-color": "var(--color-background)",
+                                                   "color"           : "var(--color-text)"});
+            $(".choices_q" + currentQuestion + ":nth-of-type(" + (answer + 3) + ")").css({"background-color": "var(--color-light-blue)",
+                                                                                          "color"           : "var(--color-text-contrast)"});
         });
 
         $("#button_submit").on("click", gradeQuiz);
