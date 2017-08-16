@@ -105,7 +105,7 @@ var TriviaGame = function() {
     var updateTimer = function() {
         timeLeft--;
 
-        if (timeLeft < 30 && $("#timer").css("animation-name") !== "shake") {
+        if (timeLeft <= 30 && $("#timer").css("animation-name") !== "shake") {
             $("#timer").css({"animation": "shake 0.80s cubic-bezier(.36, .07, .19, .97) both"});
         }
         $("#timer").text(timeLeft);
