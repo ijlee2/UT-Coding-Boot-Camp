@@ -118,7 +118,7 @@ var TriviaGame = function() {
     var resetTimer = function() {
         timeLeft = timeAllowed;
 
-        $("#timer").css({"animation": "none"});
+        $("#timer").css({"animation": "spin 0.50s cubic-bezier(.15, .07, .20, .97) both"});
         $("#timer").text(timeLeft);
     }
 
