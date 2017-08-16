@@ -26,5 +26,5 @@ If you have suggestions for making my code better and simpler, please let me kno
 4. [Crystal Collector](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/crystal-collector/) (easy), [Star Wars RPG](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/star-wars-rpg) (hard)
     - [x] HTML, CSS, JavaScript, jQuery
     
-5. Trivia Game (easy), [Trivia Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw5/trivia-game-dynamic/) (hard)
+5. [Trivia Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw5/trivia-game-basic/) (easy), [Trivia Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw5/trivia-game-advanced/) (hard)
     - [x] HTML, CSS, JavaScript, jQuery, AJAX
