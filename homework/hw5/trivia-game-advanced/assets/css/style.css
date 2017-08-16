@@ -192,8 +192,8 @@ p {
 *****************************************************************************/
 @media all and (max-width: 980px), all and (max-device-width: 980px) {
     .container {
-        width : 90%;
-        margin: auto;
+        width  : 90%;
+        margin : auto;
         padding: 5% 0;
     }
 
