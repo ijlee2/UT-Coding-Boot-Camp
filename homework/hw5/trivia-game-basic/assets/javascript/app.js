@@ -18,7 +18,7 @@ var TriviaGame = function() {
     var intervalID;
     
     // Variables for the user
-    var timeAllowed  = 90, timeLeft;
+    var timeAllowed = 90, timeWarning = 30, timeLeft
     var numQuestions = 10, numChoicesPerQuestion = 4;
     var answers, answers_user = new Array(numQuestions);
 
@@ -104,7 +104,7 @@ var TriviaGame = function() {
     var updateTimer = function() {
         timeLeft--;
 
-        if (timeLeft <= 30 && $("#timer").css("animation-name") !== "shake") {
+        if (timeLeft <= timeWarning && $("#timer").css("animation-name") !== "shake") {
             $("#timer").css({"animation": "shake 0.80s cubic-bezier(.36, .07, .19, .97) both"});
         }
         $("#timer").text(timeLeft);
@@ -180,7 +180,7 @@ var TriviaGame = function() {
 
             answers_user[currentQuestion] = answer;
 
-            // TODO: Why (answer + 3)?
+            // TODO: Why (answer + 3), not (answer + 1)?
             $(".choices_q" + currentQuestion).css({"background-color": "var(--color-background)",
                                                    "color"           : "var(--color-text)"});
             $(".choices_q" + currentQuestion + ":nth-of-type(" + (answer + 3) + ")").css({"background-color": "var(--color-light-blue)",

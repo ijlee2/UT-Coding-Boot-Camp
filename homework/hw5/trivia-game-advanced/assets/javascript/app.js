@@ -18,7 +18,7 @@ var TriviaGame = function() {
     var intervalID;
     
     // Variables for the user
-    var timeAllowed  = 10, timeLeft;
+    var timeAllowed = 10, timeWarning = 5, timeLeft;
     var numQuestions = 10, numChoicesPerQuestion = 4;
     var answers, numCorrectAnswers, currentQuestion;
 
@@ -58,6 +58,14 @@ var TriviaGame = function() {
         });
     }
 
+    var gradeQuiz = function() {
+        clearInterval(intervalID);
+
+        $("#numCorrectAnswers").text(numCorrectAnswers);
+        $("#numQuestions").text(numQuestions);
+        displayPage(2);
+    }
+
     
     /************************************************************************
         
@@ -87,11 +95,7 @@ var TriviaGame = function() {
             intervalID = setInterval(updateTimer, 1000);
 
         } else {
-            clearInterval(intervalID);
-
-            $("#numCorrectAnswers").text(numCorrectAnswers);
-            $("#numQuestions").text(numQuestions);
-            displayPage(2);
+            gradeQuiz();
 
         }
     }
@@ -137,7 +141,7 @@ var TriviaGame = function() {
     var updateTimer = function() {
         timeLeft--;
 
-        if (timeLeft <= 5 && $("#timer").css("animation-name") !== "shake") {
+        if (timeLeft <= timeWarning && $("#timer").css("animation-name") !== "shake") {
             $("#timer").css({"animation": "shake 0.80s cubic-bezier(.36, .07, .19, .97) both"});
         }
         $("#timer").text(timeLeft);
