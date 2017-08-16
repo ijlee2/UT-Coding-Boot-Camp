@@ -23,7 +23,7 @@ var TriviaGame = function() {
     var answers, numCorrectAnswers, currentQuestion;
 
     // Load questions from an online database
-    var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&difficulty=easy&type=multiple";
+    var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&type=multiple";
     
 
     /************************************************************************
