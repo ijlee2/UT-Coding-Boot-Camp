@@ -112,7 +112,7 @@ var TriviaGame = function() {
 
         }
         
-        output += `<p>The answer is <strong>${answers[currentQuestion].value}</strong>.</p>`;
+        output += `<p>The answer is ${answers[currentQuestion].value}.</p>`;
 
         $("#answer").html(output);
 
