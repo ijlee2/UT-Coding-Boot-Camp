@@ -17,6 +17,7 @@
           <th>Movie Name</th>
           <th>Year</th>
           <th>Actors</th>
+          <th>Posters</th>
         </tr>
       </thead>
       <tbody>
@@ -25,13 +26,16 @@
           <td>BLAH</td>
           <td>BLAH</td>
           <td>BLAH</td>
-        </tr>
-        <tr>
-          <td>BLAH</td>
-          <td>BLAH</td>
           <td>BLAH</td>
         </tr>
         <tr>
+          <td>BLAH</td>
+          <td>BLAH</td>
+          <td>BLAH</td>
+          <td>BLAH</td>
+        </tr>
+        <tr>
+          <td>BLAH</td>
           <td>BLAH</td>
           <td>BLAH</td>
           <td>BLAH</td>
@@ -64,6 +68,8 @@
       firstRowTds.eq(1).text(response.Year);
 
       firstRowTds.eq(2).text(response.Actors);
+
+      firstRowTds.eq(3).html("<img width=\"200\" src=\"" + response.Poster + "\">");
     });
 
     // Step 2: copy the above and try and figure out what to change to fill in the
@@ -90,6 +96,8 @@
       secondRowTds.eq(1).text(response.Year);
 
       secondRowTds.eq(2).text(response.Actors);
+
+      secondRowTds.eq(3).html("<img width=\"200\" src=\"" + response.Poster + "\">");
     });
 
     // Step 3: using the same logic, fill in the third row
@@ -115,6 +123,8 @@
       thirdRowTds.eq(1).text(response.Year);
 
       thirdRowTds.eq(2).text(response.Actors);
+
+      thirdRowTds.eq(3).html("<img width=\"200\" src=\"" + response.Poster + "\">");
     });
   </script>
 </body>
