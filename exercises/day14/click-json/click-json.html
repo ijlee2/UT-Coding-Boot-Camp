@@ -92,6 +92,9 @@
         var movie = $("#movie-input").val().trim();
 
         // The movie from the textbox is then added to our array
+        if (movie === "") {
+          return;
+        }
         movies.push(movie);
 
         // Calling renderButtons which handles the processing of our movie array
