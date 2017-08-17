@@ -3,7 +3,7 @@ var numGIFs = 9;
 var api_url = "https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&limit=" + numGIFs + "&q=";
 
 // Default topics
-var topics    = ["birthday", "hug", "love", "anniversary", "beer", "work", "sleepy", "coffee", "sandwich", "study", "hm", "rage", "what", "cute"];
+var topics    = ["birthday", "hug", "love", "anniversary", "beer", "work", "sleepy", "coffee", "sandwich", "study", "hm", "cute", "math", "what"];
 var numTopics = topics.length;
 
 
@@ -63,15 +63,11 @@ var toggleGIFAnimation = function() {
 
 
 var getGIFs = function(query) {
-    $("#topPane").css({"display": "block"});
-
     $.ajax({
         "url"   : api_url + query,
         "method": "GET"}
 
     ).done(function(response) {
-        console.log(response);
-
         $(document).off("click", "img");
 
         var output = "";
@@ -91,9 +87,16 @@ var getGIFs = function(query) {
 
 
 $(document).ready(function() {
-    $("#topPane").css({"display": "none"});
-
     updateSearchHistory();
+
+    $("#query").on("keyup", function(e) {
+        // Allow the user to hit Enter key to submit query
+        if (e.keyCode === 13) {
+            var query = $("#query").val().trim().toLowerCase();
+            
+            updateSearchHistory(query);
+        }
+    });
 
     $("#button_search").on("click", function() {
         var query = $("#query").val().trim().toLowerCase();
