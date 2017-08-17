@@ -102,7 +102,7 @@ p {
 .container_fixed {
     position: absolute;
     top     : 0;
-    right   : 17%;
+    right   : 15%;
 }
 
 #timer {
