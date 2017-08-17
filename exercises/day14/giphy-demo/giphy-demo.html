@@ -6,14 +6,16 @@
     <body>
         <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
         <script type="text/javascript">
+            // See https://developers.giphy.com/docs/
+
             // Single GIF tied to a search term
-            var api_url = "http://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&q=ryan+gosling&limit=1";
+            var api_url = "https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&q=ryan+gosling&limit=1";
 
             // 5 GIFs tied to a search term
-            var api_url = "http://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&q=ryan+gosling&limit=5";
+            var api_url = "https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&q=ryan+gosling&limit=5";
             
             // 5 trending GIFs
-            var api_url = "http://api.giphy.com/v1/gifs/trending?api_key=0010990be74a4f048609620599cd5f8f&limit=5";
+            var api_url = "https://api.giphy.com/v1/gifs/trending?api_key=0010990be74a4f048609620599cd5f8f&limit=5";
 
             $.ajax(api_url, "GET").done(function(response) {
                 console.log(response);
