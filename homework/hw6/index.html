@@ -20,18 +20,24 @@
         <div class="container">
             <h1>Giftastic</h1>
             
-            <div id="directions">
-                <p>Enter your favorite animal.</p>
+            <div id="leftPane">
+                <div class="paneItems">
+                    <h2>Search</h2>
+                    <input type="text" id="query">
+                    <div id="button_search">GIF!</div>
+                </div>
+                
+                <div class="paneItems">
+                    <h2>History</h2>
+                    <div id="searchHistory"></div>
+                </div>
             </div>
             
-            <div id="searchHistory">
-            </div>
-            
-            <div id="searchResults">
-                  <label for="movie-input">Search for:</label>
-                  <input type="text" id="movie-input"><br>
-
-                  <div id="button_search">Search!</div>
+            <div id="rightPane">
+                <div class="paneItems">
+                    <h2>GIFs</h2>
+                    <div id="searchResults"></div>
+                </div>
             </div>
         </div>
         

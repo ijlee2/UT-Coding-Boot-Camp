@@ -16,11 +16,11 @@
     --color-text-highlight: #ff6600;
 }
 
-body {
+body, input {
     background-color: var(--color-background);
     color           : var(--color-text);
     font-family     : "Quicksand", sans-serif;
-    font-size       : 30px;
+    font-size       : 24px;
 }
 
 .container {
@@ -38,7 +38,7 @@ body {
 h1 {
     color        : var(--color-dark-blue);
     font-family  : "Montserrat Subrayada", sans-serif;
-    font-size    : 2.8em;
+    font-size    : 3.5em;
     font-weight  : bold;
     text-align   : center;
     text-shadow  : 0 3px 6px var(--color-light-yellow),
@@ -47,7 +47,7 @@ h1 {
     margin-bottom: 0.65em;
 }
 
-h2, .category {
+h2 {
     color         : var(--color-text-highlight);
     font-size     : 1.5em;
     font-weight   : bold;
@@ -68,27 +68,28 @@ label {
 }
 
 input {
-    display      : block;
-    width        : 100%;
+    background-color: white;
+    font-size       : 1.2em;
+
+    display         : block;
+    width           : 96%;
+    padding         : 3% 2%;
 }
 
-#searchHistory {
+#leftPane {
     float: left;
     width: 45%;
     padding: 0 2%;
 }
 
-#searchResults {
+#rightPane {
     float: right;
     width: 45%;
     padding: 0 2%;
 }
 
-#searchHistory div {
-    float: left;
-    padding: 3%;
-    border: 1px solid gray;
-    margin: 0 2%;
+.paneItems {
+    margin-bottom: 2em;
 }
 
 #button_search {
@@ -99,8 +100,22 @@ input {
     font-weight     : bold;
     letter-spacing  : 0.03em;
     text-align      : center;
-
+    
+    width           : 88%;
     margin-top      : 4.5%;
-    border          : 5px solid var(--color-dark-blue);
+    border          : 3px solid var(--color-dark-blue);
     padding         : 3% 6%;
+}
+
+#searchHistory div {
+    float: left;
+    padding: 3%;
+    border: 1px solid gray;
+    margin: 0 2% 2% 0;
+}
+
+#searchResults img {
+    float: left;
+    width: 45%;
+    margin: 0 2% 2% 0;
 }
