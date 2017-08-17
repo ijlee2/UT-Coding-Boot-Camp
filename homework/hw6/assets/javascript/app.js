@@ -3,7 +3,7 @@ var numGIFs = 9;
 var api_url = "https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&limit=" + numGIFs + "&q=";
 
 // Default topics
-var topics    = ["dog", "cat", "rabbit", "hamster", "skunk", "goldfish", "bird", "ferret", "turtle", "super glider", "chinchilla", "hedgehog"];
+var topics    = ["birthday", "hug", "love", "anniversary", "beer", "work", "sleepy", "coffee", "sandwich", "study", "hm", "rage", "what", "cute"];
 var numTopics = topics.length;
 
 
@@ -77,9 +77,10 @@ var getGIFs = function(query) {
         var output = "";
 
         for (var i = 0; i < numGIFs; i++) {
-            output += `<img height="150" src="${response.data[i].images.fixed_width_still.url}">`;
-//                output += `<img src="${response.data[i].images.fixed_width_still.url}" height="150">
-//                           <span class="rating">${response.data[i].rating}</span>`;
+            output += `<div class="image_container">
+                           <img src="${response.data[i].images.fixed_width_still.url}" height="150">
+                           <span class="rating">Rating: ${response.data[i].rating.toUpperCase()}</span>
+                       </div>`;
         }
         
         $("#searchResults").html(output);

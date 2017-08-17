@@ -111,12 +111,28 @@ input {
     padding  : 3%;
 }
 
-#searchResults img {
-    float : left;
-    width : 31%;
-    margin: 0 3.5% 3.5% 0;
+.image_container {
+    float   : left;
+    position: relative;
+    width   : 31%;
+    margin  : 0 3.5% 2.55em 0;
 }
 
-#searchResults img:nth-of-type(3n) {
+.image_container:nth-of-type(3n) {
     margin-right: 0;
+}
+
+.image_container img {
+    width: 100%;
+}
+
+.image_container span {
+    background-color: var(--color-light-blue);
+    color           : var(--color-text-contrast);
+
+    position        : absolute;
+    width           : 90%;
+    left            : 0;
+    bottom          : -1.65em;
+    padding         : 0.4em 5%;
 }
