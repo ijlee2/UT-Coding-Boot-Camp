@@ -2,49 +2,56 @@
 var numGIFs = 10;
 var api_url = "https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&limit=" + numGIFs + "&q=";
 
-// Default search items
-var searchHistory = ["dog", "cat", "rabbit", "hamster", "skunk", "goldfish", "bird", "ferret",
-                     "turtle", "super glider", "chinchilla", "hedgehog", "hermit crab", "gerbil",
-                     "pygmy goat", "chicken", "capybara", "teacup pig", "serval", "salamander", "frog"];
+// Default topics
+var topics    = ["dog", "cat", "rabbit", "hamster", "skunk", "goldfish", "bird", "ferret", "turtle", "super glider", "chinchilla", "hedgehog"];
+var numTopics = topics.length;
 
-var initializePage = function() {
-    var output = "";
-
-    for (var i = 0; i < searchHistory.length; i++) {
-        output += `<div class="searchItems">${searchHistory[i]}</div>`;
-    }
-
-    $("#searchHistory").html(output);
-}
 
 var updateSearchHistory = function(query) {
-    // Add a new query to the search history
-    if (arguments.length === 1) {
-        if (query !== "" && searchHistory.indexOf(query) === -1) {
-            searchHistory.push(query);
+    // Do nothing if the query is empty or exists in topics already
+    if (query === "" || topics.indexOf(query) >= 0) {
+        return;
+    }
+
+    $(".topics").off("click");
+
+    // Initialize
+    if (arguments.length === 0) {
+        var output = "";
+
+        for (var i = 0; i < numTopics; i++) {
+            output += `<div class="topics">${topics[i]}</div>`;
         }
+
+        $("#searchHistory").html(output);
+    
+
+    // Add new queries to the search history
+    } else {
+        topics.push(query);
+        numTopics++;
+
+        $("#searchHistory").append(`<div class="topics">${query}</div>`);
+
     }
 
-    var output = "";
-
-    for (var i = 0; i < searchHistory.length; i++) {
-        output += `<div class="searchItems">${searchHistory[i]}</div>`;
-    }
-
-    $("#searchHistory").html(output);
+    $(".topics").on("click", function() {
+        getGIFs($(this).text());
+    });
 }
+
 
 var toggleGIFAnimation = function() {
     var img_url = $(this).attr("src");
-    var index   = img_url.indexOf(".gif");
+    var index   = img_url.indexOf("_s.gif");
 
-    if (img_url.substring(index - 2, index) === "_s") {
+    if (index >= 0) {
         // Play the GIF
-        img_url = img_url.substring(0, index - 2) + ".gif";
+        img_url = img_url.substring(0, index) + ".gif";
 
     } else {
         // Stop the GIF
-        img_url = img_url.substring(0, index) + "_s.gif";
+        img_url = img_url.substring(0, img_url.length - 4) + "_s.gif";
 
     }
 
@@ -52,33 +59,43 @@ var toggleGIFAnimation = function() {
 }
 
 
+var getGIFs = function(query) {
+    $.ajax({
+        "url"   : api_url + query,
+        "method": "GET"}
+
+    ).done(function(response) {
+        console.log(response);
+
+        $(document).off("click", "img");
+
+        var output = "";
+
+        for (var i = 0; i < numGIFs; i++) {
+            output += `<img height="150" src="${response.data[i].images.fixed_width_still.url}">`;
+//                output += `<img src="${response.data[i].images.fixed_width_still.url}" height="150">
+//                           <span class="rating">${response.data[i].rating}</span>`;
+        }
+        
+        $("#searchResults").html(output);
+
+        $(document).on("click", "img", toggleGIFAnimation);
+    });
+}
+
+
 $(document).ready(function() {
-    initializePage();
+    updateSearchHistory();
 
     $("#button_search").on("click", function() {
         var query = $("#query").val().trim().toLowerCase();
         
         updateSearchHistory(query);
-
     });
 
-    $(".searchItems").on("click", function() {
-        $.ajax({
-            "url"   : api_url + $(this).text(),
-            "method": "GET"}
+    $(".topics").on("click", function() {
+        var query = $(this).text();
 
-        ).done(function(response) {
-            console.log(response);
-
-            var output = "";
-
-            for (var i = 0; i < numGIFs; i++) {
-                output += `<img src="${response.data[i].images.fixed_width_still.url}" height="150">`;
-            }
-            
-            $(document).on("click", "img", toggleGIFAnimation);
-
-            $("#searchResults").html(output);
-        });
+        getGIFs(query);
     });
 });

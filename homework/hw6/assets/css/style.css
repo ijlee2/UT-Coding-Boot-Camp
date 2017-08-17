@@ -20,7 +20,7 @@ body, input {
     background-color: var(--color-background);
     color           : var(--color-text);
     font-family     : "Quicksand", sans-serif;
-    font-size       : 24px;
+    font-size       : 20px;
 }
 
 .container {
@@ -38,7 +38,7 @@ body, input {
 h1 {
     color        : var(--color-dark-blue);
     font-family  : "Montserrat Subrayada", sans-serif;
-    font-size    : 3.5em;
+    font-size    : 4.2em;
     font-weight  : bold;
     text-align   : center;
     text-shadow  : 0 3px 6px var(--color-light-yellow),
@@ -49,11 +49,11 @@ h1 {
 
 h2 {
     color         : var(--color-text-highlight);
-    font-size     : 1.5em;
+    font-size     : 1.8em;
     font-weight   : bold;
     letter-spacing: 0.04em;
     
-    margin-bottom : 0.8em;
+    margin-bottom : 1em;
 }
 
 p {
@@ -63,40 +63,35 @@ p {
     margin-bottom : 3%;
 }
 
-label {
-    display: block;
-}
-
 input {
     background-color: white;
     font-size       : 1.2em;
 
     display         : block;
     width           : 96%;
+    margin-bottom   : 8%;
     padding         : 3% 2%;
 }
 
-#leftPane {
-    float: left;
-    width: 45%;
-    padding: 0 2%;
-}
-
-#rightPane {
-    float: right;
-    width: 45%;
-    padding: 0 2%;
-}
-
-.paneItems {
+#search, #results, #history {
     margin-bottom: 2em;
+}
+
+#history {
+    float: left;
+    width: 60%;
+}
+
+#search {
+    float: right;
+    width: 33%;
 }
 
 #button_search {
     background-color: var(--color-light-blue);
     color           : var(--color-text-contrast);
     font-family     : "Quicksand", sans-serif;
-    font-size       : 1.15em;
+    font-size       : 1.3em;
     font-weight     : bold;
     letter-spacing  : 0.03em;
     text-align      : center;
@@ -108,14 +103,20 @@ input {
 }
 
 #searchHistory div {
-    float: left;
-    padding: 3%;
-    border: 1px solid gray;
-    margin: 0 2% 2% 0;
+    font-size: 1.15em;
+
+    float    : left;
+    margin   : 0 2% 2% 0;
+    border   : 1px solid gray;
+    padding  : 3%;
 }
 
 #searchResults img {
-    float: left;
-    width: 45%;
+    float : left;
+    width : 18.4%;
     margin: 0 2% 2% 0;
+}
+
+#searchResults img:nth-of-type(5n) {
+    margin-right: 0;
 }

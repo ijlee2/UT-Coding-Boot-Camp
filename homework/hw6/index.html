@@ -6,7 +6,7 @@
         <meta name="description" content="Homework 6 for UT Coding Boot Camp">
         <meta name="author" content="Isaac J. Lee">
 
-        <title>Giftastic</title>
+        <title>gif.tastic</title>
         
         <link rel="icon" type="image/png" href="assets/images/favicon.png">
         <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
@@ -18,23 +18,23 @@
 
     <body>
         <div class="container">
-            <h1>Giftastic</h1>
+            <h1>Gif.tastic</h1>
             
-            <div id="leftPane">
-                <div class="paneItems">
+            <div id="topPane" class="clearfix">
+                <div id="history">
+                    <h2>History</h2>
+                    <div id="searchHistory"></div>
+                </div>
+
+                <div id="search">
                     <h2>Search</h2>
                     <input type="text" id="query">
                     <div id="button_search">GIF!</div>
                 </div>
-                
-                <div class="paneItems">
-                    <h2>History</h2>
-                    <div id="searchHistory"></div>
-                </div>
             </div>
             
-            <div id="rightPane">
-                <div class="paneItems">
+            <div id="bottomPane">
+                <div id="results">
                     <h2>GIFs</h2>
                     <div id="searchResults"></div>
                 </div>
