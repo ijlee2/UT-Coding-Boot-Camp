@@ -36,12 +36,11 @@ var updateSearchHistory = function(query) {
 
 var toggleGIFAnimation = function() {
     var img_url = $(this).attr("src");
-    var index = img_url.indexOf(".gif");
+    var index   = img_url.indexOf(".gif");
 
     if (img_url.substring(index - 2, index) === "_s") {
         // Play the GIF
         img_url = img_url.substring(0, index - 2) + ".gif";
-        
 
     } else {
         // Stop the GIF
@@ -49,8 +48,6 @@ var toggleGIFAnimation = function() {
 
     }
 
-    console.log(img_url);
-    
     $(this).attr("src", img_url);
 }
 
@@ -80,7 +77,7 @@ $(document).ready(function() {
             }
             
             $(document).on("click", "img", toggleGIFAnimation);
-            
+
             $("#searchResults").html(output);
         });
     });
