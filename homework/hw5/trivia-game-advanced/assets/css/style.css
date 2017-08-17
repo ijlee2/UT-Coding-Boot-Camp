@@ -91,9 +91,18 @@ p {
 }
 
 /* Game components */
+#quizForm {
+    position: relative;
+}
+
 #question, #answer {
-    float: left;
     width: 80%;
+}
+
+.container_fixed {
+    position: absolute;
+    top     : 0;
+    right   : 17%;
 }
 
 #timer {
@@ -102,7 +111,7 @@ p {
     font-weight   : bold;
     text-align    : center;
 
-    float         : right;
+    position      : fixed;
     width         : 1.6em;
     margin-top    : 0.2em;
     border        : 0.09em solid var(--color-text-highlight);
