@@ -34,6 +34,27 @@ var updateSearchHistory = function(query) {
     $("#searchHistory").html(output);
 }
 
+var toggleGIFAnimation = function() {
+    var img_url = $(this).attr("src");
+    var index = img_url.indexOf(".gif");
+
+    if (img_url.substring(index - 2, index) === "_s") {
+        // Play the GIF
+        img_url = img_url.substring(0, index - 2) + ".gif";
+        
+
+    } else {
+        // Stop the GIF
+        img_url = img_url.substring(0, index) + "_s.gif";
+
+    }
+
+    console.log(img_url);
+    
+    $(this).attr("src", img_url);
+}
+
+
 $(document).ready(function() {
     initializePage();
 
@@ -55,10 +76,10 @@ $(document).ready(function() {
             var output = "";
 
             for (var i = 0; i < numGIFs; i++) {
-                output += `<img src="${response.data[i].images.fixed_width.url}" height="150">`;
+                output += `<img src="${response.data[i].images.fixed_width_still.url}" height="150">`;
             }
-
-            console.log(output);
+            
+            $(document).on("click", "img", toggleGIFAnimation);
             
             $("#searchResults").html(output);
         });
