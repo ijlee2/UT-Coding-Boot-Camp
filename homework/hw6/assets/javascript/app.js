@@ -1,5 +1,5 @@
 // Use GIPHY's API
-var numGIFs = 10;
+var numGIFs = 9;
 var api_url = "https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&limit=" + numGIFs + "&q=";
 
 // Default topics
@@ -33,6 +33,9 @@ var updateSearchHistory = function(query) {
 
         $("#searchHistory").append(`<div class="topics">${query}</div>`);
 
+        // Go ahead and find GIFs
+        getGIFs(query);
+
     }
 
     $(".topics").on("click", function() {
@@ -60,6 +63,8 @@ var toggleGIFAnimation = function() {
 
 
 var getGIFs = function(query) {
+    $("#topPane").css({"display": "block"});
+
     $.ajax({
         "url"   : api_url + query,
         "method": "GET"}
@@ -85,6 +90,8 @@ var getGIFs = function(query) {
 
 
 $(document).ready(function() {
+    $("#topPane").css({"display": "none"});
+
     updateSearchHistory();
 
     $("#button_search").on("click", function() {

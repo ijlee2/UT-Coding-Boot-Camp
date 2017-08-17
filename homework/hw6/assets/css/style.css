@@ -73,18 +73,18 @@ input {
     padding         : 3% 2%;
 }
 
-#search, #results, #history {
-    margin-bottom: 2em;
-}
-
-#history {
+#leftPane {
     float: left;
     width: 60%;
 }
 
-#search {
+#rightPane {
     float: right;
     width: 33%;
+}
+
+#results, #history, #search {
+    margin-bottom: 2em;
 }
 
 #button_search {
@@ -106,17 +106,17 @@ input {
     font-size: 1.15em;
 
     float    : left;
-    margin   : 0 2% 2% 0;
+    margin   : 0 3% 3% 0;
     border   : 1px solid gray;
     padding  : 3%;
 }
 
 #searchResults img {
     float : left;
-    width : 18.4%;
-    margin: 0 2% 2% 0;
+    width : 31%;
+    margin: 0 3.5% 3.5% 0;
 }
 
-#searchResults img:nth-of-type(5n) {
+#searchResults img:nth-of-type(3n) {
     margin-right: 0;
 }
