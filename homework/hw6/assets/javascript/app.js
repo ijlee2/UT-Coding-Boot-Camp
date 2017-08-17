@@ -3,7 +3,7 @@ var numGIFs = 9;
 var api_url = "https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&limit=" + numGIFs + "&q=";
 
 // Default topics
-var topics    = ["birthday", "hug", "love", "anniversary", "beer", "work", "sleepy", "coffee", "sandwich", "study", "hm", "cute", "math", "what"];
+var topics    = ["birthday", "hug", "love", "anniversary", "beer", "work", "sleepy", "coffee", "sandwich", "study", "hm", "cute", "math", "dance"];
 var numTopics = topics.length;
 
 
