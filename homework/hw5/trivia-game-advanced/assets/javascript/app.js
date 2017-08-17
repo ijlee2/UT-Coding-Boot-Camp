@@ -77,9 +77,6 @@ var TriviaGame = function() {
     }
 
     var displayCurrentQuestion = function() {
-        $("#question, #timer").css({"display": "block"});
-        $("#answer").css({"display": "none"});
-
         if (currentQuestion < numQuestions) {
             // Hide the previous question
             if (currentQuestion > 0) {
@@ -88,7 +85,9 @@ var TriviaGame = function() {
 
             // Display the current question
             $("#q" + currentQuestion).css({"display": "block"});
-
+            $("#question, #timer").css({"display": "block"});
+            $("#answer").css({"display": "none"});
+            
             resetTimer();
 
             intervalID = setInterval(updateTimer, 1000);
@@ -101,9 +100,6 @@ var TriviaGame = function() {
 
     var displayAnswer = function(index) {
         clearInterval(intervalID);
-
-        $("#question, #timer").css({"display": "none"});
-        $("#answer").css({"display": "block"});
 
         var output;
 
@@ -121,8 +117,10 @@ var TriviaGame = function() {
         
         output += `<p>The answer is ${answers[currentQuestion].value}.</p>`;
 
+        $("#question, #timer").css({"display": "none"});
         $("#answer").html(output);
-
+        $("#answer").css({"display": "block"});
+        
         setTimeout(updateQuestion, 2000);
     }
 
@@ -140,10 +138,10 @@ var TriviaGame = function() {
     var updateTimer = function() {
         timeLeft--;
 
+        $("#timer").text(timeLeft);
         if (timeLeft <= timeWarning && $("#timer").css("animation-name") !== "shake") {
             $("#timer").css({"animation": "shake 0.80s cubic-bezier(.36, .07, .19, .97) both"});
         }
-        $("#timer").text(timeLeft);
         $("#timer").replaceWith($("#timer").clone());
         
         if (timeLeft === 0) {
@@ -154,8 +152,8 @@ var TriviaGame = function() {
     var resetTimer = function() {
         timeLeft = timeAllowed;
 
-        $("#timer").css({"animation": "spin 0.50s cubic-bezier(.15, .07, .20, .97) both"});
         $("#timer").text(timeLeft);
+        $("#timer").css({"animation": "spin 0.50s cubic-bezier(.15, .07, .20, .97) both"});
     }
 
 
@@ -206,12 +204,14 @@ var TriviaGame = function() {
     var updateDOM = function(output) {
         // Display the questions
         $("#question").html(output);
-
         $(".questions").css({"display": "none"});
         
         // Handle click events
         $(".choices").on("click", function() {
-            displayAnswer($(".choices").index(this) % numChoicesPerQuestion);
+            // Find out which answer the button belongs to
+            var index = $(".choices").index(this) % numChoicesPerQuestion;
+
+            displayAnswer(index);
         });
     }
 }
@@ -230,14 +230,7 @@ $(document).ready(function() {
 
     game.startNewGame();
 
-
-    /************************************************************************
-        
-        Respond to user's actions
-        
-    *************************************************************************/
-    // Page selection
     $("#button_start").on("click", game.startQuiz);
-
+    
     $("#button_restart").on("click", game.startNewGame);
 });

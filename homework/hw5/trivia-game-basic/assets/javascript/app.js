@@ -103,10 +103,10 @@ var TriviaGame = function() {
     var updateTimer = function() {
         timeLeft--;
 
+        $("#timer").text(timeLeft);
         if (timeLeft <= timeWarning && $("#timer").css("animation-name") !== "shake") {
             $("#timer").css({"animation": "shake 0.80s cubic-bezier(.36, .07, .19, .97) both"});
         }
-        $("#timer").text(timeLeft);
         $("#timer").replaceWith($("#timer").clone());
         
         if (timeLeft === 0) {
@@ -117,8 +117,8 @@ var TriviaGame = function() {
     var resetTimer = function() {
         timeLeft = timeAllowed;
 
-        $("#timer").css({"animation": "spin 0.50s cubic-bezier(.15, .07, .20, .97) both"});
         $("#timer").text(timeLeft);
+        $("#timer").css({"animation": "spin 0.50s cubic-bezier(.15, .07, .20, .97) both"});
     }
 
 
@@ -204,13 +204,6 @@ $(document).ready(function() {
 
     game.startNewGame();
 
-
-    /************************************************************************
-        
-        Respond to user's actions
-        
-    *************************************************************************/
-    // Page selection
     $("#button_start").on("click", game.startQuiz);
 
     $("#button_restart").on("click", game.startNewGame);
