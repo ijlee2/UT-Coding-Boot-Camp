@@ -49,16 +49,16 @@
           url: queryURL,
           method: "GET"
         }).done(function(response) {
-          $("#movies-view").append(`<div class="selectedMovies">
-                                      <h2>${response.Title} (${response.Year})</h2>
-                                      <img width="200" src="${response.Poster}" alt="${response.Title}">
-                                      <h3>Summary:</h3> <p>${response.Plot}</p>
-                                      <h3>Genre:</h3> <p>${response.Genre}</p>
-                                      <h3>Director:</h3> <p>${response.Director}</p>
-                                      <h3>Actors:</h3> <p>${response.Actors}</p>
-                                      <h3>Box office:</h3> <p>${response.BoxOffice}</p>
-                                      <h3>RottenTomatoes:</h3> <p>${response.Ratings[1].Value}</p>
-                                    </div>`);
+          $("#movies-view").prepend(`<div class="selectedMovies">
+                                       <h2>${response.Title} (${response.Year})</h2>
+                                       <img width="200" src="${response.Poster}" alt="${response.Title}">
+                                       <h3>Summary:</h3> <p>${response.Plot}</p>
+                                       <h3>Genre:</h3> <p>${response.Genre}</p>
+                                       <h3>Director:</h3> <p>${response.Director}</p>
+                                       <h3>Actors:</h3> <p>${response.Actors}</p>
+                                       <h3>Box office:</h3> <p>${response.BoxOffice}</p>
+                                       <h3>RottenTomatoes:</h3> <p>${response.Ratings[1].Value}</p>
+                                     </div>`);
 
           $("#movies-view .selectedMovies").css({"float"  : "left",
                                                  "width"  : "20%",
