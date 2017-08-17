@@ -17,7 +17,7 @@
             // 5 trending GIFs
             var api_url = "https://api.giphy.com/v1/gifs/trending?api_key=0010990be74a4f048609620599cd5f8f&limit=5";
 
-            $.ajax(api_url, "GET").done(function(response) {
+            $.ajax({"url": api_url, "method": "GET"}).done(function(response) {
                 console.log(response);
             });
         </script>

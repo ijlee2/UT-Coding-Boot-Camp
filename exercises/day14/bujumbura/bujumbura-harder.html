@@ -22,7 +22,7 @@
     // Create an AJAX call to retrieve data Log the data in console
     // Log the data in HTML
     // Scream Ushindi (victory in Swahili)! at the top of your lungs
-    $.ajax(api_url, "GET").done(function(response) {
+    $.ajax({"url": api_url, "method": "GET"}).done(function(response) {
       console.log(response);
 
       $(".city").text(response.name + " Weather Details");
