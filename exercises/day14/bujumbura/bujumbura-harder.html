@@ -14,10 +14,12 @@
   <div class="temp"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
+    // API documentation: https://openweathermap.org/current
+    
     // Things to accomplish:
     // Get an API Key from OpenWeatherMap API
     var query = "Bujumbura,Burundi";
-    var api_url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&APPID=a67bef9fb01b7d94059a8cd91572ab3c";
+    var api_url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&units=imperial&appid=a67bef9fb01b7d94059a8cd91572ab3c";
 
     // Create an AJAX call to retrieve data Log the data in console
     // Log the data in HTML
@@ -34,7 +36,8 @@
       $(".humidity").text("Humidity: "+ response.main.humidity);
       $(".humidity").css({"font-size": "1.5em", "margin-bottom": "1.5em"});
       
-      $(".temp").text("Temperature (F): " + Math.round(100 * (response.main.temp * 9/5 - 459.67)) / 100);
+      // Temperature is in Kelvin by default
+      $(".temp").text("Temperature (F): " + response.main.temp);
       $(".temp").css({"font-size": "1.5em", "margin-bottom": "1.5em"});
       
     });
