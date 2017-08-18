@@ -1,4 +1,8 @@
-.jumbotron{
+.jumbotron {
     background: #2c2c7d;
-    color:white;
+    color     : white;
+}
+
+.input-group {
+    margin-bottom: 2em;
 }
