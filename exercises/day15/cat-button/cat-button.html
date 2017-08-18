@@ -12,19 +12,18 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
-    //
+    // When the user clicks on the button, post a GIF
     $("#cat-button").on("click", function() {
-
       // The url to the API
       var queryURL = "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cats";
 
-      // Request a GIF from the API
+      // Set up the AJAX request
       $.ajax({
         url: queryURL,
         method: "GET"
       })
 
-      // When the call is complete
+      // Run the callback function when the call is complete (a Promise)
       .done(function(response) {
 
         // Get the GIF's url
@@ -33,7 +32,7 @@
         // Create an image tag
         var catImage = $("<img>");
 
-        // Specify the properties of img
+        // Set the src and alt attributes of img
         catImage.attr("src", imageUrl);
         catImage.attr("alt", "cat image");
 
