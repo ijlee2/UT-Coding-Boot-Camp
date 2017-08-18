@@ -53,7 +53,8 @@ var updateSearchHistory = function(query) {
 
 
 var toggleGIFAnimation = function() {
-    var img_url = $(this).attr("src");
+    // Allow the user to click either img or div that surrounds the img
+    var img_url = $("img", this).attr("src");
     
     // GIPHY adds _s for still images
     var index = img_url.indexOf("_s.gif");
@@ -68,7 +69,7 @@ var toggleGIFAnimation = function() {
 
     }
 
-    $(this).attr("src", img_url);
+    $("img", this).attr("src", img_url);
 }
 
 
@@ -79,7 +80,7 @@ var getGIFs = function(query) {
 
     ).done(function(response) {
         // Reset the event handler
-        $(document).off("click", "img");
+        $(document).off("click", ".image_container");
 
         var output = "";
 
@@ -92,7 +93,7 @@ var getGIFs = function(query) {
         
         $("#searchResults").html(output);
         
-        $(document).on("click", "img", toggleGIFAnimation);
+        $(document).on("click", ".image_container", toggleGIFAnimation);
 
         // Display the images in waves
         $(".image_container").css({"display": "none"});
