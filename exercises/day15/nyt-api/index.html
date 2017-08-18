@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>NYT Search</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"> -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="jumbotron">
+       <h1 align="center" class="display-3">New York Times</h1>     
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="input-group col-xs-12">    
+                
+                  <input id="query" type="text" class="form-control input-lg" placeholder="Search">
+                
+
+            </div>
+
+            <br>
+
+            <div class="input-group col-xs-12">
+                <div id="numPagesReturned"> 
+                    <select type="text" class = "form-control" > 
+                        <option>1</option>
+                        <option>5</option>
+                        <option>10</option>
+                    </select>    
+                </div>                            
+            </div>
+
+            <br>
+
+            <div class="input-group col-xs-12">    
+                
+                    <input id="yearBegin" type="text" class="form-control input-lg" placeholder="Start Year">
+                
+            </div>
+
+            <br>
+
+            <div class="input-group col-xs-12">    
+               
+                    <input id="yearEnd" type="text" class="form-control input-lg" placeholder="Ending Year">
+               
+            </div>
+
+            <br>
+
+            <div class="col-xs-12">    
+                <button id="searchMain" class="btn btn-primary btn-lg" >Search</button>
+               
+
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
