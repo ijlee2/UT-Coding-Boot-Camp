@@ -8,8 +8,11 @@ var numTopics = topics.length;
 
 
 var updateSearchHistory = function(query) {
-    // Do nothing if the query is empty or exists in topics already
+    // Reset the input field, if the query is empty or exists in topics already
     if (query === "" || topics.indexOf(query) >= 0) {
+        $("#query").val("");
+        $("#query").focus();
+
         return;
     }
 
@@ -25,7 +28,6 @@ var updateSearchHistory = function(query) {
 
         $("#searchHistory").html(output);
     
-
     // Add new queries to the search history
     } else {
         topics.push(query);
@@ -38,15 +40,15 @@ var updateSearchHistory = function(query) {
 
     }
 
-    $(".topics").on("click", function() {
-        getGIFs($(this).text());
-    });
+    $(".topics").on("click", function() { getGIFs($(this).text()); });
 }
 
 
 var toggleGIFAnimation = function() {
     var img_url = $(this).attr("src");
-    var index   = img_url.indexOf("_s.gif");
+    
+    // GIPHY appends _s for still images
+    var index = img_url.indexOf("_s.gif");
 
     if (index >= 0) {
         // Play the GIF
@@ -93,14 +95,14 @@ $(document).ready(function() {
         // Allow the user to hit Enter key to submit query
         if (e.keyCode === 13) {
             var query = $("#query").val().trim().toLowerCase();
-            
+
             updateSearchHistory(query);
         }
     });
 
     $("#button_search").on("click", function() {
         var query = $("#query").val().trim().toLowerCase();
-        
+
         updateSearchHistory(query);
     });
 
