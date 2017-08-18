@@ -3,7 +3,7 @@ var numGIFs = 9;
 var api_url = "https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&limit=" + numGIFs + "&q=";
 
 // Default topics
-var topics    = ["birthday", "hug", "love", "anniversary", "beer", "work", "sleepy", "coffee", "sandwich", "study", "hm", "cute", "math", "dance"];
+var topics    = ["birthday", "hug", "love", "house", "work", "dance", "sleepy", "coffee", "study", "sandwich", "hm", "cute", "math", "beer", "you rock"];
 var numTopics = topics.length;
 
 
@@ -91,8 +91,22 @@ var getGIFs = function(query) {
         }
         
         $("#searchResults").html(output);
-
+        
         $(document).on("click", "img", toggleGIFAnimation);
+
+        // Display the images in waves
+        $(".image_container").css({"display": "none"});
+
+        var index = 1;
+        var intervalID = setInterval(function() {
+            $(".image_container:nth-of-type(" + index + ")").css({"display": "block"});
+            index++;
+
+            if (index > numGIFs) {
+                clearInterval(intervalID);
+            }
+            
+        }, 150);
     });
 }
 

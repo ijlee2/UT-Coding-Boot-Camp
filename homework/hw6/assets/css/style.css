@@ -103,19 +103,25 @@ input {
 }
 
 #searchHistory div {
-    font-size: 1.15em;
+    font-size : 1.15em;
+    transition: all .07s ease;
 
-    float    : left;
-    margin   : 0 3% 3% 0;
-    border   : 1px solid gray;
-    padding  : 3%;
+    float     : left;
+    margin    : 0 3% 3% 0;
+    border    : 1px solid gray;
+    padding   : 3%;
+}
+
+#searchHistory div:hover {
+    transform: scale(1.1);
 }
 
 .image_container {
-    float   : left;
-    position: relative;
-    width   : 31%;
-    margin  : 0 3.5% 2.55em 0;
+    animation: slide_up_and_fade_in 0.80s cubic-bezier(.36, .07, .19, .97) both;
+    float    : left;
+    position : relative;
+    width    : 31%;
+    margin   : 0 3.5% 2.55em 0;
 }
 
 .image_container:nth-of-type(3n) {
@@ -135,4 +141,16 @@ input {
     left            : 0;
     bottom          : -1.65em;
     padding         : 0.4em 5%;
+}
+
+
+@keyframes slide_up_and_fade_in {
+    0% {
+        opacity  : 0;
+        transform: translate(0, 20%);
+    }
+
+    100% {
+        opacity  : 1;
+    }
 }
