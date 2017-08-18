@@ -8,14 +8,18 @@ var numTopics = topics.length;
 
 
 var updateSearchHistory = function(query) {
-    // Reset the input field, if the query is empty or exists in topics already
-    if (query === "" || topics.indexOf(query) >= 0) {
-        $("#query").val("");
+    // Do nothing if the query is empty
+    if (query === "") {
         $("#query").focus();
 
         return;
     }
 
+    // Reset the input field
+    $("#query").val("");
+    $("#query").focus();
+    
+    // Reset the event handler
     $(".topics").off("click");
 
     // Initialize
@@ -29,13 +33,17 @@ var updateSearchHistory = function(query) {
         $("#searchHistory").html(output);
     
     // Add new queries to the search history
-    } else {
+    } else if (topics.indexOf(query) === -1) {
         topics.push(query);
         numTopics++;
 
         $("#searchHistory").append(`<div class="topics">${query}</div>`);
 
         // Go ahead and find GIFs
+        getGIFs(query);
+
+    // Only display GIFs for existing queries
+    } else {
         getGIFs(query);
 
     }
@@ -47,7 +55,7 @@ var updateSearchHistory = function(query) {
 var toggleGIFAnimation = function() {
     var img_url = $(this).attr("src");
     
-    // GIPHY appends _s for still images
+    // GIPHY adds _s for still images
     var index = img_url.indexOf("_s.gif");
 
     if (index >= 0) {
@@ -70,6 +78,7 @@ var getGIFs = function(query) {
         "method": "GET"}
 
     ).done(function(response) {
+        // Reset the event handler
         $(document).off("click", "img");
 
         var output = "";
