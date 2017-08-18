@@ -100,6 +100,7 @@ var getGIFs = function(query) {
         var index = 1;
         var intervalID = setInterval(function() {
             $(".image_container:nth-of-type(" + index + ")").css({"display": "block"});
+            
             index++;
 
             if (index > numGIFs) {
