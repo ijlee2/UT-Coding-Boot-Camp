@@ -8,16 +8,14 @@ var numTopics = topics.length;
 
 
 var updateSearchHistory = function(query) {
-    // Do nothing if the query is empty
-    if (query === "") {
-        $("#query").focus();
-
-        return;
-    }
-
     // Reset the input field
     $("#query").val("");
     $("#query").focus();
+
+    // Do nothing if the query is empty
+    if (query === "") {
+        return;
+    }
     
     // Reset the event handler
     $(".topics").off("click");
@@ -48,7 +46,9 @@ var updateSearchHistory = function(query) {
 
     }
 
-    $(".topics").on("click", function() { getGIFs($(this).text()); });
+    $(".topics").on("click", function() {
+        getGIFs($(this).text());
+    });
 }
 
 

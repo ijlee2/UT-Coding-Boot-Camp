@@ -143,7 +143,6 @@ input {
     padding         : 0.4em 5%;
 }
 
-
 @keyframes slide_up_and_fade_in {
     0% {
         opacity  : 0;
@@ -152,5 +151,41 @@ input {
 
     100% {
         opacity  : 1;
+    }
+}
+
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Stylesheet for desktop (reduced)
+    
+*****************************************************************************
+*****************************************************************************/
+@media all and (max-width: 980px), all and (max-device-width: 980px) {
+    .container {
+        width: 90%;
+    }
+
+    body {
+        font-size: 2vw;
+    }
+
+    #leftPane {
+        float        : none;
+        width        : 90%;
+        margin       : auto;
+        margin-bottom: 2em;
+    }
+
+    #rightPane {
+        float : none;
+        width : 90%;
+        margin: auto;
+    }
+
+    .image_container img {
+        height: 24vw;
     }
 }
