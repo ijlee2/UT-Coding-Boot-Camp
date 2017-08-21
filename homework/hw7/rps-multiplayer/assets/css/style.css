@@ -1,0 +1,101 @@
+/****************************************************************************
+ ****************************************************************************
+    
+    Default stylesheet
+    
+*****************************************************************************
+*****************************************************************************/
+:root {
+    /* Define color scheme */
+    --color-background    : #f0f2f0;
+    --color-light-yellow  : #f7e739;
+    --color-light-blue    : #78b6ed;
+    --color-dark-blue     : #3773a8;
+    --color-text          : #202020;
+    --color-text-contrast : #f9f6e3;
+    --color-text-highlight: #ff6600;
+}
+
+body, input {
+    background-color: var(--color-background);
+    color           : var(--color-text);
+    font-family     : "Quicksand", sans-serif;
+    font-size       : 20px;
+}
+
+.container {
+    width  : 840px;
+    margin : auto;
+    padding: 2.5% 0;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear  : both;
+}
+
+h1 {
+    color        : var(--color-dark-blue);
+    font-family  : "Montserrat Subrayada", sans-serif;
+    font-size    : 4.2em;
+    font-weight  : bold;
+    text-align   : center;
+    text-shadow  : 0 3px 6px var(--color-light-yellow),
+                   0 6px 8px var(--color-light-blue);
+
+    margin-bottom: 0.65em;
+}
+
+h2 {
+    color         : var(--color-text-highlight);
+    font-size     : 1.8em;
+    font-weight   : bold;
+    letter-spacing: 0.04em;
+    
+    margin-bottom : 1em;
+}
+
+p {
+    letter-spacing: 0.03em;
+    line-height   : 1.5em;
+    
+    margin-bottom : 3%;
+}
+
+input {
+    background-color: white;
+    font-size       : 1.2em;
+    
+    float           : left;
+    width           : 40%;
+    margin-right    : 8%;
+    padding         : 3% 2%;
+}
+
+#player1 {
+    float: left;
+    width: 48%;
+    border: 1px red solid;
+}
+
+#player2 {
+    float: right;
+    width: 48%;
+    border: 1px red solid;
+}
+
+#button_start {
+    background-color: var(--color-light-blue);
+    color           : var(--color-text-contrast);
+    font-family     : "Quicksand", sans-serif;
+    font-size       : 1.2em;
+    font-weight     : bold;
+    letter-spacing  : 0.03em;
+    text-align      : center;
+    
+    float           : left;
+    width           : 10%;
+    border          : 3px solid var(--color-dark-blue);
+    padding         : 3% 6%;
+}
