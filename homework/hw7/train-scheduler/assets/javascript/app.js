@@ -18,7 +18,7 @@ let testInput = [{"name"       : "Trenton Express",
 
                  {"name"       : "Oregon Trail",
                   "destination": "Salem",
-                  "departure"  : [0, 6, 0],
+                  "departure"  : [0, 11, 0],
                   "frequency"  : 200}
                 ];
 
@@ -64,8 +64,8 @@ function findNextArrival(train) {
         Express the departure in minutes (time0)
         
     *************************************************************************/
-    const hour0   = train.departure[0];
-    const minute0 = train.departure[1];
+    const hour0   = train.departure[1];
+    const minute0 = train.departure[2];
 
     const time0 = 60 * hour0 + minute0;
 
