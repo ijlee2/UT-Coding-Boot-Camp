@@ -10,7 +10,7 @@
         
 <!--        <link rel="icon" type="image/png" href="assets/images/favicon.png">-->
         <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada|Quicksand">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Quicksand">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -21,53 +21,41 @@
             <h1>Train Scheduler</h1>
             
             <div id="schedule" class="page">
-                <h2>Schedule</h2>
+                <h2>Check Schedule</h2>
 
                 <table id="currentSchedule">
-                    <tr>
-                        <th>Train Name</th>
-                        <th>Destination</th>
-                        <th>Frequency (min)</th>
-                        <th>Next Arrival</th>
-                        <th>Minutes Away</th>
-                    </tr>
-                    <tr>
-                        <td>Trenton Express</td>
-                        <td>Trenton</td>
-                        <td>25</td>
-                        <td>05:35 PM</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>Oregon Trail</td>
-                        <td>Salem</td>
-                        <td>3600</td>
-                        <td>01:39 PM</td>
-                        <td>1154</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Train Name</th>
+                            <th>Destination</th>
+                            <th>Frequency (min)</th>
+                            <th>Next Arrival</th>
+                            <th>Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
                 </table>
 
-                <div class="page_next">Add a Train</div>
+                <div class="page_next">Add a Train >></div>
             </div>
             
-            <div class="page">
-                <div id="search">
-                    <h2>Add a Train</h2>
+            <div id="search" class="page">
+                <h2>Add a Train</h2>
 
-                    <label for="trainName">Train Name</label>
-                    <input type="text" id="trainName">
-                    
-                    <label for="destination">Destination</label>
-                    <input type="text" id="destination">
-                    
-                    <label for="firstDeparture">First Departure (00:00 - 23:59)</label>
-                    <input type="text" id="firstDeparture">
-                    
-                    <label for="frequency">Frequency (min)</label>
-                    <input type="text" id="frequency">
+                <label for="trainName">Train Name</label>
+                <input type="text" id="trainName">
+                
+                <label for="destination">Destination</label>
+                <input type="text" id="destination">
+                
+                <label for="firstDeparture">First Departure (00:00 - 23:59)</label>
+                <input type="text" id="firstDeparture">
+                
+                <label for="frequency">Frequency (min)</label>
+                <input type="text" id="frequency">
 
-                    <div id="button_submit">Submit</div>
-                </div>
+                <div class="page_prev"><< Check Schedule</div>
+                <div id="button_submit">Submit</div>
             </div>
         </div>
         

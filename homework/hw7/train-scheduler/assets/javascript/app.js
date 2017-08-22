@@ -15,24 +15,35 @@ firebase.initializeApp(config);
 var database;
 var trains;
 
+const testInput = {"trains": [{"name"       : "Trenton Express",
+                               "destination": "Trenton",
+                               "frequency"  : 25,
+                               "nextArrival": "05:35 PM",
+                               "minutesAway": 10},
+
+                              {"name"       : "Oregon Trail",
+                               "destination": "Salem",
+                               "frequency"  : 3600,
+                               "nextArrival": "01:39 PM",
+                               "minutesAway": 1154}]
+                    };
+
+
 var displayPage = function(page) {
     $(".page").css({"display": "none"});
     $(".page:nth-of-type(" + (page + 1) + ")").css({"display": "block"});
 }
 
-$(document).ready(function() {
-    displayPage(0);
-
+var loadDatabase = function() {
     database = firebase.database();
 
     database.ref().once("value", function(snapshot) {
         // Create database if it doesn't exist
         if (snapshot.val() == null) {
             // Create trains object
-            trains = {"list"  : [{"name": "Thomas"}, {"name": "Jack"}],
-                      "length": 0};
+            trains = testInput.trains;
 
-            database.ref().set(trains);
+            database.ref().set(testInput);
 
         // Load database if it exists
         } else {
@@ -44,30 +55,30 @@ $(document).ready(function() {
             var output = "";
 
             trains.forEach(train => {
-                output += `${train.name}`;
+                output += `<tr>
+                               <td>${train.name}</td>
+                               <td>${train.destination}</td>
+                               <td>${train.frequency}</td>
+                               <td>${train.nextArrival}</td>
+                               <td>${train.minutesAway}</td>
+                           </tr>`;
             });
+
+            $("#currentSchedule tbody").empty().append(output);
         }
     });
+}
+
+$(document).ready(function() {
+    displayPage(0);
+
+    loadDatabase();
+
+    $(".page_prev").on("click", function() {
+        displayPage(0);
+    })
+
+    $(".page_next").on("click", function() {
+        displayPage(1);
+    })
 });
-
-/*
-database.ref("player1").on("value", function(snapshot) {
-    // Get the most recent value from Firebase
-
-    // Update the local values
-
-}, function(error) {
-    console.log("The read failed: " + error.code);
-
-});
-
-database.ref("player2").on("value", function(snapshot) {
-    // Get the most recent value from Firebase
-
-    // Update the local values
-
-}, function(error) {
-    console.log("The read failed: " + error.code);
-
-});
-*/

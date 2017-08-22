@@ -36,15 +36,14 @@ body, input {
 }
 
 h1 {
-    color        : var(--color-dark-blue);
-    font-family  : "Montserrat Subrayada", sans-serif;
-    font-size    : 4.67em;
-    font-weight  : bold;
-    text-align   : center;
-    text-shadow  : 0 3px 6px var(--color-light-yellow),
-                   0 6px 8px var(--color-light-blue);
+    color         : var(--color-dark-blue);
+    font-family   : "Encode Sans Condensed", sans-serif;
+    font-size     : 3.2em;
+    font-weight   : bold;
+    letter-spacing: 0.08em;
+    text-align    : center;
 
-    margin-bottom: 0.65em;
+    margin-bottom : 0.65em;
 }
 
 h2 {
@@ -119,7 +118,7 @@ input {
     display: none;
 }
 
-.page_prev, .page_next {
+.page_prev, .page_next, #button_submit {
     background-color: var(--color-light-blue);
     color           : var(--color-text-contrast);
     font-family     : "Quicksand", sans-serif;
@@ -137,22 +136,6 @@ input {
     float: left;
 }
 
-.page_next {
+.page_next, #button_submit {
     float: right;
-}
-
-
-#button_submit {
-    background-color: var(--color-light-blue);
-    color           : var(--color-text-contrast);
-    font-family     : "Quicksand", sans-serif;
-    font-size       : 1.3em;
-    font-weight     : bold;
-    letter-spacing  : 0.03em;
-    text-align      : center;
-    
-    width           : 88%;
-    margin-top      : 12%;
-    border          : 3px solid var(--color-dark-blue);
-    padding         : 3% 6%;
 }
