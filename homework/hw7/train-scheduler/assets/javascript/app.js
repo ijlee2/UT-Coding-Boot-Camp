@@ -10,7 +10,6 @@ const config = {
 
 firebase.initializeApp(config);
 
-
 // Define test case
 let testInput = [{"name"       : "Trenton Express",
                   "destination": "Trenton",
@@ -173,6 +172,9 @@ function displaySchedule() {
         $("#destination").val(trains[index].destination);
         $("#departure").val(displayTime(trains[index].departure));
         $("#frequency").val(trains[index].frequency);
+
+        // Edit button
+        $("#search > h2").text("Edit the Train");
     });
 }
 
@@ -211,7 +213,7 @@ $(document).ready(function() {
     }, 1000 * (60 - currentTime.getSeconds()));
 
     // Add a new train
-    $("#button_submit").on("click", function() {
+    $("#button_add").on("click", function() {
         /*
         // Input validation
         $("input").each(function() {

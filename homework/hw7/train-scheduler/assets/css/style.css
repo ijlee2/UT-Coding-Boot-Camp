@@ -132,7 +132,7 @@ input {
     margin-bottom   : 1em;
 }
 
-#button_submit {
+#button_add, #button_delete, #button_edit {
     background-color: var(--color-light-blue);
     color           : var(--color-text-contrast);
     font-family     : "Quicksand", sans-serif;
@@ -141,8 +141,21 @@ input {
     letter-spacing  : 0.03em;
     text-align      : center;
 
-    float           : right;
     margin-top      : 3%;
     border          : 4px solid var(--color-dark-blue);
     padding         : 2% 5%;
+}
+
+#button_add {
+    float: right;
+}
+
+#button_delete {
+    display: none;
+    float  : left;
+}
+
+#button_edit {
+    display: none;
+    float  : right;
 }
