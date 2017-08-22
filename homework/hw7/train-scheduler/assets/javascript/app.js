@@ -56,29 +56,16 @@ var loadDatabase = function() {
 }
 
 function findNextArrival(train) {
-    const numMinutesPerDay = 24 * 60;
-
-
-    /************************************************************************
-        
-        Express the departure in minutes (time0)
-        
-    *************************************************************************/
+    // Express the departure in minutes (time0)
     const hour0   = train.departure[1];
     const minute0 = train.departure[2];
 
     const time0 = 60 * hour0 + minute0;
 
-    
-    /************************************************************************
-        
-        Express the current time in minutes (time1)
-        
-    *************************************************************************/
+    // Express the current time in minutes (time1)
     const currentTime = new Date();
-
-    const hour1   = currentTime.getHours();
-    const minute1 = currentTime.getMinutes();
+    const hour1       = currentTime.getHours();
+    const minute1     = currentTime.getMinutes();
 
     const time1 = 60 * hour1 + minute1;
 
@@ -107,6 +94,7 @@ function findNextArrival(train) {
 
     }
 
+    // Account for departure on another day
     if (hour >= 24) {
         day  = Math.floor(hour / 24);
         hour = hour % 24;
@@ -114,9 +102,17 @@ function findNextArrival(train) {
     
     return {"nextArrival": [day, hour, minute],
             "minutesAway": time - time1};
-
 }
 
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Display functions
+    
+*****************************************************************************
+*****************************************************************************/
 function displayTime(timeArray) {
     // Get the hour and minute
     let d = timeArray[0], h = timeArray[1], m = timeArray[2];
@@ -174,10 +170,22 @@ function displaySchedule() {
         $("#frequency").val(trains[index].frequency);
 
         // Edit button
-        $("#search > h2").text("Edit the Train");
+        $("#search > h2").text("Delete or Edit the Train");
+
+        $("#button_add").css({"display": "none"});
+        $("#button_delete, #button_edit").css({"display": "block"});
     });
 }
 
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Add, edit, or delete a train
+    
+*****************************************************************************
+*****************************************************************************/
 function addTrain() {
     // Convert the departure time (String) to an Array
     const departure_string = $("#departure").val().trim();
@@ -198,7 +206,23 @@ function addTrain() {
     displaySchedule();
 }
 
+function editTrain() {
 
+}
+
+function deleteTrain() {
+
+}
+
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Wait for user actions
+    
+*****************************************************************************
+*****************************************************************************/
 $(document).ready(function() {
     loadDatabase();
 
@@ -213,7 +237,7 @@ $(document).ready(function() {
     }, 1000 * (60 - currentTime.getSeconds()));
 
     // Add a new train
-    $("#button_add").on("click", function() {
+    $("#button_add").on("click", addTrain);
         /*
         // Input validation
         $("input").each(function() {
@@ -244,6 +268,7 @@ $(document).ready(function() {
         }
         */
 
-        addTrain();
-    });
+    $("#button_edit").on("click", editTrain);
+
+    $("#button_delete").on("click", deleteTrain);
 });

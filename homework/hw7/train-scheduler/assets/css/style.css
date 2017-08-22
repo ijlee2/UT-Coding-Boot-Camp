@@ -152,10 +152,11 @@ input {
 
 #button_delete {
     display: none;
-    float  : left;
+    float  : right;
 }
 
 #button_edit {
-    display: none;
-    float  : right;
+    display    : none;
+    float      : right;
+    margin-left: 4%;
 }
