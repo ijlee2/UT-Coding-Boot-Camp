@@ -15,17 +15,19 @@ firebase.initializeApp(config);
 var database;
 var trains;
 
-const testInput = {"trains": [{"name"       : "Trenton Express",
-                               "destination": "Trenton",
-                               "frequency"  : 25,
-                               "nextArrival": "05:35 PM",
-                               "minutesAway": 10},
+const testInput = {"trains": [{"name"          : "Trenton Express",
+                               "destination"   : "Trenton",
+                               "firstDeparture": "08:00 AM",
+                               "frequency"     : 25,
+                               "nextArrival"   : "05:35 PM",
+                               "minutesAway"   : 10},
 
-                              {"name"       : "Oregon Trail",
-                               "destination": "Salem",
-                               "frequency"  : 3600,
-                               "nextArrival": "01:39 PM",
-                               "minutesAway": 1154}]
+                              {"name"          : "Oregon Trail",
+                               "destination"   : "Salem",
+                               "firstDeparture": "08:00 AM",
+                               "frequency"     : 3600,
+                               "nextArrival"   : "01:39 PM",
+                               "minutesAway"   : 1154}]
                     };
 
 
@@ -51,34 +53,47 @@ var loadDatabase = function() {
 
         }
 
-        if (trains.length > 0) {
-            var output = "";
-
-            trains.forEach(train => {
-                output += `<tr>
-                               <td>${train.name}</td>
-                               <td>${train.destination}</td>
-                               <td>${train.frequency}</td>
-                               <td>${train.nextArrival}</td>
-                               <td>${train.minutesAway}</td>
-                           </tr>`;
-            });
-
-            $("#currentSchedule tbody").empty().append(output);
-        }
+        updateSchedule();
     });
 }
+
+function updateSchedule() {
+    var output = "";
+
+    trains.forEach(train => {
+        output += `<tr>
+                       <td>${train.name}</td>
+                       <td>${train.destination}</td>
+                       <td>${train.frequency}</td>
+                       <td>${train.nextArrival}</td>
+                       <td>${train.minutesAway}</td>
+                   </tr>`;
+    });
+
+    $("#currentSchedule tbody").empty().append(output);
+}
+
+function addTrain() {
+    var train = {"name"          : $("#name").val().trim(),
+                 "destination"   : $("#destination").val().trim(),
+                 "firstDeparture": $("#firstDeparture").val().trim(),
+                 "frequency"     : parseInt($("#frequency").val())};
+
+    // Calculate the next arrival
+    train.nextArrival = "05:35 PM";
+    train.minutesAway = 10;
+
+    trains.push(train);
+    database.ref().set(trains);
+    
+    updateSchedule();
+}
+
 
 $(document).ready(function() {
     displayPage(0);
 
     loadDatabase();
 
-    $(".page_prev").on("click", function() {
-        displayPage(0);
-    })
-
-    $(".page_next").on("click", function() {
-        displayPage(1);
-    })
+    $("#button_submit").on("click", addTrain);
 });

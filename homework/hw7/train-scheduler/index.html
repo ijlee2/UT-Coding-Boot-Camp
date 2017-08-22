@@ -20,13 +20,12 @@
         <div class="container">
             <h1>Train Scheduler</h1>
             
-            <div id="schedule" class="page">
-                <h2>Check Schedule</h2>
-
+            <h2>Check Schedule</h2>
+            <div id="schedule">
                 <table id="currentSchedule">
                     <thead>
                         <tr>
-                            <th>Train Name</th>
+                            <th>Name</th>
                             <th>Destination</th>
                             <th>Frequency (min)</th>
                             <th>Next Arrival</th>
@@ -35,26 +34,26 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-
-                <div class="page_next">Add a Train >></div>
             </div>
             
-            <div id="search" class="page">
-                <h2>Add a Train</h2>
+            <h2>Add a Train</h2>
+            <div id="search">
+                <div class="leftPane">
+                    <label for="name">Name</label>
+                    <input type="text" id="name">
+                    
+                    <label for="destination">Destination</label>
+                    <input type="text" id="destination">
+                </div>
 
-                <label for="trainName">Train Name</label>
-                <input type="text" id="trainName">
-                
-                <label for="destination">Destination</label>
-                <input type="text" id="destination">
-                
-                <label for="firstDeparture">First Departure (00:00 - 23:59)</label>
-                <input type="text" id="firstDeparture">
-                
-                <label for="frequency">Frequency (min)</label>
-                <input type="text" id="frequency">
+                <div class="rightPane">
+                    <label for="firstDeparture">First Departure (00:00 - 23:59)</label>
+                    <input type="text" id="firstDeparture">
+                    
+                    <label for="frequency">Frequency (min)</label>
+                    <input type="text" id="frequency">
+                </div>
 
-                <div class="page_prev"><< Check Schedule</div>
                 <div id="button_submit">Submit</div>
             </div>
         </div>
