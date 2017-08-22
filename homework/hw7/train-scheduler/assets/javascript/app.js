@@ -206,7 +206,7 @@ function addTrain() {
     displaySchedule();
 
     // Reset the fields
-    $("#name, #destination, #departure, #frequency").empty();
+    $("input").val("");
 }
 
 function editTrain() {
@@ -229,7 +229,7 @@ function editTrain() {
     displaySchedule();
 
     // Change to Add mode
-    $("#name, #destination, #departure, #frequency").empty();
+    $("input").val("");
     $("#button_add").css({"display": "block"});
     $("#button_delete, #button_edit").css({"display": "none"});
 }
@@ -241,7 +241,7 @@ function deleteTrain() {
     displaySchedule();
 
     // Change to Add mode
-    $("#name, #destination, #departure, #frequency").empty();
+    $("input").val("");
     $("#button_add").css({"display": "block"});
     $("#button_delete, #button_edit").css({"display": "none"});
 }
