@@ -12,10 +12,10 @@ firebase.initializeApp(config);
 
 
 // Global variables
-var database;
-var trains;
+let database;
+let trains;
 
-const testInput = {"trains": [{"name"       : "Trenton Express",
+const testInput = [{"name"       : "Trenton Express",
                                "destination": "Trenton",
                                "departure"  : "08:00 AM",
                                "frequency"  : 25,
@@ -27,8 +27,7 @@ const testInput = {"trains": [{"name"       : "Trenton Express",
                                "departure"  : "08:00 AM",
                                "frequency"  : 3600,
                                "nextArrival": "01:39 PM",
-                               "minutesAway": 1154}]
-                    };
+                               "minutesAway": 1154}];
 
 
 var displayPage = function(page) {
@@ -42,16 +41,22 @@ var loadDatabase = function() {
     database.ref().once("value", function(snapshot) {
         // Create database if it doesn't exist
         if (snapshot.val() == null) {
+            console.log("Database not created");
+
             // Create trains object
-            trains = testInput.trains;
+            trains = testInput;
 
             database.ref().set(testInput);
 
         // Load database if it exists
         } else {
-            trains = snapshot.val().trains;
+            console.log("Database exists");
+            
+            trains = snapshot.val();
 
         }
+
+        console.log(trains);
 
         updateSchedule();
     });
