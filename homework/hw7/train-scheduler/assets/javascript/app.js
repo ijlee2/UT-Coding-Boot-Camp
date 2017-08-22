@@ -10,7 +10,7 @@ const config = {
 
 firebase.initializeApp(config);
 
-// Define test case
+// Define a test case
 let testInput = [{"name"       : "Trenton Express",
                   "destination": "Trenton",
                   "departure"  : [0, 8, 0],
@@ -19,7 +19,12 @@ let testInput = [{"name"       : "Trenton Express",
                  {"name"       : "Oregon Trail",
                   "destination": "Salem",
                   "departure"  : [0, 11, 0],
-                  "frequency"  : 200}
+                  "frequency"  : 200},
+
+                 {"name"       : "Flying Scotsman",
+                  "destination": "Milwaukee",
+                  "departure"  : [0, 14, 20],
+                  "frequency"  : 8}
                 ];
 
 
@@ -39,13 +44,13 @@ var loadDatabase = function() {
     database = firebase.database();
 
     database.ref().once("value", function(snapshot) {
-        // Create database if it doesn't exist
-        if (snapshot.val() == null) {
+        // Create a database if it doesn't exist
+        if (snapshot.val() === null) {
             trains = testInput;
 
             database.ref().set(testInput);
 
-        // Load database if it exists
+        // Otherwise, load the database
         } else {
             trains = snapshot.val();
 
@@ -56,18 +61,19 @@ var loadDatabase = function() {
 }
 
 function findNextArrival(train) {
-    // Express the departure in minutes (time0)
-    const hour0   = train.departure[1];
-    const minute0 = train.departure[2];
+    // Express the departure in minutes
+    const h0 = train.departure[1];
+    const m0 = train.departure[2];
 
-    const time0 = 60 * hour0 + minute0;
+    const time0 = 60 * h0 + m0;
 
-    // Express the current time in minutes (time1)
+    // Express the current time in minutes
     const currentTime = new Date();
-    const hour1       = currentTime.getHours();
-    const minute1     = currentTime.getMinutes();
 
-    const time1 = 60 * hour1 + minute1;
+    const h1 = currentTime.getHours();
+    const m1 = currentTime.getMinutes();
+
+    const time1 = 60 * h1 + m1;
 
     
     /************************************************************************
@@ -75,32 +81,22 @@ function findNextArrival(train) {
         Calculate the next arrival
         
     *************************************************************************/
-    const numTripsMade = Math.floor((time1 - time0) / train.frequency);
+    const numTripsMade = Math.max(Math.floor((time1 - time0) / train.frequency), 0);
     
-    // Departure time
-    let day = 0, hour, minute, time;
-
-    // The train will depart much later
-    if (numTripsMade < 0) {
-        hour   = hour0;
-        minute = minute0;
-        time   = 60 * hour + minute;
-
-    // The train will depart soon
-    } else {
-        time   = time0 + (numTripsMade + 1) * train.frequency;
-        hour   = Math.floor(time / 60);
-        minute = time - 60 * hour;
-
-    }
+    // Find the arrival time in minutes
+    const time = time0 + (numTripsMade + 1) * train.frequency;
+    
+    let d = 0;
+    let h = Math.floor(time / 60);
+    let m = time - 60 * h;
 
     // Account for departure on another day
-    if (hour >= 24) {
-        day  = Math.floor(hour / 24);
-        hour = hour % 24;
+    if (h >= 24) {
+        d = Math.floor(h / 24);
+        h = h % 24;
     }
     
-    return {"nextArrival": [day, hour, minute],
+    return {"nextArrival": [d, h, m],
             "minutesAway": time - time1};
 }
 
@@ -114,8 +110,12 @@ function findNextArrival(train) {
 *****************************************************************************
 *****************************************************************************/
 function displayTime(timeArray) {
-    // Get the hour and minute
-    let d = timeArray[0], h = timeArray[1], m = timeArray[2];
+    // Get the day, hour, and minute
+    let d = timeArray[0];
+    let h = timeArray[1];
+    let m = timeArray[2];
+
+    // Display the period
     const period = (0 <= h && h < 12) ? "AM": "PM";
 
     // Display the hour
@@ -158,26 +158,12 @@ function displaySchedule() {
                    </tr>`;
     });
 
-    $("#currentSchedule tbody").empty().append(output);
+    $("tbody").empty().append(output);
 
     $("tr").on("click", function() {
         trainID = $("tr").index(this) - 1;
 
-        const h = trains[trainID].departure[1], m = trains[trainID].departure[2];
-        let departure_string = (h < 10) ? ("0" + h) : h;
-        departure_string += (m < 10) ? (":0" + m) : (":" + m);
-
-        // Edit train information
-        $("#name").val(trains[trainID].name);
-        $("#destination").val(trains[trainID].destination);
-        $("#departure").val(departure_string);
-        $("#frequency").val(trains[trainID].frequency);
-
-        // Edit button
-        $("#search > h2").text("Delete or Edit the Train");
-
-        $("#button_add").css({"display": "none"});
-        $("#button_delete, #button_edit").css({"display": "block"});
+        switchMode("edit");
     });
 }
 
@@ -190,23 +176,95 @@ function displaySchedule() {
     
 *****************************************************************************
 *****************************************************************************/
+    /*
+    // Input validation
+    $("input").each(function() {
+        var element = $(this);
+        console.log(element);
+
+        if (element.val() == undefined) {
+            element.css({"background-color": "red"});
+            element.attr("placeholder", `Please fill out the ${this.id}!`);
+        }
+    });
+
+    if ($("#name").val() === "") {
+        console.log("Fill out name");
+        return;
+    }
+    if ($("#destination").val() === "") {
+        console.log("Fill out destination");
+        return;
+    }
+    if ($("#departure").val() === "") {
+        console.log("Fill out departure");
+        return;
+    }
+    if ($("#frequency").val() === "") {
+        console.log("Fill out frequency");
+        return;
+    }
+    */
+
+function switchMode(mode) {
+    switch (mode) {
+        case "add":
+            // Reset the fields
+            $("input").val("");
+            
+            // Display add mode
+            $("#search > h2").text("Add a Train");
+            $("#button_add").css({"display": "block"});
+            $("#button_delete, #button_edit").css({"display": "none"});
+
+            break;
+
+        case "edit":
+            const train = trains[trainID];
+            
+            const h = train.departure[1]
+            const m = train.departure[2];
+
+            let departure_string = (h < 10) ? ("0" + h) : h;
+            
+            departure_string += (m < 10) ? (":0" + m) : (":" + m);
+
+            // Update the fields
+            $("#name").val(train.name);
+            $("#destination").val(train.destination);
+            $("#departure").val(departure_string);
+            $("#frequency").val(train.frequency);
+
+            // Display edit mode
+            $("#search > h2").text("Delete or Edit the Train");
+            $("#button_add").css({"display": "none"});
+            $("#button_delete, #button_edit").css({"display": "block"});
+
+            break;
+
+    }
+}
+
 function addTrain() {
-    // Convert the departure time (String) to an Array
+    // Format the departure time
     const departure_string = $("#departure").val().trim();
 
-    const index  = departure_string.indexOf(":");
-    const hour   = parseInt(departure_string.substring(0, index));
-    const minute = parseInt(departure_string.substring(index + 1));
+    const i = departure_string.indexOf(":");
+    const h = parseInt(departure_string.substring(0, i));
+    const m = parseInt(departure_string.substring(i + 1));
 
     // Create a new train object
     let train = {"name"       : $("#name").val().trim(),
                  "destination": $("#destination").val().trim(),
-                 "departure"  : [0, hour, minute],
+                 "departure"  : [0, h, m],
                  "frequency"  : parseInt($("#frequency").val())};
 
     trains.push(train);
+
+    // TODO: Make this more efficient by using addChild
     database.ref().set(trains);
     
+    // TODO: Make this ore efficient by appending a row
     displaySchedule();
 
     // Reset the fields
@@ -214,42 +272,41 @@ function addTrain() {
 }
 
 function editTrain() {
-    // Convert the departure time (String) to an Array
+    // Format the departure time
     const departure_string = $("#departure").val().trim();
 
-    const index  = departure_string.indexOf(":");
-    const hour   = parseInt(departure_string.substring(0, index));
-    const minute = parseInt(departure_string.substring(index + 1));
+    const i = departure_string.indexOf(":");
+    const h = parseInt(departure_string.substring(0, i));
+    const m = parseInt(departure_string.substring(i + 1));
 
     // Create a new train object
     let train = {"name"       : $("#name").val().trim(),
                  "destination": $("#destination").val().trim(),
-                 "departure"  : [0, hour, minute],
+                 "departure"  : [0, h, m],
                  "frequency"  : parseInt($("#frequency").val())};
 
     trains[trainID] = train;
+    
+    // TODO: Make this more efficient
     database.ref().set(trains);
 
+    // TODO: Make this more efficient
     displaySchedule();
 
-    // Change to Add mode
-    $("#search > h2").text("Add a Train");
-    $("input").val("");
-    $("#button_add").css({"display": "block"});
-    $("#button_delete, #button_edit").css({"display": "none"});
+    switchMode("add");
 }
 
 function deleteTrain() {
     trains.splice(trainID, 1);
-    database.ref().set(trains);
     
+    // TODO: Make this more efficient
+    database.ref().set(trains);
+//    database.ref().child(trainID).remove();
+    
+    // TODO: Make this more efficient
     displaySchedule();
 
-    // Change to Add mode
-    $("#search > h2").text("Add a Train");
-    $("input").val("");
-    $("#button_add").css({"display": "block"});
-    $("#button_delete, #button_edit").css({"display": "none"});
+    switchMode("add");
 }
 
 
@@ -265,46 +322,17 @@ $(document).ready(function() {
     loadDatabase();
 
     // Update the train schedule every minute
-    const currentTime = new Date();
+    const numSecondsLeft = 60 - (new Date()).getSeconds();
 
     setTimeout(function() {
         displaySchedule();
 
         setInterval(displaySchedule, 60000);
 
-    }, 1000 * (60 - currentTime.getSeconds()));
+    }, 1000 * numSecondsLeft);
 
     // Add a new train
     $("#button_add").on("click", addTrain);
-        /*
-        // Input validation
-        $("input").each(function() {
-            var element = $(this);
-            console.log(element);
-
-            if (element.val() == undefined) {
-                element.css({"background-color": "red"});
-                element.attr("placeholder", `Please fill out the ${this.id}!`);
-            }
-        });
-
-        if ($("#name").val() === "") {
-            console.log("Fill out name");
-            return;
-        }
-        if ($("#destination").val() === "") {
-            console.log("Fill out destination");
-            return;
-        }
-        if ($("#departure").val() === "") {
-            console.log("Fill out departure");
-            return;
-        }
-        if ($("#frequency").val() === "") {
-            console.log("Fill out frequency");
-            return;
-        }
-        */
 
     $("#button_edit").on("click", editTrain);
 
