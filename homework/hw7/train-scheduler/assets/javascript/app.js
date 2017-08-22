@@ -163,10 +163,14 @@ function displaySchedule() {
     $("tr").on("click", function() {
         trainID = $("tr").index(this) - 1;
 
+        const h = trains[trainID].departure[1], m = trains[trainID].departure[2];
+        let departure_string = (h < 10) ? ("0" + h) : h;
+        departure_string += (m < 10) ? (":0" + m) : (":" + m);
+
         // Edit train information
         $("#name").val(trains[trainID].name);
         $("#destination").val(trains[trainID].destination);
-        $("#departure").val(displayTime(trains[trainID].departure));
+        $("#departure").val(departure_string);
         $("#frequency").val(trains[trainID].frequency);
 
         // Edit button
