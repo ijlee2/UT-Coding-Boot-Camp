@@ -1,5 +1,5 @@
 // Configure Firebase
-var config = {
+const config = {
     apiKey           : "AIzaSyDTZzRZokWqHyFnA0T11Hte9ZwJ9QgO4kI",
     authDomain       : "train-scheduler-3f682.firebaseapp.com",
     databaseURL      : "https://train-scheduler-3f682.firebaseio.com",
@@ -11,10 +11,7 @@ var config = {
 firebase.initializeApp(config);
 
 
-// Global variables
-let database;
-let trains;
-
+// Define test case
 const testInput = [{"name"       : "Trenton Express",
                     "destination": "Trenton",
                     "departure"  : "08:00 AM",
@@ -31,10 +28,17 @@ const testInput = [{"name"       : "Trenton Express",
                   ];
 
 
-var displayPage = function(page) {
-    $(".page").css({"display": "none"});
-    $(".page:nth-of-type(" + (page + 1) + ")").css({"display": "block"});
-}
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Train scheduler
+    
+*****************************************************************************
+*****************************************************************************/
+// Global variables
+let database;
+let trains;
 
 var loadDatabase = function() {
     database = firebase.database();
@@ -42,29 +46,22 @@ var loadDatabase = function() {
     database.ref().once("value", function(snapshot) {
         // Create database if it doesn't exist
         if (snapshot.val() == null) {
-            console.log("Database not created");
-
-            // Create trains object
             trains = testInput;
 
             database.ref().set(testInput);
 
         // Load database if it exists
         } else {
-            console.log("Database exists");
-            
             trains = snapshot.val();
 
         }
 
-        console.log(trains);
-
-        updateSchedule();
+        displaySchedule();
     });
 }
 
-function updateSchedule() {
-    var output = "";
+function displaySchedule() {
+    let output = "";
 
     trains.forEach(train => {
         output += `<tr>
@@ -87,40 +84,102 @@ function addTrain() {
 
     const currentTime = new Date();
 
-    // Express the departure in minutes (time0)
-    let hour   = parseInt(train.departure.substring(0, 2));
-    let minute = parseInt(train.departure.substring(3, 5));
+    
+    /************************************************************************
+        
+        Express the departure in minutes (time0)
+        
+    *************************************************************************/
+    const index   = train.departure.indexOf(":");
+    const hour0   = parseInt(train.departure.substring(0, index));
+    const minute0 = parseInt(train.departure.substring(index + 1));
 
-    const time0 = 60 * hour + minute;
+    const time0 = 60 * hour0 + minute0;
 
-    // Express the current time in minutes (time1)
-    hour   = currentTime.getHours();
-    minute = currentTime.getMinutes();
+    
+    /************************************************************************
+        
+        Express the current time in minutes (time1)
+        
+    *************************************************************************/
+    const hour1   = currentTime.getHours();
+    const minute1 = currentTime.getMinutes();
 
-    const time1 = 60 * hour + minute;
+    const time1 = 60 * hour1 + minute1;
 
-    // Find the next arrival
-    const numRoundsMade = Math.floor((time1 - time0) / train.frequency);
-    const time2 = time0 + (numRoundsMade + 1) * train.frequency;
+    
+    /************************************************************************
+        
+        Calculate the next arrival
+        
+    *************************************************************************/
+    const numTripsMade = Math.floor((time1 - time0) / train.frequency);
+    console.log("numTripsMade: " + numTripsMade);
 
-    hour   = Math.floor(time2 / 60);
-    minute = time2 - 60 * hour;
-    hour   = hour % 24;
+    // Departure time
+    let hour2, minute2, time2;
 
-    train.nextArrival = (hour < 12) ? `${hour}:${minute} AM` : `${hour - 12}:${minute} PM`;
+    // The train will depart much later
+    if (numTripsMade < 0) {
+        hour2   = hour0;
+        minute2 = minute0;
+        time2   = 60 * hour2 + minute2;
+
+    // The train will depart soon
+    } else {
+        time2   = time0 + (numTripsMade + 1) * train.frequency;
+        hour2   = Math.floor(time2 / 60);
+        minute2 = time2 - 60 * hour2;
+
+//        hour2   = hour2 % 24;
+
+    }
+    
+    
+    train.nextArrival = (hour2 < 12) ? `${hour2}:${minute2} AM` : `${hour2 - 12}:${minute2} PM`;
     train.minutesAway = time2 - time1;
 
     trains.push(train);
     database.ref().set(trains);
     
-    updateSchedule();
+    displaySchedule();
 }
 
 
 $(document).ready(function() {
-    displayPage(0);
-
     loadDatabase();
 
-    $("#button_submit").on("click", addTrain);
+    $("#button_submit").on("click", function() {
+        /*
+        // Input validation
+        $("input").each(function() {
+            var element = $(this);
+            console.log(element);
+
+            if (element.val() == undefined) {
+                element.css({"background-color": "red"});
+                element.attr("placeholder", `Please fill out the ${this.id}!`);
+            }
+        });
+
+        if ($("#name").val() === "") {
+            console.log("Fill out name");
+            return;
+        }
+        if ($("#destination").val() === "") {
+            console.log("Fill out destination");
+            return;
+        }
+        if ($("#departure").val() === "") {
+            console.log("Fill out departure");
+            return;
+        }
+        if ($("#frequency").val() === "") {
+            console.log("Fill out frequency");
+            return;
+        }
+        */
+
+        addTrain();
+    });
 });
