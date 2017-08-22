@@ -8,7 +8,7 @@
 :root {
     /* Define color scheme */
     --color-background    : #f0f2f0;
-    --color-light-yellow  : #f7e739;
+    --color-light-brown   : #ebd9a3;
     --color-light-blue    : #78b6ed;
     --color-dark-blue     : #3773a8;
     --color-text          : #202020;
@@ -29,6 +29,11 @@ body, input {
     padding: 2.5% 0;
 }
 
+.page {
+    width : 36%;
+    margin: auto;
+}
+
 .clearfix::after {
     content: "";
     display: block;
@@ -36,15 +41,14 @@ body, input {
 }
 
 h1 {
-    color        : var(--color-dark-blue);
-    font-family  : "Montserrat Subrayada", sans-serif;
-    font-size    : 4.2em;
-    font-weight  : bold;
-    text-align   : center;
-    text-shadow  : 0 3px 6px var(--color-light-yellow),
-                   0 6px 8px var(--color-light-blue);
+    color         : var(--color-dark-blue);
+    font-family   : "Encode Sans Condensed", sans-serif;
+    font-size     : 3.2em;
+    font-weight   : bold;
+    letter-spacing: 0.08em;
+    text-align    : center;
 
-    margin-bottom: 0.65em;
+    margin-bottom : 0.65em;
 }
 
 h2 {
@@ -53,7 +57,7 @@ h2 {
     font-weight   : bold;
     letter-spacing: 0.04em;
     
-    margin-bottom : 1em;
+    margin-bottom : 0.85em;
 }
 
 p {
@@ -63,14 +67,38 @@ p {
     margin-bottom : 3%;
 }
 
+#login {
+    padding: 15% 15% 18% 15%;
+    border : 2px double gray;
+}
+
+label {
+    display      : block;
+    margin-top   : 2em;
+    margin-bottom: 1em;
+}
+
 input {
     background-color: white;
-    font-size       : 1.2em;
     
-    float           : left;
-    width           : 40%;
-    margin-right    : 8%;
-    padding         : 3% 2%;
+    display         : block;
+    width           : 94%;
+    padding         : 2% 3%;
+    margin-bottom   : 2em;
+}
+
+#button_submit {
+    background-color: var(--color-light-blue);
+    color           : var(--color-text-contrast);
+    font-family     : "Quicksand", sans-serif;
+    font-size       : 1.15em;
+    font-weight     : bold;
+    letter-spacing  : 0.03em;
+    text-align      : center;
+    
+    width           : 90%;
+    border          : 3px solid var(--color-dark-blue);
+    padding         : 4% 4.5%;
 }
 
 #player1 {
@@ -83,19 +111,4 @@ input {
     float: right;
     width: 48%;
     border: 1px red solid;
-}
-
-#button_start {
-    background-color: var(--color-light-blue);
-    color           : var(--color-text-contrast);
-    font-family     : "Quicksand", sans-serif;
-    font-size       : 1.2em;
-    font-weight     : bold;
-    letter-spacing  : 0.03em;
-    text-align      : center;
-    
-    float           : left;
-    width           : 10%;
-    border          : 3px solid var(--color-dark-blue);
-    padding         : 3% 6%;
 }

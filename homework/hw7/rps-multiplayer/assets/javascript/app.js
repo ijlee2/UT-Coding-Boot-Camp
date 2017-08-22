@@ -16,8 +16,19 @@ var database;
 var numPlayers, playerTurn;
 var player1, player2;
 
+var displayPage = function(page) {
+    $(".page").css({"display": "none"});
+    $(".page:nth-of-type(" + (page + 1) + ")").css({"display": "block"});
+}
 
 $(document).ready(function() {
+    displayPage(0);
+
+    $("#button_submit").on("click", function() {
+        displayPage(1);
+    })
+
+    /*
     database = firebase.database();
 
     database.ref().once("value", function(snapshot) {
@@ -71,6 +82,7 @@ $(document).ready(function() {
 
         }
     });
+    */
 });
 
 /*

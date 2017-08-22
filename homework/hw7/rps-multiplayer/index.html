@@ -6,11 +6,11 @@
         <meta name="description" content="Homework 7 for UT Coding Boot Camp">
         <meta name="author" content="Isaac J. Lee">
 
-        <title>RPS Game</title>
+        <title>RPS Multiplayer</title>
         
 <!--        <link rel="icon" type="image/png" href="assets/images/favicon.png">-->
         <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada|Quicksand">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Quicksand">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -18,20 +18,27 @@
     </head>
     <body>
         <div class="container">
-            <h1>RPS</h1>
+            <h1>RPS Multiplayer</h1>
             
-            <div id="player_name" class="clearfix">
-                <input type="text" id="name">
-                <div id="button_start">Start</div>
-            </div>
-
-            <div id="player1">
-                <div id="player1_display">
+            <div class="page">
+                <div id="login">
+                    <h2>Login</h2>
+                    
+                    <label for="name">Player Name</label>
+                    <input type="text" id="name">
+                    <div id="button_submit">Submit</div>
                 </div>
             </div>
+            
+            <div class="page">
+                <div id="player1">
+                    <div id="player1_display">
+                    </div>
+                </div>
 
-            <div id="player2">
-                <div id="player2_display">
+                <div id="player2">
+                    <div id="player2_display">
+                    </div>
                 </div>
             </div>
         </div>
