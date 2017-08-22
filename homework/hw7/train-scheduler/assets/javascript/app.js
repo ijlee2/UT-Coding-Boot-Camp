@@ -11,21 +11,21 @@ const config = {
 firebase.initializeApp(config);
 
 // Define a test case
-let testInput = [{"name"       : "Trenton Express",
-                  "destination": "Trenton",
-                  "departure"  : [0, 8, 0],
-                  "frequency"  : 25},
+const testInput = [{"name"       : "Trenton Express",
+                    "destination": "Trenton",
+                    "departure"  : [0, 8, 0],
+                    "frequency"  : 25},
 
-                 {"name"       : "Oregon Trail",
-                  "destination": "Salem",
-                  "departure"  : [0, 11, 0],
-                  "frequency"  : 200},
+                   {"name"       : "Oregon Trail",
+                    "destination": "Salem",
+                    "departure"  : [0, 11, 0],
+                    "frequency"  : 200},
 
-                 {"name"       : "Flying Scotsman",
-                  "destination": "Milwaukee",
-                  "departure"  : [0, 14, 20],
-                  "frequency"  : 8}
-                ];
+                   {"name"       : "Flying Scotsman",
+                    "destination": "Milwaukee",
+                    "departure"  : [0, 14, 20],
+                    "frequency"  : 8}
+                  ];
 
 
 

@@ -10,6 +10,22 @@ const config = {
 
 firebase.initializeApp(config);
 
+// Define a test case
+const testPlayer1 = {"name"     : "John",
+                     "move"     : -1,
+                     "numWins"  : 0,
+                     "numLosses": 0};
+
+const testPlayer2 = {"name"     : "Emily",
+                     "move"     : -1,
+                     "numWins"  : 0,
+                     "numLosses": 0};
+
+const testMessages = ["John: Hi, there!",
+                      "Emily: Hello.",
+                      "John: How are you?",
+                      "Emily: Doing well, thanks."];
+
 
 
 /****************************************************************************
@@ -22,9 +38,35 @@ firebase.initializeApp(config);
 // Global variables
 let database;
 let player1, player2, playerID;
+let messages;
 
 function loadDatabase() {
+    database = firebase.database();
 
+    database.ref().once("value", function(snapshot) {
+        // Create a database if it doesn't exist
+        if (snapshot.val() === null) {
+            player1  = testPlayer1;
+            player2  = testPlayer2;
+            playerID = 1;
+            messages = testMessages;
+
+            database.ref().set({"player1" : player1,
+                                "player2" : player2,
+                                "playerID": 1,
+                                "messages": messages});
+
+        // Otherwise, load the database
+        } else {
+            player1  = snapshot.val().player1;
+            player2  = snapshot.val().player2;
+            playerID = snapshot.val().playerID;
+            messages = snapshot.val().messages;
+
+        }
+
+        displayPlayers();
+    });
 }
 
 
@@ -36,9 +78,14 @@ function loadDatabase() {
     
 *****************************************************************************
 *****************************************************************************/
-var displayPage = function(page) {
+function displayPage(page) {
     $(".page").css({"display": "none"});
     $(`.page:nth-of-type(${page + 1})`).css({"display": "block"});
+}
+
+function displayPlayers() {
+    $("#player1_display").text(player1.name);
+    $("#player2_display").text(player2.name);
 }
 
 
@@ -53,50 +100,28 @@ var displayPage = function(page) {
 $(document).ready(function() {
     displayPage(0);
 
+    $("#name").on("keyup", function(e) {
+        // Allow the user to hit Enter key to enter name
+        if (e.keyCode === 13) {
+            var name = $("#name").val().trim();
+
+            displayPage(1);
+
+            loadDatabase();
+        }
+    });
+
     $("#button_submit").on("click", function() {
         displayPage(1);
+
+        loadDatabase();
     })
 
     /*
     database = firebase.database();
 
     database.ref().once("value", function(snapshot) {
-        // Create database if it doesn't exist
-        if (snapshot.val() == null) {
-            // Create game mechanics
-            numPlayers = 0;
-            playerTurn = 0;
-            database.ref().set({"numPlayers": numPlayers,
-                                "playerTurn": playerTurn});
 
-            // Create Player 1 object
-            player1 = {"name"     : "",
-                       "move"     : -1,
-                       "numWins"  :  0,
-                       "numLosses":  0,
-                       "messages" : []};
-
-            database.ref("player1").set(player1);
-
-            // Create Player 2 object
-            player2 = {"name"     : "",
-                       "move"     : -1,
-                       "numWins"  :  0,
-                       "numLosses":  0,
-                       "messages" : []};
-
-            database.ref("player2").set(player2);
-
-        // Load database if it exists
-        } else {
-            numPlayers = snapshot.val().numPlayers;
-            playerTurn = snapshot.val().playerTurn;
-            player1    = snapshot.child("player1").val();
-            player2    = snapshot.child("player2").val();
-
-        }
-
-        console.log(numPlayers);
         if (numPlayers === 0) {
             $("#player1_display").text("Waiting for Player 1...");
             $("#player2_display").text("Waiting for Player 2...");
