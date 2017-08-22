@@ -14,16 +14,16 @@ firebase.initializeApp(config);
 // Define test case
 const testInput = [{"name"       : "Trenton Express",
                     "destination": "Trenton",
-                    "departure"  : "08:00 AM",
+                    "departure"  : [8, 0],
                     "frequency"  : 25,
-                    "nextArrival": "05:35 PM",
+                    "nextArrival": [17, 35],
                     "minutesAway": 10},
 
                    {"name"       : "Oregon Trail",
                     "destination": "Salem",
-                    "departure"  : "08:00 AM",
+                    "departure"  : [8, 0],
                     "frequency"  : 3600,
-                    "nextArrival": "01:39 PM",
+                    "nextArrival": [13, 39],
                     "minutesAway": 1154}
                   ];
 
@@ -60,6 +60,28 @@ var loadDatabase = function() {
     });
 }
 
+function displayTime(timeArray) {
+    // Get the hour and minute
+    let h = timeArray[0], m = timeArray[1];
+    const period = (0 <= h && h < 12) ? "AM": "PM";
+
+    // Display the hour
+    if (h === 0) {
+        h = 12;
+
+    } else if (h > 12) {
+        h -= 12;
+
+    }
+
+    // Display the minute
+    if (m < 10) {
+        m = "0" + m;
+    }
+
+    return `${h}:${m} ${period}`;
+}
+
 function displaySchedule() {
     let output = "";
 
@@ -68,12 +90,18 @@ function displaySchedule() {
                        <td>${train.name}</td>
                        <td>${train.destination}</td>
                        <td>${train.frequency}</td>
-                       <td>${train.nextArrival}</td>
+                       <td>${displayTime(train.nextArrival)}</td>
                        <td>${train.minutesAway}</td>
                    </tr>`;
     });
 
     $("#currentSchedule tbody").empty().append(output);
+}
+
+function updateSchedule() {
+    trains.forEach(train => {
+
+    })
 }
 
 function addTrain() {
@@ -136,7 +164,7 @@ function addTrain() {
     }
     
     
-    train.nextArrival = (hour2 < 12) ? `${hour2}:${minute2} AM` : `${hour2 - 12}:${minute2} PM`;
+    train.nextArrival = [hour2, minute2];
     train.minutesAway = time2 - time1;
 
     trains.push(train);
@@ -148,6 +176,9 @@ function addTrain() {
 
 $(document).ready(function() {
     loadDatabase();
+
+    // Update the train schedule every minute
+//    setInterval(updateSchedule, 60000);
 
     $("#button_submit").on("click", function() {
         /*
