@@ -33,7 +33,7 @@ let testInput = [{"name"       : "Trenton Express",
 *****************************************************************************/
 // Global variables
 let database;
-let trains;
+let trains, trainID;
 
 var loadDatabase = function() {
     database = firebase.database();
@@ -161,13 +161,13 @@ function displaySchedule() {
     $("#currentSchedule tbody").empty().append(output);
 
     $("tr").on("click", function() {
-        let index = $("tr").index(this) - 1;
+        trainID = $("tr").index(this) - 1;
 
         // Edit train information
-        $("#name").val(trains[index].name);
-        $("#destination").val(trains[index].destination);
-        $("#departure").val(displayTime(trains[index].departure));
-        $("#frequency").val(trains[index].frequency);
+        $("#name").val(trains[trainID].name);
+        $("#destination").val(trains[trainID].destination);
+        $("#departure").val(displayTime(trains[trainID].departure));
+        $("#frequency").val(trains[trainID].frequency);
 
         // Edit button
         $("#search > h2").text("Delete or Edit the Train");
@@ -204,14 +204,46 @@ function addTrain() {
     database.ref().set(trains);
     
     displaySchedule();
+
+    // Reset the fields
+    $("#name, #destination, #departure, #frequency").empty();
 }
 
 function editTrain() {
+    // Convert the departure time (String) to an Array
+    const departure_string = $("#departure").val().trim();
 
+    const index  = departure_string.indexOf(":");
+    const hour   = parseInt(departure_string.substring(0, index));
+    const minute = parseInt(departure_string.substring(index + 1));
+
+    // Create a new train object
+    let train = {"name"       : $("#name").val().trim(),
+                 "destination": $("#destination").val().trim(),
+                 "departure"  : [0, hour, minute],
+                 "frequency"  : parseInt($("#frequency").val())};
+
+    trains[trainID] = train;
+    database.ref().set(trains);
+
+    displaySchedule();
+
+    // Change to Add mode
+    $("#name, #destination, #departure, #frequency").empty();
+    $("#button_add").css({"display": "block"});
+    $("#button_delete, #button_edit").css({"display": "none"});
 }
 
 function deleteTrain() {
+    trains.splice(trainID, 1);
+    database.ref().set(trains);
+    
+    displaySchedule();
 
+    // Change to Add mode
+    $("#name, #destination, #departure, #frequency").empty();
+    $("#button_add").css({"display": "block"});
+    $("#button_delete, #button_edit").css({"display": "none"});
 }
 
 
