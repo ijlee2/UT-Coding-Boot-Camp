@@ -16,18 +16,19 @@ let database;
 let trains;
 
 const testInput = [{"name"       : "Trenton Express",
-                               "destination": "Trenton",
-                               "departure"  : "08:00 AM",
-                               "frequency"  : 25,
-                               "nextArrival": "05:35 PM",
-                               "minutesAway": 10},
+                    "destination": "Trenton",
+                    "departure"  : "08:00 AM",
+                    "frequency"  : 25,
+                    "nextArrival": "05:35 PM",
+                    "minutesAway": 10},
 
-                              {"name"       : "Oregon Trail",
-                               "destination": "Salem",
-                               "departure"  : "08:00 AM",
-                               "frequency"  : 3600,
-                               "nextArrival": "01:39 PM",
-                               "minutesAway": 1154}];
+                   {"name"       : "Oregon Trail",
+                    "destination": "Salem",
+                    "departure"  : "08:00 AM",
+                    "frequency"  : 3600,
+                    "nextArrival": "01:39 PM",
+                    "minutesAway": 1154}
+                  ];
 
 
 var displayPage = function(page) {
