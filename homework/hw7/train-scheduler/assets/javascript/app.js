@@ -14,12 +14,12 @@ firebase.initializeApp(config);
 // Define test case
 let testInput = [{"name"       : "Trenton Express",
                   "destination": "Trenton",
-                  "departure"  : [8, 0],
+                  "departure"  : [0, 8, 0],
                   "frequency"  : 25},
 
                  {"name"       : "Oregon Trail",
                   "destination": "Salem",
-                  "departure"  : [8, 0],
+                  "departure"  : [0, 8, 0],
                   "frequency"  : 200}
                 ];
 
@@ -143,7 +143,7 @@ function displayTime(timeArray) {
 
     } else {
         return `${h}:${m} ${period}, in ${d} days`;
-        
+
     }
 }
 
@@ -164,6 +164,19 @@ function displaySchedule() {
     });
 
     $("#currentSchedule tbody").empty().append(output);
+
+    $("tr").on("click", function() {
+        let index = $("tr").index(this);
+        console.log("index: " + index);
+
+        // Edit train information
+        if (index > 0) {
+            $("#name").val(trains[index].name);
+            $("#destination").val(trains[index].destination);
+            $("#departure").val(displayTime(trains[index].departure));
+            $("#frequency").val(trains[index].frequency);
+        }
+    })
 }
 
 function addTrain() {
@@ -177,7 +190,7 @@ function addTrain() {
     // Create a new train object
     let train = {"name"       : $("#name").val().trim(),
                  "destination": $("#destination").val().trim(),
-                 "departure"  : [hour, minute],
+                 "departure"  : [0, hour, minute],
                  "frequency"  : parseInt($("#frequency").val())};
 
     trains.push(train);
