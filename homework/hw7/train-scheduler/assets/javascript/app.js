@@ -15,19 +15,19 @@ firebase.initializeApp(config);
 var database;
 var trains;
 
-const testInput = {"trains": [{"name"          : "Trenton Express",
-                               "destination"   : "Trenton",
-                               "firstDeparture": "08:00 AM",
-                               "frequency"     : 25,
-                               "nextArrival"   : "05:35 PM",
-                               "minutesAway"   : 10},
+const testInput = {"trains": [{"name"       : "Trenton Express",
+                               "destination": "Trenton",
+                               "departure"  : "08:00 AM",
+                               "frequency"  : 25,
+                               "nextArrival": "05:35 PM",
+                               "minutesAway": 10},
 
-                              {"name"          : "Oregon Trail",
-                               "destination"   : "Salem",
-                               "firstDeparture": "08:00 AM",
-                               "frequency"     : 3600,
-                               "nextArrival"   : "01:39 PM",
-                               "minutesAway"   : 1154}]
+                              {"name"       : "Oregon Trail",
+                               "destination": "Salem",
+                               "departure"  : "08:00 AM",
+                               "frequency"  : 3600,
+                               "nextArrival": "01:39 PM",
+                               "minutesAway": 1154}]
                     };
 
 
@@ -74,14 +74,35 @@ function updateSchedule() {
 }
 
 function addTrain() {
-    var train = {"name"          : $("#name").val().trim(),
-                 "destination"   : $("#destination").val().trim(),
-                 "firstDeparture": $("#firstDeparture").val().trim(),
-                 "frequency"     : parseInt($("#frequency").val())};
+    const train = {"name"       : $("#name").val().trim(),
+                   "destination": $("#destination").val().trim(),
+                   "departure"  : $("#departure").val().trim(),
+                   "frequency"  : parseInt($("#frequency").val())};
 
-    // Calculate the next arrival
-    train.nextArrival = "05:35 PM";
-    train.minutesAway = 10;
+    const currentTime = new Date();
+
+    // Express the departure in minutes (time0)
+    let hour   = parseInt(train.departure.substring(0, 2));
+    let minute = parseInt(train.departure.substring(3, 5));
+
+    const time0 = 60 * hour + minute;
+
+    // Express the current time in minutes (time1)
+    hour   = currentTime.getHours();
+    minute = currentTime.getMinutes();
+
+    const time1 = 60 * hour + minute;
+
+    // Find the next arrival
+    const numRoundsMade = Math.floor((time1 - time0) / train.frequency);
+    const time2 = time0 + (numRoundsMade + 1) * train.frequency;
+
+    hour   = Math.floor(time2 / 60);
+    minute = time2 - 60 * hour;
+    hour   = hour % 24;
+
+    train.nextArrival = (hour < 12) ? `${hour}:${minute} AM` : `${hour - 12}:${minute} PM`;
+    train.minutesAway = time2 - time1;
 
     trains.push(train);
     database.ref().set(trains);
