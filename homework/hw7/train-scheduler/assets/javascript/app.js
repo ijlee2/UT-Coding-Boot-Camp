@@ -57,6 +57,9 @@ var loadDatabase = function() {
 }
 
 function findNextArrival(train) {
+    const numMinutesPerDay = 24 * 60;
+
+
     /************************************************************************
         
         Express the departure in minutes (time0)
@@ -105,6 +108,8 @@ function findNextArrival(train) {
 //        hour2   = hour2 % 24;
 
     }
+    console.log("before:" + hour2);
+    console.log("after: " + (hour2 - 24));
     
     return {"nextArrival": [hour2, minute2],
             "minutesAway": time2 - time1};
