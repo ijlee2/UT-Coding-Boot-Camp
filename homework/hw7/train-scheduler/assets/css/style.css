@@ -8,7 +8,7 @@
 :root {
     /* Define color scheme */
     --color-background    : #f0f2f0;
-    --color-light-yellow  : #f7e739;
+    --color-light-brown   : #e2d19c;
     --color-light-blue    : #78b6ed;
     --color-dark-blue     : #3773a8;
     --color-text          : #202020;
@@ -89,7 +89,7 @@ tr:nth-child(even) {
 }
 
 tr:nth-child(odd) {
-    background-color: var(--color-light-yellow);
+    background-color: var(--color-light-brown);
 }
 
 th {
@@ -99,6 +99,7 @@ th {
     width           : 18%;
     padding         : 2% 1%;
     border-right    : 1px solid var(--color-text-contrast);
+    border-bottom   : 2px solid var(--color-text-contrast);
 }
 
 th:last-child {

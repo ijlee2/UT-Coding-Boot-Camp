@@ -233,6 +233,7 @@ function editTrain() {
     displaySchedule();
 
     // Change to Add mode
+    $("#search > h2").text("Add a Train");
     $("input").val("");
     $("#button_add").css({"display": "block"});
     $("#button_delete, #button_edit").css({"display": "none"});
@@ -245,6 +246,7 @@ function deleteTrain() {
     displaySchedule();
 
     // Change to Add mode
+    $("#search > h2").text("Add a Train");
     $("input").val("");
     $("#button_add").css({"display": "block"});
     $("#button_delete, #button_edit").css({"display": "none"});
