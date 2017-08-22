@@ -18,7 +18,7 @@ If you have suggestions for making my code better and simpler, please let me kno
 4. [Crystal Collector](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/crystal-collector/) (easy), [Star Wars RPG](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw4/star-wars-rpg) (hard)
 5. [Trivia Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw5/trivia-game-basic/) (easy), [Trivia Game](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw5/trivia-game-advanced/) (hard)
 6. [gif.tastic](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw6/)
-7. [Train Scheduler](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw7/train-scheduler) (easy), RPS Multiplayer (hard)
+7. [Train Scheduler](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw7/train-scheduler/) (easy), RPS Multiplayer (hard)
 
 ## Exercises
 A collection of codes made from scratch or from a starter template.
