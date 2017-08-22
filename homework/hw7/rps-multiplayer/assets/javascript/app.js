@@ -1,5 +1,5 @@
 // Configure Firebase
-var config = {
+const config = {
     apiKey           : "AIzaSyDXvqGhdA0Ub2OVaR2uAYRw4qMWxAJXLSg",
     authDomain       : "rps-multiplayer-53644.firebaseapp.com",
     databaseURL      : "https://rps-multiplayer-53644.firebaseio.com",
@@ -11,16 +11,45 @@ var config = {
 firebase.initializeApp(config);
 
 
-// Global variables
-var database;
-var numPlayers, playerTurn;
-var player1, player2;
 
-var displayPage = function(page) {
-    $(".page").css({"display": "none"});
-    $(".page:nth-of-type(" + (page + 1) + ")").css({"display": "block"});
+/****************************************************************************
+ ****************************************************************************
+    
+    Rock, Paper, Scissors Game
+    
+*****************************************************************************
+*****************************************************************************/
+// Global variables
+let database;
+let player1, player2, playerID;
+
+function loadDatabase() {
+
 }
 
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Display functions
+    
+*****************************************************************************
+*****************************************************************************/
+var displayPage = function(page) {
+    $(".page").css({"display": "none"});
+    $(`.page:nth-of-type(${page + 1})`).css({"display": "block"});
+}
+
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Wait for user actions
+    
+*****************************************************************************
+*****************************************************************************/
 $(document).ready(function() {
     displayPage(0);
 

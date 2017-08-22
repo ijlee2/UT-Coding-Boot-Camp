@@ -40,7 +40,7 @@ let testInput = [{"name"       : "Trenton Express",
 let database;
 let trains, trainID;
 
-var loadDatabase = function() {
+function loadDatabase() {
     database = firebase.database();
 
     database.ref().once("value", function(snapshot) {
