@@ -19,7 +19,7 @@ let testInput = [{"name"       : "Trenton Express",
 
                  {"name"       : "Oregon Trail",
                   "destination": "Salem",
-                  "departure"  : [0, 8, 0],
+                  "departure"  : [0, 6, 0],
                   "frequency"  : 200}
                 ];
 
@@ -166,17 +166,14 @@ function displaySchedule() {
     $("#currentSchedule tbody").empty().append(output);
 
     $("tr").on("click", function() {
-        let index = $("tr").index(this);
-        console.log("index: " + index);
+        let index = $("tr").index(this) - 1;
 
         // Edit train information
-        if (index > 0) {
-            $("#name").val(trains[index].name);
-            $("#destination").val(trains[index].destination);
-            $("#departure").val(displayTime(trains[index].departure));
-            $("#frequency").val(trains[index].frequency);
-        }
-    })
+        $("#name").val(trains[index].name);
+        $("#destination").val(trains[index].destination);
+        $("#departure").val(displayTime(trains[index].departure));
+        $("#frequency").val(trains[index].frequency);
+    });
 }
 
 function addTrain() {
