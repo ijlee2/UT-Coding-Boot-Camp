@@ -92,33 +92,35 @@ function findNextArrival(train) {
     const numTripsMade = Math.floor((time1 - time0) / train.frequency);
     
     // Departure time
-    let hour2, minute2, time2;
+    let day = 0, hour, minute, time;
 
     // The train will depart much later
     if (numTripsMade < 0) {
-        hour2   = hour0;
-        minute2 = minute0;
-        time2   = 60 * hour2 + minute2;
+        hour   = hour0;
+        minute = minute0;
+        time   = 60 * hour + minute;
 
     // The train will depart soon
     } else {
-        time2   = time0 + (numTripsMade + 1) * train.frequency;
-        hour2   = Math.floor(time2 / 60);
-        minute2 = time2 - 60 * hour2;
-//        hour2   = hour2 % 24;
+        time   = time0 + (numTripsMade + 1) * train.frequency;
+        hour   = Math.floor(time / 60);
+        minute = time - 60 * hour;
 
     }
-    console.log("before:" + hour2);
-    console.log("after: " + (hour2 - 24));
+
+    if (hour >= 24) {
+        day  = Math.floor(hour / 24);
+        hour = hour % 24;
+    }
     
-    return {"nextArrival": [hour2, minute2],
-            "minutesAway": time2 - time1};
+    return {"nextArrival": [day, hour, minute],
+            "minutesAway": time - time1};
 
 }
 
 function displayTime(timeArray) {
     // Get the hour and minute
-    let h = timeArray[0], m = timeArray[1];
+    let d = timeArray[0], h = timeArray[1], m = timeArray[2];
     const period = (0 <= h && h < 12) ? "AM": "PM";
 
     // Display the hour
@@ -133,7 +135,16 @@ function displayTime(timeArray) {
         m = "0" + m;
     }
 
-    return `${h}:${m} ${period}`;
+    if (d === 0) {
+        return `${h}:${m} ${period}`
+
+    } else if (d === 1) {
+        return `${h}:${m} ${period}, in ${d} day`;
+
+    } else {
+        return `${h}:${m} ${period}, in ${d} days`;
+        
+    }
 }
 
 function displaySchedule() {
