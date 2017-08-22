@@ -36,13 +36,18 @@ const testMessages = ["John: Hi, there!",
 *****************************************************************************
 *****************************************************************************/
 // Global variables
-let database;
+let database, connectedRef, connectionsRef;
+
 let player1, player2, playerID;
 let messages;
 
 function loadDatabase() {
     database = firebase.database();
 
+    // Track visitors
+    connectedRef   = database.ref(".info/connected");
+    connectionsRef = database.ref("connections");
+    
     database.ref().once("value", function(snapshot) {
         // Create a database if it doesn't exist
         if (snapshot.val() === null) {
@@ -66,6 +71,21 @@ function loadDatabase() {
         }
 
         displayPlayers();
+    });
+
+    connectedRef.on("value", function(snap) {
+        // When the user is online
+        if (snap.val()) {
+            // Add the user to the connections list
+            const connection = connectionsRef.push(true);
+
+            // Remove the user from the connections list when they disconnect
+            connection.onDisconnect().remove();
+        }
+    });
+
+    connectionsRef.on("value", function(snap) {
+        $("#numPlayersOnline").text(snap.numChildren() - 1);
     });
 }
 
@@ -98,6 +118,8 @@ function displayPlayers() {
 *****************************************************************************
 *****************************************************************************/
 $(document).ready(function() {
+    loadDatabase();
+
     displayPage(0);
 
     $("#name").on("keyup", function(e) {
@@ -106,15 +128,11 @@ $(document).ready(function() {
             var name = $("#name").val().trim();
 
             displayPage(1);
-
-            loadDatabase();
         }
     });
 
     $("#button_submit").on("click", function() {
         displayPage(1);
-
-        loadDatabase();
     })
 
     /*

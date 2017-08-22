@@ -20,18 +20,13 @@ body, input {
     background-color: var(--color-background);
     color           : var(--color-text);
     font-family     : "Quicksand", sans-serif;
-    font-size       : 20px;
+    font-size       : 18px;
 }
 
 .container {
     width  : 840px;
     margin : auto;
     padding: 2.5% 0;
-}
-
-.page {
-    width : 36%;
-    margin: auto;
 }
 
 .clearfix::after {
@@ -68,7 +63,9 @@ p {
 }
 
 #login {
-    padding: 15% 15% 18% 15%;
+    width  : 33%;
+    margin : auto;
+    padding: 12% 14%;
     border : 2px double gray;
 }
 
