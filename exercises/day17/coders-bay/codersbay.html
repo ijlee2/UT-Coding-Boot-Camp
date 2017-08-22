@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <title>CoderBay</title>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <br>
+
+      <!-- Jumbotron Title -->
+      <div class="jumbotron">
+        <h1 class="text-center">Welcome to CodersBay</h1>
+        <h3 class="text-center">"Where bidders win big."</h3>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3 class="text-center"><strong>Today's Sale</strong>: Pure Vegetarian-Based Coding Knowledge (Chewable)</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Product -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-4 col-sm-offset-2">
+                  <img class="img-responsive thumbnail center-block" src="http://graphitepublications.com/wp-content/uploads/2015/04/5-Coding-Challenges-to-Help-You-Train-Your-Brain.jpg" alt="Coding Brain" >
+                </div>
+                <div class="col-sm-6">
+                  <h3 class=""><strong>Highest Bidder:</strong> <span id="highest-bidder"></span></h3>
+                  <h3 class=""><strong>Current Price:</strong> <span id="highest-price"></span></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Make Your Bid -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Make Your Bid</h3>
+            </div>
+            <div class="panel-body">
+              <form>
+                <div class="form-group">
+                  <label for="bidder-name">Your Name</label>
+                  <input class="form-control" id="bidder-name" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="bidder-price">Your Price</label>
+                  <input class="form-control" id="bidder-price" type="number">
+                </div>
+                <button class="btn btn-primary" id="submit-bid" type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="logicOption2.js"></script>
+
+  </body>
+
+</html>
