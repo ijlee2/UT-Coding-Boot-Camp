@@ -12,20 +12,16 @@ firebase.initializeApp(config);
 
 
 // Define test case
-const testInput = [{"name"       : "Trenton Express",
-                    "destination": "Trenton",
-                    "departure"  : [8, 0],
-                    "frequency"  : 25,
-                    "nextArrival": [17, 35],
-                    "minutesAway": 10},
+let testInput = [{"name"       : "Trenton Express",
+                  "destination": "Trenton",
+                  "departure"  : [8, 0],
+                  "frequency"  : 25},
 
-                   {"name"       : "Oregon Trail",
-                    "destination": "Salem",
-                    "departure"  : [8, 0],
-                    "frequency"  : 3600,
-                    "nextArrival": [13, 39],
-                    "minutesAway": 1154}
-                  ];
+                 {"name"       : "Oregon Trail",
+                  "destination": "Salem",
+                  "departure"  : [8, 0],
+                  "frequency"  : 200}
+                ];
 
 
 
@@ -60,67 +56,14 @@ var loadDatabase = function() {
     });
 }
 
-function displayTime(timeArray) {
-    // Get the hour and minute
-    let h = timeArray[0], m = timeArray[1];
-    const period = (0 <= h && h < 12) ? "AM": "PM";
-
-    // Display the hour
-    if (h === 0) {
-        h = 12;
-
-    } else if (h > 12) {
-        h -= 12;
-
-    }
-
-    // Display the minute
-    if (m < 10) {
-        m = "0" + m;
-    }
-
-    return `${h}:${m} ${period}`;
-}
-
-function displaySchedule() {
-    let output = "";
-
-    trains.forEach(train => {
-        output += `<tr>
-                       <td>${train.name}</td>
-                       <td>${train.destination}</td>
-                       <td>${train.frequency}</td>
-                       <td>${displayTime(train.nextArrival)}</td>
-                       <td>${train.minutesAway}</td>
-                   </tr>`;
-    });
-
-    $("#currentSchedule tbody").empty().append(output);
-}
-
-function updateSchedule() {
-    trains.forEach(train => {
-
-    })
-}
-
-function addTrain() {
-    const train = {"name"       : $("#name").val().trim(),
-                   "destination": $("#destination").val().trim(),
-                   "departure"  : $("#departure").val().trim(),
-                   "frequency"  : parseInt($("#frequency").val())};
-
-    const currentTime = new Date();
-
-    
+function findNextArrival(train) {
     /************************************************************************
         
         Express the departure in minutes (time0)
         
     *************************************************************************/
-    const index   = train.departure.indexOf(":");
-    const hour0   = parseInt(train.departure.substring(0, index));
-    const minute0 = parseInt(train.departure.substring(index + 1));
+    const hour0   = train.departure[0];
+    const minute0 = train.departure[1];
 
     const time0 = 60 * hour0 + minute0;
 
@@ -130,6 +73,8 @@ function addTrain() {
         Express the current time in minutes (time1)
         
     *************************************************************************/
+    const currentTime = new Date();
+
     const hour1   = currentTime.getHours();
     const minute1 = currentTime.getMinutes();
 
@@ -142,8 +87,7 @@ function addTrain() {
         
     *************************************************************************/
     const numTripsMade = Math.floor((time1 - time0) / train.frequency);
-    console.log("numTripsMade: " + numTripsMade);
-
+    
     // Departure time
     let hour2, minute2, time2;
 
@@ -158,14 +102,67 @@ function addTrain() {
         time2   = time0 + (numTripsMade + 1) * train.frequency;
         hour2   = Math.floor(time2 / 60);
         minute2 = time2 - 60 * hour2;
-
 //        hour2   = hour2 % 24;
 
     }
     
-    
-    train.nextArrival = [hour2, minute2];
-    train.minutesAway = time2 - time1;
+    return {"nextArrival": [hour2, minute2],
+            "minutesAway": time2 - time1};
+
+}
+
+function displayTime(timeArray) {
+    // Get the hour and minute
+    let h = timeArray[0], m = timeArray[1];
+    const period = (0 <= h && h < 12) ? "AM": "PM";
+
+    // Display the hour
+    h = h % 12;
+
+    if (h === 0) {
+        h = 12;
+    }
+
+    // Display the minute
+    if (m < 10) {
+        m = "0" + m;
+    }
+
+    return `${h}:${m} ${period}`;
+}
+
+function displaySchedule() {
+    let info;
+    let output = "";
+
+    trains.forEach(train => {
+        info = findNextArrival(train);
+
+        output += `<tr>
+                       <td>${train.name}</td>
+                       <td>${train.destination}</td>
+                       <td>${train.frequency}</td>
+                       <td>${displayTime(info.nextArrival)}</td>
+                       <td>${info.minutesAway}</td>
+                   </tr>`;
+    });
+
+    $("#currentSchedule tbody").empty().append(output);
+}
+
+function addTrain() {
+    // Convert the departure time (String) to an Array
+    const departure_string = $("#departure").val().trim();
+
+    const index  = departure_string.indexOf(":");
+    const hour   = parseInt(departure_string.substring(0, index));
+    const minute = parseInt(departure_string.substring(index + 1));
+
+    // Create a new train object
+    let train = {"name"       : $("#name").val().trim(),
+                 "destination": $("#destination").val().trim(),
+                 "departure"  : [hour, minute],
+                 "frequency"  : parseInt($("#frequency").val())};
 
     trains.push(train);
     database.ref().set(trains);
@@ -178,8 +175,16 @@ $(document).ready(function() {
     loadDatabase();
 
     // Update the train schedule every minute
-//    setInterval(updateSchedule, 60000);
+    const currentTime = new Date();
 
+    setTimeout(function() {
+        displaySchedule();
+
+        setInterval(displaySchedule, 60000);
+
+    }, 1000 * (60 - currentTime.getSeconds()));
+
+    // Add a new train
     $("#button_submit").on("click", function() {
         /*
         // Input validation
