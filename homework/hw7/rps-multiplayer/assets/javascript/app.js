@@ -43,14 +43,12 @@ let messages;
 
 function loadDatabase() {
     database = firebase.database();
-
-    // Track visitors
-    connectedRef   = database.ref(".info/connected");
-    connectionsRef = database.ref("connections");
     
     database.ref().once("value", function(snapshot) {
         // Create a database if it doesn't exist
         if (snapshot.val() === null) {
+            console.log("create database");
+
             player1  = testPlayer1;
             player2  = testPlayer2;
             playerID = 1;
@@ -63,6 +61,8 @@ function loadDatabase() {
 
         // Otherwise, load the database
         } else {
+            console.log("load database");
+            
             player1  = snapshot.val().player1;
             player2  = snapshot.val().player2;
             playerID = snapshot.val().playerID;
@@ -72,6 +72,12 @@ function loadDatabase() {
 
         displayPlayers();
     });
+    console.log(player1);
+    console.log(player2);
+
+    // Track visitors
+    connectedRef   = database.ref(".info/connected");
+    connectionsRef = database.ref("connections");
 
     connectedRef.on("value", function(snap) {
         // When the user is online
