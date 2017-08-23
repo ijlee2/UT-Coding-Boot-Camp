@@ -21,16 +21,6 @@ const connectedRef   = database.ref(".info/connected");
 const connectionsRef = database.ref("connections");
 
 // Define a test case
-const testPlayer1 = {"name"     : "John",
-                     "move"     : -1,
-                     "numWins"  : 0,
-                     "numLosses": 0};
-
-const testPlayer2 = {"name"     : "Emily",
-                     "move"     : -1,
-                     "numWins"  : 0,
-                     "numLosses": 0};
-
 const testMessages = ["John: Hi, there!",
                       "Emily: Hello.",
                       "John: How are you?",
@@ -46,7 +36,8 @@ const testMessages = ["John: Hi, there!",
 *****************************************************************************
 *****************************************************************************/
 // Global variables
-let players = [], numPlayers = 0, playerID;
+let players = new Array(2);
+let numPlayers, turn;
 let messages;
 
 
@@ -56,17 +47,10 @@ let messages;
     
 *****************************************************************************/
 function loadDatabase() {
-    // When the page loads, or when a player starts the game
     database.ref("players").on("child_added", function(snapshot) {
-        // Get the player
-        player = snapshot.val();
-
         // Update the array
-        players.push(player);
-        numPlayers++;
-
-        // TODO: Display player information
-
+        players[snapshot.key] = snapshot.val();
+        console.log(players);
     });
 
     // When a player exists the game
@@ -75,27 +59,34 @@ function loadDatabase() {
         player = snapshot.val();
 
         // Update the array (FIFO)
+        /*
         players.shift();
         numPlayers--;
+        */
 
         // TODO: Display player information
         
     });
 
+    database.ref("numPlayers").on("value", function(snapshot) {
+        numPlayers = (snapshot.val()) ? snapshot.val() : 0;
+    });
+    
+
     // Track visitors
     connectedRef.on("value", function(snapshot) {
-        // When a player is online
+        // When a user is online
         if (snapshot.val()) {
-            // Add the player to the connections list
+            // Add the user to the connections list
             const connection = connectionsRef.push(true);
 
-            // Remove the player from the list when they disconnect
+            // Remove the user from the list when they disconnect
             connection.onDisconnect().remove();
         }
     });
 
     connectionsRef.on("value", function(snapshot) {
-        $("#numPlayersOnline").text(snapshot.numChildren() - 1);
+        $("#numActiveVisitors").text(snapshot.numChildren() - 1);
     });
 }
 
@@ -122,9 +113,22 @@ function displayPlayers() {
     
 *****************************************************************************/
 function addPlayer() {
-    const name = $("#name").val().trim();
+    const player = {"name"     : $("#name").val().trim(),
+                    "move"     : -1,
+                    "numWins"  : 0,
+                    "numLosses": 0};
 
-    displayPage(1);
+    // Add the player
+    if (numPlayers < 2) {
+        database.ref("players").child(numPlayers).set(player);
+        database.ref("numPlayers").set(numPlayers + 1);
+        
+        displayPage(1);
+
+    } else {
+        console.log("Please wait for the next available match.");
+
+    }
 }
 
 
