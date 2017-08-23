@@ -1,4 +1,10 @@
-// Configure Firebase
+/****************************************************************************
+ ****************************************************************************
+    
+    Configure Firebase
+    
+*****************************************************************************
+*****************************************************************************/
 const config = {
     apiKey           : "AIzaSyDTZzRZokWqHyFnA0T11Hte9ZwJ9QgO4kI",
     authDomain       : "train-scheduler-3f682.firebaseapp.com",
@@ -10,28 +16,8 @@ const config = {
 
 firebase.initializeApp(config);
 
-// Define a test case
-/*
-const test_trains = [
-    {"id"         : 0,
-     "name"       : "Trenton Express",
-     "destination": "Trenton",
-     "departure"  : [0, 8, 0],
-     "frequency"  : 25},
+const database = firebase.database();
 
-    {"id"         : 1,
-     "name"       : "Oregon Trail",
-     "destination": "Salem",
-     "departure"  : [0, 11, 0],
-     "frequency"  : 200},
-
-    {"id"         : 2,
-     "name"       : "Flying Scotsman",
-     "destination": "Milwaukee",
-     "departure"  : [0, 14, 20],
-     "frequency"  : 8}
-];
-*/
 
 
 /****************************************************************************
@@ -42,32 +28,20 @@ const test_trains = [
 *****************************************************************************
 *****************************************************************************/
 // Global variables
-let database;
 let trains = [], availableID = 0;
 let myTrain, trainID, arrayID;
 
 function loadDatabase() {
-    database = firebase.database();
-
     // When the loads, or when a user adds a train
     database.ref().on("child_added", function(snapshot) {
         // Get the train
-        let train  = snapshot.val();
-        const info = findNextArrival(train);
+        const train = snapshot.val();
 
         // Update the array
         trains.push(train);
 
         // Update the schedule table
-        const output = `<tr id="${train.id}">
-                            <td>${train.name}</td>
-                            <td>${train.destination}</td>
-                            <td>${train.frequency}</td>
-                            <td>${displayTime(info.nextArrival)}</td>
-                            <td>${info.minutesAway}</td>
-                        </tr>`;
-
-        $("tbody").append(output);
+        $("tbody").append(displayTrain(train));
 
         // Find the next available ID
         availableID = Math.max(train.id + 1, availableID);
@@ -76,8 +50,7 @@ function loadDatabase() {
     // When a user edits a train
     database.ref().on("child_changed", function(snapshot) {
         // Get the train
-        let train  = snapshot.val();
-        const info = findNextArrival(train);
+        const train = snapshot.val();
 
         // Update the array
         trainID = train.id;
@@ -85,22 +58,14 @@ function loadDatabase() {
         trains[arrayID] = train;
 
         // Update the schedule table
-        const output = `<tr id="${train.id}">
-                            <td>${train.name}</td>
-                            <td>${train.destination}</td>
-                            <td>${train.frequency}</td>
-                            <td>${displayTime(info.nextArrival)}</td>
-                            <td>${info.minutesAway}</td>
-                        </tr>`;
-
-        $(`tr#${trainID}`).replaceWith(output);
+        $(`tr#${trainID}`).replaceWith(displayTrain(train));
 
     });
 
     // When a user removes a train
     database.ref().on("child_removed", function(snapshot) {
         // Get the train
-        let train  = snapshot.val();
+        const train = snapshot.val();
 
         // Update the array
         trainID = train.id;
@@ -217,21 +182,23 @@ function displayTime(timeArray) {
     }
 }
 
+function displayTrain(train) {
+    const info = findNextArrival(train);
+
+    return `<tr id="${train.id}">
+                <td>${train.name}</td>
+                <td>${train.destination}</td>
+                <td>${train.frequency}</td>
+                <td>${displayTime(info.nextArrival)}</td>
+                <td>${info.minutesAway}</td>
+            </tr>`;
+}
+
 function refreshSchedule() {
     let info;
     let output = "";
 
-    trains.forEach(train => {
-        info = findNextArrival(train);
-
-        output += `<tr id="${train.id}">
-                       <td>${train.name}</td>
-                       <td>${train.destination}</td>
-                       <td>${train.frequency}</td>
-                       <td>${displayTime(info.nextArrival)}</td>
-                       <td>${info.minutesAway}</td>
-                   </tr>`;
-    });
+    trains.forEach(train => output += displayTrain(train));
 
     $("tbody").empty().append(output);
 }
@@ -367,7 +334,7 @@ function deleteTrain() {
 $(document).ready(function() {
     loadDatabase();
 
-    // Refresh the train schedule every minute
+    // Refresh the schedule every minute
     const numSecondsLeft = 60 - (new Date()).getSeconds();
 
     setTimeout(function() {
