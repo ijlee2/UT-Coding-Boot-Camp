@@ -46,7 +46,7 @@ const testMessages = ["John: Hi, there!",
 *****************************************************************************
 *****************************************************************************/
 // Global variables
-let player1, player2, playerID;
+let players = [], numPlayers = 0, playerID;
 let messages;
 
 
@@ -57,35 +57,26 @@ let messages;
 *****************************************************************************/
 function loadDatabase() {
     // When the page loads, or when a player starts the game
-    database.ref("player1").on("child_added", function(snapshot) {
-        // Get player information
-        player1 = snapshot.val();
+    database.ref("players").on("child_added", function(snapshot) {
+        // Get the player
+        player = snapshot.val();
+
+        // Update the array
+        players.push(player);
+        numPlayers++;
 
         // TODO: Display player information
 
-    });
-
-    database.ref("player2").on("child_added", function(snapshot) {
-        // Get player information
-        player2 = snapshot.val();
-
-        // TODO: Display player information
-        
     });
 
     // When a player exists the game
-    database.ref("player1").on("child_removed", function(snapshot) {
-        // Get player information
-        player1 = {};
+    database.ref("players").on("child_removed", function(snapshot) {
+        // Get the player
+        player = snapshot.val();
 
-        // TODO: Display player information
-        
-    });
-
-    // When a player exists the game
-    database.ref("player2").on("child_removed", function(snapshot) {
-        // Get player information
-        player2 = {};
+        // Update the array (FIFO)
+        players.shift();
+        numPlayers--;
 
         // TODO: Display player information
         
@@ -127,6 +118,18 @@ function displayPlayers() {
 
 /****************************************************************************
     
+    Add or delete a player
+    
+*****************************************************************************/
+function addPlayer() {
+    const name = $("#name").val().trim();
+
+    displayPage(1);
+}
+
+
+/****************************************************************************
+    
     Wait for user actions
     
 *****************************************************************************/
@@ -138,34 +141,9 @@ $(document).ready(function() {
     $("#name").on("keyup", function(e) {
         // Allow the user to hit Enter key to enter name
         if (e.keyCode === 13) {
-            const name = $("#name").val().trim();
-
-            displayPage(1);
+            addPlayer();
         }
     });
 
-    $("#button_submit").on("click", function() {
-        displayPage(1);
-    })
-
-    /*
-    database = firebase.database();
-
-    database.ref().once("value", function(snapshot) {
-
-        if (numPlayers === 0) {
-            $("#player1_display").text("Waiting for Player 1...");
-            $("#player2_display").text("Waiting for Player 2...");
-
-        } else {
-            if (numPlayers >= 1) {
-                $("#player1_display").text("Player 1 is ready.");
-            }
-            if (numPlayers >= 2) {
-                $("#player2_display").text("Player 2 is ready.");
-            }
-
-        }
-    });
-    */
+    $("#button_submit").on("click", addPlayer);
 });
