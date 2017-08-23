@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Homework 7 for UT Coding Boot Camp">
+        <meta name="author" content="Isaac J. Lee">
+
+        <title>Train Scheduler</title>
+        
+<!--        <link rel="icon" type="image/png" href="assets/images/favicon.png">-->
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Quicksand">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Train Scheduler</h1>
+
+            <div id="schedule">
+                <h2>Schedule</h2>
+                <p>Directions: Click on the row to delete or edit information.</p>
+                
+                <table id="currentSchedule">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Destination</th>
+                            <th>Frequency (min)</th>
+                            <th>Next Arrival</th>
+                            <th>Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div id="search">
+                <h2>Add a Train</h2>
+                <p>Directions: Please fill out all fields.</p>
+                
+                <div class="leftPane">
+                    <label for="name">Name</label>
+                    <input type="text" id="name">
+                    
+                    <label for="destination">Destination</label>
+                    <input type="text" id="destination">
+                </div>
+
+                <div class="rightPane">
+                    <label for="departure">Departure (00:00 - 23:59)</label>
+                    <input type="text" id="departure">
+                    
+                    <label for="frequency">Frequency (min)</label>
+                    <input type="text" id="frequency">
+                </div>
+                
+                <div id="button_add">Add</div>
+                <div id="button_edit">Save</div>
+                <div id="button_delete">Delete</div>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="assets/javascript/app.js"></script>
+    </body>
+</html>
