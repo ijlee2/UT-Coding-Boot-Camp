@@ -108,14 +108,20 @@ function displayPage(page) {
 }
 
 function displayPlayers() {
+    let output;
+
     for (let i = 0; i < numPlayers; i++) {
         if (!$.isEmptyObject(players[i])) {
-            $(`#player${i} > .display`).text(players[i].name);
+            output = `<h2>${players[i].name}</h2>
+                      <p>Welcome to RPS Multiplayer!</p>`;
 
         } else {
-            $(`#player${i} > .display`).text(`Waiting for a player to join.`);
+            output = `<h2>???</h2>
+                      <p>Waiting for the player to join...<p>`;
 
         }
+        
+        $(`#player${i} > .display`).html(output);
     }
 }
 
