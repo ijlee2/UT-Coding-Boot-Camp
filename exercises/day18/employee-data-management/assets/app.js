@@ -18,8 +18,8 @@ $("#button_submit").on("click", function() {
     // I get the information from the broswer
     var name        = $("#name").val();
     var role        = $("#role").val();
-//    var startDate   = moment($("#startDate").val().trim(), "DD/MM/YY").format("X");
-    var startDate   = $("#startDate").val().trim();
+    var startDate   = moment($("#startDate").val().trim(), "MM/DD/YYYY").format("X");
+//    var startDate   = $("#startDate").val().trim();
     var monthlyRate = $("#monthlyRate").val();
 
     // Add the information to the database
