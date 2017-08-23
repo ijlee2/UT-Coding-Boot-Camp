@@ -36,8 +36,8 @@ const testMessages = ["John: Hi, there!",
 *****************************************************************************
 *****************************************************************************/
 // Global variables
-let players = new Array(2);
-let numPlayers, turn;
+const numPlayers = 2;
+let players = new Array(numPlayers), numPlayersInMatch, turn;
 let messages;
 
 
@@ -50,7 +50,9 @@ function loadDatabase() {
     database.ref("players").on("child_added", function(snapshot) {
         // Update the array
         players[snapshot.key] = snapshot.val();
-        console.log(players);
+
+        // Display player information
+        displayPlayers();
     });
 
     // When a player exists the game
@@ -68,8 +70,12 @@ function loadDatabase() {
         
     });
 
-    database.ref("numPlayers").on("value", function(snapshot) {
-        numPlayers = (snapshot.val()) ? snapshot.val() : 0;
+    database.ref("numPlayersInMatch").on("value", function(snapshot) {
+        numPlayersInMatch = (snapshot.val()) ? snapshot.val() : 0;
+    });
+
+    database.ref("turn").on("value", function(snapshot) {
+        turn = (snapshot.val()) ? snapshot.val() : undefined;
     });
     
 
@@ -102,8 +108,15 @@ function displayPage(page) {
 }
 
 function displayPlayers() {
-    $("#player1_display").text(player1.name);
-    $("#player2_display").text(player2.name);
+    for (let i = 0; i < numPlayers; i++) {
+        if (!$.isEmptyObject(players[i])) {
+            $(`#player${i} > .display`).text(players[i].name);
+
+        } else {
+            $(`#player${i} > .display`).text(`Waiting for a player to join.`);
+
+        }
+    }
 }
 
 
@@ -119,9 +132,10 @@ function addPlayer() {
                     "numLosses": 0};
 
     // Add the player
-    if (numPlayers < 2) {
-        database.ref("players").child(numPlayers).set(player);
-        database.ref("numPlayers").set(numPlayers + 1);
+    if (numPlayersInMatch < 2) {
+        database.ref("players").child(numPlayersInMatch).set(player);
+        database.ref("numPlayersInMatch").set(numPlayersInMatch + 1);
+        database.ref("turn").set(0);
         
         displayPage(1);
 
