@@ -11,22 +11,27 @@ const config = {
 firebase.initializeApp(config);
 
 // Define a test case
-const testInput = [{"name"       : "Trenton Express",
-                    "destination": "Trenton",
-                    "departure"  : [0, 8, 0],
-                    "frequency"  : 25},
+/*
+const test_trains = [
+    {"id"         : 0,
+     "name"       : "Trenton Express",
+     "destination": "Trenton",
+     "departure"  : [0, 8, 0],
+     "frequency"  : 25},
 
-                   {"name"       : "Oregon Trail",
-                    "destination": "Salem",
-                    "departure"  : [0, 11, 0],
-                    "frequency"  : 200},
+    {"id"         : 1,
+     "name"       : "Oregon Trail",
+     "destination": "Salem",
+     "departure"  : [0, 11, 0],
+     "frequency"  : 200},
 
-                   {"name"       : "Flying Scotsman",
-                    "destination": "Milwaukee",
-                    "departure"  : [0, 14, 20],
-                    "frequency"  : 8}
-                  ];
-
+    {"id"         : 2,
+     "name"       : "Flying Scotsman",
+     "destination": "Milwaukee",
+     "departure"  : [0, 14, 20],
+     "frequency"  : 8}
+];
+*/
 
 
 /****************************************************************************
@@ -38,26 +43,96 @@ const testInput = [{"name"       : "Trenton Express",
 *****************************************************************************/
 // Global variables
 let database;
-let trains, trainID;
+let trains = [], availableID = 0;
+let myTrain, trainID, arrayID;
 
 function loadDatabase() {
     database = firebase.database();
 
-    database.ref().once("value", function(snapshot) {
-        // Create a database if it doesn't exist
-        if (snapshot.val() === null) {
-            trains = testInput;
+    // When the loads, or when a user adds a train
+    database.ref().on("child_added", function(snapshot) {
+        // Get the train
+        let train  = snapshot.val();
+        const info = findNextArrival(train);
 
-            database.ref().set(testInput);
+        // Update the array
+        trains.push(train);
 
-        // Otherwise, load the database
-        } else {
-            trains = snapshot.val();
+        // Update the schedule table
+        const output = `<tr id="${train.id}">
+                            <td>${train.name}</td>
+                            <td>${train.destination}</td>
+                            <td>${train.frequency}</td>
+                            <td>${displayTime(info.nextArrival)}</td>
+                            <td>${info.minutesAway}</td>
+                        </tr>`;
 
-        }
+        $("tbody").append(output);
 
-        displaySchedule();
+        // Find the next available ID
+        availableID = Math.max(train.id + 1, availableID);
     });
+
+    // When a user edits a train
+    database.ref().on("child_changed", function(snapshot) {
+        // Get the train
+        let train  = snapshot.val();
+        const info = findNextArrival(train);
+
+        // Update the array
+        trainID = train.id;
+        findArrayID();
+        trains[arrayID] = train;
+
+        // Update the schedule table
+        const output = `<tr id="${train.id}">
+                            <td>${train.name}</td>
+                            <td>${train.destination}</td>
+                            <td>${train.frequency}</td>
+                            <td>${displayTime(info.nextArrival)}</td>
+                            <td>${info.minutesAway}</td>
+                        </tr>`;
+
+        $(`tr#${trainID}`).replaceWith(output);
+
+    });
+
+    // When a user removes a train
+    database.ref().on("child_removed", function(snapshot) {
+        // Get the train
+        let train  = snapshot.val();
+
+        // Update the array
+        trainID = train.id;
+        findArrayID();
+        trains.splice(arrayID, 1);
+
+        // Update the schedule table
+        $(`tr#${trainID}`).remove();
+        
+    });
+}
+
+function findAvailableID() {
+    let availableID = 0;
+
+    for (let i = 0; i < trains.length; i++) {
+        // The next available ID is always 1 greater than a current ID
+        availableID = Math.max(trains[i].id + 1, availableID);
+    }
+
+    return availableID;
+}
+
+function findArrayID() {
+    // Find the train in the array
+    for (arrayID = 0; arrayID < trains.length; arrayID++) {
+        if (trains[arrayID].id === trainID) {
+            myTrain = trains[arrayID];
+
+            break;
+        }
+    }
 }
 
 function findNextArrival(train) {
@@ -142,14 +217,14 @@ function displayTime(timeArray) {
     }
 }
 
-function displaySchedule() {
+function refreshSchedule() {
     let info;
     let output = "";
 
     trains.forEach(train => {
         info = findNextArrival(train);
 
-        output += `<tr>
+        output += `<tr id="${train.id}">
                        <td>${train.name}</td>
                        <td>${train.destination}</td>
                        <td>${train.frequency}</td>
@@ -159,12 +234,6 @@ function displaySchedule() {
     });
 
     $("tbody").empty().append(output);
-
-    $("tr").on("click", function() {
-        trainID = $("tr").index(this) - 1;
-
-        switchMode("edit");
-    });
 }
 
 
@@ -207,40 +276,33 @@ function displaySchedule() {
     */
 
 function switchMode(mode) {
-    switch (mode) {
-        case "add":
-            // Reset the fields
-            $("input").val("");
-            
-            // Display add mode
-            $("#search > h2").text("Add a Train");
-            $("#button_add").css({"display": "block"});
-            $("#button_delete, #button_edit").css({"display": "none"});
+    if (mode === "add") {
+        // Reset the fields
+        $("input").val("");
+        
+        // Change to add mode
+        $("#search > h2").text("Add a Train");
+        $("#button_add").css({"display": "block"});
+        $("#button_delete, #button_edit").css({"display": "none"});
 
-            break;
+    } else if (mode === "edit") {
+        // Format the departure time
+        const h = myTrain.departure[1];
+        const m = myTrain.departure[2];
 
-        case "edit":
-            const train = trains[trainID];
-            
-            const h = train.departure[1]
-            const m = train.departure[2];
+        let departure_string = (h < 10) ? ("0" + h) : h;
+        departure_string += (m < 10) ? (":0" + m) : (":" + m);
 
-            let departure_string = (h < 10) ? ("0" + h) : h;
-            
-            departure_string += (m < 10) ? (":0" + m) : (":" + m);
+        // Update the fields
+        $("#name").val(myTrain.name);
+        $("#destination").val(myTrain.destination);
+        $("#departure").val(departure_string);
+        $("#frequency").val(myTrain.frequency);
 
-            // Update the fields
-            $("#name").val(train.name);
-            $("#destination").val(train.destination);
-            $("#departure").val(departure_string);
-            $("#frequency").val(train.frequency);
-
-            // Display edit mode
-            $("#search > h2").text("Delete or Edit the Train");
-            $("#button_add").css({"display": "none"});
-            $("#button_delete, #button_edit").css({"display": "block"});
-
-            break;
+        // Change to edit mode
+        $("#search > h2").text("Delete or Edit the Train");
+        $("#button_add").css({"display": "none"});
+        $("#button_delete, #button_edit").css({"display": "block"});
 
     }
 }
@@ -253,19 +315,14 @@ function addTrain() {
     const h = parseInt(departure_string.substring(0, i));
     const m = parseInt(departure_string.substring(i + 1));
 
-    // Create a new train object
-    let train = {"name"       : $("#name").val().trim(),
-                 "destination": $("#destination").val().trim(),
-                 "departure"  : [0, h, m],
-                 "frequency"  : parseInt($("#frequency").val())};
+    // Save to the database
+    const train = {"id"         : availableID,
+                   "name"       : $("#name").val().trim(),
+                   "destination": $("#destination").val().trim(),
+                   "departure"  : [0, h, m],
+                   "frequency"  : parseInt($("#frequency").val())};
 
-    trains.push(train);
-
-    // TODO: Make this more efficient by using addChild
-    database.ref().set(trains);
-    
-    // TODO: Make this ore efficient by appending a row
-    displaySchedule();
+    database.ref().child(availableID).set(train);
 
     // Reset the fields
     $("input").val("");
@@ -279,32 +336,21 @@ function editTrain() {
     const h = parseInt(departure_string.substring(0, i));
     const m = parseInt(departure_string.substring(i + 1));
 
-    // Create a new train object
-    let train = {"name"       : $("#name").val().trim(),
-                 "destination": $("#destination").val().trim(),
-                 "departure"  : [0, h, m],
-                 "frequency"  : parseInt($("#frequency").val())};
-
-    trains[trainID] = train;
+    // Save to the database
+    const train = {"id"         : trainID,
+                   "name"       : $("#name").val().trim(),
+                   "destination": $("#destination").val().trim(),
+                   "departure"  : [0, h, m],
+                   "frequency"  : parseInt($("#frequency").val())};
     
-    // TODO: Make this more efficient
-    database.ref().set(trains);
-
-    // TODO: Make this more efficient
-    displaySchedule();
+    database.ref().child(trainID).update(train);
 
     switchMode("add");
 }
 
 function deleteTrain() {
-    trains.splice(trainID, 1);
-    
-    // TODO: Make this more efficient
-    database.ref().set(trains);
-//    database.ref().child(trainID).remove();
-    
-    // TODO: Make this more efficient
-    displaySchedule();
+    // Remove from the database
+    database.ref().child(trainID).remove();
 
     switchMode("add");
 }
@@ -321,20 +367,27 @@ function deleteTrain() {
 $(document).ready(function() {
     loadDatabase();
 
-    // Update the train schedule every minute
+    // Refresh the train schedule every minute
     const numSecondsLeft = 60 - (new Date()).getSeconds();
 
     setTimeout(function() {
-        displaySchedule();
+        refreshSchedule();
 
-        setInterval(displaySchedule, 60000);
+        setInterval(refreshSchedule, 60000);
 
-    }, 1000 * numSecondsLeft);
+    }, 1000 * refreshSchedule);
 
-    // Add a new train
+    // Listen to clicks on static elements
     $("#button_add").on("click", addTrain);
-
     $("#button_edit").on("click", editTrain);
-
     $("#button_delete").on("click", deleteTrain);
+});
+
+// Listen to clicks on dynamic elements
+$(document.body).on("click", "tr", function() {
+    trainID = parseInt($(this).attr("id"));
+
+    findArrayID();
+    
+    switchMode("edit");
 });
