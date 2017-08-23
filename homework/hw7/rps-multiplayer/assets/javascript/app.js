@@ -36,8 +36,8 @@ const testMessages = ["John: Hi, there!",
 *****************************************************************************
 *****************************************************************************/
 // Global variables
-const numPlayers = 2;
-let players = new Array(numPlayers), numPlayersInMatch, turn;
+const numPlayersAllowed = 2;
+let players = new Array(numPlayersAllowed), numPlayersInMatch, turn;
 let messages;
 
 
@@ -51,8 +51,7 @@ function loadDatabase() {
         // Update the array
         players[snapshot.key] = snapshot.val();
 
-        // Display player information
-        displayPlayers();
+        refreshDisplay();
     });
 
     // When a player exists the game
@@ -66,7 +65,7 @@ function loadDatabase() {
         numPlayers--;
         */
 
-        // TODO: Display player information
+//        refreshDisplay();
         
     });
 
@@ -78,7 +77,6 @@ function loadDatabase() {
         turn = (snapshot.val()) ? snapshot.val() : undefined;
     });
     
-
     // Track visitors
     connectedRef.on("value", function(snapshot) {
         // When a user is online
@@ -107,21 +105,42 @@ function displayPage(page) {
     $(`.page:nth-of-type(${page + 1})`).css({"display": "block"});
 }
 
-function displayPlayers() {
-    let output;
+function refreshDisplay() {
+    let element;
 
-    for (let i = 0; i < numPlayers; i++) {
-        if (!$.isEmptyObject(players[i])) {
-            output = `<h2>${players[i].name}</h2>
-                      <p>Welcome to RPS Multiplayer!</p>`;
+    // If the game hasn't started yet
+    if (numPlayersInMatch < numPlayersAllowed) {
+        for (let i = 0; i < numPlayersAllowed; i++) {
+            element = `#player${i} > `;
 
-        } else {
-            output = `<h2>???</h2>
-                      <p>Waiting for the player to join...<p>`;
+            if (!$.isEmptyObject(players[i])) {
+                $(element + ".name").html(`<h2>${players[i].name}</h2>`);
+                $(element + ".display").html("<p>Welcome to RPS Multiplayer!</p>");
 
+            } else {
+                $(element + ".name").html("<h2>???</h2>");
+                $(element + ".display").html("<p>Waiting for the player to join...<p>");
+
+            }
         }
-        
-        $(`#player${i} > .display`).html(output);
+
+    // Play RPS
+    } else {
+        for (let i = 0; i < numPlayersAllowed; i++) {
+            element = `#player${i} > `;
+
+            // Selection menu
+            if (players[i].choice === -1) {
+                $(element + ".display").html(`<div class="choices">Rock</div>
+                                              <div class="choices">Paper</div>
+                                              <div class="choices">Scissors</div>`);
+
+            // Display the user's choice
+            } else {
+
+            }
+        }
+
     }
 }
 
@@ -132,13 +151,13 @@ function displayPlayers() {
     
 *****************************************************************************/
 function addPlayer() {
-    const player = {"name"     : $("#name").val().trim(),
-                    "move"     : -1,
+    const player = {"name"     : $("#input_name").val().trim(),
+                    "choice"   : -1,
                     "numWins"  : 0,
                     "numLosses": 0};
 
     // Add the player
-    if (numPlayersInMatch < 2) {
+    if (numPlayersInMatch < numPlayersAllowed) {
         database.ref("players").child(numPlayersInMatch).set(player);
         database.ref("numPlayersInMatch").set(numPlayersInMatch + 1);
         database.ref("turn").set(0);
@@ -162,7 +181,7 @@ $(document).ready(function() {
 
     displayPage(0);
 
-    $("#name").on("keyup", function(e) {
+    $("#input_name").on("keyup", function(e) {
         // Allow the user to hit Enter key to enter name
         if (e.keyCode === 13) {
             addPlayer();
