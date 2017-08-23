@@ -31,8 +31,14 @@ const database = firebase.database();
 let trains = [], availableID = 0;
 let myTrain, trainID, arrayID;
 
+
+/****************************************************************************
+    
+    Set the database behavior
+    
+*****************************************************************************/
 function loadDatabase() {
-    // When the loads, or when a user adds a train
+    // When the page loads, or when a user adds a train
     database.ref().on("child_added", function(snapshot) {
         // Get the train
         const train = snapshot.val();
@@ -43,7 +49,7 @@ function loadDatabase() {
         // Update the schedule table
         $("tbody").append(displayTrain(train));
 
-        // Find the next available ID
+        // Set the next available ID
         availableID = Math.max(train.id + 1, availableID);
     });
 
@@ -51,44 +57,37 @@ function loadDatabase() {
     database.ref().on("child_changed", function(snapshot) {
         // Get the train
         const train = snapshot.val();
-
-        // Update the array
         trainID = train.id;
+        
+        // Update the array
         findArrayID();
         trains[arrayID] = train;
 
         // Update the schedule table
         $(`tr#${trainID}`).replaceWith(displayTrain(train));
-
     });
 
     // When a user removes a train
     database.ref().on("child_removed", function(snapshot) {
         // Get the train
         const train = snapshot.val();
+        trainID = train.id;
 
         // Update the array
-        trainID = train.id;
         findArrayID();
         trains.splice(arrayID, 1);
 
         // Update the schedule table
         $(`tr#${trainID}`).remove();
-        
     });
 }
 
-function findAvailableID() {
-    let availableID = 0;
 
-    for (let i = 0; i < trains.length; i++) {
-        // The next available ID is always 1 greater than a current ID
-        availableID = Math.max(trains[i].id + 1, availableID);
-    }
-
-    return availableID;
-}
-
+/****************************************************************************
+    
+    Query functions
+    
+*****************************************************************************/
 function findArrayID() {
     // Find the train in the array
     for (arrayID = 0; arrayID < trains.length; arrayID++) {
@@ -104,31 +103,24 @@ function findNextArrival(train) {
     // Express the departure in minutes
     const h0 = train.departure[1];
     const m0 = train.departure[2];
-
-    const time0 = 60 * h0 + m0;
+    const t0 = 60 * h0 + m0;
 
     // Express the current time in minutes
     const currentTime = new Date();
 
     const h1 = currentTime.getHours();
     const m1 = currentTime.getMinutes();
+    const t1 = 60 * h1 + m1;
 
-    const time1 = 60 * h1 + m1;
-
+    // Number of trips that can be made between t0 and t1
+    const numTripsMade = Math.max(Math.floor((t1 - t0) / train.frequency), 0);
     
-    /************************************************************************
-        
-        Calculate the next arrival
-        
-    *************************************************************************/
-    const numTripsMade = Math.max(Math.floor((time1 - time0) / train.frequency), 0);
-    
-    // Find the arrival time in minutes
-    const time = time0 + (numTripsMade + 1) * train.frequency;
+    // Find the arrival time
+    const arrivalTime = t0 + (numTripsMade + 1) * train.frequency;
     
     let d = 0;
-    let h = Math.floor(time / 60);
-    let m = time - 60 * h;
+    let h = Math.floor(arrivalTime / 60);
+    let m = arrivalTime - 60 * h;
 
     // Account for departure on another day
     if (h >= 24) {
@@ -137,17 +129,14 @@ function findNextArrival(train) {
     }
     
     return {"nextArrival": [d, h, m],
-            "minutesAway": time - time1};
+            "minutesAway": arrivalTime - t1};
 }
 
 
-
 /****************************************************************************
- ****************************************************************************
     
     Display functions
     
-*****************************************************************************
 *****************************************************************************/
 function displayTime(timeArray) {
     // Get the day, hour, and minute
@@ -170,6 +159,7 @@ function displayTime(timeArray) {
         m = "0" + m;
     }
 
+    // Display the day
     if (d === 0) {
         return `${h}:${m} ${period}`
 
@@ -195,7 +185,6 @@ function displayTrain(train) {
 }
 
 function refreshSchedule() {
-    let info;
     let output = "";
 
     trains.forEach(train => output += displayTrain(train));
@@ -204,13 +193,10 @@ function refreshSchedule() {
 }
 
 
-
 /****************************************************************************
- ****************************************************************************
     
     Add, edit, or delete a train
     
-*****************************************************************************
 *****************************************************************************/
     /*
     // Input validation
@@ -282,16 +268,16 @@ function addTrain() {
     const h = parseInt(departure_string.substring(0, i));
     const m = parseInt(departure_string.substring(i + 1));
 
-    // Save to the database
+    // Update the database
     const train = {"id"         : availableID,
                    "name"       : $("#name").val().trim(),
                    "destination": $("#destination").val().trim(),
                    "departure"  : [0, h, m],
-                   "frequency"  : parseInt($("#frequency").val())};
+                   "frequency"  : parseInt($("#frequency").val().trim())};
 
     database.ref().child(availableID).set(train);
 
-    // Reset the fields
+    // Reset
     $("input").val("");
 }
 
@@ -303,33 +289,32 @@ function editTrain() {
     const h = parseInt(departure_string.substring(0, i));
     const m = parseInt(departure_string.substring(i + 1));
 
-    // Save to the database
+    // Update the database
     const train = {"id"         : trainID,
                    "name"       : $("#name").val().trim(),
                    "destination": $("#destination").val().trim(),
                    "departure"  : [0, h, m],
-                   "frequency"  : parseInt($("#frequency").val())};
+                   "frequency"  : parseInt($("#frequency").val().trim())};
     
     database.ref().child(trainID).update(train);
 
+    // Reset
     switchMode("add");
 }
 
 function deleteTrain() {
-    // Remove from the database
+    // Update the database
     database.ref().child(trainID).remove();
 
+    // Reset
     switchMode("add");
 }
 
 
-
 /****************************************************************************
- ****************************************************************************
     
     Wait for user actions
     
-*****************************************************************************
 *****************************************************************************/
 $(document).ready(function() {
     loadDatabase();
@@ -342,7 +327,7 @@ $(document).ready(function() {
 
         setInterval(refreshSchedule, 60000);
 
-    }, 1000 * refreshSchedule);
+    }, 1000 * numSecondsLeft);
 
     // Listen to clicks on static elements
     $("#button_add").on("click", addTrain);
