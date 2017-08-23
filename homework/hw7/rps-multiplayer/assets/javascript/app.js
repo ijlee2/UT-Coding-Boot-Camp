@@ -19,6 +19,7 @@ firebase.initializeApp(config);
 const database       = firebase.database();
 const connectedRef   = database.ref(".info/connected");
 const connectionsRef = database.ref("connections");
+const playersRef     = database.ref("players");
 
 // Define a test case
 const testMessages = ["John: Hi, there!",
@@ -47,25 +48,20 @@ let messages;
     
 *****************************************************************************/
 function loadDatabase() {
-    database.ref("players").on("child_added", function(snapshot) {
+    playersRef.on("child_added", function(snapshot) {
         // Update the array
         players[snapshot.key] = snapshot.val();
-
+        
         refreshDisplay();
     });
 
     // When a player exists the game
-    database.ref("players").on("child_removed", function(snapshot) {
+    playersRef.on("child_removed", function(snapshot) {
         // Get the player
-        player = snapshot.val();
+        players[snapshot.key] = undefined;
+        numPlayersInMatch--;
 
-        // Update the array (FIFO)
-        /*
-        players.shift();
-        numPlayers--;
-        */
-
-//        refreshDisplay();
+        refreshDisplay();
         
     });
 
@@ -107,6 +103,8 @@ function displayPage(page) {
 
 function refreshDisplay() {
     let element;
+
+    console.log(players);
 
     // If the game hasn't started yet
     if (numPlayersInMatch < numPlayersAllowed) {
@@ -158,7 +156,10 @@ function addPlayer() {
 
     // Add the player
     if (numPlayersInMatch < numPlayersAllowed) {
-        database.ref("players").child(numPlayersInMatch).set(player);
+        // TODO: Change numPlayersInMatch to the available ID
+        const playerRef = database.ref("players").push(player);
+        playerRef.onDisconnect().remove();
+
         database.ref("numPlayersInMatch").set(numPlayersInMatch + 1);
         database.ref("turn").set(0);
         

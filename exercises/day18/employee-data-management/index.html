@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Employee Data Management</title>
+            
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="moment.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron text-center">
+                <h1>Employee Data Management</h1>
+                <p>A Comprehensive Directory of Employee Billable Hours</p>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">Current Employees</div>
+                <div class="panel-body">
+                    <table class="table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Start Date</th>
+                                <th>Months Worked</th>
+                                <th>Monthly Rate ($)</th>
+                                <th>Total Billed ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">Add Employee</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="name">Employee Name</label>
+                        <input type="text" class="form-control" id="name">
+
+                        <label for="role">Role</label>
+                        <input type="text" class="form-control" id="role">
+
+                        <label for="startDate">Start Date (dd:mm:yyyy)</label>
+                        <input type="text" class="form-control" id="startDate">
+
+                        <label for="monthlyRate">Monthly Rate</label>
+                        <input type="text" class="form-control" id="monthlyRate">
+
+                        <button type="submit" class="btn btn-primary" id="button_submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="app.js"></script>
+    </body>
+</html>
