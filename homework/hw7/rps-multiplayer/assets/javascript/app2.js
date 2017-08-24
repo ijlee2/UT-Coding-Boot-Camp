@@ -31,7 +31,8 @@ const playersRef = database.ref("players");
 // Global variables
 const numPlayersAllowed = 2;
 let   numPlayersInMatch;
-let   players = [new Array(numPlayersAllowed)], myID, turn;
+let   players = [], availableID = 0;
+let   playerID, arrayID, turn;
 let   messages;
 
 
@@ -42,10 +43,27 @@ let   messages;
 *****************************************************************************/
 function loadDatabase() {
     playersRef.on("child_added", function(snapshot) {
+        // Get the player
+        const player = snapshot.val();
+
         // Update the array
-        players[snapshot.key] = snapshot.val();
+        players.push(player);
         
         database.ref("numPlayersInMatch").set(numPlayersInMatch + 1);
+        
+        refreshDisplay();
+    });
+
+    playersRef.on("child_removed", function(snapshot) {
+        // Get the player
+        const player = snapshot.val();
+        playerID = player.id;
+
+        // Update the array
+        findArrayID();
+        players.splice(arrayID, 1);
+        
+        database.ref("numPlayersInMatch").set(numPlayersInMatch - 1);
         
         refreshDisplay();
     });
@@ -59,6 +77,23 @@ function loadDatabase() {
     database.ref("turn").on("value", function(snapshot) {
         turn = (snapshot.val()) ? snapshot.val() : undefined;
     });
+}
+
+
+/****************************************************************************
+    
+    Query functions
+    
+*****************************************************************************/
+function findArrayID() {
+    // Find the player in the array
+    for (arrayID = 0; arrayID < players.length; arrayID++) {
+        if (players[arrayID].id === playerID) {
+//            myPlayer = players[arrayID];
+
+            break;
+        }
+    }
 }
 
 
@@ -99,18 +134,20 @@ function refreshDisplay() {
     
 *****************************************************************************/
 function addPlayer() {
-    const player = {"name"     : $("#input_name").val().trim(),
-                    "choice"   : -1,
-                    "numWins"  : 0,
-                    "numLosses": 0};
-
     // Add the player
     if (numPlayersInMatch < numPlayersAllowed) {
-        const playerRef = playersRef.push(player);
+        playerID = numPlayersInMatch;
 
-        myID = playerRef.key;
-        
-        database.ref("numPlayersInMatch").set(numPlayersInMatch + 1);
+        const player = {"id"       : playerID,
+                        "name"     : $("#input_name").val().trim(),
+                        "choice"   : -1,
+                        "numWins"  : 0,
+                        "numLosses": 0};    
+
+        const playerRef = playersRef.child(playerID);
+
+        playerRef.set(player);
+        playerRef.onDisconnect().remove();
 
         displayPage(1);
     }
