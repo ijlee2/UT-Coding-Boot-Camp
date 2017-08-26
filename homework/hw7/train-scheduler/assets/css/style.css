@@ -84,6 +84,11 @@ table {
     width: 100%;
 }
 
+tbody tr:hover {
+    background-color: var(--color-light-blue);
+    color           : var(--color-text-contrast);
+}
+
 tr:nth-child(even) {
     background-color: var(--color-text-contrast);
 }

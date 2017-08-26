@@ -32,7 +32,7 @@ const playersRef = database.ref("players");
 const numPlayersAllowed = 2;
 let   numPlayersInMatch;
 let   players = [], availableID = 0;
-let   playerID, arrayID, turn;
+let   myID, arrayID, turn;
 let   messages;
 
 
@@ -57,7 +57,7 @@ function loadDatabase() {
     playersRef.on("child_removed", function(snapshot) {
         // Get the player
         const player = snapshot.val();
-        playerID = player.id;
+        myID = player.id;
 
         // Update the array
         findArrayID();
@@ -70,8 +70,6 @@ function loadDatabase() {
 
     database.ref("numPlayersInMatch").on("value", function(snapshot) {
         numPlayersInMatch = (snapshot.val()) ? snapshot.val() : 0;
-
-        console.log("Number of players in match: " + numPlayersInMatch);
     });
 
     database.ref("turn").on("value", function(snapshot) {
@@ -88,7 +86,7 @@ function loadDatabase() {
 function findArrayID() {
     // Find the player in the array
     for (arrayID = 0; arrayID < players.length; arrayID++) {
-        if (players[arrayID].id === playerID) {
+        if (players[arrayID].id === myID) {
 //            myPlayer = players[arrayID];
 
             break;
@@ -119,7 +117,7 @@ function refreshDisplay() {
                 $(element + ".display").html("<p>Welcome to RPS Multiplayer!</p>");
 
             } else {
-                $(element + ".name").html("<h2>???</h2>");
+                $(element + ".name").html("<h2>Player 2</h2>");
                 $(element + ".display").html("<p>Waiting for the player to join...<p>");
 
             }
@@ -136,15 +134,15 @@ function refreshDisplay() {
 function addPlayer() {
     // Add the player
     if (numPlayersInMatch < numPlayersAllowed) {
-        playerID = numPlayersInMatch;
+        myID = numPlayersInMatch;
 
-        const player = {"id"       : playerID,
+        const player = {"id"       : myID,
                         "name"     : $("#input_name").val().trim(),
                         "choice"   : -1,
                         "numWins"  : 0,
                         "numLosses": 0};    
 
-        const playerRef = playersRef.child(playerID);
+        const playerRef = playersRef.child(myID);
 
         playerRef.set(player);
         playerRef.onDisconnect().remove();
