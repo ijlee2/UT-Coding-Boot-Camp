@@ -36,10 +36,10 @@
                 <div class="bg-dark p-4">
                     <!-- Added data-toggle and data-target to specify an action -->
                     <div class="locall_menuItems">
-                        <button type="button" class="btn btn-outline-primary home"   onClick="displayPage(1)" data-toggle="collapse" data-target=".collapse">Home</button>
-                        <button type="button" class="btn btn-outline-warning access" href="eat_drink_play.html" data-toggle="collapse" data-target=".collapse">Go Local!</button>
+                        <button type="button" class="btn btn-outline-primary home" href="index.html" data-toggle="collapse" data-target=".collapse">Home</button>
+                        <button type="button" class="btn btn-outline-warning access"   onClick="displayPage(2)"  data-toggle="collapse" data-target=".collapse">Go Local!</button>
                         <button type="button" class="btn btn-outline-secondary access" onClick="displayPage(3)" data-toggle="collapse" data-target=".collapse">Your Dev Team</button>
-                        <button type="button" class="btn btn-outline-success access" onClick="displayPage(4)" data-toggle="collapse" data-target=".collapse">Log In / Sign Up</button>
+                        <button type="button" class="btn btn-outline-success access"   onClick="displayPage(4)" data-toggle="collapse" data-target=".collapse">Log In / Sign Up</button>
                     </div>
                 </div>
             </div>
@@ -50,19 +50,9 @@
                 </button>
             </nav>
         </div>
-        <!-- Cover Page -->
-        <div class="page locall_page_full" id="page1">
-            <div class="jumbotron">
-                <h1>LocALL</h1>
-                <h2>Eat, Play, Drink Locally</h2>
-
-                <a class="btn btn-primary" href="eat_drink_play.html">Go Local!</a>
-            </div>
-        </div>
-
 
         <!-- Go Local! Page -->
-        <!-- <div class="content page" id="page2">
+        <div class="content page" id="page2">
             <div class="row locall_flex_container">
                 <div class="btn-group col-md-3" id="events_eat">
                     <button type="button" class="btn btn-secondary dropdown-toggle button_events" id="button_eat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Eat</button>
@@ -116,101 +106,7 @@
                 </div>
             </div>
         </div>
-         -->
-        <!-- Your Dev Team Page -->
-        <div class="page locall_page_full disappear" id="page3">
-            <h1>Your Dev Team</h1>
-            
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="assets/images/jacque.jpg" class="locall_team_photos" alt="Photo of Jacque White">
-                        
-                        <h2>Jacque White</h2>
-                        <h3>Back-End Developer</h3>
-
-                        <p>I'm an Austinite with a passion for all things health and wellness, culinary arts, and travel.</p>
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="assets/images/isaac.jpg" class="locall_team_photos" alt="Photo of Isaac Lee">
-                        <h2>Isaac Lee</h2>
-                        <h3>Back-End Developer</h3>
-
-                        <p>I provide analytic and computational solutions to your engineering problems. Furthermore, I believe in being human: continuous learning + communication + collaboration.</p>
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="assets/images/aaron.jpg" class="locall_team_photos" alt="Photo of Aaron Tyler">
-                        <h2>Aaron Tyler</h2>
-                        <h3>Front-End Developer</h3>
-
-                        <p>I'm a biochemistry student at The University of Texas at Austin. I enjoy both front-end and back-end development.</p>
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="assets/images/margie.jpg" class="locall_team_photos" alt="Photo of Margarita Tagaban">
-                        <h2>Margarita Tagaban</h2>
-                        <h3>Front-End Developer</h3>
-
-                        <p>Hi, I'm Margie! I'm a Texas native who loves problem solving. 
-                            <br>
-                            I earned my Bachelor's Degree July 2017 at Texas State University.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page locall_page_full disappear" id="page4">
-            <div class="containerPage5">
-                <h2>Log In</h2>
-               
-                <div>
-                    <label for="userName_login">Name (required)</label>
-                    <input type="text" id="userName_login">
-                </div>              
-
-                <div>
-                    <label for="userPassword_login">Password (required)</label>
-                    <input type="text" id="userPassword_login">
-                </div>
-
-                <div class="messageToUser"></div>
-
-                <div class="btn btn-primary" id="button_login">Submit</div>
-
-                <p>Want to create an account?</p><div class="btn btn-primary btn-sm" onclick="displayPage(5)">Sign up</div>
-            </div>
-        </div>
-      
-        <div class="page locall_page_full disappear" id="page5">
-            <div class="containerPage5">
-                <h2>Sign Up</h2>
-               
-                <div>
-                    <label for="userName_signup">Name (required)</label>
-                    <input type="text" id="userName_signup">
-                </div>
-               
-                <div>
-                    <label for="userEmail_signup">Email (required)</label>
-                    <input type="email" id="userEmail_signup">
-                </div>
-               
-                <div>
-                    <label for="userPassword_signup">Password (required)</label>
-                    <input type="text" id="userPassword_signup">
-                </div>
-
-               <div class="messageToUser"></div>
-
-               <div class="btn btn-primary" id="button_signup">Submit</div>
-            </div>
-        </div>
-
-        <!-- Custom JavaScript -->
+        </body>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5UBuB1NoQsps2oc6EdyNhrLGbYY_FZMQ&libraries=places&callback=displayMap" async defer></script>
         <script src="assets/js/app.js"></script>
-    </body>
-</html>
+        </html>

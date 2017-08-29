@@ -190,14 +190,17 @@ function displayRecommendations(eventNames) {
                         <div class="restaurantImage">
                             <p>${r.eat.name}</p>
                             <img height="150" width="150" src="${r.eat.image}" alt="${r.eat.name}">
+                            <p>Rating: ${displayRating(r.eat)}</p>
                         </div>
                         <div class="columnTwo">
                             <p>${r.play.name}</p>
                             <img height="150" width="150" src="${r.play.image}" alt="${r.play.name}">
+                            <p>Rating: ${displayRating(r.play)}</p>
                         </div>
                         <div class="item restaurantAddress">
                             <p>${r.drink.name}</p>
                             <img height="150" width="150" src="${r.drink.image}" alt="${r.drink.name}">
+                            <p>Rating: ${displayRating(r.drink)}</p>
                         </div>
                     </div>
                 </div>`;
@@ -205,6 +208,22 @@ function displayRecommendations(eventNames) {
 
         $("#recommendations").html(output);
     });
+}
+
+function displayRating(event) {
+    let stars_string = "";
+    
+    // Whole number
+    for (let i = 1; i < event.rating; i++) {
+        stars_string += "★";
+    }
+
+    // Fractional part
+    if (Math.trunc(event.rating) !== event.rating) {
+        stars_string += "½";
+    }
+
+    return stars_string;
 }
 
 

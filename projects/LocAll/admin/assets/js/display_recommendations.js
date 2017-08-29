@@ -156,16 +156,33 @@ function displayRecommendations(eventNames) {
         }
         
         // Display recommendations
-        let names, output = "";
+        let names, ratings, output = "";
 
         recommendations.forEach(r => {
-            names = `<p>▪ ${r.eat.name}</p><p>▪ ${r.play.name}</p><p>▪ ${r.drink.name}</p>`;
+            names   = `<p>▪ ${r.eat.name}</p><p>▪ ${r.play.name}</p><p>▪ ${r.drink.name}</p>`;
+            ratings = `<p style="margin-bottom:0.4em">${displayRating(r.eat)}</p><p style="margin-bottom:0.4em">${displayRating(r.play)}</p><p>${displayRating(r.drink)}</p>`;
 
-            output += `<tr><td>${names}</td><td>${r.metric.toFixed(3)}</td></tr>`;
+            output += `<tr><td>${names}</td><td>${ratings}</td></tr>`;
         });
 
         $("#recommendations tbody").html(output);
     });
+}
+
+function displayRating(event) {
+    let stars_string = "";
+    
+    // Whole number
+    for (let i = 1; i < event.rating; i++) {
+        stars_string += "★";
+    }
+
+    // Fractional part
+    if (Math.trunc(event.rating) !== event.rating) {
+        stars_string += "½";
+    }
+
+    return stars_string;
 }
 
 
