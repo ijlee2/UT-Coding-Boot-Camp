@@ -88,8 +88,6 @@ $(".dropdown-item").click(function() {
 
     eventNames[index] = eventName.toLowerCase();
 
-    console.log(eventNames);
-    
     // Change the text in HTML
     $(`#button_${eventTypes[index]}`).text(eventName);
 
@@ -160,9 +158,7 @@ function displayRecommendations(eventNames) {
         recommendations = [];
 
         // Recommend events near the user
-        const data = snapshot.val().filter(function(a) {
-            return spherical_distance(a.center, myLocation) < metric_max;
-        });
+        const data = snapshot.val().filter((a) => spherical_distance(a.center, myLocation) < metric_max);
 
         // Select recommendations at random
         for (i = 0; i < numRecommendations_max; i++) {
