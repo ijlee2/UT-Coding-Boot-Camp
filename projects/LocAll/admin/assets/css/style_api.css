@@ -1,0 +1,135 @@
+/****************************************************************************
+ ****************************************************************************
+    
+    Default stylesheet
+    
+*****************************************************************************
+*****************************************************************************/
+:root {
+    /* Define color scheme */
+    --color-background    : #f0f2f0;
+    --color-light-brown   : #ebd9a3;
+    --color-light-blue    : #78b6ed;
+    --color-dark-blue     : #3773a8;
+    --color-text          : #202020;
+    --color-text-contrast : #f9f6e3;
+    --color-text-highlight: #ff6600;
+}
+
+body {
+    background-color: var(--color-background);
+    color           : var(--color-text);
+    font-family     : "Quicksand", sans-serif;
+    font-size       : 20px;
+}
+
+.container {
+    width  : 840px;
+    margin : auto;
+    padding: 2.5% 0;
+}
+
+.panel {
+    margin-bottom: 7%;
+}
+
+h1 {
+    color         : var(--color-dark-blue);
+    font-family   : "Shadows Into Light", cursive;
+    font-size     : 3.2em;
+    font-weight   : bold;
+    letter-spacing: 0.08em;
+    text-align    : center;
+
+    margin-bottom : 0.85em;
+}
+
+h2 {
+    color         : var(--color-text-highlight);
+    font-size     : 1.8em;
+    font-weight   : bold;
+    letter-spacing: 0.04em;
+    
+    margin-bottom : 0.85em;
+}
+
+li {
+    list-style-position: inside;
+    list-style-type    : square;
+    margin-bottom      : 2.5%;
+}
+
+p {
+    letter-spacing: 0.03em;
+    line-height   : 1.5em;
+    
+    margin-bottom : 3%;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* Table */
+table {
+    width: 100%;
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-text-contrast);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--color-light-brown);
+}
+
+th {
+    background-color: var(--color-dark-blue);
+    color           : var(--color-text-contrast);
+    
+    width           : 15%;
+    padding         : 2% 1%;
+    border-right    : 1px solid var(--color-text-contrast);
+    border-bottom   : 2px solid var(--color-text-contrast);
+}
+
+th:last-child {
+    border-right: none;
+}
+
+td {
+    font-size       : 0.9em;
+    width           : 15%;
+    padding         : 1.25% 1%;
+    border-right    : 1px solid var(--color-text-contrast);
+}
+
+td img {
+    width : 100px;
+    height: 100px;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+/* Form */
+label {
+    display      : block;
+    margin-top   : 2em;
+    margin-bottom: 1em;
+}
+
+input, select {
+    background-color: white;
+    font-size       : 1em;
+    
+    display         : block;
+    width           : 94%;
+    padding         : 2% 3%;
+    margin-bottom   : 2em;
+}
+
+select {
+    width: 100%;
+}

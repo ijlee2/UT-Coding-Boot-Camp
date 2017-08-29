@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Google Maps API demo">
+        <meta name="author" content="Isaac J. Lee">
+
+        <title>Google Maps API Demo</title>
+
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand|Shadows+Into+Light" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="assets/css/style_api.css">
+        <style>
+            /* IMPORTANT: Set the map height explicitly */
+            #map {
+                height: 500px;
+            }
+        </style>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Google Maps API</h1>
+
+            <div class="panel">
+                <h2>Notes</h2>
+                <p>Documentation is great.</p>
+                <div id="map"></div>
+            </div>
+            
+            <div class="panel">
+                <h2>Documentation</h2>
+                <p><a href="https://developers.google.com/maps/documentation/javascript/tutorial">Link to the API documentation</a></p>
+            </div>
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUXkXE4GQC50D5MTJSZRnoy47XBou0f1U&callback=displayMap" async defer></script>
+        <script type="text/javascript" src="assets/js/google_maps.js"></script>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!-- Step 5: Allow users to create an account. -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="authenticate users">
+        <meta name="author" content="Isaac J. Lee, Jacque White">
+
+        <title>Authenticate Users</title>
+
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand|Shadows+Into+Light" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="assets/css/style_api.css">
+        <style>
+            .panel {
+                width : 50%;
+                margin: auto;
+            }
+
+            .button_top, .button_bottom {
+                font-family   : "Quicksand", sans-serif;
+                font-size     : 1.15em;
+                font-weight   : bold;
+                letter-spacing: 0.03em;
+                text-align    : center;
+                
+                width         : 21%;
+                border        : 3px solid var(--color-dark-blue);
+                padding       : 4% 4.5%;
+            }
+
+            .button_top {
+                float           : left;
+                background-color: lightgray;
+                color           : black;
+                margin-right    : 1.5%;
+                margin-bottom   : 12.5%;
+            }
+            
+            .button_bottom {
+                float           : right;
+                background-color: var(--color-light-blue);
+                color           : var(--color-text-contrast);
+                margin-top      : 10%;
+            }
+        </style>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Authenticate Users</h1>
+
+            <div class="panel">
+                <div class="button_top" id="button_signup">Sign Up</div>
+                <div class="button_top" id="button_login">Log in</div>
+                <div class="button_top" id="button_logout">Log out</div>
+                
+                <h2 id="header">Sign Up</h2>
+                
+                <div class="input_container" id="userName_container">
+                    <label for="userName">Name (required)</label>
+                    <input type="text" id="userName">
+                </div>
+                
+                <div class="input_container" id="userEmail_container">
+                    <label for="userEmail">Email (required)</label>
+                    <input type="email" id="userEmail">
+                </div>
+                
+                <div class="input_container" id="userPassword_container">
+                    <label for="userPassword">Password (required)</label>
+                    <input type="text" id="userPassword">
+                </div>
+
+                 <div class="input_container" id="userLocation_container">
+                    <label for="userLocation">Location</label>
+                    <select name="userLocation" id="userLocation">
+                        <option value="central" selected>Central Austin</option>
+                        <option value="north">North Austin</option>
+                        <option value="west">West Austin</option>
+                        <option value="east">East Austin</option>
+                        <option value="south">South Austin</option>
+                    </select>
+                </div>
+
+                <div id="messageToUser"></div>
+
+                <div class="button_bottom" id="button_submit">Submit</div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="assets/js/authenticate_users.js"></script>
+    </body>
+</html>

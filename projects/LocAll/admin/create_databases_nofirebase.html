@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="create databases of events">
+        <meta name="author" content="Isaac J. Lee, Jacque White">
+
+        <title>Create Databases</title>
+
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand|Shadows+Into+Light" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="assets/css/style_api.css">
+        <style>
+            /* IMPORTANT: Set the map height explicitly */
+            #map {
+                height: 500px;
+            }
+        </style>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Create Databases</h1>
+
+            <div class="panel">
+                <h2>Google Maps</h2>
+                <div id="map"></div>
+            </div>
+
+            <div class="panel" id="bbq">
+                <h2>BBQ</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Phone</th>
+                            <th>Website</th>
+                            <th>Image</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="panel" id="hike">
+                <h2>Hike</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Phone</th>
+                            <th>Website</th>
+                            <th>Image</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="panel" id="brewery">
+                <h2>Brewery</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Phone</th>
+                            <th>Website</th>
+                            <th>Image</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5UBuB1NoQsps2oc6EdyNhrLGbYY_FZMQ&libraries=places&callback=createDatabases" async defer></script>
+        <script type="text/javascript" src="assets/js/create_databases_nofirebase.js"></script>
+    </body>
+</html>
