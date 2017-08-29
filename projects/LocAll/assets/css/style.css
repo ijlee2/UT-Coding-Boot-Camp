@@ -169,13 +169,6 @@ p {
     padding-bottom       : 2em;
 }
 
-#googleMaps {
-    /* Allow Google Maps to always appear on the screen */
-    position: absolute;
-    top     : 0;
-    right   : 400px;
-}
-
 /* IMPORTANT: Set the map height explicitly */
 #map {
     /* Allow Google Maps to always appear on the screen */
