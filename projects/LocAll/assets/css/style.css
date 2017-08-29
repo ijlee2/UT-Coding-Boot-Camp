@@ -9,7 +9,7 @@ body {
     font-family: "Arvo", sans-serif;
     font-size  : 20px;
     text-align : center;
-
+    
     width  : 100%;
     margin : 0;
     padding: 0;
@@ -80,7 +80,7 @@ p {
 }
 
 .locall_page_full {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0);
 
     /* Center vertically */
     min-height    : 100%;   /* Fallback for browsers do not support vh unit */
@@ -97,16 +97,11 @@ p {
 .locall_page_full a {
     font-size: 2em;
 
-    padding  : 10px 30px;
+    padding: 10px 30px;
 }
 
 
 /* Page 2: Go Local! */
-#page2 {
-    /* Allow Google Maps to always appear on the screen */
-    position: relative;
-}
-
 .locall_flex_container {
     display                : -webkit-flex;
     display                : flex;
@@ -116,7 +111,8 @@ p {
     align-items            : center;
     -webkit-justify-content: center;
     justify-content        : center;
-    margin-top             : 3em;
+    
+    margin-top: 3em;
 }
 
 .button_events {
@@ -141,15 +137,16 @@ p {
     display              : grid;
     grid-template-columns: 2fr 1fr;
     grid-column-gap      : 0.3em;
-    margin-top: 2.6em;
 
+    margin-top: 2.6em;
 }
 
 .subContainer {
     display     : grid;
     grid-row-gap: .5em;
-    margin-left: 5em;
+    margin-left : 5em;
 }
+
 .restaurantImage {
     background: rgba(220, 213, 213, 0.93);
 }
@@ -159,22 +156,20 @@ p {
 } 
 
 .columnTwo {
-    background:  rgba(196, 188, 188, 0.93);
+    background: rgba(196, 188, 188, 0.93);
 }
 
 .listItem {
     display              : grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding-bottom       : .5em;
-    padding-top     : .5em;
+    padding-top          : .5em;
 }
 
 /* IMPORTANT: Set the map height explicitly */
 #map {
-    /* Allow Google Maps to always appear on the screen */
-    position: fixed !important;
-    width   : 400px;
-    height  : 400px;
+    width     : 400px;
+    height    : 400px;
     margin-top: .5em;
 }
 
@@ -183,7 +178,6 @@ p {
 /* background opacity and the height and padding to make the background look similar to the jumbotron so we wouldnt have to use a jumbotron with our carousel */
 .carousel {
     background: rgba(255, 255, 255, 0);
-
     width     : 800px;
     margin    : 1% auto 0 auto;
 }
@@ -210,29 +204,32 @@ p {
 }
 
 .containerPage5 align-items {
-    display              : grid;
+    display: grid;
     grid-template-columns: 1fr;
-    margin-top           : 4em;
-    margin-left          : 7em;
+    
+    margin-top : 4em;
+    margin-left: 7em;
 }
 
 /* Mobile */
-@media all and (max-width: 660px), all and (max-device-width: 660px) {
+@media screen and (max-width: 660px) {
     .listItem {
-        grid-template-columns: 1fr 2fr;
-        grid-gap             : 1em;
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+    }
+
+    .subContainer{
+        grid-template-columns: 1fr;
+        margin-right : 3.3em;
+        border-bottom: solid #DFCE80;
     }
 
     h1 {
-        font-size: 50px;
+        font-size: 30px;
     }
 
     .locall_menuItems {
         margin-left: 0;
-    }
-
-    #page2 {
-        position: normal;
     }
 
     .flexContainer {
@@ -241,13 +238,9 @@ p {
 
     .containerPage2 {
         grid-template-columns: 1fr;
-        grid-row-gap         : 2em;
+        grid-row-gap: 0;
 
         margin-left: 0;
-    }
-
-    #map {
-        position: normal;
     }
 
     #page3 h2 {
@@ -256,5 +249,11 @@ p {
 
     #page3 h3 {
         font-size: 20px;
+    }
+
+    #map{
+        width      : 300px;
+        height     : 300px;
+        margin-left: 4em;
     }
 }

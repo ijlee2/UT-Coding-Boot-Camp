@@ -1,23 +1,3 @@
-// This allows us to hide pages without affecting Google Maps
-$(document).init(function(event) {
-    $(".disappear").hide();
-    
-    $(this).parent().siblings().each(function(index, element) {
-        $(element).find(".page").show();
-    });
-});
-
-$(document).on("click", ".access", function(event) {
-    $(this).siblings().show();
-    $(this).parent().siblings().each(function(index, element) {
-        $(element).find(".page").hide();
-    });
-});
-
-$(".dropdown-toggle").dropdown("update");
-
-
-
 /****************************************************************************
  ****************************************************************************
     
@@ -124,6 +104,7 @@ function spherical_distance(point1, point2) {
 }
 
 
+
 /****************************************************************************
  ****************************************************************************
     
@@ -142,7 +123,6 @@ function createBins(data) {
 
     return bins;
 }
-
 
 function displayRecommendations(eventNames) {
     const directoryName = `${eventNames[0]}_${eventNames[1]}_${eventNames[2]}`;
@@ -296,21 +276,6 @@ $("body").on("click", ".subContainer", function() {
     
 *****************************************************************************
 *****************************************************************************/
-function displayPage(page) {
-    $(".page").hide();
-    $(`.page:nth-of-type(${page + 1})`).show();
-
-    // Go Local! page
-    if (page === 2) {
-        eventNames = ["", "", "", ""];
-    }
-
-    // Log-in & Sign-up pages
-    if (page === 4 || page === 5) {
-        $(".messageToUser").empty();
-    }
-};
-
 $("#button_login").click(function() {
     $(".messageToUser").empty();
 
@@ -340,7 +305,7 @@ $("#button_login").click(function() {
                     $(".messageToUser").text(`Welcome, ${snapshot.val().name}!`);
                     
                     setTimeout(function() {
-                        displayPage(2);
+                        window.location.replace("go_local.html");
                         
                     }, 2000);
                 });
@@ -349,7 +314,6 @@ $("#button_login").click(function() {
                 e => console.log(e.message)
             );
     }
-
 });
 
 $("#button_signup").click(function() {
@@ -390,10 +354,10 @@ $("#button_signup").click(function() {
                     "email"   : email
                 });
 
-                $(".messageToUser").text(`Thanks for signing up, ${name}!`);
+                $(".messageToUser").text(`${name}, thanks for signing up!`);
 
                 setTimeout(function() {
-                    displayPage(2);
+                        window.location.replace("go_local.html");
 
                 }, 2000);
             })
