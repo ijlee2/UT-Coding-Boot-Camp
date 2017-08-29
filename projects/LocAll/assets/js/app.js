@@ -79,7 +79,6 @@ const locations_in_austin = {
     
 *****************************************************************************
 *****************************************************************************/
-let eventType, eventName;
 const eventTypes = ["eat", "play", "drink", "location"];
 let   eventNames = ["", "", "", ""];
 
@@ -135,8 +134,7 @@ function spherical_distance(point1, point2) {
 *****************************************************************************
 *****************************************************************************/
 function createBins(data) {
-    let bins = [0];
-    let bin_count = 0;
+    let bins = [0], bin_count = 0;
 
     data.forEach(d => {
         bin_count += Math.round(1000000 * d.probability);
@@ -162,7 +160,7 @@ function displayRecommendations(eventNames) {
         recommendations = [];
 
         // Recommend events near the user
-        let data = snapshot.val().filter(function(a) {
+        const data = snapshot.val().filter(function(a) {
             return spherical_distance(a.center, myLocation) < metric_max;
         });
 
@@ -178,7 +176,7 @@ function displayRecommendations(eventNames) {
             // Find the correct bin
             for (j = 0; j < (bins.length - 1); j++) {
                 if (bins[j] <= randomNumber && randomNumber < bins[j + 1]) {
-                    // Save the recommendation (we use ... since splice returns an array)
+                    // Save the recommendation
                     recommendations.push(...data.splice(j, 1));
 
                     break;
@@ -264,8 +262,7 @@ $("body").on("click", ".subContainer", function() {
         google.maps.event.addListener(marker, "click", function() {
             const phone   = (p.phone)   ? `${p.phone}<br>` : "";
             const website = (p.website) ? `<a href="${p.website}" target="_blank">Visit their website</a>` : "";
-
-            const output = `<div><strong>${p.name}</strong><br>${p.location.street}<br>${phone}${website}</div>`;
+            const output  = `<div><strong>${p.name}</strong><br>${p.location.street}<br>${phone}${website}</div>`;
 
             infowindow.setContent(output);
             infowindow.open(map, this);

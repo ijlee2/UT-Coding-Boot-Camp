@@ -202,7 +202,7 @@ $("body").on("click", "tbody tr", function() {
     
     // Place a marker for each place
     for (let key in places) {
-        var marker = new google.maps.Marker({
+        const marker = new google.maps.Marker({
             "map"     : map,
             "position": places[key].geometry,
             "icon"    : markerIcons[key]

@@ -46,8 +46,8 @@ const eventNames = {
 for (let eventType in eventNames) {
     eventNames[eventType].forEach(eventName =>
         database_events.child(`${eventType}/${eventName}`).once("value").then(function(snapshot) {
-            let database     = snapshot.val();
-            let database_new = {};
+            const database     = snapshot.val();
+            let   database_new = {};
 
             let names = [], name;
 
