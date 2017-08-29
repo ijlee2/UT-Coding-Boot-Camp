@@ -62,6 +62,14 @@ const markerIcons = {
     "drink": "assets/images/drink.png"
 };
 
+const locations_in_austin = {
+    "central": {"lat": 30.284919, "lng": -97.734057},  // UT Austin
+    "north"  : {"lat": 30.402065, "lng": -97.725883},  // The Domain
+    "west"   : {"lat": 30.343171, "lng": -97.835514},  // Emma Long Metropolitan Park
+    "east"   : {"lat": 30.263466, "lng": -97.695904},  // Austin Bouldering Project
+    "south"  : {"lat": 30.256079, "lng": -97.763509}   // Alamo Drafthouse South Lamar
+};
+
 
 
 /****************************************************************************
@@ -142,30 +150,7 @@ function createBins(data) {
 
 function displayRecommendations(eventNames) {
     const directoryName = `${eventNames[0]}_${eventNames[1]}_${eventNames[2]}`;
-    let   myLocation;
-
-    switch (eventNames[3]) {
-        case "central":
-            myLocation = {"lat": 30.284919, "lng": -97.734057};  // UT Austin
-            break;
-
-        case "north":
-            myLocation = {"lat": 30.402065, "lng": -97.725883};  // The Domain
-            break;
-
-        case "west":
-            myLocation = {"lat": 30.343171, "lng": -97.835514};  // Emma Long Metropolitan Park
-            break;
-
-        case "east":
-            myLocation = {"lat": 30.263466, "lng": -97.695904};  // Austin Bouldering Project
-            break;
-
-        case "south":
-            myLocation = {"lat": 30.256079, "lng": -97.763509};  // Alamo Drafthouse South Lamar
-            break;
-
-    }
+    const myLocation    = locations_in_austin[eventNames[3]];
     
     // Temporary variables
     let i, j;

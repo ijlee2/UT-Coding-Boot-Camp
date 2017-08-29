@@ -102,6 +102,11 @@ p {
 
 
 /* Page 2: Go Local! */
+#page2 {
+    /* Allow Google Maps to always appear on the screen */
+    position: relative;
+}
+
 .locall_flex_container {
     display                : -webkit-flex;
     display                : flex;
@@ -164,10 +169,19 @@ p {
     padding-bottom       : 2em;
 }
 
+#googleMaps {
+    /* Allow Google Maps to always appear on the screen */
+    position: absolute;
+    top     : 0;
+    right   : 400px;
+}
+
+/* IMPORTANT: Set the map height explicitly */
 #map {
-    float : right;
-    width : 400px;
-    height: 400px;
+    /* Allow Google Maps to always appear on the screen */
+    position: fixed !important;
+    width   : 400px;
+    height  : 400px;
 }
 
 
