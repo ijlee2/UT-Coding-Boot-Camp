@@ -6,7 +6,7 @@ Unless I noted otherwise, I have written all code. I'd much appreciate it if you
 If you have suggestions for making my code better and simpler, please let me know!
 
 ## Projects
-1. [LocAll](https://github.com/ijlee2/LocAll) (w/ Margie Tagaban, Aaron Tyler, Jacque White)
+1. [LocAll](https://github.com/ijlee2/LocAll) (with [Margie Tagaban](https://github.com/taggie05), [Aaron Tyler](https://github.com/atyler88), [Jacque White](https://github.com/JacqueWhite))
 2. 
 3. 
 
