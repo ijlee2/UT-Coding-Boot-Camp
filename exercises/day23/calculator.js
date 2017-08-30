@@ -20,7 +20,7 @@ switch (process.argv[2]) {
 
         } else {
             console.log(`${x} / ${y} = undefined`);
-            
+
         }
         break;
         
@@ -29,7 +29,7 @@ switch (process.argv[2]) {
         break;
         
     case "power":
-        console.log(`${x} ^ ${y} = ${x ^ y}`);
+        console.log(`${x} ^ ${y} = ${Math.pow(x, y)}`);
         break;
 
     case "algebra":
