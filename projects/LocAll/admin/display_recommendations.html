@@ -13,9 +13,15 @@
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand|Shadows+Into+Light" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="assets/css/style_api.css">
         <style>
+            #leftPane {
+                float: left;
+                width: 50%;
+            }
+
+            #rightPane {
             /* This div allows Google Maps to always appear on the screen */
-            .page {
                 position: relative;
+                float   : right;
             }
     
             /* Menu */
@@ -25,8 +31,8 @@
 
             .menu_events {
                 float       : left;
-                width       : 22%;
-                margin-right: 3%;
+                width       : 46%;
+                margin-right: 4%;
             }
 
             li {
@@ -93,71 +99,75 @@
         <div class="container">
             <h1>Display Recommendations</h1>
             
-            <div class="page clearfix" id="menu">
-                <div class="menu_events">
-                    <h2>Eat</h2>
-                    <select name="eat" id="eat">
-                        <option value="" disabled selected></option>
-                        <option value="asian">Asian</option>
-                        <option value="bbq">BBQ</option>
-                        <option value="indian">Indian</option>
-                        <option value="pizza">Pizza</option>
-                        <option value="tex-mex">Tex-Mex</option>
-                    </select>
+            <div id="leftPane">
+                <div class="page clearfix" id="menu">
+                    <div class="menu_events">
+                        <h2>Eat</h2>
+                        <select name="eat" id="eat">
+                            <option value="" disabled selected></option>
+                            <option value="asian">Asian</option>
+                            <option value="bbq">BBQ</option>
+                            <option value="indian">Indian</option>
+                            <option value="pizza">Pizza</option>
+                            <option value="tex-mex">Tex-Mex</option>
+                        </select>
+                    </div>
+
+                    <div class="menu_events">
+                        <h2>Play</h2>
+                        <select name="play" id="play">
+                            <option value="" disabled selected></option>
+                            <option value="bowl">Bowl</option>
+                            <option value="hike">Hike</option>
+                            <option value="movie">Movie</option>
+                            <option value="spa">Spa</option>
+                            <option value="swim">Swim</option>
+                        </select>
+                    </div>
+
+                    <div class="menu_events">
+                        <h2>Drink</h2>
+                        <select name="drink" id="drink">
+                            <option value="" disabled selected></option>
+                            <option value="bar">Bar</option>
+                            <option value="brewery">Brewery</option>
+                            <option value="coffee">Coffee</option>
+                            <option value="tea">Tea</option>
+                            <option value="wine">Wine</option>
+                        </select>
+                    </div>
+
+                    <div class="menu_events">
+                        <h2>Location</h2>
+                        <select name="location" id="location">
+                            <option value="" disabled selected></option>
+                            <option value="central">Central Austin</option>
+                            <option value="north">North Austin</option>
+                            <option value="west">West Austin</option>
+                            <option value="east">East Austin</option>
+                            <option value="south">South Austin</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="menu_events">
-                    <h2>Play</h2>
-                    <select name="play" id="play">
-                        <option value="" disabled selected></option>
-                        <option value="bowl">Bowl</option>
-                        <option value="hike">Hike</option>
-                        <option value="movie">Movie</option>
-                        <option value="spa">Spa</option>
-                        <option value="swim">Swim</option>
-                    </select>
-                </div>
-
-                <div class="menu_events">
-                    <h2>Drink</h2>
-                    <select name="drink" id="drink">
-                        <option value="" disabled selected></option>
-                        <option value="bar">Bar</option>
-                        <option value="brewery">Brewery</option>
-                        <option value="coffee">Coffee</option>
-                        <option value="tea">Tea</option>
-                        <option value="wine">Wine</option>
-                    </select>
-                </div>
-
-                <div class="menu_events">
-                    <h2>Location</h2>
-                    <select name="location" id="location">
-                        <option value="" disabled selected></option>
-                        <option value="central">Central Austin</option>
-                        <option value="north">North Austin</option>
-                        <option value="west">West Austin</option>
-                        <option value="east">East Austin</option>
-                        <option value="south">South Austin</option>
-                    </select>
+                <h2>Results</h2>
+                <p>Click on a row to see places on the map.</p>
+                <div class="page">
+                    <div class="panel" id="recommendations">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-            <h2>Results</h2>
-            <p>Click on a table row to see the places on map.</p>
-            <div class="page">
-                <div class="panel" id="recommendations">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-
+            
+            <div id="rightPane">
                 <div class="panel" id="googleMaps">
                     <div id="map"></div>
                 </div>
