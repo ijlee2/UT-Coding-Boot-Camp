@@ -1,5 +1,11 @@
-// Configure
-const keys = require("./keys.js");
+/****************************************************************************
+ ****************************************************************************
+    
+    Configure APIs
+    
+*****************************************************************************
+*****************************************************************************/
+const keys    = require("./keys.js");
 
 // Twitter
 const Twitter = require("twitter");
@@ -13,16 +19,45 @@ const spotify = new Spotify(keys.spotify);
 const request = require("request");
 
 // File System
-const fs = require("fs");
+const fs      = require("fs");
 
 
-// Initialize
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Initialize
+    
+*****************************************************************************
+*****************************************************************************/
+process.stdout.write('\033c');
+
+// Create a log file if it does not exist
+const file_log = "log.txt";
+
+if (!fs.existsSync(file_log)) {
+    fs.writeFile(file_log, "", (error) => {
+        if (error) {
+            saveOutput(`Error in creating "${file_log}"\n${error}\n\n`);
+            return;
+        }
+    });
+}
+
 const option = process.argv[2];
 const title  = process.argv.slice(3).join(" ");
 
 mainMenu(option, title);
 
 
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Menu options
+    
+*****************************************************************************
+*****************************************************************************/
 function mainMenu(option, title) {
     switch (option) {
         case "my-tweets":
@@ -42,7 +77,7 @@ function mainMenu(option, title) {
             break;
 
         default:
-            console.log("Command not found.");
+            saveOutput(`Error:\n"${option}" is a not valid command.\n\n`);
 
     }
 }
@@ -54,18 +89,36 @@ function getTweets() {
         screen_name: "BobBarker000000"
     };
 
-    twitter.get("statuses/user_timeline", parameters, function(error, tweets, response) {
+    twitter.get("statuses/user_timeline", parameters, (error, tweets, response) => {
         if (error) {
-            return console.log(`Error in calling "Twitter": ${error}`);
+            saveOutput(`Error in calling "Twitter"\n${error}\n\n`);
+            return;
         }
 
+
+        /********************************************************************
+            
+            Write to terminal and file
+            
+        *********************************************************************/
+        let output = "My Tweets\n";
+
+        output += addSeparator();
+        
         tweets.forEach(t => {
-//            const tweet_date = moment(t.created_at, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en');
-            drawSeparator();
-            console.log(`@${t.user.screen_name} · ${t.created_at}\n\n"${t.text}"\n`);
+            // Extract date information
+            [, month, day, time, , year] = t.created_at.split(" ");
+            [hour, minute]               = time.split(":");
+
+            // Format the time stamp
+            const timeStamp = `${month} ${day} ${year}, ${hour % 12}:${minute} ${(hour < 12) ? "AM" : "PM"}`;
+
+            output += `@${t.user.screen_name} · ${timeStamp}\n"${t.text}"\n\n`;
         });
 
-        drawSeparator();
+        output += addSeparator();
+
+        saveOutput(output);
     });
 }
 
@@ -77,9 +130,10 @@ function getSong(title) {
         "limit": 1
     };
 
-    spotify.search(parameters, function(error, data) {
+    spotify.search(parameters, (error, data) => {
         if (error) {
-            return console.log(`Error in calling "Spotify": ${error}`);
+            saveOutput(`Error in calling "Spotify"\n${error}\n\n`);
+            return;
         }
 
         // For simplicity, we assume that Spotify always finds the right song
@@ -89,13 +143,24 @@ function getSong(title) {
         const artists = [];
         song.artists.forEach(a => artists.push(a.name));
 
-        // Display song information
-        drawSeparator();
-        console.log(`Artists:\t${artists.join(", ")}`);
-        console.log(`Album:\t\t${song.album.name}`);
-        console.log(`Track:\t\t${song.name}`);
-        console.log(`Preview link:\t${song.preview_url}`);
-        drawSeparator();
+
+        /********************************************************************
+            
+            Write to terminal and file
+            
+        *********************************************************************/
+        let output = "Spotify This Song\n";
+        
+        output += addSeparator();
+        
+        output += `Artists      : ${artists.join(", ")}\n`;
+        output += `Album        : ${song.album.name}\n`;
+        output += `Track        : ${song.name}\n`;
+        output += `Preview link : ${song.preview_url}\n\n`;
+        
+        output += addSeparator();
+
+        saveOutput(output);
     });
 }
 
@@ -103,44 +168,75 @@ function getSong(title) {
 function getMovie(title) {
     const api_url = `https://www.omdbapi.com/?apikey=40e9cece&t=${title}&plot=short`;
     
-    request(api_url, function(error, response, body) {
+    request(api_url, (error, response, body) => {
         if (error) {
-            return console.log(`Error in calling "OMDB": ${error}`);
+            saveOutput(`Error in calling "OMDB"\n${error}\n\n`);
+            return;
         }
 
-        // Assume that the request is always successful
-        if (response.statusCode === 200) {
-            const movie = JSON.parse(body);
-
-            drawSeparator();
-            console.log(`Title          : ${movie.Title}`);
-            console.log(`Release year   : ${movie.Year}`);
-            console.log(`Plot           : ${movie.Plot}`);
-            console.log(`Actors         : ${movie.Actors}`);
-            console.log(`IMDB           : ${movie.imdbRating}`);
-            console.log(`RottenTomatoes : ${movie.Ratings[1].Value}`);
-            console.log(`Production     : ${movie.Country}`);
-            console.log(`Language       : ${movie.Language}`);
-            drawSeparator();
+        if (response.statusCode !== 200) {
+            saveOutput(`Error in calling "OMDB"\n${response}\n\n`);
+            return;
         }
+
+        const movie = JSON.parse(body);
+
+        
+
+        /********************************************************************
+            
+            Write to terminal and file
+            
+        *********************************************************************/
+        let output = "Movie This\n";
+
+        output += addSeparator();
+        
+        output += `Title          : ${movie.Title}\n`;
+        output += `Release year   : ${movie.Year}\n`;
+        output += `Plot           : ${movie.Plot}\n`;
+        output += `Actors         : ${movie.Actors}\n`;
+        output += `IMDB           : ${movie.imdbRating}\n`;
+        output += `RottenTomatoes : ${movie.Ratings[1].Value}\n`;
+        output += `Production     : ${movie.Country}\n`;
+        output += `Language       : ${movie.Language}\n\n`;
+        
+        output += addSeparator();
+
+        saveOutput(output);
     });
 }
 
 
 function doWhatItSays() {
-    fs.readFile("random.txt", "utf8", function(error, data) {
+    fs.readFile("random.txt", "utf8", (error, data) => {
         if (error) {
-            return console.log(`Error in calling "Do What It Says": ${error}`);
+            saveOutput(`Error in calling "Do What It Says":\n${error}\n\n`);
+            return;
         }
 
         const commands = data.split("\r\n");
+        
+
+        /********************************************************************
+            
+            Write to terminal and file
+            
+        *********************************************************************/
+        if (commands.length === 1 && commands[0] === "") {
+            saveOutput(`Error in calling "Do What It Says":\nPlease enter a command in "random.txt".\n\n`);
+        }
 
         commands.forEach(c => {
-            // Use indexOf instead of split, in case the title includes a comma
+            if (c === "") {
+                return;
+            }
+
+            // Use indexOf instead of split, in case the title has a comma
             const index = c.indexOf(",");
 
-            const option = (index >= 0) ? c.substring(0, index).trim().toLowerCase() : c;
-            const title  = (index >= 0) ? c.substring(index + 1).trim() : undefined;
+            const option = (index >= 0) ? c.substring(0,  index).trim().toLowerCase() : c;
+            const title  = (index >= 0) ? c.substring(index + 1).trim()               : undefined;
 
             mainMenu(option, title);
         });
@@ -148,6 +244,16 @@ function doWhatItSays() {
 }
 
 
-function drawSeparator() {
-    console.log("\n" + "-".repeat(50) + "\n");
+function addSeparator() {
+    return "-".repeat(60) + "\n\n";
+}
+
+function saveOutput(output) {
+    console.log(output);
+
+    fs.appendFile(file_log, output, (error) => {
+        if (error) {
+            return console.log(`Error in appending to "${file_log}"\n${error}\n\n`);
+        }
+    });
 }
