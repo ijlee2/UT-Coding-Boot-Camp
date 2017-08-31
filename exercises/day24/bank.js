@@ -62,7 +62,7 @@ function updateTotal(amount) {
 function playLottery() {
     const lotteryNumber = Math.floor(6 * Math.random());
 
-    if (lotteryNumber === 1) {
+    if (lotteryNumber === 0) {
         console.log("You won the lottery!");
         updateTotal(2.00);
 
