@@ -9,3 +9,7 @@ exports.spotify = {
     "id"    : "275fa6b9bcbc4940bdfd2897b92ccb81",
     "secret": "06d5f657cda04a2ea7a74841700dcb76"
 }
+
+exports.omdb = {
+    "key": "40e9cece"
+}
