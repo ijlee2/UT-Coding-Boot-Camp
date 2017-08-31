@@ -1,6 +1,6 @@
-var fs = require("fs");
+const fs = require("fs");
 
-var textFile = process.argv[2];
+const textFile = process.argv[2];
 
 fs.appendFile(textFile, "Hello Kitty\n", function(error) {
     if (error) {
