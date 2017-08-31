@@ -5,7 +5,7 @@ const query = process.argv[2];
 
 const api_url = `https://www.omdbapi.com/?apikey=40e9cece&t=${query}`;
 
-request(`https://www.omdbapi.com/?apikey=40e9cece&t=${query}`, function(error, response, body) {
+request(`https://www.omdbapi.com/?apikey=40e9cece&t=${query}&plot=short`, function(error, response, body) {
     // If the request is successful
     if (!error && response.statusCode === 200) {
         const movie = JSON.parse(body);
