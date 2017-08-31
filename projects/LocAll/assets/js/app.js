@@ -50,6 +50,23 @@ const locations_in_austin = {
     "south"  : {"lat": 30.256079, "lng": -97.763509}   // Alamo Drafthouse South Lamar
 };
 
+$(function() {
+    // Initialize the carousel
+    let paused = 0;
+    $("#myCarousel").carousel({
+        interval: 1000,
+        pause   : 0
+    });
+
+    // Trigger play
+    $("#toggleCarousel").click(function() {
+        $("#myCarousel").carousel((paused) ? "cycle" : "pause");
+        $(this).find("i").toggleClass("fa-play fa-pause");
+
+        paused != paused;
+    });
+});
+
 
 
 /****************************************************************************
@@ -72,7 +89,7 @@ $(".dropdown-item").click(function() {
     $(`#button_${eventTypes[index]}`).text(eventName);
 
     // Display recommendations once the user selects all options
-    if (eventNames.filter((a) => a !== "").length === eventNames.length) {
+    if (eventNames.filter(a => a !== "").length === eventNames.length) {
         displayRecommendations(eventNames);
     }
 });
@@ -191,19 +208,19 @@ function displayRecommendations(eventNames) {
 }
 
 function displayRating(event) {
-    let stars_string = "";
+    let rating = "";
     
     // Whole number
     for (let i = 1; i < event.rating; i++) {
-        stars_string += "★";
+        rating += "★";
     }
 
     // Fractional part
     if (Math.trunc(event.rating) !== event.rating) {
-        stars_string += "½";
+        rating += "½";
     }
 
-    return stars_string;
+    return rating;
 }
 
 

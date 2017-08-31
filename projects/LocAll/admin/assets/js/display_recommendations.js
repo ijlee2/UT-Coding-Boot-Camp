@@ -66,7 +66,7 @@ $("select").change(function() {
     eventNames[index] = events[index].value;
 
     // Display recommendations once the user selects all options
-    if (eventNames.filter((a) => a !== "").length === eventNames.length) {
+    if (eventNames.filter(a => a !== "").length === eventNames.length) {
         displayRecommendations(eventNames);
     }
 });
@@ -133,7 +133,7 @@ function displayRecommendations(eventNames) {
         recommendations = [];
 
         // Recommend events near the user
-        const data = snapshot.val().filter((a) => spherical_distance(a.center, myLocation) < metric_max);
+        const data = snapshot.val().filter(a => spherical_distance(a.center, myLocation) < metric_max);
 
         // Select recommendations at random
         for (i = 0; i < numRecommendations_max; i++) {
@@ -160,7 +160,7 @@ function displayRecommendations(eventNames) {
 
         recommendations.forEach(r => {
             names   = `<p>▪ ${r.eat.name}</p><p>▪ ${r.play.name}</p><p>▪ ${r.drink.name}</p>`;
-            ratings = `<p style="margin-bottom:0.4em">${displayRating(r.eat)}</p><p style="margin-bottom:0.4em">${displayRating(r.play)}</p><p>${displayRating(r.drink)}</p>`;
+            ratings = `<p style="margin-bottom: 0.4em">${displayRating(r.eat)}</p><p style="margin-bottom: 0.4em">${displayRating(r.play)}</p><p>${displayRating(r.drink)}</p>`;
 
             output += `<tr><td>${names}</td><td>${ratings}</td></tr>`;
         });
@@ -170,19 +170,19 @@ function displayRecommendations(eventNames) {
 }
 
 function displayRating(event) {
-    let stars_string = "";
+    let rating = "";
     
     // Whole number
     for (let i = 1; i < event.rating; i++) {
-        stars_string += "★";
+        rating += "★";
     }
 
     // Fractional part
     if (Math.trunc(event.rating) !== event.rating) {
-        stars_string += "½";
+        rating += "½";
     }
 
-    return stars_string;
+    return rating;
 }
 
 

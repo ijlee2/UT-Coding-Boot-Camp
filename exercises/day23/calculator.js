@@ -37,13 +37,13 @@ switch (process.argv[2]) {
         const expression = process.argv[3];
 
         const index_variable = expression.indexOf("x");
-        const a = expression.substring(0, index_variable);
+        const a = parseFloat(expression.substring(0, index_variable));
 
         if (a !== 0) {
             const index_plus  = expression.indexOf("+");
             const index_equal = expression.indexOf("=");
-            const b = expression.substring(index_plus + 1, index_equal);
-            const c = expression.substring(index_equal + 1);
+            const b = parseFloat(expression.substring(index_plus + 1, index_equal));
+            const c = parseFloat(expression.substring(index_equal + 1));
 
             console.log(`x = ${(c - b) / a}`);
 

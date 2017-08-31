@@ -34,12 +34,14 @@ const database = firebase.database();
 let   map, service;
 const delayBetweenAPICalls = 6000;
 
-const location_central = {"lat": 30.284919, "lng": -97.734057};  // UT Austin
-const location_north   = {"lat": 30.402065, "lng": -97.725883};  // The Domain
-const location_west    = {"lat": 30.343171, "lng": -97.835514};  // Emma Long Metropolitan Park
-const location_east    = {"lat": 30.263466, "lng": -97.695904};  // Austin Bouldering Project
-const location_south   = {"lat": 30.256079, "lng": -97.763509};  // Alamo Drafthouse South Lamar
-const searchRadius     = 10 * 1609.34;
+const locations_in_austin = {
+    "central": {"lat": 30.284919, "lng": -97.734057},  // UT Austin
+    "north"  : {"lat": 30.402065, "lng": -97.725883},  // The Domain
+    "west"   : {"lat": 30.343171, "lng": -97.835514},  // Emma Long Metropolitan Park
+    "east"   : {"lat": 30.263466, "lng": -97.695904},  // Austin Bouldering Project
+    "south"  : {"lat": 30.256079, "lng": -97.763509}   // Alamo Drafthouse South Lamar
+};
+const searchRadius = 10 * 1609.34;
 
 const queries = [
     [
@@ -66,10 +68,10 @@ const queries = [
 ];
 
 // ADMIN TODO: Take permutations below
-// location_austin = location_central, location_north, location_west, location_east, location_south
+// location_austin = location_in_austin["central"], ...["north"], ...["west"], ...["east"], ...["south"]
 // rankBy          = "prominence", "distance"
 // queryIndex      = 0, 1
-const location_austin = location_central;
+const location_austin = locations_in_austin["central"];
 const rankBy          = "prominence";
 const queryIndex      = 0;
 
