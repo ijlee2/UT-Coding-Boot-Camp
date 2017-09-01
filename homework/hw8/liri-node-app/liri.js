@@ -30,7 +30,7 @@ const fs      = require("fs");
     
 *****************************************************************************
 *****************************************************************************/
-process.stdout.write('\033c');
+process.stdout.write("\033c");
 
 // Create a log file if it does not exist
 const file_log = "log.txt";
@@ -38,7 +38,7 @@ const file_log = "log.txt";
 if (!fs.existsSync(file_log)) {
     fs.writeFile(file_log, "", (error) => {
         if (error) {
-            saveOutput(`Error in creating "${file_log}"\n${error}\n\n`);
+            saveOutput(`Error in creating "${file_log}"\n${error}\n\n\n`);
             return;
         }
     });
@@ -58,8 +58,8 @@ mainMenu(option, title);
     
 *****************************************************************************
 *****************************************************************************/
-function mainMenu(option, title) {
-    switch (option) {
+function mainMenu(option = "", title) {
+    switch (option.toLowerCase()) {
         case "my-tweets":
             getTweets();
             break;
@@ -77,7 +77,7 @@ function mainMenu(option, title) {
             break;
 
         default:
-            saveOutput(`Error:\n"${option}" is a not valid command.\n\n`);
+            saveOutput(`Error:\n"${option}" is a not valid command.\nPlease select "my-tweets", "spotify-this-song", "movie-this", or "do-what-it-says".\n\n\n`);
 
     }
 }
@@ -85,13 +85,13 @@ function mainMenu(option, title) {
 
 function getTweets() {
     const parameters = {
-        count: 20,
+        count      : 20,
         screen_name: "BobBarker000000"
     };
 
     twitter.get("statuses/user_timeline", parameters, (error, tweets, response) => {
         if (error) {
-            saveOutput(`Error in calling "Twitter"\n${error}\n\n`);
+            saveOutput(`Error in calling "Twitter"\n${error}\n\n\n`);
             return;
         }
 
@@ -116,7 +116,7 @@ function getTweets() {
             output += `@${t.user.screen_name} · ${timeStamp}\n"${t.text}"\n\n`;
         });
 
-        output += addSeparator();
+        output += addSeparator() + "\n";
 
         saveOutput(output);
     });
@@ -132,7 +132,7 @@ function getSong(title) {
 
     spotify.search(parameters, (error, data) => {
         if (error) {
-            saveOutput(`Error in calling "Spotify"\n${error}\n\n`);
+            saveOutput(`Error in calling "Spotify"\n${error}\n\n\n`);
             return;
         }
 
@@ -158,7 +158,7 @@ function getSong(title) {
         output += `Track        : ${song.name}\n`;
         output += `Preview link : ${song.preview_url}\n\n`;
         
-        output += addSeparator();
+        output += addSeparator() + "\n";
 
         saveOutput(output);
     });
@@ -170,12 +170,12 @@ function getMovie(title) {
     
     request(api_url, (error, response, body) => {
         if (error) {
-            saveOutput(`Error in calling "OMDB"\n${error}\n\n`);
+            saveOutput(`Error in calling "OMDB"\n${error}\n\n\n`);
             return;
         }
 
         if (response.statusCode !== 200) {
-            saveOutput(`Error in calling "OMDB"\n${response}\n\n`);
+            saveOutput(`Error in calling "OMDB"\n${response}\n\n\n`);
             return;
         }
 
@@ -201,7 +201,7 @@ function getMovie(title) {
         output += `Production     : ${movie.Country}\n`;
         output += `Language       : ${movie.Language}\n\n`;
         
-        output += addSeparator();
+        output += addSeparator() + "\n";
 
         saveOutput(output);
     });
@@ -211,7 +211,7 @@ function getMovie(title) {
 function doWhatItSays() {
     fs.readFile("random.txt", "utf8", (error, data) => {
         if (error) {
-            saveOutput(`Error in calling "Do What It Says":\n${error}\n\n`);
+            saveOutput(`Error in calling "Do What It Says":\n${error}\n\n\n`);
             return;
         }
 
@@ -224,7 +224,7 @@ function doWhatItSays() {
             
         *********************************************************************/
         if (commands.length === 1 && commands[0] === "") {
-            saveOutput(`Error in calling "Do What It Says":\nPlease enter a command in "random.txt".\n\n`);
+            saveOutput(`Error in calling "Do What It Says":\nPlease enter a command in "random.txt".\n\n\n`);
         }
 
         commands.forEach(c => {
@@ -248,12 +248,15 @@ function addSeparator() {
     return "-".repeat(60) + "\n\n";
 }
 
+
 function saveOutput(output) {
+    // Write to the terminal
     console.log(output);
 
+    // Write to the log file
     fs.appendFile(file_log, output, (error) => {
         if (error) {
-            return console.log(`Error in appending to "${file_log}"\n${error}\n\n`);
+            return console.log(`Error in appending to "${file_log}"\n${error}\n\n\n`);
         }
     });
 }
