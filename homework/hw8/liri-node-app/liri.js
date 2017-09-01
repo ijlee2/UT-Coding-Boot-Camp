@@ -38,7 +38,7 @@ const file_log = "log.txt";
 if (!fs.existsSync(file_log)) {
     fs.writeFile(file_log, "", (error) => {
         if (error) {
-            saveOutput(`Error in creating "${file_log}"\n${error}\n\n\n`);
+            console.log(`Error in creating "${file_log}"\n${error}\n\n\n`);
             return;
         }
     });
