@@ -1,0 +1,16 @@
+{
+  "name": "day25",
+  "version": "1.0.0",
+  "description": "Packages needed for Day 25.",
+  "main": "weatherdest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Isaac J. Lee",
+  "license": "ISC",
+  "dependencies": {
+    "geocoder": "^0.2.3",
+    "request": "^2.81.0",
+    "weather-js": "^1.0.3"
+  }
+}
