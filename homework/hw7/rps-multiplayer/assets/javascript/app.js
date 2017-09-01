@@ -6,88 +6,94 @@
 *****************************************************************************
 *****************************************************************************/
 const config = {
-    apiKey           : "AIzaSyDXvqGhdA0Ub2OVaR2uAYRw4qMWxAJXLSg",
-    authDomain       : "rps-multiplayer-53644.firebaseapp.com",
-    databaseURL      : "https://rps-multiplayer-53644.firebaseio.com",
-    projectId        : "rps-multiplayer-53644",
-    storageBucket    : "rps-multiplayer-53644.appspot.com",
-    messagingSenderId: "931155377111"
+    "apiKey"           : "AIzaSyDXvqGhdA0Ub2OVaR2uAYRw4qMWxAJXLSg",
+    "authDomain"       : "rps-multiplayer-53644.firebaseapp.com",
+    "databaseURL"      : "https://rps-multiplayer-53644.firebaseio.com",
+    "projectId"        : "rps-multiplayer-53644",
+    "storageBucket"    : "rps-multiplayer-53644.appspot.com",
+    "messagingSenderId": "931155377111"
 };
 
 firebase.initializeApp(config);
 
-const database       = firebase.database();
-const connectedRef   = database.ref(".info/connected");
-const connectionsRef = database.ref("connections");
-const playersRef     = database.ref("players");
-
-// Define a test case
-const testMessages = ["John: Hi, there!",
-                      "Emily: Hello.",
-                      "John: How are you?",
-                      "Emily: Doing well, thanks."];
+const database          = firebase.database();
+const database_players  = database.ref("players");
+const database_turn     = database.ref("turn");
+const database_messages = database.ref("messages");
 
 
 
 /****************************************************************************
  ****************************************************************************
     
-    Rock, Paper, Scissors Game
+    Initialize
     
 *****************************************************************************
 *****************************************************************************/
 // Global variables
 const numPlayersAllowed = 2;
-let players = new Array(numPlayersAllowed), numPlayersInMatch, turn;
+let players, numPlayers, myID;
+let turn;
 let messages;
+
+// Find out who are playing the game
+database_players.on("value", (snapshot) => {
+    players = snapshot.val();
+    
+    if (players) {
+        numPlayers = players.filter(p => p !== -1).length;
+        
+    // Initialize the database
+    } else {
+        for (let i = 0; i < numPlayersAllowed; i++) {
+            database_players.child(i).set(-1);
+        }
+
+    }
+
+    // Refresh the game page if the user is in the game
+    if (typeof myID !== "undefined") {
+        refreshDisplay();
+    }
+});
+
+// Find out whose turn it is
+database_turn.on("value", (snapshot) => turn = (snapshot.val()) ? snapshot.val() : 0);
+
+// Display chat messages
+database_messages.on("child_added", (snapshot) => {
+    $("#messages").append(snapshot.val());
+});
 
 
 /****************************************************************************
     
-    Set the database behavior
+    Game mechanics
     
 *****************************************************************************/
-function loadDatabase() {
-    playersRef.on("child_added", function(snapshot) {
-        // Update the array
-        players[snapshot.key] = snapshot.val();
-        
-        refreshDisplay();
-    });
+function addPlayer(name) {
+    if (numPlayers < numPlayersAllowed) {
+        const player = {
+            "name"     : name,
+            "choice"   : -1,
+            "numWins"  : 0,
+            "numLosses": 0
+        };
 
-    // When a player exists the game
-    playersRef.on("child_removed", function(snapshot) {
-        // Get the player
-        players[snapshot.key] = undefined;
-        numPlayersInMatch--;
+        // Add the player to the next available spot
+        for (let i = 0; i < numPlayersAllowed; i++) {
+            if (players[i] === -1) {
+                myID = i;
 
-        refreshDisplay();
-        
-    });
+                database_players.child(i).set(player);
+                database_players.child(i).onDisconnect().set(-1);
 
-    database.ref("numPlayersInMatch").on("value", function(snapshot) {
-        numPlayersInMatch = (snapshot.val()) ? snapshot.val() : 0;
-    });
-
-    database.ref("turn").on("value", function(snapshot) {
-        turn = (snapshot.val()) ? snapshot.val() : undefined;
-    });
-    
-    // Track visitors
-    connectedRef.on("value", function(snapshot) {
-        // When a user is online
-        if (snapshot.val()) {
-            // Add the user to the connections list
-            const connection = connectionsRef.push(true);
-
-            // Remove the user from the list when they disconnect
-            connection.onDisconnect().remove();
+                break;
+            }
         }
-    });
 
-    connectionsRef.on("value", function(snapshot) {
-        $("#numActiveVisitors").text(snapshot.numChildren() - 1);
-    });
+        displayPage(1);
+    }
 }
 
 
@@ -104,70 +110,18 @@ function displayPage(page) {
 function refreshDisplay() {
     let element;
 
-    console.log(players);
+    for (let i = 0; i < numPlayersAllowed; i++) {
+        element = `#player${i} > `;
 
-    // If the game hasn't started yet
-    if (numPlayersInMatch < numPlayersAllowed) {
-        for (let i = 0; i < numPlayersAllowed; i++) {
-            element = `#player${i} > `;
+        if (players[i] !== -1) {
+            $(`${element}.name`).html(`<h2>${players[i].name}</h2>`);
+            $(`${element}.display`).html("<p>Welcome to RPS Multiplayer!</p>");
 
-            if (!$.isEmptyObject(players[i])) {
-                $(element + ".name").html(`<h2>${players[i].name}</h2>`);
-                $(element + ".display").html("<p>Welcome to RPS Multiplayer!</p>");
+        } else {
+            $(`${element}.name`).html(`<h2>Player ${i + 1}</h2>`);
+            $(`${element}.display`).html("<p>Waiting for the player to join...<p>");
 
-            } else {
-                $(element + ".name").html("<h2>???</h2>");
-                $(element + ".display").html("<p>Waiting for the player to join...<p>");
-
-            }
         }
-
-    // Play RPS
-    } else {
-        for (let i = 0; i < numPlayersAllowed; i++) {
-            element = `#player${i} > `;
-
-            // Selection menu
-            if (players[i].choice === -1) {
-                $(element + ".display").html(`<div class="choices">Rock</div>
-                                              <div class="choices">Paper</div>
-                                              <div class="choices">Scissors</div>`);
-
-            // Display the user's choice
-            } else {
-
-            }
-        }
-
-    }
-}
-
-
-/****************************************************************************
-    
-    Add or delete a player
-    
-*****************************************************************************/
-function addPlayer() {
-    const player = {"name"     : $("#input_name").val().trim(),
-                    "choice"   : -1,
-                    "numWins"  : 0,
-                    "numLosses": 0};
-
-    // Add the player
-    if (numPlayersInMatch < numPlayersAllowed) {
-        // TODO: Change numPlayersInMatch to the available ID
-        const playerRef = database.ref("players").push(player);
-        playerRef.onDisconnect().remove();
-
-        database.ref("numPlayersInMatch").set(numPlayersInMatch + 1);
-        database.ref("turn").set(0);
-        
-        displayPage(1);
-
-    } else {
-        console.log("Please wait for the next available match.");
-
     }
 }
 
@@ -178,16 +132,27 @@ function addPlayer() {
     
 *****************************************************************************/
 $(document).ready(function() {
-    loadDatabase();
-
     displayPage(0);
 
-    $("#input_name").on("keyup", function(e) {
-        // Allow the user to hit Enter key to enter name
-        if (e.keyCode === 13) {
-            addPlayer();
+    // Allow the user to hit Enter key to enter name
+    $("#playerName").on("keyup", event => {
+        const playerName = $("#playerName").val().trim();
+
+        if (event.keyCode === 13 && checkName(playerName)) {
+            addPlayer(playerName);
         }
     });
 
-    $("#button_submit").on("click", addPlayer);
+    $("#button_submit").on("click", () => {
+        const playerName = $("#playerName").val().trim();
+
+        if (checkName(playerName)) {
+            addPlayer(playerName);
+        }
+    });
 });
+
+// Name can consist of letters and numbers only
+function checkName(name) {
+    return name.match(/^[a-z0-9]+$/i);
+}
