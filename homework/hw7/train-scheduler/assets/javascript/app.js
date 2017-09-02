@@ -6,12 +6,12 @@
 *****************************************************************************
 *****************************************************************************/
 const config = {
-    apiKey           : "AIzaSyDTZzRZokWqHyFnA0T11Hte9ZwJ9QgO4kI",
-    authDomain       : "train-scheduler-3f682.firebaseapp.com",
-    databaseURL      : "https://train-scheduler-3f682.firebaseio.com",
-    projectId        : "train-scheduler-3f682",
-    storageBucket    : "train-scheduler-3f682.appspot.com",
-    messagingSenderId: "886128771331"
+    "apiKey"           : "AIzaSyDTZzRZokWqHyFnA0T11Hte9ZwJ9QgO4kI",
+    "authDomain"       : "train-scheduler-3f682.firebaseapp.com",
+    "databaseURL"      : "https://train-scheduler-3f682.firebaseio.com",
+    "projectId"        : "train-scheduler-3f682",
+    "storageBucket"    : "train-scheduler-3f682.appspot.com",
+    "messagingSenderId": "886128771331"
 };
 
 firebase.initializeApp(config);
@@ -128,8 +128,10 @@ function findNextArrival(train) {
         h = h % 24;
     }
     
-    return {"nextArrival": [d, h, m],
-            "minutesAway": arrivalTime - t1};
+    return {
+        "nextArrival": [d, h, m],
+        "minutesAway": arrivalTime - t1
+    };
 }
 
 
@@ -198,36 +200,6 @@ function refreshSchedule() {
     Add, edit, or delete a train
     
 *****************************************************************************/
-    /*
-    // Input validation
-    $("input").each(function() {
-        var element = $(this);
-        console.log(element);
-
-        if (element.val() == undefined) {
-            element.css({"background-color": "red"});
-            element.attr("placeholder", `Please fill out the ${this.id}!`);
-        }
-    });
-
-    if ($("#name").val() === "") {
-        console.log("Fill out name");
-        return;
-    }
-    if ($("#destination").val() === "") {
-        console.log("Fill out destination");
-        return;
-    }
-    if ($("#departure").val() === "") {
-        console.log("Fill out departure");
-        return;
-    }
-    if ($("#frequency").val() === "") {
-        console.log("Fill out frequency");
-        return;
-    }
-    */
-
 function switchMode(mode) {
     if (mode === "add") {
         // Reset the fields
@@ -243,8 +215,8 @@ function switchMode(mode) {
         const h = myTrain.departure[1];
         const m = myTrain.departure[2];
 
-        let departure_string = (h < 10) ? ("0" + h) : h;
-        departure_string += (m < 10) ? (":0" + m) : (":" + m);
+        let departure_string = (h < 10) ? `0${h}` : h;
+        departure_string += (m < 10) ? `:0${m}` : `:${m}`;
 
         // Update the fields
         $("#name").val(myTrain.name);
@@ -269,11 +241,13 @@ function addTrain() {
     const m = parseInt(departure_string.substring(i + 1));
 
     // Update the database
-    const train = {"id"         : availableID,
-                   "name"       : $("#name").val().trim(),
-                   "destination": $("#destination").val().trim(),
-                   "departure"  : [0, h, m],
-                   "frequency"  : parseInt($("#frequency").val().trim())};
+    const train = {
+        "id"         : availableID,
+        "name"       : $("#name").val().trim(),
+        "destination": $("#destination").val().trim(),
+        "departure"  : [0, h, m],
+        "frequency"  : parseInt($("#frequency").val().trim())
+    };
 
     database.ref().child(availableID).set(train);
 
@@ -290,11 +264,13 @@ function editTrain() {
     const m = parseInt(departure_string.substring(i + 1));
 
     // Update the database
-    const train = {"id"         : trainID,
-                   "name"       : $("#name").val().trim(),
-                   "destination": $("#destination").val().trim(),
-                   "departure"  : [0, h, m],
-                   "frequency"  : parseInt($("#frequency").val().trim())};
+    const train = {
+        "id"         : trainID,
+        "name"       : $("#name").val().trim(),
+        "destination": $("#destination").val().trim(),
+        "departure"  : [0, h, m],
+        "frequency"  : parseInt($("#frequency").val().trim())
+    };
     
     database.ref().child(trainID).update(train);
 
