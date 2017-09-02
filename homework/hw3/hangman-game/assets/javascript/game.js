@@ -6,12 +6,12 @@
 *****************************************************************************
 *****************************************************************************/
 // Variables for the game
-var numWins = 0, numLosses = 0;
-var keyEnabled = true;
+let numWins = 0, numLosses = 0;
+let keyEnabled = true;
 
 // Variables for the user
-var answer, answer_array, answer_string;
-var guesses_array, guesses_string, numTriesLeft;
+let answer, answer_string, answer_array;
+let guesses_string, guesses_array, numTriesLeft;
 
 
 
@@ -24,21 +24,16 @@ var guesses_array, guesses_string, numTriesLeft;
 *****************************************************************************/
 function startNewGame() {
     // Choose a random word from the dictionary
-    answer            = getWord().toLowerCase();
-    var answer_length = answer.length;
+    answer              = getWord().toLowerCase();
+    const answer_length = answer.length;
 
     // Initialize what the user sees
-    answer_array = new Array(answer_length);
-
-    for (var i = 0; i < answer_length; i++) {
-        answer_array[i] = "_";
-    }
-
-    answer_string = answer_array.join("");
+    answer_string = "_".repeat(answer_length);
+    answer_array  = answer_string.split("");
 
     // Reset guesses
-    guesses_array  = [];
     guesses_string = "";
+    guesses_array  = [];
 
     // Allow more tries for shorter words
     numTriesLeft = Math.max(6, Math.min(13 - Math.ceil(answer_length / 2), 10));
@@ -69,7 +64,7 @@ $(document).ready(function() {
         Respond to user's actions
         
     *****************************************************************************/
-    $(document).on("keypress", function(e) {
+    $(document).on("keypress", event => {
         // Allow the user to press any key to hide the lightbox
         if (!keyEnabled) {
             keyEnabled = true;
@@ -79,13 +74,13 @@ $(document).ready(function() {
         }
 
         // Find out which key was pressed
-        var letter = String.fromCharCode(e.which).toLowerCase();
+        const letter = String.fromCharCode(event.which).toLowerCase();
 
         if ("a" <= letter && letter <= "z") {
             // Check if the letter is a new guess
             if (guesses_array.indexOf(letter) === -1) {
                 // Check if the letter is a part of the word
-                var index = answer.indexOf(letter);
+                let index = answer.indexOf(letter);
 
                 if (index === -1) {
                     numTriesLeft--;
@@ -105,17 +100,19 @@ $(document).ready(function() {
                 }
 
                 // Record the letter
-                guesses_array.push(letter);
                 guesses_string += letter;
+                guesses_array.push(letter);
                 $("#guesses").text(guesses_string);
 
                 // Check if the user has guessed the word correctly
                 if (answer_string === answer) {
                     numWins++;
                     
-                    $("#outputMessage").html("Yep, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
-                    $("#lightBox").css({"animation-name"  : "slide_down",
-                                        "background-color": "var(--color-mint-green)"});
+                    $("#outputMessage").html(`Yep, it was <strong>${answer}</strong>!<br>Press any key to continue.`);
+                    $("#lightBox").css({
+                        "animation-name"  : "slide_down",
+                        "background-color": "var(--color-mint-green)"
+                    });
                     $("#lightBox strong").css({"color": "#fff896"});
 
                     displayLightBox(true);
@@ -126,9 +123,11 @@ $(document).ready(function() {
                 } else if (numTriesLeft === 0) {
                     numLosses++;
 
-                    $("#outputMessage").html("Nah, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
-                    $("#lightBox").css({"animation-name"  : "shake",
-                                        "background-color": "#c81a4c"});
+                    $("#outputMessage").html(`Nah, it was <strong>${answer}</strong>!<br>Press any key to continue.`);
+                    $("#lightBox").css({
+                        "animation-name"  : "shake",
+                        "background-color": "#c81a4c"
+                    });
                     $("#lightBox strong").css({"color": "#beffad"});
                     
                     displayLightBox(true);
@@ -145,15 +144,8 @@ $(document).ready(function() {
     });
 });
 
-
 function displayLightBox(lightBoxOn) {
     keyEnabled = !lightBoxOn;
 
-    if (lightBoxOn) {
-        $("#lightBox_background, #lightBox").css({"display": "block"});
-
-    } else {
-        $("#lightBox_background, #lightBox").css({"display": "none"});
-
-    }
+    $("#lightBox_background, #lightBox").css({"display": (lightBoxOn) ? "block" : "none"});
 }

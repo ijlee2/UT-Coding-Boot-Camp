@@ -5,8 +5,6 @@
     
 *****************************************************************************
 *****************************************************************************/
-var game;
-
 var HangmanGame = function() {
     /************************************************************************
         
@@ -14,12 +12,12 @@ var HangmanGame = function() {
         
     *************************************************************************/
     // Variables for the game
-    var numWins = 0, numLosses = 0;
-    var keyEnabled = true;
+    let numWins = 0, numLosses = 0;
+    let keyEnabled = true;
 
     // Variables for the user
-    var answer, answer_array, answer_string;
-    var guesses_array, guesses_string, numTriesLeft;
+    let answer, answer_string, answer_array;
+    let guesses_string, guesses_array, numTriesLeft;
 
 
     /************************************************************************
@@ -29,21 +27,18 @@ var HangmanGame = function() {
     *************************************************************************/
     this.startNewGame = function() {
         // Choose a random word from the dictionary
-        answer            = getWord().toLowerCase();
-        var answer_length = answer.length;
+        answer              = getWord().toLowerCase();
+        const answer_length = answer.length;
 
         // Initialize what the user sees
-        answer_array = new Array(answer_length);
-
-        for (var i = 0; i < answer_length; i++) {
-            answer_array[i] = "_";
-        }
+        answer_string = "_".repeat(answer_length);
+        answer_array  = answer_string.split("");
 
         updateAnswerString();
 
         // Reset guesses
-        guesses_array  = [];
         guesses_string = "";
+        guesses_array  = [];
 
         // Allow more tries for shorter words
         numTriesLeft = Math.max(6, Math.min(13 - Math.ceil(answer_length / 2), 10));
@@ -64,32 +59,26 @@ var HangmanGame = function() {
     this.displayLightBox = function(lightBoxOn) {
         this.updateKeyEnabled(!lightBoxOn);
 
-        if (lightBoxOn) {
-            $("#lightBox_background, #lightBox").css({"display": "block"});
-
-        } else {
-            $("#lightBox_background, #lightBox").css({"display": "none"});
-
-        }
+        $("#lightBox_background, #lightBox").css({"display": (lightBoxOn) ? "block" : "none"});
     }
 
-    var displayProgress = function() {
+    function displayProgress() {
         $("#answerProgress").text(answer_string);
     }
 
-    var displayNumWins = function() {
+    function displayNumWins() {
         $("#numWins").text(numWins);
     }
 
-    var displayNumLosses = function() {
+    function displayNumLosses() {
         $("#numLosses").text(numLosses);        
     }
 
-    var displayNumTriesLeft = function() {
+    function displayNumTriesLeft() {
         $("#numTriesLeft").text(numTriesLeft);
     }
 
-    var displayGuesses = function() {
+    function displayGuesses() {
         $("#guesses").text(guesses_string);
     }
     
@@ -103,20 +92,20 @@ var HangmanGame = function() {
         keyEnabled = changeTo;
     }
 
-    var updateAnswerString = function() {
+    function updateAnswerString() {
         answer_string = answer_array.join("");
 
         displayProgress();
     }
 
-    var updateGuesses = function(changeBy) {
-        guesses_array.push(changeBy);
+    function updateGuesses(changeBy) {
         guesses_string += changeBy;
-
+        guesses_array.push(changeBy);
+        
         displayGuesses();
     }
 
-    var updateNumTriesLeft = function(changeBy) {
+    function updateNumTriesLeft(changeBy) {
         numTriesLeft += changeBy;
 
         displayNumTriesLeft();
@@ -132,14 +121,14 @@ var HangmanGame = function() {
         return keyEnabled;
     }
 
-    var isGuessNew = function(x) {
-        return (guesses_array.indexOf(x) === -1);
+    function isGuessNew(x) {
+        return guesses_array.indexOf(x) === -1;
     }
 
     this.checkProgress = function(letter) {
         if (isGuessNew(letter)) {
             // Check if the letter is a part of the word
-            var index = answer.indexOf(letter);
+            let index = answer.indexOf(letter);
 
             if (index === -1) {
                 updateNumTriesLeft(-1);
@@ -163,9 +152,11 @@ var HangmanGame = function() {
             if (answer_string === answer) {
                 numWins++;
 
-                $("#outputMessage").html("Yep, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
-                $("#lightBox").css({"animation-name"  : "slide_down",
-                                    "background-color": "var(--color-mint-green)"});
+                $("#outputMessage").html(`Yep, it was <strong>${answer}</strong>!<br>Press any key to continue.`);
+                $("#lightBox").css({
+                    "animation-name"  : "slide_down",
+                    "background-color": "var(--color-mint-green)"
+                });
                 $("#lightBox strong").css({"color": "#fff896"});
 
                 this.displayLightBox(true);
@@ -176,9 +167,11 @@ var HangmanGame = function() {
             } else if (numTriesLeft === 0) {
                 numLosses++;
 
-                $("#outputMessage").html("Nah, it was <strong>" + answer + "</strong>!<br>Press any key to continue.");
-                $("#lightBox").css({"animation-name"  : "shake",
-                                    "background-color": "#c81a4c"});
+                $("#outputMessage").html(`Nah, it was <strong>${answer}</strong>!<br>Press any key to continue.`);
+                $("#lightBox").css({
+                    "animation-name"  : "shake",
+                    "background-color": "#c81a4c"
+                });
                 $("#lightBox strong").css({"color": "#beffad"});
 
                 this.displayLightBox(true);
@@ -199,6 +192,8 @@ var HangmanGame = function() {
     
 *****************************************************************************
 *****************************************************************************/
+let game;
+
 $(document).ready(function() {
     game = new HangmanGame();
 
@@ -210,7 +205,7 @@ $(document).ready(function() {
         Respond to user's actions
         
     *************************************************************************/
-    $(document).on("keypress", function(e) {
+    $(document).on("keypress", event => {
         // Allow the user to press any key to hide the lightbox
         if (!game.isKeyEnabled()) {
             game.updateKeyEnabled(true);
@@ -220,7 +215,7 @@ $(document).ready(function() {
         }
 
         // Find out which key was pressed
-        var letter = String.fromCharCode(e.which).toLowerCase();
+        const letter = String.fromCharCode(event.which).toLowerCase();
 
         if ("a" <= letter && letter <= "z") {
             game.checkProgress(letter);

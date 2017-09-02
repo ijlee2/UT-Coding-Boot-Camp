@@ -1,5 +1,5 @@
 // Words from https://github.com/first20hours/google-10000-english
-var dictionary = [
+const dictionary = [
 "information",
 "available",
 "copyright",
@@ -7447,8 +7447,8 @@ var dictionary = [
 "poison"
 ];
 
-var dictionary_length = dictionary.length;
+const dictionary_length = dictionary.length;
 
 function getWord() {
-    return dictionary[Math.floor(Math.random() * dictionary_length)];
+    return dictionary[Math.floor(dictionary_length * Math.random())];
 }

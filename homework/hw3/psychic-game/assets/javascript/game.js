@@ -6,11 +6,11 @@
 *****************************************************************************
 *****************************************************************************/
 // Variables for the game
-var numWins = 0, numLosses = 0;
+let numWins = 0, numLosses = 0;
 
 // Variables for the user
-var answer;
-var guesses_array, guesses_string, numTriesLeft;
+let answer;
+let guesses_array, guesses_string, numTriesLeft;
 
 
 
@@ -49,9 +49,9 @@ $(document).ready(function() {
         Respond to user's actions
         
     *************************************************************************/
-    $(document).on("keypress", function(e) {
+    $(document).on("keypress", event => {
         // Find out which key was pressed
-        var yourGuess = String.fromCharCode(e.which).toLowerCase();
+        const yourGuess = String.fromCharCode(event.which).toLowerCase();
 
         if ("a" <= yourGuess && yourGuess <= "z") {
             // Check if the guess has yet to be made
