@@ -43,8 +43,14 @@ database_players.on("value", (snapshot) => {
     if (players) {
         numPlayers = players.filter(p => p !== -1).length;
 
+        // For simplicity, Player 1 always makes the first move
         if (turn === null && numPlayers === numPlayersAllowed) {
             database_turn.set(0);
+
+        // If a player drops out, set turn to null
+        } else if (numPlayers < numPlayersAllowed) {
+            database_turn.set(null);
+
         }
         
     // Initialize the database
@@ -55,20 +61,14 @@ database_players.on("value", (snapshot) => {
 
     }
 
-    // Refresh the display if the user is in the game
-    if (typeof myID === "number") {
-        refreshDisplay();
-    }
+    refreshDisplay();
 });
 
 // Find out whose turn it is
 database_turn.on("value", (snapshot) => {
     turn = snapshot.val();
 
-    // Refresh the display if the user is in the game
-    if (typeof myID === "number") {
-        refreshDisplay();
-    }
+    refreshDisplay();
 });
 
 // Display chat messages
@@ -140,6 +140,23 @@ $("body").on("click", ".attacks", function() {
     // Record whether the player chose Rock, Paper, or Scissors
     database_players.child(`${turn}/choice`).set($(".attacks").index(this));
 
+    if (turn === numPlayersAllowed - 1) {
+        let p1 = players[0], p2 = players[1];
+
+        if (p1.choice !== p2.choice) {
+            // Win condition for Player 1
+            if ((p1.choice + 2) % 3 === p2.choice) {
+                database_players.child(`0/numWins`).set(p1.numWins + 1);
+                database_players.child(`1/numLosses`).set(p2.numLosses + 1);
+
+            } else {
+                database_players.child(`0/numLosses`).set(p1.numLosses + 1);
+                database_players.child(`1/numWins`).set(p2.numWins + 1);
+
+            }
+        }
+    }
+
     // Pass the turn
     database_turn.set((turn + 1) % numPlayersAllowed);
 });
@@ -159,19 +176,15 @@ function displayPage(page) {
 }
 
 function refreshDisplay() {
-    let element;
-    
+    // Only refresh the display if the user is in the game
+    if (typeof myID !== "number") {
+        return;
+    }
+
     if (turn === null) {
         for (let i = 0; i < numPlayersAllowed; i++) {
-            element = `#player${i} > `;
-
-            if (players[i] !== -1) {
-                $(`${element}.name`).html(`<h2>${players[i].name}</h2>`);
-
-            } else {
-                $(`${element}.name`).html(`<h2>Waiting for Player ${i + 1}</h2>`);
-
-            }
+            $(`#player${i} > .name`).html((players[i] !== -1) ? `<h2>${players[i].name}</h2>` : `<h2>Waiting for Player ${i + 1}</h2>`);
+            $(`#player${i} > .display`).empty();
         }
 
     } else {
@@ -179,12 +192,8 @@ function refreshDisplay() {
             $(`#player${i} > .name`).html(`<h2>${players[i].name}</h2>`);
         }
 
-        if (turn === myID) {
-            $(`#player${myID} > .display`).html(`<div class="attacks">Rock</div><div class="attacks">Paper</div><div class="attacks">Scissors</div>`);
-
-        } else {
-            $(`#player${myID} > .display`).html(`<p>Waiting for ${players[turn].name} to make a move.<p>`);
-
-        }
+        $(`#player${myID} > .display`).html((turn === myID) ? 
+                                            `<div class="attacks">Rock</div><div class="attacks">Paper</div><div class="attacks">Scissors</div>` :
+                                            `<p>Waiting for ${players[turn].name} to make a move.<p>`);
     }
 }
