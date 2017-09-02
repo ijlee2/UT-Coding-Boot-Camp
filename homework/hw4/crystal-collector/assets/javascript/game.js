@@ -5,22 +5,22 @@
     
 *****************************************************************************
 *****************************************************************************/
-var game;
-
-var CrystalCollector = function() {
+const CrystalCollector = function() {
     /************************************************************************
         
         Private variables
         
     *************************************************************************/
     // Variables for the game
-    var numPages = $(".page").length, currentPage = 0;
-    var numWins = 0, numLosses = 0;
-
+    const numPages      = $(".page").length;
+    let   currentPage   = 0;
+    
+    const numCrystals   = 4;
+    let   crystalValues = new Array(numCrystals);
+    
     // Variables for the user
-    var numCrystals   = 4;
-    var crystalValues = new Array(numCrystals);
-    var targetSum, currentSum;
+    let numWins = 0, numLosses = 0;
+    let targetSum, currentSum;
 
 
     /************************************************************************
@@ -34,7 +34,7 @@ var CrystalCollector = function() {
         currentSum = 0;
 
         // Assign a value between 1 and 12 to each crystal
-        for (var i = 0; i < numCrystals; i++) {
+        for (let i = 0; i < numCrystals; i++) {
             crystalValues[i] = randomInteger(1, 12);
 
             // Take a linear combination
@@ -45,7 +45,7 @@ var CrystalCollector = function() {
         while (targetSum < 19 || targetSum > 120) {
             targetSum = 0;
 
-            for (var i = 0; i < numCrystals; i++) {
+            for (let i = 0; i < numCrystals; i++) {
                 targetSum += randomInteger(1, 6) * crystalValues[i];
             }
         }
@@ -64,28 +64,28 @@ var CrystalCollector = function() {
         Display functions
         
     *************************************************************************/
-    var displayCurrentPage = function() {
+    function displayCurrentPage() {
         $(".page").css({"display": "none"});
-        $(".page:nth-of-type(" + (currentPage + 1) + ")").css({"display": "block"});
+        $(`.page:nth-of-type(${currentPage + 1})`).css({"display": "block"});
     }
 
     this.displayLightBox = function(lightBoxOn) {
         $("#lightBox_background, #lightBox").css({"display": (lightBoxOn ? "block" : "none")});
     }
 
-    var displayNumWins = function() {
+    function displayNumWins() {
         $("#numWins").text(numWins);
     }
 
-    var displayNumLosses = function() {
-        $("#numLosses").text(numLosses);        
+    function displayNumLosses() {
+        $("#numLosses").text(numLosses);
     }
 
-    var displayTargetSum = function() {
+    function displayTargetSum() {
         $("#targetSum").text(targetSum);
     }
 
-    var displayCurrentSum = function() {
+    function displayCurrentSum() {
         $("#currentSum").text(currentSum);
     }
 
@@ -101,11 +101,11 @@ var CrystalCollector = function() {
         displayCurrentPage();
     }
 
-    var updateNumWins = function(changeBy) {
+    function updateNumWins(changeBy) {
         numWins += changeBy;
     }
 
-    var updateNumLosses = function(changeBy) {
+    function updateNumLosses(changeBy) {
         numLosses += changeBy;
     }
 
@@ -116,7 +116,7 @@ var CrystalCollector = function() {
         
     *************************************************************************/
     // Generate a random number between a and b
-    var randomInteger = function(a, b) {
+    function randomInteger(a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a;
     }
     
@@ -133,8 +133,10 @@ var CrystalCollector = function() {
             updateNumWins(1);
 
             $("#outputMessage").html("Congratulations!<br>Click anywhere to continue.");
-            $("#lightBox").css({"animation-name"  : "slide_down",
-                                "background-color": "var(--color-mint-green)"});
+            $("#lightBox").css({
+                "animation-name"  : "slide_down",
+                "background-color": "var(--color-mint-green)"
+            });
 
             this.displayLightBox(true);
             
@@ -144,8 +146,10 @@ var CrystalCollector = function() {
             updateNumLosses(1);
 
             $("#outputMessage").html("You got greedy!<br>Click anywhere to continue.");
-            $("#lightBox").css({"animation-name"  : "shake",
-                                "background-color": "#c81a4c"});
+            $("#lightBox").css({
+                "animation-name"  : "shake",
+                "background-color": "var(--color-danger-red)"
+            });
 
             this.displayLightBox(true);
             
@@ -164,6 +168,8 @@ var CrystalCollector = function() {
     
 *****************************************************************************
 *****************************************************************************/
+let game;
+
 $(document).ready(function() {
     game = new CrystalCollector();
 

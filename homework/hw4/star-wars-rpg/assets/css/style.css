@@ -10,12 +10,12 @@
 }
 
 body {
-    background-color: var(--color-background);
-    background-image: url("../images/background.jpg");
+    background-color : var(--color-background);
+    background-image : url("../images/background.jpg");
     background-repeat: repeat;
-    color      : var(--color-text);
-    font-family: "Amiri", cursive;
-    font-size  : 30px;
+    color            : var(--color-text);
+    font-family      : "Amiri", cursive;
+    font-size        : 30px;
 }
 
 .container {

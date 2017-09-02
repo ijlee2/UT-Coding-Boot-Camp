@@ -1,6 +1,7 @@
 :root {
     /* Define color scheme */
     --color-mint-green    : #4aaaa5;
+    --color-danger-red    : #c81a4c;
     --color-text          : #202020;
     --color-text-highlight: #ff6600;
 }

@@ -5,7 +5,7 @@
     
 *****************************************************************************
 *****************************************************************************/
-var HangmanGame = function() {
+const HangmanGame = function() {
     /************************************************************************
         
         Private variables
@@ -170,7 +170,7 @@ var HangmanGame = function() {
                 $("#outputMessage").html(`Nah, it was <strong>${answer}</strong>!<br>Press any key to continue.`);
                 $("#lightBox").css({
                     "animation-name"  : "shake",
-                    "background-color": "#c81a4c"
+                    "background-color": "var(--color-danger-red)"
                 });
                 $("#lightBox strong").css({"color": "#beffad"});
 
