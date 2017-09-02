@@ -5,24 +5,23 @@
     
 *****************************************************************************
 *****************************************************************************/
-var game;
-
-var TriviaGame = function() {
+const TriviaGame = function() {
     /************************************************************************
         
         Private variables
         
     *************************************************************************/
     // Variables for the game
-    var intervalID;
+    let   intervalID;
+    const numQuestions = 10, numChoicesPerQuestion = 4;
+    const timeAllowed = 10, timeWarning = 5;
     
     // Variables for the user
-    var timeAllowed = 10, timeWarning = 5, timeLeft;
-    var numQuestions = 10, numChoicesPerQuestion = 4;
-    var answers, numCorrectAnswers, currentQuestion;
+    let timeLeft;
+    let answers, numCorrectAnswers, currentQuestion;
 
     // Load questions from an online database
-    var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&type=multiple";
+    const api_url = `https://opentdb.com/api.php?amount=${numQuestions}&type=multiple`;
     
 
     /************************************************************************
@@ -45,9 +44,9 @@ var TriviaGame = function() {
         resetTimer();
         displayPage(1);
 
-        $.getJSON(api_url, function(json) {
+        $.getJSON(api_url, json => {
             // Parse the JSON given by the API (if successful)
-            var output = parseData((json.response_code === 0) ? json.results : sampleResults);
+            const output = parseData((json.response_code === 0) ? json.results : sampleResults);
 
             // Write questions to the DOM
             updateDOM(output);
@@ -57,7 +56,7 @@ var TriviaGame = function() {
         });
     }
 
-    var gradeQuiz = function() {
+    function gradeQuiz() {
         clearInterval(intervalID);
 
         $("#numCorrectAnswers").text(numCorrectAnswers);
@@ -71,20 +70,20 @@ var TriviaGame = function() {
         Display methods
         
     *************************************************************************/
-    var displayPage = function(page) {
+    function displayPage(page) {
         $(".page").css({"display": "none"});
-        $(".page:nth-of-type(" + (page + 1) + ")").css({"display": "block"});
+        $(`.page:nth-of-type(${page + 1})`).css({"display": "block"});
     }
 
-    var displayCurrentQuestion = function() {
+    function displayCurrentQuestion() {
         if (currentQuestion < numQuestions) {
             // Hide the previous question
             if (currentQuestion > 0) {
-                $("#q" + (currentQuestion - 1)).css({"display": "none"});
+                $(`#q${currentQuestion - 1}`).css({"display": "none"});
             }
 
             // Display the current question
-            $("#q" + currentQuestion).css({"display": "block"});
+            $(`#q${currentQuestion}`).css({"display": "block"});
             $("#question, #timer").css({"display": "block"});
             $("#answer").css({"display": "none"});
             
@@ -98,10 +97,10 @@ var TriviaGame = function() {
         }
     }
 
-    var displayAnswer = function(index) {
+    function displayAnswer(index) {
         clearInterval(intervalID);
 
-        var output;
+        let output;
 
         if (index === answers[currentQuestion].index) {
             numCorrectAnswers++;
@@ -130,12 +129,12 @@ var TriviaGame = function() {
         Set (update) methods
         
     *************************************************************************/
-    var updateQuestion = function() {
+    function updateQuestion() {
         currentQuestion++;
         displayCurrentQuestion();
     }
 
-    var updateTimer = function() {
+    function updateTimer() {
         timeLeft--;
 
         $("#timer").text(timeLeft);
@@ -149,7 +148,7 @@ var TriviaGame = function() {
         }
     }
 
-    var resetTimer = function() {
+    function resetTimer() {
         timeLeft = timeAllowed;
 
         $("#timer").text(timeLeft);
@@ -162,16 +161,15 @@ var TriviaGame = function() {
         Helper methods
         
     *************************************************************************/
-    var parseData = function(data) {
-        var output = "";
+    function parseData(data) {
+        let output = "";
         
         // Temporary variables
-        var i, j;
-        var choices;
+        let i, j, choices;
         
         for (i = 0; i < numQuestions; i++) {
             // Display the subcategory
-            var index = data[i].category.indexOf(":");
+            const index = data[i].category.indexOf(":");
 
             if (index >= 0) {
                 // Account for the space after colon
@@ -181,8 +179,10 @@ var TriviaGame = function() {
             // Insert the correct answer among the incorrect ones
             choices = data[i].incorrect_answers;
             
-            answers[i] = {"index": Math.floor(numChoicesPerQuestion * Math.random()),
-                          "value": data[i].correct_answer};
+            answers[i] = {
+                "index": Math.floor(numChoicesPerQuestion * Math.random()),
+                "value": data[i].correct_answer
+            };
             
             choices.splice(answers[i].index, 0, answers[i].value);
             
@@ -201,7 +201,7 @@ var TriviaGame = function() {
         return output;
     }
 
-    var updateDOM = function(output) {
+    function updateDOM(output) {
         // Display the questions
         $("#question").html(output);
         $(".questions").css({"display": "none"});
@@ -209,7 +209,7 @@ var TriviaGame = function() {
         // Handle click events
         $(".choices").on("click", function() {
             // Find out which answer the button belongs to
-            var index = $(".choices").index(this) % numChoicesPerQuestion;
+            const index = $(".choices").index(this) % numChoicesPerQuestion;
 
             displayAnswer(index);
         });
@@ -225,6 +225,8 @@ var TriviaGame = function() {
     
 *****************************************************************************
 *****************************************************************************/
+let game;
+
 $(document).ready(function() {
     game = new TriviaGame();
 

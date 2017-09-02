@@ -5,24 +5,23 @@
     
 *****************************************************************************
 *****************************************************************************/
-var game;
-
-var TriviaGame = function() {
+const TriviaGame = function() {
     /************************************************************************
         
         Private variables
         
     *************************************************************************/
     // Variables for the game
-    var intervalID;
+    let   intervalID;
+    const numQuestions = 10, numChoicesPerQuestion = 4;
+    const timeAllowed = 90, timeWarning = 30;
     
     // Variables for the user
-    var timeAllowed = 90, timeWarning = 30, timeLeft
-    var numQuestions = 10, numChoicesPerQuestion = 4;
-    var answers, answers_user = new Array(numQuestions);
+    let timeLeft;
+    let answers, answers_user = new Array(numQuestions);
 
     // Load questions from an online database
-    var api_url = "https://opentdb.com/api.php?amount=" + numQuestions + "&type=multiple";
+    const api_url = `https://opentdb.com/api.php?amount=${numQuestions}&type=multiple`;
     
 
     /************************************************************************
@@ -38,7 +37,7 @@ var TriviaGame = function() {
         // Reset variables
         answers = new Array(numQuestions);
 
-        for (var i = 0; i < numQuestions; i++) {
+        for (let i = 0; i < numQuestions; i++) {
             answers_user[i] = -1;
         }
         
@@ -47,9 +46,9 @@ var TriviaGame = function() {
         resetTimer();
         displayPage(1);
 
-        $.getJSON(api_url, function(json) {
+        $.getJSON(api_url, json => {
             // Parse the JSON given by the API (if successful)
-            var output = parseData((json.response_code === 0) ? json.results : sampleResults);
+            const output = parseData((json.response_code === 0) ? json.results : sampleResults);
 
             // Write questions to the DOM
             updateDOM(output);
@@ -59,12 +58,12 @@ var TriviaGame = function() {
         });
     }
 
-    var gradeQuiz = function() {
+    function gradeQuiz() {
         clearInterval(intervalID);
 
-        var numCorrectAnswers = 0;
+        let numCorrectAnswers = 0;
 
-        for (var i = 0; i < numQuestions; i++) {
+        for (let i = 0; i < numQuestions; i++) {
             if (answers_user[i] === answers[i].index) {
                 numCorrectAnswers++;
             }
@@ -81,12 +80,12 @@ var TriviaGame = function() {
         Display methods
         
     *************************************************************************/
-    var displayPage = function(page) {
+    function displayPage(page) {
         $(".page").css({"display": "none"});
-        $(".page:nth-of-type(" + (page + 1) + ")").css({"display": "block"});
+        $(`.page:nth-of-type(${page + 1})`).css({"display": "block"});
     }
 
-    var displayQuestions = function() {
+    function displayQuestions() {
         $("#question, #timer, #button_submit").css({"display": "block"});
 
         resetTimer();
@@ -100,7 +99,7 @@ var TriviaGame = function() {
         Set (update) methods
         
     *************************************************************************/
-    var updateTimer = function() {
+    function updateTimer() {
         timeLeft--;
 
         $("#timer").text(timeLeft);
@@ -114,7 +113,7 @@ var TriviaGame = function() {
         }
     }
 
-    var resetTimer = function() {
+    function resetTimer() {
         timeLeft = timeAllowed;
 
         $("#timer").text(timeLeft);
@@ -127,16 +126,15 @@ var TriviaGame = function() {
         Helper methods
         
     *************************************************************************/
-    var parseData = function(data) {
-        var output = "";
+    function parseData(data) {
+        let output = "";
         
         // Temporary variables
-        var i, j;
-        var choices;
+        let i, j, choices;
         
         for (i = 0; i < numQuestions; i++) {
             // Display the subcategory
-            var index = data[i].category.indexOf(":");
+            const index = data[i].category.indexOf(":");
 
             if (index >= 0) {
                 // Account for the space after colon
@@ -146,8 +144,10 @@ var TriviaGame = function() {
             // Insert the correct answer among the incorrect ones
             choices = data[i].incorrect_answers;
             
-            answers[i] = {"index": Math.floor(numChoicesPerQuestion * Math.random()),
-                          "value": data[i].correct_answer};
+            answers[i] = {
+                "index": Math.floor(numChoicesPerQuestion * Math.random()),
+                "value": data[i].correct_answer
+            };
             
             choices.splice(answers[i].index, 0, answers[i].value);
             
@@ -166,24 +166,28 @@ var TriviaGame = function() {
         return output;
     }
 
-    var updateDOM = function(output) {
+    function updateDOM(output) {
         // Display the questions
         $("#question").html(output);
 
         // Handle click events
         $(".choices").on("click", function() {
             // Find out which question and answer the button belongs to
-            var index           = $(".choices").index(this);
-            var answer          = index % numChoicesPerQuestion;
-            var currentQuestion = (index - answer) / numChoicesPerQuestion;
+            const index           = $(".choices").index(this);
+            const answer          = index % numChoicesPerQuestion;
+            const currentQuestion = (index - answer) / numChoicesPerQuestion;
 
             answers_user[currentQuestion] = answer;
 
-            // TODO: Why (answer + 3), not (answer + 1)?
-            $(".choices_q" + currentQuestion).css({"background-color": "var(--color-background)",
-                                                   "color"           : "var(--color-text)"});
-            $(".choices_q" + currentQuestion + ":nth-of-type(" + (answer + 3) + ")").css({"background-color": "var(--color-light-blue)",
-                                                                                          "color"           : "var(--color-text-contrast)"});
+            $(`.choices_q${currentQuestion}`).css({
+                "background-color": "var(--color-background)",
+                "color"           : "var(--color-text)"
+            });
+            // Use (answer + 3), not (answer + 1), because of the HTML structure
+            $(`.choices_q${currentQuestion}:nth-of-type(${answer + 3})`).css({
+                "background-color": "var(--color-light-blue)",
+                "color"           : "var(--color-text-contrast)"
+            });
         });
 
         $("#button_submit").on("click", gradeQuiz);
@@ -199,6 +203,8 @@ var TriviaGame = function() {
     
 *****************************************************************************
 *****************************************************************************/
+let game;
+
 $(document).ready(function() {
     game = new TriviaGame();
 
