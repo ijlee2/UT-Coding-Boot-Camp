@@ -194,17 +194,19 @@ function refreshDisplay() {
 
     if (turn === null) {
         for (let i = 0; i < numPlayersAllowed; i++) {
-            $(`#player${i} > .name`).html((players[i] !== -1) ? `<h2>${players[i].name}</h2>` : `<h2>Waiting for Player ${i + 1}</h2>`);
+            $(`#player${i} > .name`).html((players[i] !== -1) ? `<h2>${players[i].name}</h2>` : `<h2>Searching for Player ${i + 1}</h2>`);
+            $(`#player${i} > .stats`).html((players[i] !== -1) ? `<p>Wins: ${players[i].numWins}, Losses: ${players[i].numLosses}</p>` : "");
             $(`#player${i} > .display`).empty();
         }
 
     } else {
         for (let i = 0; i < numPlayersAllowed; i++) {
             $(`#player${i} > .name`).html(`<h2>${players[i].name}</h2>`);
+            $(`#player${i} > .stats`).html(`<p>Wins: ${players[i].numWins}, Losses: ${players[i].numLosses}</p>`);
         }
 
         $(`#player${myID} > .display`).html((turn === myID) ? 
                                             `<div class="attacks">Rock</div><div class="attacks">Paper</div><div class="attacks">Scissors</div>` :
-                                            `<p>Waiting for ${players[turn].name} to make a move.<p>`);
+                                            `<p>Searching for ${players[turn].name} to make a move.<p>`);
     }
 }

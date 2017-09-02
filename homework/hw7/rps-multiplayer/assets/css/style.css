@@ -116,6 +116,10 @@ input {
     float: right;
 }
 
+.stats {
+    margin-bottom: 8%;
+}
+
 .display > div {
     margin       : auto;
     margin-bottom: 3%;
