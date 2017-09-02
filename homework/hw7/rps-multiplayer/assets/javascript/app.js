@@ -32,9 +32,9 @@ const database_chat    = database.ref("chat");
 *****************************************************************************/
 // Global variables
 const numPlayersAllowed = 2;
-let players, numPlayers, myID;
-let turn;
-let chat;
+let players, numPlayers;
+let myID, turn;
+let chat, chat_max = 4;
 
 // Find out who are playing the game
 database_players.on("value", (snapshot) => {
@@ -47,9 +47,13 @@ database_players.on("value", (snapshot) => {
         if (turn === null && numPlayers === numPlayersAllowed) {
             database_turn.set(0);
 
-        // If a player drops out, set turn to null
+        // If a player drops out, set turn and chat to null
         } else if (numPlayers < numPlayersAllowed) {
             database_turn.set(null);
+
+            if (numPlayers === 0) {
+                database_chat.set(null);
+            }
 
         }
         
@@ -72,7 +76,11 @@ database_turn.on("value", (snapshot) => {
 });
 
 // Display chat messages
-database_chat.on("child_added", (snapshot) => $("#chat").append(snapshot.val()));
+database_chat.on("value", (snapshot) => {
+    chat = (snapshot.val()) ? snapshot.val() : [];
+
+    $("#chatDisplay").html(chat.join(""));
+});
 
 
 
@@ -96,6 +104,12 @@ $(document).ready(function() {
 
     $("#button_submit").on("click", () => {
         addPlayer($("#playerName").val().trim());
+    });
+
+    $("#chatMessage").on("keyup", event => {
+        if (event.keyCode === 13) {
+            addMessage($("#chatMessage").val().trim());
+        }
     });
 });
 
@@ -171,6 +185,18 @@ $("body").on("click", ".attacks", function() {
     // Pass the turn
     database_turn.set((turn + 1) % numPlayersAllowed);
 });
+
+function addMessage(message) {
+    $("#chatMessage").val("");
+    $("#chatMessage").focus();
+
+    if (chat.length === chat_max) {
+        chat.shift();
+    }
+    chat.push(`<p>${players[myID].name}: ${message}</p>`);
+
+    database_chat.set(chat);
+}
 
 
 

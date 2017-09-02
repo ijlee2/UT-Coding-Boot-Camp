@@ -8,7 +8,7 @@
 
         <title>RPS Multiplayer</title>
         
-<!--        <link rel="icon" type="image/png" href="assets/images/favicon.png">-->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png">
         <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Quicksand">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -33,19 +33,25 @@
             </div>
             
             <div class="page">
-                <div class="players" id="player0">
-                    <div class="name"></div>
-                    <div class="stats"></div>
-                    <div class="display"></div>
-                </div>
+                <div class="clearfix" id="players">
+                    <div id="player0">
+                        <div class="name"></div>
+                        <div class="stats"></div>
+                        <div class="display"></div>
+                    </div>
 
-                <div class="players" id="player1">
-                    <div class="name"></div>
-                    <div class="stats"></div>
-                    <div class="display"></div>
+                    <div id="player1">
+                        <div class="name"></div>
+                        <div class="stats"></div>
+                        <div class="display"></div>
+                    </div>
                 </div>
-
-                <div id="chat"></div>
+                
+                <div id="chat">
+                    <h2>Chat</h2>
+                    <div id="chatDisplay"></div>
+                    <input type="text" id="chatMessage">
+                </div>
             </div>
         </div>
         

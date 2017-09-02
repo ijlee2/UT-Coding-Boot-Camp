@@ -63,6 +63,10 @@ p {
     margin-bottom : 3%;
 }
 
+.page {
+    position: relative;
+}
+
 #login {
     width  : 33%;
     margin : auto;
@@ -103,9 +107,8 @@ input {
     margin: 8% 0 4% 0;
 }
 
-.players {
+#players > div {
     width : 48%;
-    border: 1px red solid;
 }
 
 #player0 {
@@ -133,4 +136,30 @@ input {
 .display > div:hover {
     background-color: var(--color-light-blue);
     color           : var(--color-text-contrast);
+}
+
+#chat {
+    position: absolute;
+    top     : 20em;
+    width   : 100%;
+}
+
+#chatDisplay {
+    background-color: var(--color-light-blue);
+    color           : var(--color-text-contrast);
+
+    width           : 90%;
+    height          : 10em;
+    margin-bottom   : 2%;
+    border          : 1px solid var(--color-dark-blue);
+    padding         : 3% 5%;
+}
+
+#chatDisplay > p {
+    line-height: 1.25em;
+}
+
+#chatMessage {
+    width : 93.5%;
+    height: 60%;
 }
