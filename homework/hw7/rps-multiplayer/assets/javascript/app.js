@@ -16,10 +16,10 @@ const config = {
 
 firebase.initializeApp(config);
 
-const database          = firebase.database();
-const database_players  = database.ref("players");
-const database_turn     = database.ref("turn");
-const database_messages = database.ref("messages");
+const database         = firebase.database();
+const database_players = database.ref("players");
+const database_turn    = database.ref("turn");
+const database_chat    = database.ref("chat");
 
 
 
@@ -34,7 +34,7 @@ const database_messages = database.ref("messages");
 const numPlayersAllowed = 2;
 let players, numPlayers, myID;
 let turn;
-let messages;
+let chat;
 
 // Find out who are playing the game
 database_players.on("value", (snapshot) => {
@@ -72,7 +72,7 @@ database_turn.on("value", (snapshot) => {
 });
 
 // Display chat messages
-database_messages.on("child_added", (snapshot) => $("#messages").append(snapshot.val()));
+database_chat.on("child_added", (snapshot) => $("#chat").append(snapshot.val()));
 
 
 
@@ -89,19 +89,13 @@ $(document).ready(function() {
 
     // Allow the user to hit Enter key to enter name
     $("#playerName").on("keyup", event => {
-        const playerName = $("#playerName").val().trim();
-
-        if (event.keyCode === 13 && checkName(playerName)) {
-            addPlayer(playerName);
+        if (event.keyCode === 13) {
+            addPlayer($("#playerName").val().trim());
         }
     });
 
     $("#button_submit").on("click", () => {
-        const playerName = $("#playerName").val().trim();
-
-        if (checkName(playerName)) {
-            addPlayer(playerName);
-        }
+        addPlayer($("#playerName").val().trim());
     });
 });
 
@@ -111,28 +105,45 @@ function checkName(name) {
 }
 
 function addPlayer(name) {
-    if (numPlayers < numPlayersAllowed) {
-        const player = {
-            "name"     : name,
-            "choice"   : -1,
-            "numWins"  : 0,
-            "numLosses": 0
-        };
+    // TODO: Implement a wait list
+    if (numPlayers >= numPlayersAllowed) {
+        $("#playerName").focus();
+        $("#errorMessage").html("<p>Sorry, 2 people are already playing the game. Please wait for the next round.</p>");
 
-        // Add the player to the next available spot
-        for (let i = 0; i < numPlayersAllowed; i++) {
-            if (players[i] === -1) {
-                myID = i;
-
-                database_players.child(myID).set(player);
-                database_players.child(myID).onDisconnect().set(-1);
-
-                break;
-            }
-        }
-
-        displayPage(1);
+        return;
     }
+
+    // Input validation
+    if (!checkName(name)) {
+        $("#playerName").focus();
+        $("#errorMessage").html("<p>Please enter your name (letters, numbers only).</p>");
+
+        setInterval(() => $("#errorMessage").empty(), 3000);
+
+        return;
+    }
+
+    // Success
+    const player = {
+        "name"     : name,
+        "choice"   : -1,
+        "numWins"  : 0,
+        "numLosses": 0
+    };
+
+    // Add the player to the next available spot
+    for (let i = 0; i < numPlayersAllowed; i++) {
+        if (players[i] === -1) {
+            myID = i;
+
+            database_players.child(myID).set(player);
+            database_players.child(myID).onDisconnect().set(-1);
+
+            break;
+        }
+    }
+
+    displayPage(1);
 }
 
 // Respond to clicks on dynamically generated divs
