@@ -43,7 +43,9 @@ database_players.on("value", (snapshot) => {
     if (players) {
         numPlayers = players.filter(p => p !== -1).length;
 
-        database_turn.set((numPlayers === numPlayersAllowed) ? 0 : null);
+        if (turn === null && numPlayers === numPlayersAllowed) {
+            database_turn.set(0);
+        }
         
     // Initialize the database
     } else {
@@ -53,14 +55,21 @@ database_players.on("value", (snapshot) => {
 
     }
 
-    // Refresh the game page if the user is in the game
-    if (typeof myID !== "undefined") {
+    // Refresh the display if the user is in the game
+    if (typeof myID === "number") {
         refreshDisplay();
     }
 });
 
 // Find out whose turn it is
-database_turn.on("value", (snapshot) => {turn = snapshot.val(); console.log("It is Player " + turn + "'s now.");});
+database_turn.on("value", (snapshot) => {
+    turn = snapshot.val();
+
+    // Refresh the display if the user is in the game
+    if (typeof myID === "number") {
+        refreshDisplay();
+    }
+});
 
 // Display chat messages
 database_messages.on("child_added", (snapshot) => $("#messages").append(snapshot.val()));
@@ -76,6 +85,7 @@ database_messages.on("child_added", (snapshot) => $("#messages").append(snapshot
 *****************************************************************************/
 $(document).ready(function() {
     displayPage(0);
+    $("#playerName").focus();
 
     // Allow the user to hit Enter key to enter name
     $("#playerName").on("keyup", event => {
@@ -125,6 +135,15 @@ function addPlayer(name) {
     }
 }
 
+// Respond to clicks on dynamically generated divs
+$("body").on("click", ".attacks", function() {
+    // Record whether the player chose Rock, Paper, or Scissors
+    database_players.child(`${turn}/choice`).set($(".attacks").index(this));
+
+    // Pass the turn
+    database_turn.set((turn + 1) % numPlayersAllowed);
+});
+
 
 
 /****************************************************************************
@@ -161,7 +180,7 @@ function refreshDisplay() {
         }
 
         if (turn === myID) {
-            $(`#player${myID} > .display`).html("<div>Rock</div><div>Paper</div><div>Scissors</div>");
+            $(`#player${myID} > .display`).html(`<div class="attacks">Rock</div><div class="attacks">Paper</div><div class="attacks">Scissors</div>`);
 
         } else {
             $(`#player${myID} > .display`).html(`<p>Waiting for ${players[turn].name} to make a move.<p>`);

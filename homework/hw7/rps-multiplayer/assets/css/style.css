@@ -121,3 +121,8 @@ input {
     font-size    : 1.2em;
     text-align   : center;
 }
+
+.display > div:hover {
+    background-color: var(--color-light-blue);
+    color           : var(--color-text-contrast);
+}
