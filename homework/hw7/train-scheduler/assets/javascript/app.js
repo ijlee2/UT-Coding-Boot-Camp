@@ -336,7 +336,7 @@ $(document).ready(function() {
 });
 
 // Listen to clicks on dynamic elements
-$(document.body).on("click", "tr", function() {
+$("body").on("click", "tr", function() {
     trainID = parseInt($(this).attr("id"));
 
     findArrayID();

@@ -1,13 +1,13 @@
 // Use GIPHY's API
-var numGIFs = 9;
-var api_url = "https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&limit=" + numGIFs + "&q=";
+const numGIFs = 9;
+const api_url = `https://api.giphy.com/v1/gifs/search?api_key=0010990be74a4f048609620599cd5f8f&limit=${numGIFs}&q=`;
 
 // Default topics
-var topics    = ["birthday", "hug", "love", "house", "work", "dance", "sleepy", "coffee", "study", "sandwich", "hm", "cute", "math", "beer", "you rock"];
-var numTopics = topics.length;
+let topics    = ["birthday", "hug", "love", "house", "work", "dance", "sleepy", "coffee", "study", "sandwich", "hm", "cute", "math", "beer", "you rock"];
+let numTopics = topics.length;
 
 
-var updateSearchHistory = function(query) {
+function updateSearchHistory(query) {
     // Reset the input field
     $("#query").val("");
     $("#query").focus();
@@ -22,11 +22,9 @@ var updateSearchHistory = function(query) {
 
     // Initialize
     if (arguments.length === 0) {
-        var output = "";
+        let output = "";
 
-        for (var i = 0; i < numTopics; i++) {
-            output += `<div class="topics">${topics[i]}</div>`;
-        }
+        topics.forEach(t => output += `<div class="topics">${t}</div>`);
 
         $("#searchHistory").html(output);
     
@@ -52,20 +50,18 @@ var updateSearchHistory = function(query) {
 }
 
 
-var toggleGIFAnimation = function() {
+function toggleGIFAnimation() {
     // Allow the user to click either img or div that surrounds the img
-    var img_url = $("img", this).attr("src");
+    let img_url = $("img", this).attr("src");
     
     // GIPHY adds _s for still images
-    var index = img_url.indexOf("_s.gif");
-
-    if (index >= 0) {
+    if (img_url.indexOf("_s.gif") >= 0) {
         // Play the GIF
-        img_url = img_url.substring(0, index) + ".gif";
+        img_url = img_url.replace("_s.gif", ".gif");
 
     } else {
         // Stop the GIF
-        img_url = img_url.substring(0, img_url.length - 4) + "_s.gif";
+        img_url = img_url.replace(".gif", "_s.gif");
 
     }
 
@@ -73,34 +69,33 @@ var toggleGIFAnimation = function() {
 }
 
 
-var getGIFs = function(query) {
+function getGIFs(query) {
     $.ajax({
         "url"   : api_url + query,
-        "method": "GET"}
+        "method": "GET"
 
-    ).done(function(response) {
+    }).done(response => {
         // Reset the event handler
         $(document).off("click", ".image_container");
 
-        var output = "";
+        let output = "";
 
-        for (var i = 0; i < numGIFs; i++) {
+        response.data.forEach(r => {
             output += `<div class="image_container">
-                           <img src="${response.data[i].images.fixed_width_still.url}" height="150">
-                           <span class="rating">Rating: ${response.data[i].rating.toUpperCase()}</span>
+                           <img src="${r.images.fixed_width_still.url}" height="150">
+                           <span class="rating">Rating: ${r.rating.toUpperCase()}</span>
                        </div>`;
-        }
+        });
         
         $("#searchResults").html(output);
-        
-        $(document).on("click", ".image_container", toggleGIFAnimation);
 
         // Display the images in waves
         $(".image_container").css({"display": "none"});
 
-        var index = 1;
-        var intervalID = setInterval(function() {
-            $(".image_container:nth-of-type(" + index + ")").css({"display": "block"});
+        let index = 1;
+        
+        const intervalID = setInterval(function() {
+            $(`.image_container:nth-of-type(${index})`).css({"display": "block"});
             
             index++;
 
@@ -116,24 +111,27 @@ var getGIFs = function(query) {
 $(document).ready(function() {
     updateSearchHistory();
 
-    $("#query").on("keyup", function(e) {
+    $("#query").on("keyup", event => {
         // Allow the user to hit Enter key to submit query
-        if (e.keyCode === 13) {
-            var query = $("#query").val().trim().toLowerCase();
+        if (event.keyCode === 13) {
+            const query = $("#query").val().trim().toLowerCase();
 
             updateSearchHistory(query);
         }
     });
 
     $("#button_search").on("click", function() {
-        var query = $("#query").val().trim().toLowerCase();
+        const query = $("#query").val().trim().toLowerCase();
 
         updateSearchHistory(query);
     });
 
     $(".topics").on("click", function() {
-        var query = $(this).text();
+        const query = $(this).text();
 
         getGIFs(query);
     });
 });
+
+// Listen to clicks on dynamically created elements
+$("body").on("click", ".image_container", toggleGIFAnimation);
