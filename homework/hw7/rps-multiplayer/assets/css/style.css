@@ -56,6 +56,7 @@ h2 {
 }
 
 p {
+    font-size     : 1.2em;
     letter-spacing: 0.03em;
     line-height   : 1.5em;
     
@@ -109,4 +110,14 @@ input {
 
 #player1 {
     float: right;
+}
+
+.display > div {
+    margin       : auto;
+    margin-bottom: 3%;
+    border       : 1px black solid;
+    padding      : 3%;
+
+    font-size    : 1.2em;
+    text-align   : center;
 }
