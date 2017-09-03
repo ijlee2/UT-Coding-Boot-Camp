@@ -108,7 +108,7 @@ function getTweets() {
         tweets.forEach(t => {
             // Extract date information
             [, month, day, time, , year] = t.created_at.split(" ");
-            [hour, minute]               = time.split(":");
+            [hour, minute]               = time.split(":").map(x => parseInt(x, 10));
 
             // Format the time stamp
             const timeStamp = `${month} ${day} ${year}, ${hour % 12}:${minute} ${(hour < 12) ? "AM" : "PM"}`;
