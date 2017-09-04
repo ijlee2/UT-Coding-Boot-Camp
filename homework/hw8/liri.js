@@ -166,7 +166,7 @@ function getSong(title) {
 
 
 function getMovie(title) {
-    const api_url = `https://www.omdbapi.com/?apikey=40e9cece&t=${title}&plot=short`;
+    const api_url = `https://www.omdbapi.com/?apikey=${keys.omdb.key}&t=${title}&plot=short`;
     
     request(api_url, (error, response, body) => {
         if (error) {
