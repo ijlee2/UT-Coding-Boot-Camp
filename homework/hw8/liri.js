@@ -180,7 +180,6 @@ function getMovie(title) {
         }
 
         const movie = JSON.parse(body);
-
         
 
         /********************************************************************
