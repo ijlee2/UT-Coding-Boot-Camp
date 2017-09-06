@@ -18,12 +18,10 @@ function randomNumber(a, b) {
 function displayTeamStats() {
     findTeamStats();
 
-    console.log("\nTeam Stats");
-
     players.forEach(p => p.printStats());
     
     console.log(`\nTeam offense: ${stats.offense}`);
-    console.log(`Team defense: ${stats.defense}\n`);
+    console.log(`Team defense: ${stats.defense}`);
 }
 
 function findTeamStats() {
@@ -69,13 +67,14 @@ function Player(parameters) {
 }
 
 function enterPlayer() {
-    console.log(`\nEnter Player #${count + 1}'s information`);
+    console.log(`\nEnter Player #${count + 1}'s information\n`);
 
     inquirer.prompt([
         {
             "type"   : "input",
             "name"   : "name",
-            "message": "Name:"
+            "message": "Name:",
+            "default": `Player ${count + 1}`
         },
         {
             "type"   : "list",
@@ -86,12 +85,14 @@ function enterPlayer() {
         {
             "type"   : "input",
             "name"   : "offense",
-            "message": "Offense skill (1 - 10):"
+            "message": "Offense skill (1 - 10):",
+            "default": 6
         },
         {
             "type"   : "input",
             "name"   : "defense",
-            "message": "Defense skill (1 - 10):"
+            "message": "Defense skill (1 - 10):",
+            "default": 6
         }
 
     ]).then(response => {
@@ -108,6 +109,8 @@ function enterPlayer() {
             enterPlayer();
 
         } else {
+            process.stdout.write("\033c");
+            
             playGame();
 
         }
@@ -125,7 +128,7 @@ enterPlayer();
 let score = 0, round = 0;
 
 function playGame() {
-    console.log(`\nRound ${round + 1}!`);
+    console.log(`\n\n--- Round ${round + 1} ---\n`);
 
     // Find the team's offensive and defensive stats
     displayTeamStats();
@@ -141,7 +144,7 @@ function playGame() {
         score--;
     }
 
-    console.log(`Score: ${score}\n`);
+    console.log(`Team score: ${score}\n`);
 
     // Allow a substitution after the round
     round++;
@@ -181,8 +184,6 @@ function playGame() {
                         players[i].position = "Starter";
                         continue;
                     }
-
-                    players[i].printStats();
                 }
             }
             
@@ -201,7 +202,9 @@ function playGame() {
 
         }
 
+        console.log("\n--- Stats Update ---\n");
         displayTeamStats();
+        console.log();
 
         inquirer.prompt([
             {
@@ -213,6 +216,9 @@ function playGame() {
 
         ]).then(response => {
             if (response.continue) {
+                process.stdout.write("\033c");
+
+                score = 0;
                 round = 0;
                 playGame();
 
