@@ -2,25 +2,33 @@ process.stdout.write("\033c");
 
 const inquirer = require("inquirer");
 
-const players = [], numPlayers = 4;
-let   count = 0;
+const numPlayers = 8;
+const players = [], stats = {"offense": 0, "defense": 0};
 
 
+/****************************************************************************
+    
+    Helper functions
+    
+*****************************************************************************/
 function randomNumber(a, b) {
     return Math.floor((b - a + 1) * Math.random() + a);
 }
 
 function displayTeamStats() {
+    findTeamStats();
+
     console.log("\nTeam Stats");
 
     players.forEach(p => p.printStats());
+    
+    console.log(`\nTeam offense: ${stats.offense}`);
+    console.log(`Team defense: ${stats.defense}\n`);
 }
 
 function findTeamStats() {
-    const stats = {
-        "offense": 0,
-        "defense": 0
-    };
+    stats.offense = 0;
+    stats.defense = 0;
 
     players.forEach(p => {
         if (p.position === "Starter") {
@@ -28,10 +36,15 @@ function findTeamStats() {
             stats.defense += p.defense;
         }
     });
-
-    return stats;
 }
 
+
+/****************************************************************************
+    
+    Create basketball players
+    
+*****************************************************************************/
+let count = 0;
 
 function Player(parameters) {
     for (let key in parameters) {
@@ -51,34 +64,34 @@ function Player(parameters) {
     }
 
     this.printStats = function() {
-        console.log(`${this.name}: ${this.position} / ${this.offense} / ${this.defense}`);
+        console.log(`${this.name} - ${this.position}, ${this.offense}, ${this.defense}`);
     }
 }
 
 function enterPlayer() {
-    console.log(`\nPlayer #${count + 1}`);
+    console.log(`\nEnter Player #${count + 1}'s information`);
 
     inquirer.prompt([
         {
             "type"   : "input",
             "name"   : "name",
-            "message": "Enter their name:"
+            "message": "Name:"
         },
         {
             "type"   : "list",
             "name"   : "position",
-            "message": "Select their position:",
+            "message": "Position:",
             "choices": ["Starter", "Substitute"]
         },
         {
             "type"   : "input",
             "name"   : "offense",
-            "message": "Enter their offense (1-10):"
+            "message": "Offense skill (1 - 10):"
         },
         {
             "type"   : "input",
             "name"   : "defense",
-            "message": "Enter their defense (1-10):"
+            "message": "Defense skill (1 - 10):"
         }
 
     ]).then(response => {
@@ -104,18 +117,18 @@ function enterPlayer() {
 enterPlayer();
 
 
+/****************************************************************************
+    
+    Play a game of basketball
+    
+*****************************************************************************/
 let score = 0, round = 0;
 
 function playGame() {
     console.log(`\nRound ${round + 1}!`);
 
     // Find the team's offensive and defensive stats
-    const stats = findTeamStats();
-
     displayTeamStats();
-    
-    console.log(`Team offense: ${stats.offense}`);
-    console.log(`Team defense: ${stats.defense}`);
 
     // Opponents make a move
     const number1 = randomNumber(1, 50), number2 = randomNumber(1, 50);
@@ -174,7 +187,38 @@ function playGame() {
             }
             
             playGame();
-            
+
         });
+
+    // Ask the user if they want to restart the game
+    } else {
+        // Update the stats
+        if (score > 0) {
+            players.forEach(p => p.goodGame());
+
+        } else if (score < 0) {
+            players.forEach(p => p.badGame());
+
+        }
+
+        displayTeamStats();
+
+        inquirer.prompt([
+            {
+                "type"   : "confirm",
+                "name"   : "continue",
+                "message": "Play again?",
+                "default": true
+            }
+
+        ]).then(response => {
+            if (response.continue) {
+                round = 0;
+                playGame();
+
+            }
+
+        });
+
     }
 }
