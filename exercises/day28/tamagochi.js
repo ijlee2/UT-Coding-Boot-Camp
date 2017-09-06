@@ -56,7 +56,7 @@ function DigitalPal() {
     Create a dog instance
 
 *****************************************************************************/
-const dog = DigitalPal();
+const dog = new DigitalPal();
 
 // Properties and methods unique to the dog instance
 dog.isOutside = false;
@@ -96,9 +96,9 @@ dog.goInside = function() {
     Create a cat instance
 
 *****************************************************************************/
-const cat = DigitalPal();
+const cat = new DigitalPal();
 
-// Properties and methods unique to the dog instance
+// Properties and methods unique to the cat instance
 cat.houseCondition = 100;
 
 cat.meow = function() {
