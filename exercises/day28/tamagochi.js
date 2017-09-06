@@ -9,6 +9,7 @@ function DigitalPal() {
             console.log("That was yummy!");
 
             this.isHungry = false;
+            this.isSleepy = true;
 
         } else {
             console.log("No, thanks! I'm full.");
