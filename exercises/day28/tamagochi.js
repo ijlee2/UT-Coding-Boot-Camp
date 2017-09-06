@@ -122,3 +122,10 @@ cat.buyNewFurniture = function() {
 
     console.log("Are you sure about that?");
 }
+
+
+const animals = {cat, dog};
+const animal  = process.argv[2];
+const action  = process.argv[3];
+
+animals[animal][action]();
