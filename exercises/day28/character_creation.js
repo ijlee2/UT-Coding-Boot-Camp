@@ -4,12 +4,12 @@ function Person(parameters) {
     }
 
     this.printStats = function() {
-        console.log(`Name      : ${this.name}`);
-        console.log(`Profession: ${this.profession}`);
-        console.log(`Gender    : ${this.gender}`);
-        console.log(`Age       : ${this.age}`);
-        console.log(`Strength  : ${this.strength}`);
-        console.log(`HP        : ${this.hp}`);
+        console.log(`Name       : ${this.name}`);
+        console.log(`Profession : ${this.profession}`);
+        console.log(`Gender     : ${this.gender}`);
+        console.log(`Age        : ${this.age}`);
+        console.log(`Strength   : ${this.strength}`);
+        console.log(`HP         : ${this.hp}`);
         console.log("");
     }
 
@@ -76,7 +76,7 @@ person2.levelUp();
 
 // Start the game
 console.log("\n--- Start the game ---\n");
-while (person1.isAlive() && person2.isAlive()) {
+while (true) {
     if (person1.isAlive()) {
         person1.attack(person2);
 
