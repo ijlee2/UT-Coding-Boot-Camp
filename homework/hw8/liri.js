@@ -36,7 +36,7 @@ process.stdout.write("\033c");
 const file_log = "log.txt";
 
 if (!fs.existsSync(file_log)) {
-    fs.writeFile(file_log, "", (error) => {
+    fs.writeFile(file_log, "", error => {
         if (error) {
             console.log(`Error in creating "${file_log}"\n${error}\n\n\n`);
             return;
@@ -253,7 +253,7 @@ function saveOutput(output) {
     console.log(output);
 
     // Write to the log file
-    fs.appendFile(file_log, output, (error) => {
+    fs.appendFile(file_log, output, error => {
         if (error) {
             return console.log(`Error in appending to "${file_log}"\n${error}\n\n\n`);
         }
