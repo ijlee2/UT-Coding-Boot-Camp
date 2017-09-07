@@ -1,25 +1,25 @@
 const clozeSymbol = "...";
 
-module.exports = function Card(type, question, answer) {
+module.exports = function Card(myType, question, answer) {
     // Scope-safe constructor
     if (!(this instanceof Card)) {
-        return new Card(type, question, answer);
+        return new Card(myType, question, answer);
     }
 
     // Check whether the card is cloze-deleted
-    const isCloze = (type === "Cloze");
-    const regex   = new RegExp(answer, "i");
+    const regex = new RegExp(answer, "i");
     
-    if (isCloze && !question.match(regex)) {
+    if (myType === "Cloze" && !question.match(regex)) {
         throw "Cloze deletion failed.";
     }
 
     // Record the question and answer
-    const front = (isCloze) ? question.replace(regex, clozeSymbol) : question;
+    const type  = myType;
+    const front = (myType === "Cloze") ? question.replace(regex, clozeSymbol) : question;
     const back  = answer;
 
     // Return an object 
     this.jsonify = function() {
-        return {isCloze, front, back};
+        return {type, front, back};
     }
 }

@@ -1,3 +1,10 @@
+/****************************************************************************
+ ****************************************************************************
+    
+    Initialize
+    
+*****************************************************************************
+*****************************************************************************/
 const Card     = require("./card.js");
 const fs       = require("fs");
 const inquirer = require("inquirer");
@@ -8,20 +15,34 @@ const file_bank = "bank.txt";
 if (!fs.existsSync(file_bank)) {
     fs.writeFile(file_bank, "", error => {
         if (error) {
-            return console.log(`Error in creating the file "${file_log}"\n${error}\n\n`);
+            return console.log(`Error in creating the file "${file_bank}"\n${error}\n\n`);
         }
     });
 }
 
+// Load existing cards
 let cards;
 
+fs.readFile(file_bank, "UTF8", (error, data) => {
+    if (error) {
+        return console.log(`Error in reading cards from "${file_bank}"\n${error}\n\n`);
+    }
 
-// Start the program
+    cards = (data !== "") ? JSON.parse(data) : [];
+});
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Start the program
+    
+*****************************************************************************
+*****************************************************************************/
 mainMenu();
 
 function mainMenu() {
     clearScreen();
-    cards = [];
 
     inquirer.prompt([
         {
@@ -78,7 +99,7 @@ function createCards() {
         }
 
     ]).then(response => {
-        // Try to create a Card instance (check if type is Cloze and answer appears in question)
+        // Try to create a card (check if type is Cloze and answer appears in question)
         try {
             cards.push(new Card(response.type, response.question, response.answer).jsonify());
 
@@ -92,22 +113,11 @@ function createCards() {
             createCards();
 
         } else {
-            // Get existing cards
-            fs.readFile(file_bank, "UTF8", (error, data) => {
+            // Save the new deck
+            fs.writeFile(file_bank, JSON.stringify(cards, null, 4), error => {
                 if (error) {
-                    return console.log(`Error in reading cards from "${file_bank}"\n${error}\n\n`);
+                    return console.log(`Error in writing cards to "${file_bank}"\n${error}\n\n`);
                 }
-
-                // Add cards that have been created
-                const cards_new = (data !== "") ? JSON.parse(data).concat(cards) : cards;
-
-                // Save the new deck
-                fs.writeFile(file_bank, JSON.stringify(cards_new, null, 4), error => {
-                    if (error) {
-                        return console.log(`Error in writing cards to "${file_bank}"\n${error}\n\n`);
-                    }
-
-                });
 
             });
 
@@ -116,6 +126,75 @@ function createCards() {
         }
 
     });
+}
+
+function practice() {
+    if (cards.length === 0) {
+        console.log("Please create a bank of questions first!\n\n");
+
+        mainMenu();
+
+    } else {
+        inquirer.prompt([
+            {
+                "type"   : "list",
+                "name"   : "type",
+                "message": "What type of cards do you want to use?",
+                "choices": ["Basic", "Cloze"]
+            }
+
+        ]).then(response => {
+            const cardsFiltered = cards.filter(c => c.type === response.type);
+
+            if (cardsFiltered.length === 0) {
+                console.log(`Please create a bank of ${response.type} questions first!\n\n`);
+
+                mainMenu();
+
+            } else {
+                // Ask questions
+                const numQuestions = cardsFiltered.length;
+                let   index = 0, numCorrectAnswers = 0;
+
+                clearScreen();
+                askQuestion();
+
+                function askQuestion() {
+                    inquirer.prompt([
+                        {
+                            "type"    : "input",
+                            "name"    : `question`,
+                            "message" : `${cardsFiltered[index].front}\nYour answer:`
+                        }
+
+                    ]).then(response => {
+                        const regex = new RegExp(cardsFiltered[index].back, "i");
+
+                        if (response.question.match(regex)) {
+                            numCorrectAnswers++;
+
+                            console.log("Correct!\n");
+
+                        } else {
+                            console.log(`Incorrect! The answer was ${cardsFiltered[index].back}.\n`);
+
+                        }
+
+                        index++;
+
+                        if (index < numQuestions) {
+                            askQuestion();
+
+                        } else {
+                            console.log(`Grade: ${Math.round(100 * numCorrectAnswers / numQuestions)}%\n`);
+
+                        }
+
+                    });
+                }
+            }
+        });
+    }
 }
 
 function clearScreen() {
