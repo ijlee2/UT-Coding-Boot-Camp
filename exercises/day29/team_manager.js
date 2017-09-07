@@ -56,21 +56,17 @@ function Player(parameters) {
     }
     
     this.goodGame = function() {
-        if (randomNumber(0, 1)) {
-            (randomNumber(0, 1)) ? this.offense++ : this.defense++;
+        (randomNumber(0, 1)) ? this.offense++ : this.defense++;
 
-            this.offense = Math.min(this.offense, 10);
-            this.defense = Math.min(this.defense, 10);
-        }
+        this.offense = Math.min(this.offense, 10);
+        this.defense = Math.min(this.defense, 10);
     }
     
     this.badGame = function() {
-        if (randomNumber(0, 1)) {
-            (randomNumber(0, 1)) ? this.offense-- : this.defense--;
+        (randomNumber(0, 1)) ? this.offense-- : this.defense--;
 
-            this.offense = Math.max(this.offense, 0);
-            this.defense = Math.max(this.defense, 0);
-        }
+        this.offense = Math.max(this.offense, 0);
+        this.defense = Math.max(this.defense, 0);
     }
 
     this.printStats = function() {
