@@ -1,12 +1,11 @@
 process.stdout.write("\033c");
 
-const Student   = require("./student").Student;
 const Classroom = require("./classroom").Classroom;
 const inquirer  = require("inquirer");
 
 const classroom = new Classroom({
     "professor": {"name": "John Smith"},
-    "room"     : {"number": 101}
+    "location" : {"number": 101}
 });
 
 let numStudents = 0;
@@ -43,22 +42,19 @@ function interact() {
         }
 
     ]).then(response => {
-        // Create a Student class
-        const student = new Student({
+        // Add a student to class
+        classroom.addStudent({
             "name"   : response.name,
             "subject": response.subject,
             "gpa"    : parseFloat(response.gpa)
         });
-
-        // Add the class to Classroom instance
-        classroom.addStudent(student);
 
         if (response.continue) {
             interact();
 
         } else {
             console.log();
-            console.log(`${classroom.professor.name}, Room ${classroom.room.number}\n`);
+            console.log(`${classroom.professor.name}, Room ${classroom.location.number}\n`);
             classroom.displayStudents();
 
         }

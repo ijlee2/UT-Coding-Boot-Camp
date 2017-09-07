@@ -1,3 +1,5 @@
+const Student = require("./student").Student;
+
 exports.Classroom = function Classroom(parameters) {
     // Name of professor, room number
     for (let key in parameters) {
@@ -7,8 +9,8 @@ exports.Classroom = function Classroom(parameters) {
     const students    = [];
     let   numStudents = 0;
 
-    this.addStudent = function(student) {
-        students.push(student);
+    this.addStudent = function(parameters) {
+        students.push(new Student(parameters));
         numStudents++;
     }
 
