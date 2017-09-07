@@ -2,7 +2,7 @@ process.stdout.write("\033c");
 
 const inquirer = require("inquirer");
 
-const numPlayers = 8;
+const numPlayers = 8, numStarters = 5;
 const players = [], stats = {"offense": 0, "defense": 0};
 
 
@@ -18,7 +18,13 @@ function randomNumber(a, b) {
 function displayTeamStats() {
     findTeamStats();
 
-    players.forEach(p => p.printStats());
+    // Display starters
+    console.log("Starters:");
+    players.filter(p => p.starter).forEach(p => p.printStats());
+
+    // Display substitutes
+    console.log("\nSubstitutes:");
+    players.filter(p => !p.starter).forEach(p => p.printStats());
     
     console.log(`\nTeam offense: ${stats.offense}`);
     console.log(`Team defense: ${stats.defense}`);
@@ -29,7 +35,7 @@ function findTeamStats() {
     stats.defense = 0;
 
     players.forEach(p => {
-        if (p.position === "Starter") {
+        if (p.starter) {
             stats.offense += p.offense;
             stats.defense += p.defense;
         }
@@ -52,12 +58,18 @@ function Player(parameters) {
     this.goodGame = function() {
         if (randomNumber(0, 1)) {
             (randomNumber(0, 1)) ? this.offense++ : this.defense++;
+
+            this.offense = Math.min(this.offense, 10);
+            this.defense = Math.min(this.defense, 10);
         }
     }
     
     this.badGame = function() {
         if (randomNumber(0, 1)) {
             (randomNumber(0, 1)) ? this.offense-- : this.defense--;
+
+            this.offense = Math.max(this.offense, 0);
+            this.defense = Math.max(this.defense, 0);
         }
     }
 
@@ -67,7 +79,7 @@ function Player(parameters) {
 }
 
 function enterPlayer() {
-    console.log(`\nEnter Player #${count + 1}'s information\n`);
+    console.log(`\nEnter Player #${count + 1}'s information (${(count < numStarters) ? "Starter" : "Substitute"})\n`);
 
     inquirer.prompt([
         {
@@ -77,22 +89,27 @@ function enterPlayer() {
             "default": `Player ${count + 1}`
         },
         {
-            "type"   : "list",
+            "type"   : "input",
             "name"   : "position",
-            "message": "Position:",
-            "choices": ["Starter", "Substitute"]
+            "message": "Position:"
         },
         {
-            "type"   : "input",
-            "name"   : "offense",
-            "message": "Offense skill (1 - 10):",
-            "default": 6
+            "type"    : "input",
+            "name"    : "offense",
+            "message" : "Offense skill (1 - 10):",
+            "validate": function (value) {
+                return (!isNaN(value) && parseFloat(value) === Math.trunc(value) && 1 <= parseInt(value) && parseInt(value) <= 10);
+            },
+            "default" : 6
         },
         {
-            "type"   : "input",
-            "name"   : "defense",
-            "message": "Defense skill (1 - 10):",
-            "default": 6
+            "type"    : "input",
+            "name"    : "defense",
+            "message" : "Defense skill (1 - 10):",
+            "validate": function (value) {
+                return (!isNaN(value) && parseFloat(value) === Math.trunc(value) && 1 <= parseInt(value) && parseInt(value) <= 10);
+            },
+            "default" : 6
         }
 
     ]).then(response => {
@@ -100,7 +117,8 @@ function enterPlayer() {
             "name"    : response.name,
             "position": response.position,
             "offense" : parseInt(response.offense),
-            "defense" : parseInt(response.defense)
+            "defense" : parseInt(response.defense),
+            "starter" : (count < numStarters),
         }));
 
         count++;
@@ -155,7 +173,7 @@ function playGame() {
                 "type"   : "list",
                 "name"   : "playerOut",
                 "message": "Player to sub out: ",
-                "choices": players.filter(p => p.position === "Starter")
+                "choices": players.filter(p => p.starter)
                                   .map(p => p.name)
                                   .concat("Skip")
             },
@@ -163,7 +181,7 @@ function playGame() {
                 "type"   : "list",
                 "name"   : "playerIn",
                 "message": "Player to sub in: ",
-                "choices": players.filter(p => p.position === "Substitute")
+                "choices": players.filter(p => !p.starter)
                                   .map(p => p.name),
                 "when"   : function(response) {
                                return response.playerOut !== "Skip";
@@ -175,13 +193,13 @@ function playGame() {
                 for (let i = 0; i < players.length; i++) {
                     // Sub out
                     if (players[i].name === response.playerOut) {
-                        players[i].position = "Substitute";
+                        players[i].starter = false;
                         continue;
                     }
 
                     // Sub in
                     if (players[i].name === response.playerIn) {
-                        players[i].position = "Starter";
+                        players[i].starter = true;
                         continue;
                     }
                 }
