@@ -17,6 +17,15 @@ exports.WeatherAdmin = function WeatherAdmin() {
         const userSearch = new UserSearch(name, location);
 
         userSearch.getWeather();
+
+        // Output to the file
+        const output = `Name: ${userSearch.name}\nLocation: ${userSearch.location}\nTime Stamp: ${userSearch.timestamp}\n\n`;
+
+        fs.appendFile(file_log, output, error => {
+            if (error) {
+                return console.log(`Error in appending to "${file_log}"\n${error}\n\n\n`);
+            }
+        });
     }
 
     this.getData = function() {
