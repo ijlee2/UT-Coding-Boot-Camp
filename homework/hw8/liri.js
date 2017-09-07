@@ -196,7 +196,7 @@ function getMovie(title) {
         output += `Plot           : ${movie.Plot}\n`;
         output += `Actors         : ${movie.Actors}\n`;
         output += `IMDB           : ${movie.imdbRating}\n`;
-        output += `RottenTomatoes : ${movie.Ratings[1].Value}\n`;
+        output += `RottenTomatoes : ${(movie.Ratings[1]) ? movie.Ratings[1].Value : "N/A"}\n`;
         output += `Production     : ${movie.Country}\n`;
         output += `Language       : ${movie.Language}\n\n`;
         
