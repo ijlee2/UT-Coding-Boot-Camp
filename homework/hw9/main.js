@@ -161,7 +161,7 @@ function practice() {
                 setTimeout(mainMenu, menuTimeout);
 
             } else {
-                let index = 0;
+                let index = 0, numCorrectAnswers = 0;
 
                 // Ask questions
                 clearScreen();
@@ -195,7 +195,7 @@ function practice() {
                             askQuestion();
 
                         } else {
-                            console.log(`Grade: ${Math.round(100 * numCorrectAnswers / numQuestions)}%\n`.white.bold);
+                            console.log(`Grade: ${Math.round(100 * numCorrectAnswers / numQuestions)}%\n`.magenta.bold);
                             setTimeout(mainMenu, menuTimeout);
 
                         }
