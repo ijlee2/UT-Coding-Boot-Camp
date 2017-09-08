@@ -16,7 +16,7 @@ const file_bank = "bank.txt";
 if (!fs.existsSync(file_bank)) {
     fs.writeFile(file_bank, "", error => {
         if (error) {
-            return console.log(`Error in creating the file "${file_bank}"\n${error}\n`);
+            return console.log(`Error in creating the file "${file_bank}"\n${error}\n`.red.bold);
         }
     });
 }
@@ -26,7 +26,7 @@ let cards;
 
 fs.readFile(file_bank, "UTF8", (error, data) => {
     if (error) {
-        return console.log(`Error in reading cards from "${file_bank}"\n${error}\n`);
+        return console.log(`Error in reading cards from "${file_bank}"\n${error}\n`.red.bold);
     }
 
     cards = (data !== "") ? JSON.parse(data) : [];
@@ -126,7 +126,7 @@ function createCards() {
             // Save the new deck
             fs.writeFile(file_bank, JSON.stringify(cards, null, 4), error => {
                 if (error) {
-                    return console.log(`Error in writing cards to "${file_bank}"\n${error}\n`);
+                    return console.log(`Error in writing cards to "${file_bank}"\n${error}\n`.red.bold);
                 }
 
             });
@@ -154,16 +154,16 @@ function practice() {
 
         ]).then(response => {
             const cardsFiltered = cards.filter(c => c.type === response.type);
+            const numQuestions  = cardsFiltered.length;
 
-            if (cardsFiltered.length === 0) {
+            if (numQuestions === 0) {
                 console.log(`Please create a bank of ${response.type} questions first!\n`.red.bold);
                 setTimeout(mainMenu, menuTimeout);
 
             } else {
-                // Ask questions
-                const numQuestions = cardsFiltered.length;
-                let   index = 0, numCorrectAnswers = 0;
+                let index = 0;
 
+                // Ask questions
                 clearScreen();
                 askQuestion();
 
@@ -195,7 +195,7 @@ function practice() {
                             askQuestion();
 
                         } else {
-                            console.log(`Grade: ${Math.round(100 * numCorrectAnswers / numQuestions)}%\n`.magenta.bold);
+                            console.log(`Grade: ${Math.round(100 * numCorrectAnswers / numQuestions)}%\n`.white.bold);
                             setTimeout(mainMenu, menuTimeout);
 
                         }
