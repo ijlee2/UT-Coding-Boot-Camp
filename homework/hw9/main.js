@@ -153,7 +153,7 @@ function practice() {
             }
 
         ]).then(response => {
-            const cardsFiltered = cards.filter(c => c.type === response.type);
+            const cardsFiltered = cards.filter(c => (c.type === response.type));
             const numQuestions  = cardsFiltered.length;
 
             if (numQuestions === 0) {
