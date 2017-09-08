@@ -36,14 +36,16 @@ isItTrue(true, () => console.log("Yes, it is true."));
 
 // A function that accepts a function (F) and a value (V), and returns
 // a function that returns the result of running the function F on the value V
-function newFunction(f, v) {
-    return () => f(v);
+function newFunction(f, x) {
+    return () => f(x);
+}
+
+function addOne(x) {
+    return x + 1;
 }
 
 console.log();
-const g = newFunction(function addOne(x) {
-    return x + 1;
-}, 5);
+const g = newFunction(addOne, 5);
 console.log(g());
 
 
