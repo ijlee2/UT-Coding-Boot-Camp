@@ -24,7 +24,7 @@ if (!fs.existsSync(file_bank)) {
 // Load existing cards
 let cards;
 
-fs.readFile(file_bank, "UTF8", (error, data) => {
+fs.readFile(file_bank, "utf8", (error, data) => {
     if (error) {
         return console.log(`Error in reading cards from "${file_bank}"\n${error}\n`.red.bold);
     }
