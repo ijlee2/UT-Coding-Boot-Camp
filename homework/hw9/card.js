@@ -1,4 +1,4 @@
-const clozeSymbol = "...";
+const clozeSymbol = "_____";
 
 module.exports = function Card(myType, question, answer) {
     // Scope-safe constructor

@@ -6,6 +6,7 @@
 *****************************************************************************
 *****************************************************************************/
 const Card     = require("./card.js");
+const colors   = require("colors");
 const fs       = require("fs");
 const inquirer = require("inquirer");
 
@@ -15,7 +16,7 @@ const file_bank = "bank.txt";
 if (!fs.existsSync(file_bank)) {
     fs.writeFile(file_bank, "", error => {
         if (error) {
-            return console.log(`Error in creating the file "${file_bank}"\n${error}\n\n`);
+            return console.log(`Error in creating the file "${file_bank}"\n${error}\n`);
         }
     });
 }
@@ -25,7 +26,7 @@ let cards;
 
 fs.readFile(file_bank, "UTF8", (error, data) => {
     if (error) {
-        return console.log(`Error in reading cards from "${file_bank}"\n${error}\n\n`);
+        return console.log(`Error in reading cards from "${file_bank}"\n${error}\n`);
     }
 
     cards = (data !== "") ? JSON.parse(data) : [];
@@ -39,6 +40,8 @@ fs.readFile(file_bank, "UTF8", (error, data) => {
     
 *****************************************************************************
 *****************************************************************************/
+const menuTimeout = 1000;
+
 mainMenu();
 
 function mainMenu() {
@@ -55,16 +58,21 @@ function mainMenu() {
     ]).then(response => {
         switch (response.menuItem) {
             case "Create cards":
+                clearScreen();
                 createCards();
+                
                 break;
 
             case "Practice":
+                clearScreen();
                 practice();
+
                 break;
 
             case "Exit program":
-                console.log("Goodbye!\n");
-                return;
+                console.log("Goodbye!\n".white.bold);
+
+                break;
 
         }
 
@@ -99,15 +107,17 @@ function createCards() {
         }
 
     ]).then(response => {
-        // Try to create a card (check if type is Cloze and answer appears in question)
+        // Try to create a card (check if type is Cloze and answer appears within question)
         try {
             cards.push(new Card(response.type, response.question, response.answer).jsonify());
+            console.log("Card successfully created!".white.bold);
 
         } catch (error) {
-            console.log(error);
+            console.log(error.red.bold);
 
         }
 
+        // Make a new card, or return to main menu
         if (response.continue) {
             console.log();
             createCards();
@@ -116,12 +126,12 @@ function createCards() {
             // Save the new deck
             fs.writeFile(file_bank, JSON.stringify(cards, null, 4), error => {
                 if (error) {
-                    return console.log(`Error in writing cards to "${file_bank}"\n${error}\n\n`);
+                    return console.log(`Error in writing cards to "${file_bank}"\n${error}\n`);
                 }
 
             });
 
-            mainMenu();
+            setTimeout(mainMenu, menuTimeout);
 
         }
 
@@ -130,9 +140,8 @@ function createCards() {
 
 function practice() {
     if (cards.length === 0) {
-        console.log("Please create a bank of questions first!\n\n");
-
-        mainMenu();
+        console.log("Please create a bank of questions first!\n".red.bold);
+        setTimeout(mainMenu, menuTimeout);
 
     } else {
         inquirer.prompt([
@@ -147,9 +156,8 @@ function practice() {
             const cardsFiltered = cards.filter(c => c.type === response.type);
 
             if (cardsFiltered.length === 0) {
-                console.log(`Please create a bank of ${response.type} questions first!\n\n`);
-
-                mainMenu();
+                console.log(`Please create a bank of ${response.type} questions first!\n`.red.bold);
+                setTimeout(mainMenu, menuTimeout);
 
             } else {
                 // Ask questions
@@ -164,7 +172,8 @@ function practice() {
                         {
                             "type"    : "input",
                             "name"    : `question`,
-                            "message" : `${cardsFiltered[index].front}\nYour answer:`
+                            "message" : `${cardsFiltered[index].front}\nYour answer:`,
+                            "validate": value => (value !== "")
                         }
 
                     ]).then(response => {
@@ -173,10 +182,10 @@ function practice() {
                         if (response.question.match(regex)) {
                             numCorrectAnswers++;
 
-                            console.log("Correct!\n");
+                            console.log("Correct!\n".white.bold);
 
                         } else {
-                            console.log(`Incorrect! The answer was ${cardsFiltered[index].back}.\n`);
+                            console.log("Incorrect! The answer was ".white.bold + cardsFiltered[index].back.yellow.underline + ".\n".white.bold);
 
                         }
 
@@ -186,14 +195,18 @@ function practice() {
                             askQuestion();
 
                         } else {
-                            console.log(`Grade: ${Math.round(100 * numCorrectAnswers / numQuestions)}%\n`);
+                            console.log(`Grade: ${Math.round(100 * numCorrectAnswers / numQuestions)}%\n`.magenta.bold);
+                            setTimeout(mainMenu, menuTimeout);
 
                         }
 
                     });
-                }
+
+                } // End of asking questions
             }
-        });
+
+        }); // End of inquirer
+
     }
 }
 

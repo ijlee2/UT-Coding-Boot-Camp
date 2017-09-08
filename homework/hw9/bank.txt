@@ -1,0 +1,102 @@
+[
+    {
+        "type": "Basic",
+        "front": "Which English football club has the nickname \"The Foxes\"?",
+        "back": "Leicester City"
+    },
+    {
+        "type": "Basic",
+        "front": "In what year did the Wall Street Crash take place?",
+        "back": "1929"
+    },
+    {
+        "type": "Cloze",
+        "front": "When a game of chess starts, there are _____ pieces on the board.",
+        "back": "32"
+    },
+    {
+        "type": "Basic",
+        "front": "Who painted \"Swans Reflecting Elephants,\" \"Sleep,\" and \"The Persistence of Memory\"?",
+        "back": "Salvador Dali"
+    },
+    {
+        "type": "Cloze",
+        "front": "_____ is Grumpy Cat's real name.",
+        "back": "Tardar Sauce"
+    },
+    {
+        "type": "Cloze",
+        "front": "_____ is the home of the largest Japanese population outside of Japan.",
+        "back": "Brazil"
+    },
+    {
+        "type": "Basic",
+        "front": "What was the title of the first Bond movie, released in 1962?",
+        "back": "Dr. No"
+    },
+    {
+        "type": "Cloze",
+        "front": "Tomb Raider's icon, Lara Croft, was originally called _____.",
+        "back": "Laura Cruz"
+    },
+    {
+        "type": "Basic",
+        "front": "In what year was the first Mass Effect game released?",
+        "back": "2007"
+    },
+    {
+        "type": "Cloze",
+        "front": "The song, _____, in Daft Punk's Random Access Memories features Pharrell Williams.",
+        "back": "Get Lucky"
+    },
+    {
+        "type": "Cloze",
+        "front": "In South Park, Stan's last name is _____.",
+        "back": "Marsh"
+    },
+    {
+        "type": "Cloze",
+        "front": "The body of the Egyptian Sphinx is that of a(n) _____.",
+        "back": "lion"
+    },
+    {
+        "type": "Basic",
+        "front": "Which movie contains the quote, \"Say hello to my little friend!\"?",
+        "back": "Scarface"
+    },
+    {
+        "type": "Basic",
+        "front": "How many planets make up our solar system?",
+        "back": "8"
+    },
+    {
+        "type": "Basic",
+        "front": "What is the 15th letter in the Greek alphabet?",
+        "back": "Omicron"
+    },
+    {
+        "type": "Cloze",
+        "front": "_____ wrote the award-winning musical \"In the Heights.\"",
+        "back": "Lin-Manuel Miranda"
+    },
+    {
+        "type": "Cloze",
+        "front": "Chris Martin is the lead singer of _____.",
+        "back": "Coldplay"
+    },
+    {
+        "type": "Basic",
+        "front": "How many keys are there on a full-sized piano?",
+        "back": "88"
+    },
+    {
+        "type": "Cloze",
+        "front": "The Space Needle is located in _____, Washington.",
+        "back": "Seattle"
+    },
+    {
+        "type": "Basic",
+        "front": "In what year was Tamagochi digital pet released?",
+        "back": "1996"
+    }
+]
