@@ -85,8 +85,8 @@ function mainMenu(option = "", title) {
 
 function getTweets() {
     const parameters = {
-        count      : 20,
-        screen_name: "BobBarker000000"
+        "count"      : 20,
+        "screen_name": "BobBarker000000"
     };
 
     twitter.get("statuses/user_timeline", parameters, (error, tweets, response) => {
