@@ -140,8 +140,7 @@ function getSong(title) {
         const song = data.tracks.items[0];
 
         // Display all artists
-        const artists = [];
-        song.artists.forEach(a => artists.push(a.name));
+        const artists = song.artists.map(a => a.name);
 
 
         /********************************************************************
