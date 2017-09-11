@@ -15,3 +15,30 @@ VALUES ("Reputation", "Taylor Swift", "Pop");
 
 INSERT INTO albums (title, artist, genre)
 VALUES ("Villains", "Queens of the Stone Age", "Rock");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("Mnq026", "S U R V I V E", "Electronic");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("St. Elsewhere", "Gnarls Barkley", "Soul");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("...Like Clockwork", "Queens of the Stone Age", "Rock");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("Songs for the Deaf", "Queens of the Stone Age", "Rock");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("Wish You Were Here", "Pink Floy", "Rock");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("Villains", "Queens of the Stone Age", "Rock");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("Junip", "Junip", "Rock");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("Synthetica", "Metric", "New Wave");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("The 20/20 Experience", "Justin Timberlake", "Soul");
