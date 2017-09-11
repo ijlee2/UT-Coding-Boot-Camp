@@ -5,9 +5,9 @@ USE icecream_db;
 
 CREATE TABLE products (
     id INT AUTO_INCREMENT NOT NULL,
-    flavor VARCHAR(45) NULL,
-    price DECIMAL(10, 2) NULL,
-    quantity INT NULL,
+    flavor VARCHAR(45) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    quantity INT NOT NULL,
     PRIMARY KEY (id)
 );
 
