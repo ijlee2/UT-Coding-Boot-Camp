@@ -17,7 +17,7 @@ INSERT INTO albums (title, artist, genre) VALUES
 ("St. Elsewhere", "Gnarls Barkley", "Soul"),("...Like Clockwork", "Queens of the Stone Age", "Rock"),
 ("Our Endless Numbered Days", "Iron & Wine", "Folk"),
 ("Songs for the Deaf", "Queens of the Stone Age", "Rock"),
-("Wish You Were Here", "Pink Floy", "Rock"),
+("Wish You Were Here", "Pink Floyd", "Rock"),
 ("Life in Cartoon Motion", "Mika", "Pop"),
 ("Junip", "Junip", "Rock"),
 ("Synthetica", "Metric", "New Wave"),
