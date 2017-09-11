@@ -14,10 +14,16 @@ const connection = mysql.createConnection({
     "database": "albums_db"
 });
 
-connection.connect(function(error) {
+connection.connect(error => {
     if (error) throw error;
 
     console.log("connected as id " + connection.threadId);
+
+    displayAlbums();
+    displayAlbumsByGenre("Soul");
+    displayAlbumsByArtist("Queens of the Stone Age");
+
+    connection.end();
 });
 
 function displayAlbums() {
@@ -43,7 +49,7 @@ function displayAlbumsByGenre(genre) {
 }
 
 function displayAlbumsByArtist(artist) {
-    connection.query(`SELECT * FROM albums WHERE artist="${artist}"`, (error, result) => {
+    const query = connection.query(`SELECT * FROM albums WHERE artist="${artist}"`, (error, result) => {
         if (error) throw error;
 
         console.log(`\n--- Display albums of artist: ${artist} ---\n`);
@@ -51,10 +57,7 @@ function displayAlbumsByArtist(artist) {
             console.log(a.title);
         });
     });
+
+    // Display the SQL commands that was run
+    console.log(query.sql);
 }
-
-displayAlbums();
-displayAlbumsByGenre("Soul");
-displayAlbumsByArtist("Queens of the Stone Age");
-
-connection.end();
