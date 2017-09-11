@@ -21,12 +21,12 @@ connection.connect(function(error) {
 });
 
 function displayAlbums() {
-    connection.query("SELECT * FROM albums ORDER BY title ASC", (error, result) => {
+    connection.query("SELECT * FROM albums ORDER BY genre ASC", (error, result) => {
         if (error) throw error;
 
         console.log("\n--- Display albums ---\n");
         result.forEach(a => {
-            console.log(a.title);
+            console.log(`${a.genre}: "${a.title}" by ${a.artist}`);
         });
     });
 }
@@ -37,7 +37,7 @@ function displayAlbumsByGenre(genre) {
 
         console.log(`\n--- Display albums of genre: ${genre} ---\n`);
         result.forEach(a => {
-            console.log(a.title);
+            console.log(`"${a.title}" by ${a.artist}`);
         });
     });
 }
