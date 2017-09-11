@@ -1,3 +1,5 @@
+process.stdout.write("\033c");
+
 const mysql = require("mysql");
 
 const connection = mysql.createConnection({
