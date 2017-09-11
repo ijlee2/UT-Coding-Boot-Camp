@@ -31,7 +31,7 @@ function displayAlbums() {
     });
 }
 
-function searchAlbumsByGenre(genre) {
+function displayAlbumsByGenre(genre) {
     connection.query(`SELECT * FROM albums WHERE genre="${genre}"`, (error, result) => {
         if (error) throw error;
 
@@ -42,7 +42,7 @@ function searchAlbumsByGenre(genre) {
     });
 }
 
-function searchAlbumsByArtist(artist) {
+function displayAlbumsByArtist(artist) {
     connection.query(`SELECT * FROM albums WHERE artist="${artist}"`, (error, result) => {
         if (error) throw error;
 
@@ -54,7 +54,7 @@ function searchAlbumsByArtist(artist) {
 }
 
 displayAlbums();
-searchAlbumsByGenre("Soul");
-searchAlbumsByArtist("Queens of the Stone Age");
+displayAlbumsByGenre("Soul");
+displayAlbumsByArtist("Queens of the Stone Age");
 
 connection.end();
