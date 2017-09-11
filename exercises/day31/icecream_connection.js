@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+
 const connection = mysql.createConnection({
     "host": "localhost",
     "port": 3306,
@@ -21,5 +22,7 @@ connection.connect(function(error) {
 
         console.log(result);
         console.log(result[0].id, result[0].flavor, result[0].price, result[0].quantity);
+        
+        connection.end();
     });
 });
