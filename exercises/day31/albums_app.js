@@ -21,7 +21,7 @@ connection.connect(function(error) {
 });
 
 function displayAlbums() {
-    connection.query("SELECT * FROM albums", (error, result) => {
+    connection.query("SELECT * FROM albums ORDER BY title ASC", (error, result) => {
         if (error) throw error;
 
         console.log("\n--- Display albums ---\n");

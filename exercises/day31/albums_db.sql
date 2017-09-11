@@ -26,13 +26,13 @@ INSERT INTO albums (title, artist, genre)
 VALUES ("...Like Clockwork", "Queens of the Stone Age", "Rock");
 
 INSERT INTO albums (title, artist, genre)
+VALUES ("Our Endless Numbered Days", "Iron & Wine", "Folk");
+
+INSERT INTO albums (title, artist, genre)
 VALUES ("Songs for the Deaf", "Queens of the Stone Age", "Rock");
 
 INSERT INTO albums (title, artist, genre)
 VALUES ("Wish You Were Here", "Pink Floy", "Rock");
-
-INSERT INTO albums (title, artist, genre)
-VALUES ("Villains", "Queens of the Stone Age", "Rock");
 
 INSERT INTO albums (title, artist, genre)
 VALUES ("Junip", "Junip", "Rock");
@@ -42,3 +42,6 @@ VALUES ("Synthetica", "Metric", "New Wave");
 
 INSERT INTO albums (title, artist, genre)
 VALUES ("The 20/20 Experience", "Justin Timberlake", "Soul");
+
+INSERT INTO albums (title, artist, genre)
+VALUES ("The Shepherd's Dog", "Iron & Wine", "Folk");
