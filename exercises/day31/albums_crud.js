@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
 const mysql    = require("mysql");
 
-let albums;
 const connection = mysql.createConnection({
     "host"    : "localhost",
     "port"    : 3306,
@@ -10,12 +9,13 @@ const connection = mysql.createConnection({
     "database": "albums_db"
 });
 
+let albums;
+
 // Start by conecting to the database
 connection.connect(error => {
     if (error) throw error;
 
     displayAlbums(false);
-    console.log(albums);
 
     mainMenu();
 });
