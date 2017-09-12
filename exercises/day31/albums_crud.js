@@ -64,8 +64,6 @@ function mainMenu() {
 
 // Create
 function createAlbums() {
-    console.log("--- Create albums ---\n");
-
     inquirer.prompt([
         {
             "type"    : "input",
@@ -114,23 +112,17 @@ function createAlbums() {
 
 // Read
 function displayAlbums(show) {
-    console.log("--- Display albums ---\n");
-
-    const sql_command = "SELECT * FROM albums ORDER BY genre ASC";
+    const sql_command = `SELECT * FROM albums ORDER BY ${(show) ? "genre" : "title"} ASC`;
 
     connection.query(sql_command, (error, result) => {
         if (error) throw error;
 
         // Save the albums locally
-        albums = result.map(a => ({
-            "title" : a.title,
-            "artist": a.artist,
-            "genre" : a.genre
-        }));
+        albums = result.map(r => r.title);
 
         if (show) {
-            albums.forEach(a => {
-                console.log(`${a.genre}: "${a.title}" by ${a.artist}`);
+            result.forEach(r => {
+                console.log(`${r.genre}: "${r.title}" by ${r.artist}`);
             });
 
             setTimeout(mainMenu, 3000);
@@ -140,34 +132,74 @@ function displayAlbums(show) {
 
 // Update
 function updateAlbums() {
-    console.log("--- Update albums ---\n");
-
-    const query = connection.query("UPDATE products SET ? WHERE ?",
-    [
+    inquirer.prompt([
         {
-            "quantity": 100
+            "type"   : "list",
+            "name"   : "title",
+            "message": "Select the album that you want to update:",
+            "choices": albums
         },
         {
-            "flavor": "Rocky Road"
+            "type"    : "input",
+            "name"    : "title_new",
+            "message" : "Update the album name:",
+            "validate": value => (value !== "")
+        },
+        {
+            "type"    : "input",
+            "name"    : "artist_new",
+            "message" : "Update the artist name:",
+            "validate": value => (value !== "")
+        },
+        {
+            "type"    : "input",
+            "name"    : "genre_new",
+            "message" : "Update the genre:",
+            "validate": value => (value !== "")
         }
-    ], (error, result) => {
-        console.log(result.affectedRows + " products updated!\n");
 
-        deleteProduct();
+    ]).then(response => {
+        const sql_command = `UPDATE albums SET title = "${response.title_new}", artist = "${response.artist_new}", genre = "${response.genre_new}" WHERE title = "${response.title}"`;
+
+        connection.query(sql_command, (error, result) => {
+            if (error) throw error;
+
+            console.log("\nAlbum successfully updated!\n");
+
+            // Update the local copy
+            displayAlbums(false);
+
+            setTimeout(mainMenu, 1000);
+
+        });
 
     });
 }
 
-function deleteProduct() {
-    console.log("Deleting all strawberry ice creams...\n");
+// Delete
+function deleteAlbums() {
+    inquirer.prompt([
+        {
+            "type"   : "list",
+            "name"   : "title",
+            "message": "Select the album that you want to delete:",
+            "choices": albums
+        }
 
-    connection.query("DELETE FROM products WHERE ?", {
-        "flavor": "strawberry"
+    ]).then(response => {
+        const sql_command = `DELETE FROM albums WHERE title = "${response.title}"`;
 
-    }, (error, result) => {
-        console.log(result.affectedRows + " products deleted!\n");
+        connection.query(sql_command, (error, result) => {
+            if (error) throw error;
 
-        readProducts();
+            console.log("\nAlbum successfully deleted!\n");
+
+            // Update the local copy
+            displayAlbums(false);
+
+            setTimeout(mainMenu, 1000);
+            
+        });
 
     });
 }

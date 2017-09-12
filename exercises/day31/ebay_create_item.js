@@ -16,8 +16,7 @@ connection.connect(error => {
 });
 
 function createItem() {
-    inquirer.prompt(
-    [
+    inquirer.prompt([
         {
             "type"    : "input",
             "name"    : "name",
@@ -32,11 +31,57 @@ function createItem() {
         }
 
     ]).then(response => {
-        connection.query(`INSERT INTO items (name, current_bid) VALUES ("${response.name}", ${response.bid_start})`, (error, result) => {
+        const sql_command = `INSERT INTO items (name, current_bid) VALUES ("${response.name}", ${response.bid_start})`;
+
+        connection.query(sql_command, (error, result) => {
             if (error) throw error;
 
             console.log(result);
         });
 
+    });
+}
+
+function userValidation() {
+    inquirer.prompt([
+        {
+            "type"    : "input",
+            "name"    : "name",
+            "message" : "Enter the user name:",
+            "validate": value => (value !== "")
+        },
+        {
+            "type"    : "input",
+            "name"    : "password",
+            "message" : "Enter password:",
+            "validate": value => (value !== "")
+        }
+    ])    
+    .then(response => {
+        const sql_command = `SELECT * FROM users WHERE name = "${response.name}"`;
+
+        connection.query(sql_command, (error, result) => {
+            if (error) throw error;
+
+            let validated = (result.length > 0);
+
+            if (validated) {
+                if (response.password === result[0].password) {
+                    console.log("Welcome");
+
+                } else {
+                    validated = false;
+                }
+
+            } else {
+                validated = false;
+
+            }
+
+            if (!validated) {
+                console.log("User name or password is incorrect.");
+            }
+            
+        });
     });
 }

@@ -5,7 +5,7 @@ USE ebay_db;
 CREATE TABLE items (
     id INT AUTO_INCREMENT NOT NULL ,
     name VARCHAR(30) NOT NULL,
-    current_bid DECIMAL(10, 2) NOT NULL DEFAULT 0.01,
+    current_bid DECIMAL(10, 2) NOT NULL,
     uid INT,
     PRIMARY KEY (id)
 );
@@ -18,12 +18,12 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (name, password) VALUES
-("mark", "originmaster");
+    ("mark", "originmaster");
 
 INSERT INTO items (name, current_bid, uid) VALUES
-("shoes", 10.00, 1),
-("couch", 100.00, null),
-("TV", 80.00, null);
+    ("shoes", 10.00, 1),
+    ("couch", 100.00, null),
+    ("TV", 80.00, null);
 
 SELECT * FROM items;
 SELECT * FROM users;
