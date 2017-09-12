@@ -5,6 +5,8 @@ INSERT INTO top5000 VALUES
 (3, "Celine Dion", "My Heart Will Go On", 1998, 35.405, 12.636, 8.944, 23.701, 3.61);
 */
 
+USE topSongs_db;
+
 -- Load data from a csv file
 LOAD DATA LOCAL INFILE 'C:/Users/Isaac/Documents/GitHub/UT-Coding-Boot-Camp/exercises/day32/TopSongs.csv'
 INTO TABLE top5000
