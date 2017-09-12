@@ -83,6 +83,12 @@ function buyItem() {
             "name"    : "buy_quantity",
             "message" : "Enter the quantity that you want to buy:",
             "validate": value => (value !== "" && !isNaN(value))
+        },
+        {
+            "type"   : "confirm",
+            "name"   : "continue",
+            "message": "Buy another item?",
+            "default": true
         }
 
     ]).then(response => {
@@ -104,17 +110,29 @@ function buyItem() {
 
                 if (results[0].changedRows === 1) {
                     console.log("\nCongratulations, you bought ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + "!".white);
-                    console.log(`Total cost: $${(buy_quantity * results[1][0].price).toFixed(2)}\n`.white);
+                    console.log(`Subtotal: $${(buy_quantity * results[1][0].price).toFixed(2)}\n`.white);
+
+                } else if (buy_quantity > 0) {
+                    console.log("\nSorry, we do not have ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + " in stock.".white);
 
                 } else {
-                    console.log("\nSorry, we do not have ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + " in stock.".white);
+                    console.log("\nThat's all right. No pressure to buy ".white + `${results[1][0].product_name}'s`.yellow.bold + " right now.".white);
 
                 }
 
-                setTimeout(menu_customer, 2000);
-
             } catch(error) {
                 displayError(error);
+
+            } finally {
+                if (response.continue) {
+                    setTimeout(menu_customer, 2000);
+
+                } else {
+                    console.log("\nThank you for shopping with Bamazon!\n");
+
+                    connection.end();
+
+                }
 
             }
 
