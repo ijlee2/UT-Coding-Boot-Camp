@@ -1,0 +1,1 @@
+rating, artist name, song name, year, popularity (all), popularity (usa), popularity (uk), popularity (europe), popularity (others)
