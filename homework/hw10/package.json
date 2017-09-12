@@ -1,0 +1,17 @@
+{
+  "name": "hw10_isaac_lee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bamazonCustomer.js",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "inquirer": "^3.2.3",
+    "mysql": "^2.14.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Isaac J. Lee",
+  "license": "ISC"
+}
