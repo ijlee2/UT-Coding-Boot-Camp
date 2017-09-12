@@ -10,11 +10,12 @@ const inquirer = require("inquirer");
 const mysql    = require("mysql");
 
 const connection = mysql.createConnection({
-    "host"    : "localhost",
-    "port"    : 3306,
-    "user"    : "root",
-    "password": "",
-    "database": "bamazon_db"
+    "host"              : "localhost",
+    "port"              : 3306,
+    "user"              : "root",
+    "password"          : "",
+    "database"          : "bamazon_db",
+    "multipleStatements": true
 });
 
 connection.connect(error => {
@@ -23,7 +24,7 @@ connection.connect(error => {
             throw "Error: Connection to bamazon_db failed.\n";
         }
 
-        displayAvailableItems();
+        menu_customer();
 
     } catch(error) {
         displayError(error);
@@ -32,8 +33,10 @@ connection.connect(error => {
 });
 
 
-function displayAvailableItems() {
+function menu_customer() {
     clearScreen();
+
+    console.log("--- Available Items ---\n");
 
     const sql_command = "SELECT * FROM products";
 
@@ -47,7 +50,9 @@ function displayAvailableItems() {
 
             }
 
-            displayTable(results);
+            displayTable(results, 10);
+
+            buyItem();
 
         } catch(error) {
             displayError(error);
@@ -57,7 +62,58 @@ function displayAvailableItems() {
     });
 }
 
+function buyItem() {
+    inquirer.prompt([
+        {
+            "type"    : "input",
+            "name"    : "item_id",
+            "message" : "Enter the ID of the item that you want to buy:",
+            "validate": value => (value !== "" && !isNaN(value))
+        },
+        {
+            "type"    : "input",
+            "name"    : "buy_quantity",
+            "message" : "Enter the quantity that you want to buy:",
+            "validate": value => (value !== "" && !isNaN(value))
+        }
 
+    ]).then(response => {
+        const item_id      = parseInt(response.item_id);
+        const buy_quantity = parseInt(response.buy_quantity);
+
+        const sql_command =
+            `UPDATE products
+             SET stock_quantity = IF(stock_quantity >= ${buy_quantity}, stock_quantity - ${buy_quantity}, stock_quantity)
+             WHERE item_id = ${item_id};
+
+             SELECT product_name, price FROM products WHERE item_id = ${item_id};`;
+
+        connection.query(sql_command, (error, results) => {
+            try {
+                if (error) {
+                    throw `Error: Updating item #${item_id} failed.\n`;
+                }
+
+                if (results[0].changedRows === 1) {
+                    console.log("\nCongratulations, you bought ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + "!".white);
+                    console.log(`Total cost: $${(buy_quantity * results[1][0].price).toFixed(2)}\n`.white);
+
+                } else {
+                    console.log("\nSorry, we do not have ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + " in stock.".white);
+
+                }
+
+//                setTimeout(menu_customer, 2000);
+
+            } catch(error) {
+                displayError(error);
+
+            }
+
+        });
+
+    });
+}
 
 
 function clearScreen() {
@@ -70,50 +126,61 @@ function displayError(error) {
     setTimeout(() => connection.end(), 1000);
 }
 
-function displayTable(array) {
-    // Find out how much space the longest word in each column takes
+function displayTable(array, numRowsPerGroup) {
+    /************************************************************************
+    
+        Find out how much space the longest word in each column takes
+    
+    *************************************************************************/
     const columnWidths = {};
 
     // Account for the header name
     const headers = Object.keys(array[0]);
-
     headers.forEach(h => columnWidths[h] = h.length);
 
     // Account for the values
     array.forEach(row => {
         for (let key in row) {
-            // Convert numbers to String
-            const column = row[key].toString();
-
-            columnWidths[key] = Math.max(columnWidths[key], column.length);
+            columnWidths[key] = Math.max(columnWidths[key], row[key].toString().length);
         }
     });
 
-    // Display headers
-    let line = headers.reduce((sum, value) => sum + value + " ".repeat(columnWidths[value] - value.length + 2), "");
+    
+    /************************************************************************
+    
+        Display the array of objects in a table
+    
+    *************************************************************************/
+    // Create the header
+    const output_header = headers.reduce((sum, value) => 
+        sum + value + " ".repeat(columnWidths[value] - value.length + 2)
 
-    console.log(line.toUpperCase().green.bold);
+    , "").toUpperCase();
 
-    // Display rows
     let count = 0;
 
     array.forEach(row => {
+        // Display the header
+        if (count % numRowsPerGroup === 0) {
+            console.log(`${output_header}`.yellow.bold);
+        }
+
         // TODO: Use Object.values() once it's fully implemented in ES2017
-        line = headers.reduce((sum, value) => {
+        const output_row = headers.reduce((sum, value) => {
             const item = row[value].toString();
 
             return sum + item + " ".repeat(columnWidths[value] - item.length + 2);
 
         }, "");
 
-        console.log(line.white);
+        // Display the row
+        console.log(output_row.white);
 
-        // Insert a new line every 10 items
+        if (count % numRowsPerGroup === numRowsPerGroup - 1) {
+            console.log();
+        }
+
         count++;
 
-        if (count % 10 === 0 || count === array.length) {
-            console.log();
-            count = 0;
-        }
     });
 }

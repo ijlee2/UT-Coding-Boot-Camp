@@ -21,3 +21,5 @@ INSERT INTO products (product_name, department_name, price, stock_quantity) VALU
 ("Uncharted 4", "Video Games", 59.99, 63),
 ("Wonder Woman", "Movies & TV", 24.99, 2673),
 ("Yoga Mat", "Sports & Fitness", 19.99, 5788);
+
+SELECT * FROM products;
