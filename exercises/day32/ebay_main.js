@@ -99,7 +99,8 @@ function mainMenu() {
                 break;
 
             case "Exit program":
-                connection.quit();
+                console.log("Goodbye!");
+                connection.end();
                 break;
 
         }
@@ -147,7 +148,8 @@ function displayItems(show) {
         items = result.map(r => r.name);
 
         if (show) {
-            console.log(items);
+            console.log(`Items available for bid are:\n${items.map(i => `- ${i.toLowerCase()}`).join("\n")}`);
+            setTimeout(mainMenu, 3000);
         }
     });
 };
