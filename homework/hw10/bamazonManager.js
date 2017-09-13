@@ -5,10 +5,12 @@
     
 *****************************************************************************
 *****************************************************************************/
-const colors       = require("colors");
-const displayTable = require("./displayTable.js");
-const inquirer     = require("inquirer");
-const mysql        = require("mysql");
+const displayTable  = require("./displayTable.js");
+const validateInput = require("./validateInput.js");
+
+const colors   = require("colors");
+const inquirer = require("inquirer");
+const mysql    = require("mysql");
 
 // Create a local copy of items (product name -> id)
 let items = {};
@@ -91,25 +93,25 @@ function addProduct() {
             "type"    : "input",
             "name"    : "product_name",
             "message" : "Enter the product name:",
-            "validate": value => (value !== "")
+            "validate": validateInput.isNotEmpty
         },
         {
             "type"    : "input",
             "name"    : "department_name",
             "message" : "Enter the department name:",
-            "validate": value => (value !== "")
+            "validate": validateInput.isNotEmpty
         },
         {
             "type"    : "input",
             "name"    : "price",
             "message" : "Enter the price of the product:",
-            "validate": value => (value !== "")
+            "validate": validateInput.isNonnegativeReal
         },
         {
             "type"    : "input",
             "name"    : "stock_quantity",
             "message" : "Enter the stock quantity:",
-            "validate": value => (value !== "" && !isNaN(value))
+            "validate": validateInput.isWholeNumber
         },
         {
             "type"   : "confirm",
@@ -119,9 +121,10 @@ function addProduct() {
         }
 
     ]).then(response => {
+        const price = Math.round(100 * response.price) / 100;
         const sql_command =
             `INSERT INTO products (product_name, department_name, price, stock_quantity)
-             VALUES ("${response.product_name}", "${response.department_name}", ${response.price}, ${response.stock_quantity});
+             VALUES ("${response.product_name}", "${response.department_name}", ${price}, ${response.stock_quantity});
 
              SELECT item_id FROM products ORDER BY item_id DESC LIMIT 1;`;
 
@@ -197,7 +200,7 @@ function addToInventory() {
             "type"    : "input",
             "name"    : "add_quantity",
             "message" : "Update the inventory by:",
-            "validate": value => (value !== "" && !isNaN(value))
+            "validate": validateInput.isWholeNumber
         },
         {
             "type"   : "confirm",
@@ -285,5 +288,5 @@ function clearScreen() {
 function displayError(error) {
     console.log(error.red.bold);
 
-    setTimeout(() => connection.end(), 1000);
+    connection.end();
 }

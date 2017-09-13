@@ -5,10 +5,12 @@
     
 *****************************************************************************
 *****************************************************************************/
-const colors       = require("colors");
-const displayTable = require("./displayTable.js");
-const inquirer     = require("inquirer");
-const mysql        = require("mysql");
+const displayTable  = require("./displayTable.js");
+const validateInput = require("./validateInput.js");
+
+const colors   = require("colors");
+const inquirer = require("inquirer");
+const mysql    = require("mysql");
 
 // Create a local copy of items (id)
 let items;
@@ -89,21 +91,13 @@ function buyItem() {
             "type"    : "input",
             "name"    : "item_id",
             "message" : "Enter the ID of the item that you want to buy:",
-            "validate": value => {
-                const value_num = parseFloat(value);
-
-                return (value !== "" && !isNaN(value) && items.indexOf(value_num) >= 0);
-            }
+            "validate": value => (value !== "" && !isNaN(value) && items.indexOf(parseFloat(value)) >= 0)
         },
         {
             "type"    : "input",
             "name"    : "buy_quantity",
             "message" : "Enter the quantity that you want to buy:",
-            "validate": value => {
-                const value_num = parseFloat(value);
-
-                return (value !== "" && !isNaN(value) && value_num >= 0 && Math.trunc(value_num) === value_num);
-            }
+            "validate": validateInput.isWholeNumber
         },
         {
             "type"   : "confirm",
@@ -132,10 +126,10 @@ function buyItem() {
                     console.log(`Subtotal: $${(buy_quantity * results[1][0].price).toFixed(2)}\n`.white);
 
                 } else if (buy_quantity > 0) {
-                    console.log("\nSorry, we do not have ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + " in stock.".white);
+                    console.log("\nSorry, we do not have ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + " in stock.\n".white);
 
                 } else {
-                    console.log("\nThat's all right. No pressure to buy ".white + `${results[1][0].product_name}'s`.yellow.bold + " right now.".white);
+                    console.log("\nThat's all right. No pressure to buy ".white + `${results[1][0].product_name}'s`.yellow.bold + " right now.\n".white);
 
                 }
 
@@ -176,5 +170,5 @@ function clearScreen() {
 function displayError(error) {
     console.log(error.red.bold);
 
-    setTimeout(() => connection.end(), 1000);
+    connection.end();
 }
