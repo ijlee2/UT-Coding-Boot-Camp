@@ -140,7 +140,13 @@ function viewDepartmentSales() {
                 setTimeout(menu_supervisor, 2000);
 
             } else {
-                displayTable(results, 10);
+                displayTable(results, 10, {
+                    "department_id"  : 0,
+                    "department_name": undefined,
+                    "overhead_costs" : 2,
+                    "product_sales"  : 2,
+                    "total_profit"   : 2
+                });
 
                 setTimeout(menu_supervisor, 5000);
 

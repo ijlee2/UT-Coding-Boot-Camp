@@ -1,4 +1,18 @@
-module.exports = function displayTable(array, numRowsPerGroup) {
+module.exports = function displayTable(array, numRowsPerGroup, columnType) {
+    /************************************************************************
+    
+        Apply precisions to numbers
+    
+    *************************************************************************/
+    array.forEach(row => {
+        for (let key in row) {
+            if (typeof columnType[key] !== "undefined") {
+                row[key] = row[key].toFixed(columnType[key]);
+            }
+        }
+    });
+
+
     /************************************************************************
     
         Find out how much space the longest word in each column takes
@@ -7,17 +21,17 @@ module.exports = function displayTable(array, numRowsPerGroup) {
     const columnWidths = {};
 
     // Account for the header name
-    const headers = Object.keys(array[0]);
+    const headers = Object.keys(columnType);
     headers.forEach(h => columnWidths[h] = h.length);
 
     // Account for the values
     array.forEach(row => {
         for (let key in row) {
-            columnWidths[key] = Math.max(columnWidths[key], row[key].toString().length);
+            columnWidths[key] = Math.max(columnWidths[key], row[key].length);
         }
     });
-
     
+
     /************************************************************************
     
         Display the array of objects in a table
@@ -39,7 +53,7 @@ module.exports = function displayTable(array, numRowsPerGroup) {
 
         // TODO: Use Object.values() once it's fully implemented in ES2017
         const output_row = headers.reduce((sum, value) => {
-            const item = row[value].toString();
+            const item = row[value];
 
             return sum + item + " ".repeat(columnWidths[value] - item.length + 2);
 

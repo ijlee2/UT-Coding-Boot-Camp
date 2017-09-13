@@ -52,9 +52,9 @@ connection.connect(error => {
                 
             }
 
-            results[0].forEach(r => items[r.product_name] = r.item_id);
-            results[1].forEach(r => departments[r.department_name] = r.department_id);
-
+            results[0].forEach(r => departments[r.department_name] = r.department_id);
+            results[1].forEach(r => items[r.product_name] = r.item_id);
+            
             menu_manager();
             
         } catch(error) {
@@ -184,7 +184,14 @@ function viewProducts() {
         try {
             if (error) throw `Error: Displaying products for sale failed.\n`;
 
-            displayTable(results, 10);
+            displayTable(results, 10, {
+                "item_id"        : 0,
+                "product_name"   : undefined,
+                "department_name": undefined,
+                "price"          : 2,
+                "stock_quantity" : 0,
+                "product_sales"  : 2
+            });
 
             setTimeout(menu_manager, 5000);
 
@@ -268,7 +275,14 @@ function viewLowInventory() {
         try {
             if (error) throw `Error: Displaying low inventory failed.\n`;
 
-            displayTable(results, 10);
+            displayTable(results, 10, {
+                "item_id"        : 0,
+                "product_name"   : undefined,
+                "department_name": undefined,
+                "price"          : 2,
+                "stock_quantity" : 0,
+                "product_sales"  : 2
+            });
 
             setTimeout(menu_manager, 5000);
 

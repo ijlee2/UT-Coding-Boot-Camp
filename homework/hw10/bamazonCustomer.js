@@ -79,7 +79,13 @@ function menu_customer() {
         try {
             if (error) throw `Error: Displaying products table failed.\n`;
 
-            displayTable(results, 10);
+            displayTable(results, 10, {
+                "item_id"        : 0,
+                "product_name"   : undefined,
+                "department_name": undefined,
+                "price"          : 2,
+                "stock_quantity" : 0
+            });
 
             buyItem();
 
