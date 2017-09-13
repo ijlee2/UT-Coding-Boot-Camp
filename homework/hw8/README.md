@@ -33,18 +33,18 @@ Type `node liri.js my-tweets` to get your 20 most recent Tweets.
 
 ## Demos - Spotify This Song
 
-Type `node liri.js spotify-this-song "SONG NAME"` to find artist and album information.
+Type `node liri.js spotify-this-song "SONG NAME"` to find the artist and album information.
 
 ![Spotify This Song](images/spotify_this_song.png?raw=true)
 
 
-### Cloze
+## Demos - Movie This
 
-![Create Cards: Cloze](images/create_cards_cloze.png?raw=true)
+Type `node liri.js movie-this "MOVIE NAME"` to find the movie information.
+
+![Movie This](images/movie_this.png?raw=true)
 
 
-## Demos - Practice
+## Demos - Do What It Says
 
-You can now quiz yourself!
-
-![Practice](images/practice.png?raw=true)
+Type `node liri.js do-what-it-says` to run commands in the `random.txt` file.
