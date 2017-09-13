@@ -19,9 +19,13 @@ To run LIRI, you will need [Bash](https://git-scm.com/downloads/), [Node](https:
 
 ![How to Run: Step 2](images/how_to_run_step2.png?raw=true)
 
-3. Finally, in Bash, type `node liri.js` to start the program. Please read below for the options.
+3. Change the file name of `keys_template.js` to `keys.js`. Open this file to add your API keys for Twitter, Spotify, and OMDB.
 
 ![How to Run: Step 3](images/how_to_run_step3.png?raw=true)
+
+4. Finally, in Bash, type `node liri.js` to start the program. Please read below for the options.
+
+![How to Run: Step 4](images/how_to_run_step4.png?raw=true)
 
 
 ## Demos - My Tweets
