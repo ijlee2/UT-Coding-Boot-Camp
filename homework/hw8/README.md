@@ -47,4 +47,4 @@ Type `node liri.js movie-this "MOVIE NAME"` to find the movie information.
 
 ## Demos - Do What It Says
 
-Type `node liri.js do-what-it-says` to run commands in the `random.txt` file.
+Type `node liri.js do-what-it-says` to run the commands in `random.txt` file.
