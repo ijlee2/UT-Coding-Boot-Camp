@@ -210,11 +210,12 @@ function displayTable(array, numRowsPerGroup) {
         // Display the row
         console.log(output_row.white);
 
-        if (count % numRowsPerGroup === numRowsPerGroup - 1) {
+        // Add a separator
+        count++;
+
+        if (count % numRowsPerGroup === 0 || count === array.length) {
             console.log();
         }
-
-        count++;
 
     });
 }

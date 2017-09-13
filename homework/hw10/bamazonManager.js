@@ -9,6 +9,9 @@ const colors   = require("colors");
 const inquirer = require("inquirer");
 const mysql    = require("mysql");
 
+// Create a local copy of items (product name -> id)
+let items = {};
+
 const connection = mysql.createConnection({
     "host"              : "localhost",
     "port"              : 3306,
@@ -20,16 +23,27 @@ const connection = mysql.createConnection({
 
 connection.connect(error => {
     try {
-        if (error) {
-            throw "Error: Connection to bamazon_db failed.\n";
-        }
-
-        menu_manager();
+        if (error) throw "Error: Connection to bamazon_db failed.\n";
 
     } catch(error) {
         displayError(error);
 
     }
+
+    connection.query("SELECT item_id, product_name FROM products", (error, results) => {
+        try {
+            if (error) throw "Error: Creating a local copy of products failed.\n";
+
+            results.forEach(r => items[r.product_name] = r.item_id);
+
+            menu_manager();
+            
+        } catch(error) {
+            displayError(error);
+
+        }
+
+    });
 });
 
 
@@ -102,18 +116,18 @@ function addProduct() {
         }
 
     ]).then(response => {
-        const item_id      = parseInt(response.item_id);
-        const buy_quantity = parseInt(response.buy_quantity);
-
         const sql_command =
             `INSERT INTO products (product_name, department_name, price, stock_quantity)
-             VALUES ("${response.product_name}", "${response.department_name}", ${response.price}, ${response.stock_quantity})`;
+             VALUES ("${response.product_name}", "${response.department_name}", ${response.price}, ${response.stock_quantity});
+
+             SELECT item_id FROM products ORDER BY item_id DESC LIMIT 1;`;
 
         connection.query(sql_command, (error, results) => {
             try {
-                if (error) {
-                    throw `Error: Adding ${response.product_name} failed.\n`;
-                }
+                if (error) throw `Error: Adding ${response.product_name} failed.\n`;
+
+                // Update the local copy
+                items[response.product_name] = results[1][0].item_id;
 
                 console.log(`${response.product_name} was successfully added.\n`);
 
@@ -137,10 +151,91 @@ function addProduct() {
 }
 
 function viewProducts() {
+    clearScreen();
+
+    console.log("--- Available Items ---\n");
+
+    const sql_command = "SELECT * FROM products";
+
+    connection.query(sql_command, (error, results) => {
+        try {
+            if (error) {
+                throw `Error: SQL query "${sql_command}" failed.\n`;
+
+            } else if (results.length === 0) {
+                throw "Error: products table is empty.\n";
+
+            }
+
+            displayTable(results, 10);
+
+            setTimeout(menu_manager, 5000);
+
+        } catch(error) {
+            displayError(error);
+
+        }
+
+    });
 
 }
 
 function addToInventory() {
+    clearScreen();
+
+    inquirer.prompt([
+        {
+            "type"   : "list",
+            "name"   : "product_name",
+            "message": "Select the item to update:",
+            "choices": Object.keys(items)
+        },
+        {
+            "type"    : "input",
+            "name"    : "add_quantity",
+            "message" : "Update the inventory by:",
+            "validate": value => (value !== "" && !isNaN(value))
+        },
+        {
+            "type"   : "confirm",
+            "name"   : "continue",
+            "message": "Add another item?",
+            "default": true
+        }
+
+    ]).then(response => {
+        const item_id = items[response.product_name];
+
+        const sql_command =
+            `UPDATE products
+             SET stock_quantity = stock_quantity + ${response.add_quantity}
+             WHERE item_id = ${item_id};
+
+             SELECT product_name, stock_quantity FROM products WHERE item_id = ${item_id};`;
+
+        connection.query(sql_command, (error, results) => {
+            try {
+                if (error) throw `Error: Updating item #${item_id} failed.\n`;
+
+                console.log("\nThere are now ".white + `${results[1][0].stock_quantity} ${results[1][0].product_name}'s`.yellow.bold + " in stock.".white);
+
+            } catch(error) {
+                displayError(error);
+
+            } finally {
+                if (response.continue) {
+                    setTimeout(addToInventory, 2000);
+
+                } else {
+                    setTimeout(menu_manager, 2000);
+
+                }
+
+            }
+
+        });
+
+    });
 
 }
 
@@ -223,11 +318,12 @@ function displayTable(array, numRowsPerGroup) {
         // Display the row
         console.log(output_row.white);
 
-        if (count % numRowsPerGroup === numRowsPerGroup - 1) {
+        // Add a separator
+        count++;
+
+        if (count % numRowsPerGroup === 0 || count === array.length) {
             console.log();
         }
-
-        count++;
 
     });
 }
