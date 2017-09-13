@@ -19,18 +19,24 @@ To run LIRI, you will need [Bash](https://git-scm.com/downloads/), [Node](https:
 
 ![How to Run: Step 2](images/how_to_run_step2.png?raw=true)
 
-3. Finally, in Bash, type `node liri.js` to start the program. Please see below for the options.
+3. Finally, in Bash, type `node liri.js` to start the program. Please read below for the options.
 
 ![How to Run: Step 3](images/how_to_run_step3.png?raw=true)
 
 
-## Demos - Create Cards
+## Demos - My Tweets
 
-You can create basic flashcards, which show the question on front and the answer on back, or cloze flashcards, which will mask the answer in the question.
+Type `node liri.js my-tweets` to get your 20 most recent Tweets.
 
-### Basic
+![My Tweets](images/my_tweets.png?raw=true)
 
-![Create Cards: Basic](images/create_cards_basic.png?raw=true)
+
+## Demos - Spotify This Song
+
+Type `node liri.js spotify-this-song "SONG NAME"` to find artist and album information.
+
+![Spotify This Song](images/spotify_this_song.png?raw=true)
+
 
 ### Cloze
 
