@@ -121,33 +121,29 @@ function addProduct() {
         }
 
     ]).then(response => {
-        const price = Math.round(100 * response.price) / 100;
+        const product_name = response.product_name;
+        const price        = Math.round(100 * response.price) / 100;
+
         const sql_command =
             `INSERT INTO products (product_name, department_name, price, stock_quantity)
-             VALUES ("${response.product_name}", "${response.department_name}", ${price}, ${response.stock_quantity});
+             VALUES ("${product_name}", "${response.department_name}", ${price}, ${response.stock_quantity});
 
              SELECT item_id FROM products ORDER BY item_id DESC LIMIT 1;`;
 
         connection.query(sql_command, (error, results) => {
             try {
-                if (error) throw `Error: Adding ${response.product_name} failed.\n`;
+                if (error) throw `Error: Adding ${product_name} failed.\n`;
 
                 // Update the local copy
-                items[response.product_name] = results[1][0].item_id;
+                items[product_name] = results[1][0].item_id;
 
-                console.log("\n" + response.product_name.yellow.bold + " was successfully added.\n".white);
+                console.log("\n" + product_name.yellow.bold + " was successfully added.\n".white);
 
             } catch(error) {
                 displayError(error);
 
             } finally {
-                if (response.continue) {
-                    setTimeout(addProduct, 2000);
-
-                } else {
-                    setTimeout(menu_manager, 2000);
-
-                }
+                setTimeout((response.continue) ? addProduct : menu_manager, 2000);
 
             }
 
@@ -229,13 +225,7 @@ function addToInventory() {
                 displayError(error);
 
             } finally {
-                if (response.continue) {
-                    setTimeout(addToInventory, 2000);
-
-                } else {
-                    setTimeout(menu_manager, 2000);
-
-                }
+                setTimeout((response.continue) ? addToInventory : menu_manager, 2000);
 
             }
 

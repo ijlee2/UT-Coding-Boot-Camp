@@ -144,21 +144,19 @@ function buyItem() {
                 displayError(error);
 
             } finally {
-                if (response.continue) {
-                    setTimeout(menu_customer, 2000);
-
-                } else {
-                    console.log("Thank you for shopping with Bamazon!\n");
-
-                    connection.end();
-
-                }
+                setTimeout((response.continue) ? menu_customer : exitProgram, 2000);
 
             }
 
         });
 
     });
+}
+
+function exitProgram() {
+    console.log("Thank you for shopping with Bamazon!\n");
+
+    connection.end();
 }
 
 

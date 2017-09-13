@@ -10,11 +10,11 @@ CREATE TABLE departments (
 );
 
 CREATE TABLE products (
-    item_id         INT AUTO_INCREMENT NOT NULL,
-    product_name    VARCHAR(100) NOT NULL,
-    department_id   INT NOT NULL,
-    price           DECIMAL(8, 2) NOT NULL,
-    stock_quantity  INT NOT NULL,
-    product_sales   DECIMAL(8, 2) NOT NULL DEFAULT 0,
+    item_id        INT AUTO_INCREMENT NOT NULL,
+    product_name   VARCHAR(100) NOT NULL,
+    department_id  INT NOT NULL,
+    price          DECIMAL(8, 2) NOT NULL,
+    stock_quantity INT NOT NULL,
+    product_sales  DECIMAL(8, 2) NOT NULL DEFAULT 0,
     PRIMARY KEY (item_id)
 );

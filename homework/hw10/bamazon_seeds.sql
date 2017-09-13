@@ -11,7 +11,6 @@ INSERT INTO departments (department_name, overhead_costs) VALUES
 
 INSERT INTO products (product_name, department_id, price, stock_quantity) VALUES
 ("Bed Sheet", 3, 19.99, 390),
-("Bed Sheet Deluxe", 3, 39.99, 147),
 ("Doormat", 3, 11.99, 40),
 ("Drive", 4, 9.99, 4729),
 ("Drum Set", 5, 299.00, 7),
@@ -27,6 +26,7 @@ INSERT INTO products (product_name, department_id, price, stock_quantity) VALUES
 ("Nintendo Switch", 7, 349.20, 7392),
 ("Playstation 4 Pro", 7, 399.00, 1832),
 ("Sewing Machine", 3, 168.49, 27),
+("The Bourne Ultimatum", 4, 7.99, 55),
 ("The Giving Tree", 1, 11.33, 214),
 ("The Very Hungry Caterpillar", 1, 6.89, 526),
 ("Toilet Papers", 3, 12.00, 85),
