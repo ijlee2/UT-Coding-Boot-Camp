@@ -11,31 +11,33 @@ server_good.listen(port_good, function() {
     console.log(`Good server listening on: http://localhost:${port_good}`);
 });
 
-server_good.listen(port_bad, function() {
+server_bad.listen(port_bad, function() {
     console.log(`Bad server listening on: http://localhost:${port_bad}`);
 });
 
 
 const goodMessages = [
     "You are awesome!",
-    "You go!",
-    "You are beautiful!"
+    "You go, girl!",
+    "You are beautiful!",
+    "The sun shines because of you."
 ];
 
 const badMessages = [
     "You disappoint me.",
     "Is that all you can do?",
-    "Tsk, tsk, tsk."
+    "Tsk, tsk, tsk.",
+    "Why bother?"
 ];
 
 function displayGoodMessage(request, response) {
     const index = Math.floor(goodMessages.length * Math.random());
 
-    response.end(goodMessages[index]);
+    response.end(`<h1>${goodMessages[index]}</h1>`);
 }
 
 function displayBadMessage(request, response) {
     const index = Math.floor(badMessages.length * Math.random());
 
-    response.end(badMessages[index]);
+    response.end(`<h1>${badMessages[index]}</h1>`);
 }
