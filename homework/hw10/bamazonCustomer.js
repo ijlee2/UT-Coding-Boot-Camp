@@ -64,6 +64,8 @@ connection.connect(error => {
     
 *****************************************************************************
 *****************************************************************************/
+let receipt = [];
+
 function menu_customer() {
     clearScreen();
 
@@ -131,18 +133,24 @@ function buyItem() {
              SELECT product_name, price FROM products WHERE item_id = ${item_id};`;
 
         connection.query(sql_command, (error, results) => {
+            const product_name = results[1][0].product_name;
+            const price        = results[1][0].price;
+            const subtotal     = buy_quantity * price;
+
             try {
                 if (error) throw `Error: Updating item #${item_id} failed.\n`;
 
                 if (results[0].changedRows === 1) {
-                    console.log("\nCongratulations, you bought ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + "!".white);
-                    console.log(`Subtotal: $${(buy_quantity * results[1][0].price).toFixed(2)}\n`.white);
+                    receipt.push({product_name, buy_quantity, price, subtotal});
+
+                    console.log("\nCongratulations, you bought ".white + `${buy_quantity} ${product_name}'s`.yellow.bold + "!".white);
+                    console.log(`Subtotal: $${subtotal.toFixed(2)}\n`.white);
 
                 } else if (buy_quantity > 0) {
-                    console.log("\nSorry, we do not have ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + " in stock.\n".white);
+                    console.log("\nSorry, we do not have ".white + `${buy_quantity} ${product_name}'s`.yellow.bold + " in stock.\n".white);
 
                 } else {
-                    console.log("\nThat's all right. No pressure to buy ".white + `${results[1][0].product_name}'s`.yellow.bold + " right now.\n".white);
+                    console.log("\nThat's all right. No pressure to buy ".white + `${product_name}'s`.yellow.bold + " right now.\n".white);
 
                 }
 
@@ -162,7 +170,19 @@ function buyItem() {
 function exitProgram() {
     clearScreen();
 
-    console.log("Thank you for shopping with Bamazon!".white);
+    displayTable(receipt, 10, {
+        "product_name": undefined,
+        "buy_quantity": 0,
+        "price"       : 2,
+        "subtotal"    : 2
+    });
+
+    // Display the total
+    const total = receipt.reduce((sum, value) => sum + parseFloat(value.subtotal), 0);
+
+    console.log("Total: ".white + `$${total.toFixed(2)}\n`.yellow.bold);
+
+    console.log("Thank you for shopping with Bamazon!\n".white);
 
     connection.end();
 }

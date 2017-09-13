@@ -164,7 +164,7 @@ function viewDepartmentSales() {
 function exitProgram() {
     clearScreen();
 
-    console.log("Goodbye!".white);
+    console.log("Goodbye!\n".white);
 
     connection.end();
 }

@@ -35,8 +35,3 @@ INSERT INTO products (product_name, department_id, price, stock_quantity) VALUES
 ("Until Dawn", 7, 19.99, 1),
 ("Wonder Woman", 4, 24.99, 2673),
 ("Yoga Mat", 6, 19.99, 5788);
-
-SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity, p.product_sales
-FROM products AS p
-INNER JOIN departments AS d
-ON p.department_id = d.department_id;
