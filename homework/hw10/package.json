@@ -1,7 +1,7 @@
 {
     "name"           : "hw10_isaac_lee",
     "version"        : "1.0.0",
-    "description"    : "Bamazon is a CRM that focuses on sales. It provides interfaces for customers, managers, and supervisors.",
+    "description"    : "Bamazon is a CRM that focuses on sales. It provides command-line interfaces for customers, managers, and supervisors.",
     "keywords"       : ["CRM", "sales"],
     "readme"         : "README.md",
     "main"           : "bamazonCustomer.js",
