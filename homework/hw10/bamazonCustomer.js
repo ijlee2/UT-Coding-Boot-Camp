@@ -63,7 +63,13 @@ function menu_customer() {
 
     console.log("--- Available Items ---\n");
 
-    connection.query("SELECT * FROM products", (error, results) => {
+    const sql_command = 
+        `SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity, p.product_sales
+         FROM products AS p
+         INNER JOIN departments AS d
+         ON p.department_id = d.department_id`;
+
+    connection.query(sql_command, (error, results) => {
         try {
             if (error) {
                 throw `Error: Displaying products table failed.\n`;
@@ -112,7 +118,8 @@ function buyItem() {
 
         const sql_command =
             `UPDATE products
-             SET stock_quantity = IF(stock_quantity >= ${buy_quantity}, stock_quantity - ${buy_quantity}, stock_quantity)
+             SET product_sales  = IF(stock_quantity >= ${buy_quantity}, product_sales + ${buy_quantity} * price, product_sales),
+                 stock_quantity = IF(stock_quantity >= ${buy_quantity}, stock_quantity - ${buy_quantity}, stock_quantity)
              WHERE item_id = ${item_id};
 
              SELECT product_name, price FROM products WHERE item_id = ${item_id};`;
