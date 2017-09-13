@@ -5,9 +5,13 @@
     
 *****************************************************************************
 *****************************************************************************/
-const colors   = require("colors");
-const inquirer = require("inquirer");
-const mysql    = require("mysql");
+const colors       = require("colors");
+const displayTable = require("./displayTable.js");
+const inquirer     = require("inquirer");
+const mysql        = require("mysql");
+
+// Create a local copy of items (id)
+let items;
 
 const connection = mysql.createConnection({
     "host"              : "localhost",
@@ -20,16 +24,27 @@ const connection = mysql.createConnection({
 
 connection.connect(error => {
     try {
-        if (error) {
-            throw "Error: Connection to bamazon_db failed.\n";
-        }
-
-        menu_customer();
+        if (error) throw "Error: Connection to bamazon_db failed.\n";
 
     } catch(error) {
         displayError(error);
 
     }
+
+    connection.query("SELECT item_id FROM products", (error, results) => {
+        try {
+            if (error) throw "Error: Creating a local copy of products failed.\n";
+
+            items = results.map(r => r.item_id);
+
+            menu_customer();
+            
+        } catch(error) {
+            displayError(error);
+
+        }
+
+    });
 });
 
 
@@ -46,12 +61,10 @@ function menu_customer() {
 
     console.log("--- Available Items ---\n");
 
-    const sql_command = "SELECT * FROM products";
-
-    connection.query(sql_command, (error, results) => {
+    connection.query("SELECT * FROM products", (error, results) => {
         try {
             if (error) {
-                throw `Error: SQL query "${sql_command}" failed.\n`;
+                throw `Error: Displaying products table failed.\n`;
 
             } else if (results.length === 0) {
                 throw "Error: products table is empty.\n";
@@ -76,13 +89,21 @@ function buyItem() {
             "type"    : "input",
             "name"    : "item_id",
             "message" : "Enter the ID of the item that you want to buy:",
-            "validate": value => (value !== "" && !isNaN(value))
+            "validate": value => {
+                const value_num = parseFloat(value);
+
+                return (value !== "" && !isNaN(value) && items.indexOf(value_num) >= 0);
+            }
         },
         {
             "type"    : "input",
             "name"    : "buy_quantity",
             "message" : "Enter the quantity that you want to buy:",
-            "validate": value => (value !== "" && !isNaN(value))
+            "validate": value => {
+                const value_num = parseFloat(value);
+
+                return (value !== "" && !isNaN(value) && value_num >= 0 && Math.trunc(value_num) === value_num);
+            }
         },
         {
             "type"   : "confirm",
@@ -104,9 +125,7 @@ function buyItem() {
 
         connection.query(sql_command, (error, results) => {
             try {
-                if (error) {
-                    throw `Error: Updating item #${item_id} failed.\n`;
-                }
+                if (error) throw `Error: Updating item #${item_id} failed.\n`;
 
                 if (results[0].changedRows === 1) {
                     console.log("\nCongratulations, you bought ".white + `${buy_quantity} ${results[1][0].product_name}'s`.yellow.bold + "!".white);
@@ -128,7 +147,7 @@ function buyItem() {
                     setTimeout(menu_customer, 2000);
 
                 } else {
-                    console.log("\nThank you for shopping with Bamazon!\n");
+                    console.log("Thank you for shopping with Bamazon!\n");
 
                     connection.end();
 
@@ -158,64 +177,4 @@ function displayError(error) {
     console.log(error.red.bold);
 
     setTimeout(() => connection.end(), 1000);
-}
-
-function displayTable(array, numRowsPerGroup) {
-    /************************************************************************
-    
-        Find out how much space the longest word in each column takes
-    
-    *************************************************************************/
-    const columnWidths = {};
-
-    // Account for the header name
-    const headers = Object.keys(array[0]);
-    headers.forEach(h => columnWidths[h] = h.length);
-
-    // Account for the values
-    array.forEach(row => {
-        for (let key in row) {
-            columnWidths[key] = Math.max(columnWidths[key], row[key].toString().length);
-        }
-    });
-
-    
-    /************************************************************************
-    
-        Display the array of objects in a table
-    
-    *************************************************************************/
-    // Create the header
-    const output_header = headers.reduce((sum, value) => 
-        sum + value + " ".repeat(columnWidths[value] - value.length + 2)
-
-    , "").toUpperCase();
-
-    let count = 0;
-
-    array.forEach(row => {
-        // Display the header
-        if (count % numRowsPerGroup === 0) {
-            console.log(`${output_header}`.yellow.bold);
-        }
-
-        // TODO: Use Object.values() once it's fully implemented in ES2017
-        const output_row = headers.reduce((sum, value) => {
-            const item = row[value].toString();
-
-            return sum + item + " ".repeat(columnWidths[value] - item.length + 2);
-
-        }, "");
-
-        // Display the row
-        console.log(output_row.white);
-
-        // Add a separator
-        count++;
-
-        if (count % numRowsPerGroup === 0 || count === array.length) {
-            console.log();
-        }
-
-    });
 }

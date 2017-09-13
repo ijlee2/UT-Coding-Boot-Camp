@@ -5,9 +5,10 @@
     
 *****************************************************************************
 *****************************************************************************/
-const colors   = require("colors");
-const inquirer = require("inquirer");
-const mysql    = require("mysql");
+const colors       = require("colors");
+const displayTable = require("./displayTable.js");
+const inquirer     = require("inquirer");
+const mysql        = require("mysql");
 
 // Create a local copy of items (product name -> id)
 let items = {};
@@ -56,11 +57,11 @@ connection.connect(error => {
 *****************************************************************************
 *****************************************************************************/
 const menuItems = {
-    "Add a new product"     : addProduct,
-    "View products for sale": viewProducts,
-    "Add to inventory"      : addToInventory,
-    "View low inventory"    : viewLowInventory,
-    "Exit program"          : exitProgram
+    "Add a New Product"     : addProduct,
+    "View Products for Sale": viewProducts,
+    "Add to Inventory"      : addToInventory,
+    "View Low Inventory"    : viewLowInventory,
+    "Exit Program"          : exitProgram
 };
 
 function menu_manager() {
@@ -82,6 +83,8 @@ function menu_manager() {
 
 function addProduct() {
     clearScreen();
+
+    console.log("--- Add a New Product ---\n");
 
     inquirer.prompt([
         {
@@ -129,7 +132,7 @@ function addProduct() {
                 // Update the local copy
                 items[response.product_name] = results[1][0].item_id;
 
-                console.log(`${response.product_name} was successfully added.\n`);
+                console.log("\n" + response.product_name.yellow.bold + " was successfully added.\n".white);
 
             } catch(error) {
                 displayError(error);
@@ -153,14 +156,12 @@ function addProduct() {
 function viewProducts() {
     clearScreen();
 
-    console.log("--- Available Items ---\n");
+    console.log("--- View Products for Sale ---\n");
 
-    const sql_command = "SELECT * FROM products";
-
-    connection.query(sql_command, (error, results) => {
+    connection.query("SELECT * FROM products", (error, results) => {
         try {
             if (error) {
-                throw `Error: SQL query "${sql_command}" failed.\n`;
+                throw `Error: Displaying products table failed.\n`;
 
             } else if (results.length === 0) {
                 throw "Error: products table is empty.\n";
@@ -182,6 +183,8 @@ function viewProducts() {
 
 function addToInventory() {
     clearScreen();
+
+    console.log("--- Add to Inventory ---\n");
 
     inquirer.prompt([
         {
@@ -240,7 +243,24 @@ function addToInventory() {
 }
 
 function viewLowInventory() {
+    clearScreen();
 
+    console.log("--- View Low Inventory ---\n");
+    
+    connection.query("SELECT * FROM products WHERE stock_quantity < 5", (error, results) => {
+        try {
+            if (error) throw `Error: Displaying products table failed.\n`;
+
+            displayTable(results, 10);
+
+            setTimeout(menu_manager, 5000);
+
+        } catch(error) {
+            displayError(error);
+
+        }
+
+    });
 }
 
 function exitProgram() {
@@ -266,64 +286,4 @@ function displayError(error) {
     console.log(error.red.bold);
 
     setTimeout(() => connection.end(), 1000);
-}
-
-function displayTable(array, numRowsPerGroup) {
-    /************************************************************************
-    
-        Find out how much space the longest word in each column takes
-    
-    *************************************************************************/
-    const columnWidths = {};
-
-    // Account for the header name
-    const headers = Object.keys(array[0]);
-    headers.forEach(h => columnWidths[h] = h.length);
-
-    // Account for the values
-    array.forEach(row => {
-        for (let key in row) {
-            columnWidths[key] = Math.max(columnWidths[key], row[key].toString().length);
-        }
-    });
-
-    
-    /************************************************************************
-    
-        Display the array of objects in a table
-    
-    *************************************************************************/
-    // Create the header
-    const output_header = headers.reduce((sum, value) => 
-        sum + value + " ".repeat(columnWidths[value] - value.length + 2)
-
-    , "").toUpperCase();
-
-    let count = 0;
-
-    array.forEach(row => {
-        // Display the header
-        if (count % numRowsPerGroup === 0) {
-            console.log(`${output_header}`.yellow.bold);
-        }
-
-        // TODO: Use Object.values() once it's fully implemented in ES2017
-        const output_row = headers.reduce((sum, value) => {
-            const item = row[value].toString();
-
-            return sum + item + " ".repeat(columnWidths[value] - item.length + 2);
-
-        }, "");
-
-        // Display the row
-        console.log(output_row.white);
-
-        // Add a separator
-        count++;
-
-        if (count % numRowsPerGroup === 0 || count === array.length) {
-            console.log();
-        }
-
-    });
 }
