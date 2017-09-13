@@ -26,7 +26,7 @@ To run Flashcards on Windows and Mac, you will need [Bash](https://git-scm.com/d
 
 ## Demos - Create Cards
 
-You can create basic flashcards, which show the question on front and the answer on back, or cloze flashcards, which mask the answer in the question.
+You can create basic flashcards, which show the question on front and the answer on back, or cloze flashcards, which will mask the answer in the question.
 
 ### Basic
 
@@ -39,6 +39,6 @@ You can create basic flashcards, which show the question on front and the answer
 
 ## Demos - Practice
 
-You can check the overhead costs, sales, and profits of each department.
+You can now quiz yourself!
 
 ![Practice](images/practice.png?raw=true)
