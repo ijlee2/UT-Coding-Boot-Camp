@@ -127,7 +127,8 @@ function viewDepartmentSales() {
          FROM departments AS d
          LEFT JOIN products AS p
          ON d.department_id = p.department_id
-         GROUP BY d.department_id;`;
+         GROUP BY d.department_id
+         ORDER BY d.department_name;`;
 
     connection.query(sql_command, (error, results) => {
         try {

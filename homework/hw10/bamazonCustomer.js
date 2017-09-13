@@ -72,10 +72,11 @@ function menu_customer() {
     console.log("--- Available Items ---\n");
 
     const sql_command =
-        `SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity
+        `SELECT p.item_id, d.department_name, p.product_name, p.price, p.stock_quantity
          FROM products AS p
          INNER JOIN departments AS d
-         ON p.department_id = d.department_id`;
+         ON p.department_id = d.department_id
+         ORDER BY d.department_name, p.product_name`;
 
     connection.query(sql_command, (error, results) => {
         try {
@@ -83,8 +84,8 @@ function menu_customer() {
 
             displayTable(results, 10, {
                 "item_id"        : 0,
-                "product_name"   : undefined,
                 "department_name": undefined,
+                "product_name"   : undefined,
                 "price"          : 2,
                 "stock_quantity" : 0
             });

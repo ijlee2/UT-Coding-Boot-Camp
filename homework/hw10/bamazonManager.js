@@ -175,10 +175,11 @@ function viewProducts() {
     console.log("--- View Products for Sale ---\n");
 
     const sql_command =
-        `SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity, p.product_sales
+        `SELECT p.item_id, d.department_name, p.product_name, p.price, p.stock_quantity, p.product_sales
          FROM products AS p
          INNER JOIN departments AS d
-         ON p.department_id = d.department_id`;
+         ON p.department_id = d.department_id
+         ORDER BY d.department_name, p.product_name`;
 
     connection.query(sql_command, (error, results) => {
         try {
@@ -186,8 +187,8 @@ function viewProducts() {
 
             displayTable(results, 10, {
                 "item_id"        : 0,
-                "product_name"   : undefined,
                 "department_name": undefined,
+                "product_name"   : undefined,
                 "price"          : 2,
                 "stock_quantity" : 0,
                 "product_sales"  : 2
@@ -265,11 +266,12 @@ function viewLowInventory() {
     console.log("--- View Low Inventory ---\n");
 
     const sql_command =
-        `SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity, p.product_sales
+        `SELECT p.item_id, d.department_name, p.product_name, p.price, p.stock_quantity, p.product_sales
          FROM products AS p
          INNER JOIN departments AS d
          ON p.department_id = d.department_id
-         WHERE p.stock_quantity < 5`;
+         WHERE p.stock_quantity < 5
+         ORDER BY d.department_name, p.product_name`;
     
     connection.query(sql_command, (error, results) => {
         try {
@@ -277,8 +279,8 @@ function viewLowInventory() {
 
             displayTable(results, 10, {
                 "item_id"        : 0,
-                "product_name"   : undefined,
                 "department_name": undefined,
+                "product_name"   : undefined,
                 "price"          : 2,
                 "stock_quantity" : 0,
                 "product_sales"  : 2
