@@ -53,7 +53,7 @@ As a manager, you can add new items and restock them.
 
 ### Add a New Product
 
-To add an item, department name (make a selection), enter the item name, price, and stock quantity.
+To add an item, enter the department name (make a selection), item name, price, and stock quantity.
 
 ![Manager: Step 1](images/manager_step1.png?raw=true)
 
