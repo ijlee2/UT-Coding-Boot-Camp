@@ -21,6 +21,7 @@ If you have suggestions for making my code better and simpler, please let me kno
 7. [Train Scheduler](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw7/train-scheduler/) (easy), [RPS Multiplayer](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw7/rps-multiplayer/) (hard)
 8. [Liri Node App](https://github.com/ijlee2/UT-Coding-Boot-Camp/tree/master/homework/hw8/)
 9. [Flashcard Generator](https://github.com/ijlee2/UT-Coding-Boot-Camp/tree/master/homework/hw9/)
+10. [Bamazon](https://github.com/ijlee2/UT-Coding-Boot-Camp/tree/master/homework/hw10/)
 
 ## Exercises
 A collection of codes made from scratch or from a starter template.
