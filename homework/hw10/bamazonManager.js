@@ -106,16 +106,16 @@ function addProduct() {
 
     inquirer.prompt([
         {
-            "type"    : "input",
-            "name"    : "product_name",
-            "message" : "Enter the product name:",
-            "validate": validateInput.isNotEmpty
-        },
-        {
             "type"   : "list",
             "name"   : "department_name",
             "message": "Select the department name:",
             "choices": Object.keys(departments)
+        },
+        {
+            "type"    : "input",
+            "name"    : "product_name",
+            "message" : "Enter the product name:",
+            "validate": validateInput.isNotEmpty
         },
         {
             "type"    : "input",
@@ -137,13 +137,13 @@ function addProduct() {
         }
 
     ]).then(response => {
-        const product_name  = response.product_name;
         const department_id = departments[response.department_name];
+        const product_name  = response.product_name;
         const price         = Math.round(100 * response.price) / 100;
 
         const sql_command =
-            `INSERT INTO products (product_name, department_id, price, stock_quantity)
-             VALUES ("${product_name}", ${department_id}, ${price}, ${response.stock_quantity});
+            `INSERT INTO products (department_id, product_name, price, stock_quantity)
+             VALUES (${department_id}, "${product_name}", ${price}, ${response.stock_quantity});
 
              SELECT item_id FROM products ORDER BY item_id DESC LIMIT 1;`;
 
