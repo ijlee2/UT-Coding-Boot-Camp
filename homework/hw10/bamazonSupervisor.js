@@ -48,7 +48,7 @@ const menuItems = {
     "Exit Program"         : exitProgram
 };
 
-function menu_manager() {
+function menu_supervisor() {
     clearScreen();
 
     inquirer.prompt([
@@ -120,19 +120,31 @@ function viewDepartmentSales() {
 
     console.log("--- View Department Sales ---\n");
 
-    connection.query("SELECT * FROM products", (error, results) => {
+    const sql_command = 
+        `SELECT d.department_id, d.department_name, d.overhead_costs,
+                COALESCE(SUM(p.product_sales), 0) AS product_sales,
+                COALESCE(SUM(p.product_sales), 0) - overhead_costs AS total_profit
+         FROM departments AS d
+         LEFT JOIN products AS p
+         ON d.department_id = p.department_id
+         GROUP BY d.department_id;`;
+
+    connection.query(sql_command, (error, results) => {
         try {
             if (error) {
-                throw `Error: Displaying products table failed.\n`;
+                throw `Error: Finding department sales failed.\n`;
 
             } else if (results.length === 0) {
-                throw "Error: products table is empty.\n";
+                console.log("There are no departments yet. Please create one now!\n".white);
+                
+                setTimeout(menu_supervisor, 2000);
+
+            } else {
+                displayTable(results, 10);
+
+                setTimeout(menu_supervisor, 5000);
 
             }
-
-            displayTable(results, 10);
-
-            setTimeout(menu_manager, 5000);
 
         } catch(error) {
             displayError(error);
@@ -144,7 +156,9 @@ function viewDepartmentSales() {
 }
 
 function exitProgram() {
-    console.log("Goodbye!");
+    clearScreen();
+
+    console.log("Goodbye!".white);
 
     connection.end();
 }

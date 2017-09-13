@@ -12,8 +12,10 @@ const colors   = require("colors");
 const inquirer = require("inquirer");
 const mysql    = require("mysql");
 
-// Create a local copy of items (product name -> id)
-let items = {};
+// Create a local copy of departments and items (name -> id)
+let departments = {}, items = {};
+
+clearScreen();
 
 const connection = mysql.createConnection({
     "host"              : "localhost",
@@ -33,11 +35,25 @@ connection.connect(error => {
 
     }
 
-    connection.query("SELECT item_id, product_name FROM products", (error, results) => {
-        try {
-            if (error) throw "Error: Creating a local copy of products failed.\n";
+    const sql_command =
+        `SELECT department_id, department_name FROM departments;
+         SELECT item_id, product_name FROM products;`;
 
-            results.forEach(r => items[r.product_name] = r.item_id);
+    connection.query(sql_command, (error, results) => {
+        try {
+            if (error) {
+                throw "Error: Creating a local copy failed.\n";
+
+            } else if (results[0].length === 0) {
+                throw "Error: departments table is empty.\n";
+
+            } else if (results[1].length === 0) {
+                throw "Error: products table is empty.\n";
+                
+            }
+
+            results[0].forEach(r => items[r.product_name] = r.item_id);
+            results[1].forEach(r => departments[r.department_name] = r.department_id);
 
             menu_manager();
             
@@ -96,10 +112,10 @@ function addProduct() {
             "validate": validateInput.isNotEmpty
         },
         {
-            "type"    : "input",
-            "name"    : "department_name",
-            "message" : "Enter the department name:",
-            "validate": validateInput.isNotEmpty
+            "type"   : "list",
+            "name"   : "department_name",
+            "message": "Select the department name:",
+            "choices": Object.keys(departments)
         },
         {
             "type"    : "input",
@@ -121,12 +137,13 @@ function addProduct() {
         }
 
     ]).then(response => {
-        const product_name = response.product_name;
-        const price        = Math.round(100 * response.price) / 100;
+        const product_name  = response.product_name;
+        const department_id = departments[response.department_name];
+        const price         = Math.round(100 * response.price) / 100;
 
         const sql_command =
-            `INSERT INTO products (product_name, department_name, price, stock_quantity)
-             VALUES ("${product_name}", "${response.department_name}", ${price}, ${response.stock_quantity});
+            `INSERT INTO products (product_name, department_id, price, stock_quantity)
+             VALUES ("${product_name}", ${department_id}, ${price}, ${response.stock_quantity});
 
              SELECT item_id FROM products ORDER BY item_id DESC LIMIT 1;`;
 
@@ -157,15 +174,15 @@ function viewProducts() {
 
     console.log("--- View Products for Sale ---\n");
 
-    connection.query("SELECT * FROM products", (error, results) => {
+    const sql_command =
+        `SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity, p.product_sales
+         FROM products AS p
+         INNER JOIN departments AS d
+         ON p.department_id = d.department_id`;
+
+    connection.query(sql_command, (error, results) => {
         try {
-            if (error) {
-                throw `Error: Displaying products table failed.\n`;
-
-            } else if (results.length === 0) {
-                throw "Error: products table is empty.\n";
-
-            }
+            if (error) throw `Error: Displaying products for sale failed.\n`;
 
             displayTable(results, 10);
 
@@ -217,7 +234,7 @@ function addToInventory() {
 
         connection.query(sql_command, (error, results) => {
             try {
-                if (error) throw `Error: Updating item #${item_id} failed.\n`;
+                if (error) throw `Error: Updating inventory of item #${item_id} failed.\n`;
 
                 console.log("\nThere are now ".white + `${results[1][0].stock_quantity} ${results[1][0].product_name}'s`.yellow.bold + " in stock.".white);
 
@@ -239,10 +256,17 @@ function viewLowInventory() {
     clearScreen();
 
     console.log("--- View Low Inventory ---\n");
+
+    const sql_command =
+        `SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity, p.product_sales
+         FROM products AS p
+         INNER JOIN departments AS d
+         ON p.department_id = d.department_id
+         WHERE p.stock_quantity < 5`;
     
-    connection.query("SELECT * FROM products WHERE stock_quantity < 5", (error, results) => {
+    connection.query(sql_command, (error, results) => {
         try {
-            if (error) throw `Error: Displaying products table failed.\n`;
+            if (error) throw `Error: Displaying low inventory failed.\n`;
 
             displayTable(results, 10);
 
@@ -257,7 +281,9 @@ function viewLowInventory() {
 }
 
 function exitProgram() {
-    console.log("Goodbye!");
+    clearScreen();
+
+    console.log("Goodbye!".white);
 
     connection.end();
 }

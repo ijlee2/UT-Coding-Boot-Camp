@@ -35,7 +35,13 @@ connection.connect(error => {
 
     connection.query("SELECT item_id FROM products", (error, results) => {
         try {
-            if (error) throw "Error: Creating a local copy of products failed.\n";
+            if (error) {
+                throw "Error: Creating a local copy failed.\n";
+
+            } else if (results.length === 0) {
+                throw "Error: products table is empty.\n";
+
+            }
 
             items = results.map(r => r.item_id);
 
@@ -63,21 +69,15 @@ function menu_customer() {
 
     console.log("--- Available Items ---\n");
 
-    const sql_command = 
-        `SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity, p.product_sales
+    const sql_command =
+        `SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity
          FROM products AS p
          INNER JOIN departments AS d
          ON p.department_id = d.department_id`;
 
     connection.query(sql_command, (error, results) => {
         try {
-            if (error) {
-                throw `Error: Displaying products table failed.\n`;
-
-            } else if (results.length === 0) {
-                throw "Error: products table is empty.\n";
-
-            }
+            if (error) throw `Error: Displaying products table failed.\n`;
 
             displayTable(results, 10);
 
@@ -154,7 +154,9 @@ function buyItem() {
 }
 
 function exitProgram() {
-    console.log("Thank you for shopping with Bamazon!\n");
+    clearScreen();
+
+    console.log("Thank you for shopping with Bamazon!".white);
 
     connection.end();
 }

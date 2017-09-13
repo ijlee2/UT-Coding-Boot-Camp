@@ -32,7 +32,7 @@ INSERT INTO products (product_name, department_id, price, stock_quantity) VALUES
 ("Toilet Papers", 3, 12.00, 85),
 ("Ukelele", 5, 59.99, 60),
 ("Uncharted 4", 7, 59.99, 63),
-("Until Dawn", 7, 19.99, 371),
+("Until Dawn", 7, 19.99, 1),
 ("Wonder Woman", 4, 24.99, 2673),
 ("Yoga Mat", 6, 19.99, 5788);
 
