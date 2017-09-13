@@ -13,10 +13,10 @@ server.listen(PORT, function() {
 
 // We need a function which handles requests and send response
 const redirect = {
-    "/"          : `${__dirname}/server_favorites_index.html`,
-    "/foods"     : `${__dirname}/server_favorites_foods.html`,
-    "/movies"    : `${__dirname}/server_favorites_movies.html`,
-    "/frameworks": `${__dirname}/server_favorites_frameworks.html`
+    "/"          : "server_favorites_index.html",
+    "/foods"     : "server_favorites_foods.html",
+    "/movies"    : "server_favorites_movies.html",
+    "/frameworks": "server_favorites_frameworks.html"
 }
 
 function handleRequest(request, response) {
@@ -36,7 +36,7 @@ function handleRequest(request, response) {
 }
 
 function displayPage(url, request, response) {
-    fs.readFile(url, (error, data) => {
+    fs.readFile(`${__dirname}/${url}`, (error, data) => {
         response.writeHead(200, {"Content-Type": "text/html"});
         response.end(data);
     });
