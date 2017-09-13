@@ -42,6 +42,10 @@ Note, you can buy an item only up to the stock quantity.
 
 ![How to Run: Step 2](images/customer_step2.png?raw=true)
 
+At the end, you can see all items that you purchased.
+
+![How to Run: Step 3](images/customer_step3.png?raw=true)
+
 
 ## Demos - Manager
 
