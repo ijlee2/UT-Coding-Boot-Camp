@@ -16,7 +16,7 @@
     --color-text-highlight: #ff6600;
 }
 
-body, input {
+body, input, label {
     background-color: var(--color-background);
     color           : var(--color-text);
     font-family     : "Quicksand", sans-serif;
@@ -56,7 +56,6 @@ h2 {
 }
 
 p {
-    font-size     : 1.2em;
     letter-spacing: 0.03em;
     line-height   : 1.5em;
     
@@ -162,4 +161,40 @@ input {
 #chatMessage {
     width : 93.5%;
     height: 60%;
+}
+
+
+
+/****************************************************************************
+ ****************************************************************************
+
+    Stylesheet for mobile
+    
+*****************************************************************************
+*****************************************************************************/
+@media all and (max-width: 860px), all and (max-device-width: 860px) {
+    body, input, label {
+        font-size: 30px;
+        font-size: 3.49vw;
+    }
+
+    .container {
+        width  : 100%;
+        margin : auto;
+        padding: 2.5% 0;
+    }
+
+    h1 {
+        font-size    : 2.4em;
+        margin-bottom: 0.75em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    #login {
+        width  : 62%;
+        padding: 10% 12%;
+    }
 }
