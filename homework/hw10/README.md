@@ -21,7 +21,7 @@ To run Bamazon on Windows and Mac, you will need [Bash](https://git-scm.com/down
 
 ![How to Run: Step 2](images/how_to_run_step2.png?raw=true)
 
-3. In MySQL Workbench, connect to port `3306` and run `bamazon_schema.sql` then `bamazon_seeds.sql`.
+3. In MySQL Workbench, connect to `localhost:3306` and run `bamazon_schema.sql` then `bamazon_seeds.sql`.
 
 ![How to Run: Step 3](images/how_to_run_step3.png?raw=true)
 
