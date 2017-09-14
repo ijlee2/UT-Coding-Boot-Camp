@@ -1,0 +1,41 @@
+Movie This
+------------------------------------------------------------
+
+Title          : Boy A
+Release year   : 2007
+Plot           : The story of a young Jack, newly released from serving a prison sentence for a violent crime he committed as a child.
+Actors         : Andrew Garfield, Peter Mullan, Siobhan Finneran, Alfie Owen
+IMDB           : 7.7
+RottenTomatoes : 88%
+Production     : UK
+Language       : English
+
+------------------------------------------------------------
+
+
+Movie This
+------------------------------------------------------------
+
+Title          : O Brother, Where Art Thou?
+Release year   : 2000
+Plot           : In the deep south during the 1930s, three escaped convicts search for hidden treasure while a relentless lawman pursues them.
+Actors         : George Clooney, John Turturro, Tim Blake Nelson, John Goodman
+IMDB           : 7.8
+RottenTomatoes : 77%
+Production     : UK, France, USA
+Language       : English
+
+------------------------------------------------------------
+
+
+Spotify This Song
+------------------------------------------------------------
+
+Artists      : Backstreet Boys
+Album        : The Hits--Chapter One
+Track        : I Want It That Way
+Preview link : https://p.scdn.co/mp3-preview/e72a05dc3f69c891e3390c3ceaa77fad02f6b5f6?cid=275fa6b9bcbc4940bdfd2897b92ccb81
+
+------------------------------------------------------------
+
+

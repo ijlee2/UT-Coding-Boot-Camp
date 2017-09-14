@@ -21,6 +21,9 @@ const request = require("request");
 // File System
 const fs      = require("fs");
 
+// Operating System (for end-of-line)
+const os      = require("os");
+
 
 
 /****************************************************************************
@@ -213,7 +216,8 @@ function doWhatItSays() {
             return;
         }
 
-        const commands = data.split("\r\n");
+        // Use require("os").EOL to split into lines, independent of the platform
+        const commands = data.split(os.EOL);
         
 
         /********************************************************************
