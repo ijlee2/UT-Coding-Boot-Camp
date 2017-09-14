@@ -11,7 +11,7 @@ You can create two types of flashcards (basic and cloze) to help you with studyi
 ## How to Run
 To run Flashcards, you will need [Bash](https://git-scm.com/downloads/), [Node](https://nodejs.org/en/), and [npm](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm).
 
-1. In Bash, type `git@github.com:ijlee2/UT-Coding-Boot-Camp.git` to download Flashcard Generator.
+1. In Bash, type `git clone git@github.com:ijlee2/UT-Coding-Boot-Camp.git` to download Flashcard Generator.
 
 ![How to Run: Step 1](images/how_to_run_step1.png?raw=true)
 
