@@ -57,13 +57,13 @@ app.get("/api/:characters?", function(req, res) {
 });
 
 app.post("/api/new", function(req, res) {
-    const newcharacter = req.body;
+    const newCharacter = req.body;
 
-    console.log(newcharacter);
+    console.log(newCharacter);
 
-    characters.push(newcharacter);
+    characters.push(newCharacter);
 
-    res.json(newcharacter);
+    res.json(newCharacter);
 });
 
 

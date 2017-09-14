@@ -74,15 +74,15 @@ app.get("/api/:characters?", function(req, res) {
 // Create New Characters - takes in JSON input
 app.post("/api/new", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
-    const newcharacter = req.body;
+    const newCharacter = req.body;
 
-    console.log(newcharacter);
+    console.log(newCharacter);
 
     // We then add the json the user sent to the character array
-    characters.push(newcharacter);
+    characters.push(newCharacter);
 
     // We then display the JSON to the users
-    res.json(newcharacter);
+    res.json(newCharacter);
 });
 
 // Starts the server to begin listening
