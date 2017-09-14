@@ -106,15 +106,13 @@ input {
     margin: 8% 0 4% 0;
 }
 
-#players > div {
-    width : 48%;
-}
-
 #player0 {
+    width: 48%;
     float: left;
 }
 
 #player1 {
+    width: 48%;
     float: right;
 }
 
@@ -195,6 +193,23 @@ input {
 
     #login {
         width  : 62%;
-        padding: 10% 12%;
+        padding: 6% 12%;
+    }
+
+    #player0, #player1 {
+        float        : none;
+        width        : 62%;
+        margin       : auto;
+        margin-bottom: 0.75em;
+        border       : 2px solid gray;
+        padding      : 6% 12%;
+    }
+
+    #chat {
+        position: static;
+        top     : 0;
+        width   : 80%;
+        margin  : auto;
+        padding : 6% 12%;
     }
 }
