@@ -1,0 +1,17 @@
+{
+  "name": "starwars",
+  "version": "1.0.0",
+  "description": "Helps you find the characters you're looking for",
+  "main": "server7.js",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server7.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
