@@ -5,17 +5,11 @@
     
 *****************************************************************************
 *****************************************************************************/
-const express    = require("express");
-const bodyParser = require("body-parser");
-const mysql      = require("mysql");
+const express = require("express");
+const mysql   = require("mysql");
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
-
-// Set up Express to handle parsing data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({"extended": true}));
-app.use(bodyParser.text());
 
 // Set up MySQL
 const connection = mysql.createConnection({
@@ -28,6 +22,8 @@ const connection = mysql.createConnection({
 
 connection.connect(error => {
     if (error) throw error;
+
+    console.log(`Connected as ${connection.threadId}`);
 });
 
 
@@ -82,8 +78,8 @@ app.get("/coolness-chart", function(req, res) {
 });
 
 // Display actors with a particular attitude
-app.get("/attitude-chart/:att", function(req, res) {
-    const attitude = req.params.att;
+app.get("/attitude-chart/:attitude", function(req, res) {
+    const attitude = req.params.attitude;
 
     connection.query(`SELECT * FROM actors WHERE attitude = "${attitude}" ORDER BY id`, (error, results) => {
         if (error) throw error;
@@ -114,5 +110,5 @@ app.get("/attitude-chart/:att", function(req, res) {
 *****************************************************************************
 *****************************************************************************/
 app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+    console.log(`App listening on PORT ${PORT}`);
 });
