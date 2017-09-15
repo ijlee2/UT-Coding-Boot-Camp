@@ -1,0 +1,48 @@
+:root {
+    /* Define color scheme */
+    --color-text            : #371c60;
+    --color-text-highlight  : #ff6600;
+}
+
+body {
+    background    : url("background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;
+    
+    color         : var(--color-text);
+    font-family   : "Caveat", cursive;
+    font-size     : 24px;
+    letter-spacing: 0.04em;
+}
+
+/* Override Bootstrap CSS */
+.jumbotron {
+    background-color: rgba(250, 250, 250, 0.8);
+}
+
+.display-4 {
+    font-size     : 3.5em;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-family   : "Give You Glory", cursive;
+    font-size     : 1.75em;
+    font-weight   : normal;
+    letter-spacing: 0.06em;
+}
+
+button {
+    font-family   : "Give You Glory", cursive;
+    font-size     : 1em !important;
+    letter-spacing: 0.04em;
+}
+
+footer {
+    background   : rgba(250, 250, 250, 0.8);
+    border-radius: 4px;
+    padding      : 0.5em 2em 2em 2em;
+}

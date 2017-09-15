@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Homework 11 for UT Coding Boot Camp">
+        <meta name="author" content="Isaac J. Lee">
+        <title>Friend Finder</title>
+        
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Font Awesome -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        <!-- Custom CSS -->
+        <link href="https://fonts.googleapis.com/css?family=Caveat|Give+You+Glory" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="assets/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron py-5">
+                <h1 class="display-4 text-center">Friend Finder</h1>
+                <hr>
+                <h2 class="text-center">Find Your Soul Mate!</h2>
+                
+                <div class="text-center mt-5">
+                    <a href="/view"><button type="button" class="btn btn-success btn-lg mx-1" id="button_view"><i class="fa fa-binoculars mr-3" aria-hidden="true"></i>Fill Out Survey</button></a>
+                </div>
+            </div>
+
+            <div class="card my-5">
+                <h3 class="card-header">Reserve Table</h3>
+
+                <form class="p-4">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-3 col-form-label text-right">Name (required)</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="partySize" class="col-sm-3 col-form-label text-right">Party size (required)</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="partySize">
+                                <option>1</option>
+                                <option selected="selected">2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5+</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="phone" class="col-sm-3 col-form-label text-right">Phone (required)</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-3 col-form-label text-right">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="email">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg float-right mt-4" id="button_submit">Submit</button>
+                </form>
+            </div>
+
+            <div class="modal fade" id="modal_response">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hi, <span id="user_name"></span>!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p><span id="return_message"></span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                <div class="float-left">
+                    Copyright © 2017 by <a href="https://github.com/ijlee2" target="_blank">Isaac J. Lee</a>
+                </div>
+                <div class="float-right">
+                    <a href="/api/friends">API Friends</a>
+                </div>
+            </footer>
+        </div>
+
+        <!-- For Bootstrap 4 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $("#button_submit").click((event) => {
+                event.preventDefault();
+
+                var data = {
+                    "name"     : $("#name").val().trim(),
+                    "partySize": parseInt($("#partySize").val().trim()),
+                    "phone"    : $("#phone").val().trim(),
+                    "email"    : $("#email").val().trim()
+                };
+
+                // Simple input validation
+                var validationPassed = true;
+
+                if (data.name === "") {
+                    $("#name").attr("placeholder", "Please provide your name");
+
+                    validationPassed = false;
+                }
+
+                if (data.phone === "") {
+                    $("#phone").attr("placeholder", "Please provide your number");
+
+                    validationPassed = false;
+                }
+
+                if (validationPassed) {
+                    $.post("/api/new", data).then(function(data) {
+                        $("#user_name").text(data.name);
+                        $("#return_message").text((data.openTable) ? "Your reservation was a success!" : "Sorry, you are on the waitlist. We'll get back to you soon!");
+
+                        $("#modal_response").modal();
+
+                        $("#modal_response").on("hidden.bs.modal", function(event) {
+                            window.location = data.redirectUrl;
+                        });
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
