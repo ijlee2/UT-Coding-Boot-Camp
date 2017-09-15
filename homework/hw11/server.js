@@ -5,9 +5,37 @@
     
 *****************************************************************************
 *****************************************************************************/
-const body_parser = require("body-parser");
-const express     = require("express");
-const path        = require("path");
+const bodyParser = require("body-parser");
+const express    = require("express");
+const path       = require("path");
 
 const app  = express();
-const port = 8080;
+const PORT = process.env.PORT || 8080;
+
+// Set up Express to handle parsing data
+app.use(bodyParser.json());
+app.use(bodyParser.text());
+app.use(bodyParser.urlencoded({"extended": true}));
+
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Set up routes
+    
+*****************************************************************************
+*****************************************************************************/
+require("./app/routing/api_routes.js")(app);
+require("./app/routing/html_routes.js")(app);
+
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Helper functions
+    
+*****************************************************************************
+*****************************************************************************/
+app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
