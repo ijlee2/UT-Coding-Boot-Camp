@@ -48,6 +48,9 @@ app.get("/:operation/:number1/:number2", function(req, res) {
             output = `${x} / ${y} = ${(y !== 0) ? x / y : "undefined"}`;
             break;
 
+        default:
+            output = `Sorry, the only valid operations are "addition", "subtraction", "multiplication", and "division"!`
+
     }
 
     res.send(`<h1>${output}</h1>`);
