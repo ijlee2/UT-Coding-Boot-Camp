@@ -47,4 +47,4 @@ app.use("/api", router_api);
     
 *****************************************************************************
 *****************************************************************************/
-app.listen(PORT, () => console.log(`App listening on ${PORT}.\n`));
+app.listen(PORT, () => console.log(`App listening on ${PORT}.`));

@@ -64,7 +64,17 @@ $("#button_submit").click(event => {
             $("#my_name").text(response.my_name);
             $("#friend_name").text(response.friend_name);
             $("#friend_number").text(friend_number);
-            $("#friend_photo").attr("src", response.friend_photo_url);
+
+            // Display friend's photo if it exists
+            if (response.friend_photo_url) {
+                $("#friend_photo").attr("src", response.friend_photo_url);
+                $("#friend_photo").show();
+
+            } else {
+                $("#friend_photo").attr("src", "");
+                $("#friend_photo").hide();
+
+            }
 
             // Turn the modal on
             $("#modal_response").modal();

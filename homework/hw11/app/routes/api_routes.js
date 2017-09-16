@@ -5,8 +5,9 @@
     
 *****************************************************************************
 *****************************************************************************/
-const express = require("express");
-const path    = require("path");
+const express  = require("express");
+const path     = require("path");
+const validUrl = require("valid-url");
 
 // Create an instance of Router
 const router = express.Router();
@@ -46,7 +47,7 @@ router.post("/friends", (req, res) => {
     res.send({
         "my_name"         : profile.name,
         "friend_name"     : friend.name,
-        "friend_photo_url": friend.photo_url
+        "friend_photo_url": (validUrl.isUri(friend.photo_url)) ? friend.photo_url : undefined
     });
 });
 

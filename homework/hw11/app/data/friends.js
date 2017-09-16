@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
 connection.connect(error => {
     if (error) throw error;
 
-    console.log(`Database connected as thread ${connection.threadId}.\n`);
+    console.log(`Database connected as thread ${connection.threadId}.`);
 });
 
 
