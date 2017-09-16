@@ -1,7 +1,7 @@
 {
   "name": "hw11_isaac_lee",
   "version": "1.0.0",
-  "description": "",
+  "description": "Friend Finder. Your next BF is a click away!",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.1",

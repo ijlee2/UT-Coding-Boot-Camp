@@ -8,11 +8,12 @@
 const express = require("express");
 const path    = require("path");
 
+// Create an instance of Router
+const router = express.Router();
+
+// Create an instance of FriendFinder
 const FriendFinder = require(path.join(__dirname, "..", "data", "friends.js"));
 const friendFinder = new FriendFinder();
-
-// Create an instance of router
-const router = express.Router();
 
 
 
@@ -28,15 +29,16 @@ router.get("/friends", (req, res) => {
     res.json(friendFinder.getFriends());
 });
 
-// Find best friend
+// Find the most compatible friend
 router.post("/friends", (req, res) => {
+    // For some reason, req.body.answers gives an array of strings
     const profile = {
         "name"     : req.body.name,
         "photo_url": req.body.photo_url,
         "answers"  : req.body.answers.map(a => parseInt(a))
     };
-
-    const friend  = friendFinder.findFriend(profile);
+    
+    const friend = friendFinder.findBestFriend(profile);
 
     // Add the user's profile to the database
     friendFinder.addFriend(profile);
@@ -48,5 +50,4 @@ router.post("/friends", (req, res) => {
     });
 });
 
-// Export the router
 module.exports = router;

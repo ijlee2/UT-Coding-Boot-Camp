@@ -23,26 +23,32 @@ connection.connect(error => {
 });
 
 
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Create FriendFinder object
+    
+*****************************************************************************
+*****************************************************************************/
 module.exports = function FriendFinder() {
     // Scope-safe constructor
     if (!(this instanceof FriendFinder)) {
         return new FriendFinder();
     }
 
-    // Get friends from the database
-    let friends = [];
+    let friends;
 
+    // Get friends from the database
     connection.query("SELECT * FROM friends", (error, results) => {
         if (error) throw error;
 
-        results.forEach(r => {
-            friends.push({
-                "id"       : r.id,
-                "name"     : r.name,
-                "photo_url": r.photo_url,
-                "answers"  : JSON.parse(r.answers)
-            });
-        });
+        friends = results.map(r => ({
+            "id"       : r.id,
+            "name"     : r.name,
+            "photo_url": r.photo_url,
+            "answers"  : JSON.parse(r.answers)
+        }));
     });
 
 
@@ -51,7 +57,7 @@ module.exports = function FriendFinder() {
         Private methods
         
     *************************************************************************/
-    function findCompatibility(a, b) {
+    function findDifference(a, b) {
         let score = 0;
 
         for (let i = 0; i < a.answers.length; i++) {
@@ -68,11 +74,9 @@ module.exports = function FriendFinder() {
         
     *************************************************************************/
     this.addFriend = function(profile) {
-        const answers = JSON.stringify(profile.answers).replace("/,/g", ", ");
-
         const sql_command =
             `INSERT INTO friends (name, photo_url, answers)
-             VALUES ("${profile.name}", "${profile.photo_url}", "${answers}")`;
+             VALUES ("${profile.name}", "${profile.photo_url}", "${JSON.stringify(profile.answers)}")`;
 
         connection.query(sql_command, (error, results) => {
             if (error) throw error;
@@ -86,8 +90,9 @@ module.exports = function FriendFinder() {
         return friends;
     }
 
-    this.findFriend = function(profile) {
-        friends.sort((a, b) => findCompatibility(a, profile) - findCompatibility(b, profile));
+    this.findBestFriend = function(profile) {
+        // The lower the difference in compatibility, the better
+        friends.sort((a, b) => findDifference(a, profile) - findDifference(b, profile));
 
         return friends[0];
     }
