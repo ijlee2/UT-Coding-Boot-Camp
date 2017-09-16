@@ -19,7 +19,7 @@ body {
 
 /* Override Bootstrap CSS */
 .jumbotron {
-    background-color: rgba(250, 250, 250, 0.8);
+    background-color: rgba(250, 250, 250, 0.84);
 }
 
 h1 a {
@@ -58,8 +58,12 @@ button {
     font-size: 1.5em;
 }
 
+.card {
+    background-color: rgba(250, 250, 250, 0.84);
+}
+
 footer {
-    background   : rgba(250, 250, 250, 0.8);
-    border-radius: 4px;
-    padding      : 0.5em 2em 2em 2em;
+    background-color: rgba(250, 250, 250, 0.84);
+    border-radius   : 4px;
+    padding         : 0.5em 2em 2em 2em;
 }
