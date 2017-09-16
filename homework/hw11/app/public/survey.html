@@ -18,11 +18,11 @@
 
         <!-- Custom CSS -->
         <link href="https://fonts.googleapis.com/css?family=Give+You+Glory|Julius+Sans+One" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="assets/style.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     </head>
     <body>
         <div class="container">
-            <div class="card my-5" id="survey">
+            <div class="card mb-5" id="survey">
                 <h2 class="card-header">What do you like?</h2>
 
                 <form class="card-block">
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="form-group py-3">
-                        <label for="q1"><strong>Question 2.</strong> I like a dog-lover.</label>
+                        <label for="q1"><strong>Question 2.</strong> I like a cat-lover.</label>
                         
                         <select class="form-control form-control-lg" id="q1">
                             <option selected="selected" disabled>Select an option</option>
@@ -121,7 +121,7 @@
                     </div>
 
                     <div class="form-group py-3">
-                        <label for="q6"><strong>Question 7.</strong> I like someone who is unkempt.</label>
+                        <label for="q6"><strong>Question 7.</strong> I like someone who is disheveled.</label>
                         
                         <select class="form-control form-control-lg" id="q6">
                             <option selected="selected" disabled>Select an option</option>
@@ -134,7 +134,7 @@
                     </div>
 
                     <div class="form-group py-3">
-                        <label for="q7"><strong>Question 8.</strong> I like a bear-hugger.</label>
+                        <label for="q7"><strong>Question 8.</strong> I like someone who believes in sharing fate.</label>
                         
                         <select class="form-control form-control-lg" id="q7">
                             <option selected="selected" disabled>Select an option</option>
@@ -147,7 +147,7 @@
                     </div>
 
                     <div class="form-group py-3">
-                        <label for="q8"><strong>Question 9.</strong> I like someone who believes in sharing fate.</label>
+                        <label for="q8"><strong>Question 9.</strong> I like someone who believes in sharing food.</label>
                         
                         <select class="form-control form-control-lg" id="q8">
                             <option selected="selected" disabled>Select an option</option>
@@ -188,7 +188,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Your best friend is <strong><span id="friend_name"></span></strong>. Call now at <strong><span id="friend_number"></span></strong>!</p>
+                            <p>Your new BF is <strong><span id="friend_name"></span></strong>.</p>
+                            <p>Call now at <strong><span id="friend_number"></span></strong>!</p>
                             <img id="friend_photo" src=""></img>
                         </div>
                         <div class="modal-footer">
@@ -203,7 +204,7 @@
                     <a href="/api/friends">API Friends</a>
                 </div>
                 <div class="float-right">
-                    <a href="https://github.com/ijlee2" target="_blank"><i class="fa fa-copyright mr-2" aria-hidden="true"></i>Isaac J. Lee</a>
+                    <a href="https://www.linkedin.com/in/ijlee2/" target="_blank"><i class="fa fa-copyright mr-2" aria-hidden="true"></i>Isaac J. Lee</a>
                 </div>
             </footer>
         </div>
@@ -223,6 +224,8 @@
                 for (let i = 0; i < 10; i++) {
                     answers.push(parseInt($(`#q${i}`).val()));
                 }
+
+                console.log(answers);
 
                 // Simple input validation
                 let validationPassed = true;
@@ -253,7 +256,7 @@
                         $("#modal_response").modal();
 
                         $("#modal_response").on("hidden.bs.modal", event => {
-//                            window.location = data.redirectUrl;
+                            window.location = "/";
                         });
                     });
                 }

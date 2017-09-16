@@ -5,7 +5,7 @@
 }
 
 body {
-    background    : url("./background.jpg") no-repeat center center fixed;
+    background    : url("../images/background.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
        -moz-background-size: cover;
          -o-background-size: cover;
@@ -14,7 +14,7 @@ body {
     color         : var(--color-text);
     font-family   : "Julius Sans One", sans-serif;
     font-size     : 24px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
 }
 
 /* Override Bootstrap CSS */
@@ -32,16 +32,15 @@ h1 a:hover {
 }
 
 .display-4 {
-    font-size     : 3.5em;
-    letter-spacing: 0.35em;
+    font-size     : 3.2em;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
 }
 
 h2 {
     font-family   : "Give You Glory", cursive;
-    font-size     : 1.75em;
-    font-weight   : normal;
-    letter-spacing: 0.06em;
+    font-size     : 1.6em;
+    letter-spacing: 0.05em;
 }
 
 button {
@@ -60,6 +59,12 @@ button {
 
 .card-header {
     font-size: 1.5em;
+}
+
+select, option {
+    font-family   : "Give You Glory", cursive;
+    font-weight   : bold;
+    letter-spacing: 0.04em;
 }
 
 form button {

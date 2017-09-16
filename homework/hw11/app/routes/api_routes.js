@@ -6,12 +6,13 @@
 *****************************************************************************
 *****************************************************************************/
 const express = require("express");
+const path    = require("path");
+
+const FriendFinder = require(path.join(__dirname, "..", "data", "friends.js"));
+const friendFinder = new FriendFinder();
 
 // Create an instance of router
 const router = express.Router();
-
-// An array of objects
-let friends = [];
 
 
 
@@ -24,17 +25,26 @@ let friends = [];
 *****************************************************************************/
 // Display all friends
 router.get("/friends", (req, res) => {
-    res.json(friends);
+    res.json(friendFinder.getFriends());
 });
 
-// Find the best friend
+// Find best friend
 router.post("/friends", (req, res) => {
-    friends.push(req.body);
+    const profile = {
+        "name"     : req.body.name,
+        "photo_url": req.body.photo_url,
+        "answers"  : req.body.answers.map(a => parseInt(a))
+    };
 
+    const friend  = friendFinder.findFriend(profile);
+
+    // Add the user's profile to the database
+    friendFinder.addFriend(profile);
+    
     res.send({
-        "my_name"         : req.body.name,
-        "friend_name"     : "John Doe",
-        "friend_photo_url": "https://organicthemes.com/demo/profile/files/2012/12/profile_img.png"
+        "my_name"         : profile.name,
+        "friend_name"     : friend.name,
+        "friend_photo_url": friend.photo_url
     });
 });
 
