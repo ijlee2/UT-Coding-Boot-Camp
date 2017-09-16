@@ -1,12 +1,18 @@
+DROP DATABASE IF EXISTS heroku_d2871eb4b2937fc;
+CREATE DATABASE heroku_d2871eb4b2937fc;
+USE heroku_d2871eb4b2937fc;
+
+/* For testing on localhost
 DROP DATABASE IF EXISTS friend_finder_db;
 CREATE DATABASE friend_finder_db;
 USE friend_finder_db;
+*/
 
 CREATE TABLE friends (
     id        INT AUTO_INCREMENT NOT NULL,
     name      VARCHAR(30) NOT NULL,
     photo_url TEXT NOT NULL,
-    answers   JSON NOT NULL,
+    answers   CHAR(21) NOT NULL,
     PRIMARY KEY (id)
 );
 
