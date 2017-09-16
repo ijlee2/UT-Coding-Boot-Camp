@@ -30,13 +30,15 @@
                         <label for="name" class="col-xs-12 col-md-5 col-form-label"><strong>Name (required)</strong></label>
                         <div class="col-xs-12 col-md-7">
                             <input type="text" class="form-control form-control-lg" id="name" required>
+                            <div class="form-control-feedback"></div>
                         </div>
                     </div>
 
                     <div class="form-group row py-3">
                         <label for="name" class="col-xs-12 col-md-5 col-form-label"><strong>Photo URL (required)</strong></label>
                         <div class="col-xs-12 col-md-7">
-                            <input type="text" class="form-control form-control-lg" id="name" required>
+                            <input type="text" class="form-control form-control-lg" id="photo_url" required>
+                            <div class="form-control-feedback"></div>
                         </div>
                     </div>
 
@@ -170,7 +172,9 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-success btn-lg float-right mt-4 mb-3 px-5" id="button_submit">Submit</button>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-warning btn-lg mt-4 mb-3 px-5 pt-3" id="button_submit"><i class="fa fa-user-plus mr-3" aria-hidden="true"></i>Find my BF!</button>
+                    </div>
                 </form>
             </div>
 
@@ -178,13 +182,14 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Hi, <span id="user_name"></span>!</h5>
+                            <h3 class="modal-title">Hi, <span id="my_name"></span>!</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p><span id="return_message"></span></p>
+                            <p>Your best friend is <strong><span id="friend_name"></span></strong>. Call now at <strong><span id="friend_number"></span></strong>!</p>
+                            <img id="friend_photo" src=""></img>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -208,40 +213,47 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
         <script type="text/javascript">
-            $("#button_submit").click((event) => {
+            $("#button_submit").click(event => {
                 event.preventDefault();
 
-                var data = {
-                    "name"     : $("#name").val().trim(),
-                    "partySize": parseInt($("#partySize").val().trim()),
-                    "phone"    : $("#phone").val().trim(),
-                    "email"    : $("#email").val().trim()
-                };
+                const name      = $("#name").val().trim();
+                const photo_url = $("#photo_url").val().trim();
+                const answers   = [];
+
+                for (let i = 0; i < 10; i++) {
+                    answers.push(parseInt($(`#q${i}`).val()));
+                }
 
                 // Simple input validation
-                var validationPassed = true;
+                let validationPassed = true;
 
-                if (data.name === "") {
+                if (name === "") {
                     $("#name").attr("placeholder", "Please provide your name");
 
                     validationPassed = false;
                 }
 
-                if (data.phone === "") {
-                    $("#phone").attr("placeholder", "Please provide your number");
+                if (photo_url === "") {
+                    $("#photo_url").attr("placeholder", "Please provide a photo");
 
                     validationPassed = false;
                 }
 
                 if (validationPassed) {
-                    $.post("/api/new", data).then(function(data) {
-                        $("#user_name").text(data.name);
-                        $("#return_message").text((data.openTable) ? "Your reservation was a success!" : "Sorry, you are on the waitlist. We'll get back to you soon!");
+                    const data = {name, photo_url, answers};
+
+                    $.post("/api/friends", data).then(response => {
+                        const phoneNumber = `(${Math.random().toString().slice(2, 5)}) ${Math.random().toString().slice(2, 5)}-${Math.random().toString().slice(2, 6)}`;
+
+                        $("#my_name").text(response.my_name);
+                        $("#friend_name").text(response.friend_name);
+                        $("#friend_number").text(phoneNumber);
+                        $("#friend_photo").attr("src", response.friend_photo_url);
 
                         $("#modal_response").modal();
 
-                        $("#modal_response").on("hidden.bs.modal", function(event) {
-                            window.location = data.redirectUrl;
+                        $("#modal_response").on("hidden.bs.modal", event => {
+//                            window.location = data.redirectUrl;
                         });
                     });
                 }

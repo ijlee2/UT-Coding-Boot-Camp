@@ -6,8 +6,8 @@
 *****************************************************************************
 *****************************************************************************/
 const express    = require("express");
-//const bodyParser = require("body-parser");
 const path       = require("path");
+const bodyParser = require("body-parser");
 
 const app  = express();
 const PORT = process.env.PORT || 8080;
@@ -19,9 +19,9 @@ const directory_routes = path.join(__dirname, "app", "routes");
 app.use(express.static(directory_public));
 
 // Set up Express to handle parsing data
-//app.use(bodyParser.json());
-//app.use(bodyParser.text());
-//app.use(bodyParser.urlencoded({"extended": true}));
+app.use(bodyParser.json());
+app.use(bodyParser.text());
+app.use(bodyParser.urlencoded({"extended": true}));
 
 
 
