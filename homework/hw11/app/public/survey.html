@@ -17,60 +17,160 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
         <!-- Custom CSS -->
-        <link href="https://fonts.googleapis.com/css?family=Caveat|Give+You+Glory" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Give+You+Glory|Julius+Sans+One" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="assets/style.css">
     </head>
     <body>
         <div class="container">
-            <div class="jumbotron py-5">
-                <h1 class="display-4 text-center">Friend Finder</h1>
-                <hr>
-                <h2 class="text-center">Find Your Soul Mate!</h2>
-                
-                <div class="text-center mt-5">
-                    <a href="/view"><button type="button" class="btn btn-success btn-lg mx-1" id="button_view"><i class="fa fa-binoculars mr-3" aria-hidden="true"></i>Fill Out Survey</button></a>
-                </div>
-            </div>
-
-            <div class="card my-5">
-                <h3 class="card-header">Reserve Table</h3>
+            <div class="card my-5" id="survey">
+                <h2 class="card-header">What do you like?</h2>
 
                 <form class="p-4">
-                    <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label text-right">Name (required)</label>
-                        <div class="col-sm-9">
+                    <div class="form-group row py-3">
+                        <label for="name" class="col-sm-5 col-form-label"><strong>Name (required)</strong></label>
+                        <div class="col-sm-7">
                             <input type="text" class="form-control" id="name" required>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="partySize" class="col-sm-3 col-form-label text-right">Party size (required)</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="partySize">
-                                <option>1</option>
-                                <option selected="selected">2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5+</option>
-                            </select>
+                    <div class="form-group row py-3">
+                        <label for="name" class="col-sm-5 col-form-label"><strong>Photo URL (required)</strong></label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="name" required>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="phone" class="col-sm-3 col-form-label text-right">Phone (required)</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="phone" required>
-                        </div>
+                    <div class="form-group py-3">
+                        <label for="q0"><strong>Question 1.</strong> I like a daredevil.</label>
+                        
+                        <select class="form-control" id="q0">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label text-right">Email</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="email">
-                        </div>
+                    <div class="form-group py-3">
+                        <label for="q1"><strong>Question 2.</strong> I like a dog-lover.</label>
+                        
+                        <select class="form-control" id="q1">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
                     </div>
 
-                    <button type="submit" class="btn btn-success btn-lg float-right mt-4" id="button_submit">Submit</button>
+                    <div class="form-group py-3">
+                        <label for="q2"><strong>Question 3.</strong> I like a quirky person.</label>
+                        
+                        <select class="form-control" id="q2">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <label for="q3"><strong>Question 4.</strong> I like someone who isn't afraid to cry.</label>
+                        
+                        <select class="form-control" id="q3">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <label for="q4"><strong>Question 5.</strong> I like someone with an eclectic collection.</label>
+                        
+                        <select class="form-control" id="q4">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <label for="q5"><strong>Question 6.</strong> I like a gift-giver.</label>
+                        
+                        <select class="form-control" id="q5">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <label for="q6"><strong>Question 7.</strong> I like someone who is unkempt.</label>
+                        
+                        <select class="form-control" id="q6">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <label for="q7"><strong>Question 8.</strong> I like a bear-hugger.</label>
+                        
+                        <select class="form-control" id="q7">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <label for="q8"><strong>Question 9.</strong> I like someone who believes in sharing fate.</label>
+                        
+                        <select class="form-control" id="q8">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <label for="q9"><strong>Question 10.</strong> I like someone who can say I love you.</label>
+                        
+                        <select class="form-control" id="q9">
+                            <option selected="selected" disabled>Select an option</option>
+                            <option>1 (strongly disagree)</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5 (strongly agree)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg float-right mt-4 mb-3 px-5" id="button_submit">Submit</button>
                 </form>
             </div>
 

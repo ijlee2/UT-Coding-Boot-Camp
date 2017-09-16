@@ -1,7 +1,7 @@
 :root {
     /* Define color scheme */
     --color-text            : #371c60;
-    --color-text-highlight  : #ff6600;
+    --color-text-highlight  : #0275d8;
 }
 
 body {
@@ -12,7 +12,7 @@ body {
             background-size: cover;
     
     color         : var(--color-text);
-    font-family   : "Caveat", cursive;
+    font-family   : "Julius Sans One", sans-serif;
     font-size     : 24px;
     letter-spacing: 0.04em;
 }
@@ -20,6 +20,15 @@ body {
 /* Override Bootstrap CSS */
 .jumbotron {
     background-color: rgba(250, 250, 250, 0.8);
+}
+
+h1 a {
+    color: var(--color-text);
+}
+
+h1 a:hover {
+    color          : var(--color-text-highlight);
+    text-decoration: none;
 }
 
 .display-4 {
@@ -39,6 +48,14 @@ button {
     font-family   : "Give You Glory", cursive;
     font-size     : 1em !important;
     letter-spacing: 0.04em;
+}
+
+#survey {
+    font-size: 1.2em;
+}
+
+.card-header {
+    font-size: 1.5em;
 }
 
 footer {
