@@ -5,17 +5,23 @@
     
 *****************************************************************************
 *****************************************************************************/
-const bodyParser = require("body-parser");
 const express    = require("express");
+//const bodyParser = require("body-parser");
 const path       = require("path");
 
 const app  = express();
 const PORT = process.env.PORT || 8080;
 
+const directory_public = path.join(__dirname, "app", "public");
+const directory_routes = path.join(__dirname, "app", "routes");
+
+// Set public directory
+app.use(express.static(directory_public));
+
 // Set up Express to handle parsing data
-app.use(bodyParser.json());
-app.use(bodyParser.text());
-app.use(bodyParser.urlencoded({"extended": true}));
+//app.use(bodyParser.json());
+//app.use(bodyParser.text());
+//app.use(bodyParser.urlencoded({"extended": true}));
 
 
 
@@ -26,8 +32,11 @@ app.use(bodyParser.urlencoded({"extended": true}));
     
 *****************************************************************************
 *****************************************************************************/
-require("./app/routing/api_routes.js")(app);
-require("./app/routing/html_routes.js")(app);
+const router_html = require(path.join(directory_routes, "html_routes.js"));
+const router_api  = require(path.join(directory_routes, "api_routes.js"));
+
+app.use("/", router_html);
+app.use("/api", router_api);
 
 
 
@@ -38,4 +47,4 @@ require("./app/routing/html_routes.js")(app);
     
 *****************************************************************************
 *****************************************************************************/
-app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`App listening on ${PORT}`));
