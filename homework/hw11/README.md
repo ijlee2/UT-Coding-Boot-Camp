@@ -20,20 +20,20 @@ To run Friend Finder, you will need [Bash](https://git-scm.com/downloads/), [Nod
 
 ![How to Run: Step 2](readme/how_to_run_step2.png?raw=true)
 
-3. To deploy on Heroku, you will need to move `hw11` directory to a folder that isn't a repository.
-
-Type `mkdir ../../../hw11; mv {.,}* ../../../hw11; cd ../../../hw11` to create a new directory in your starting folder.
+3. To deploy on Heroku, you will need to move `hw11` directory to a folder that isn't a Git repository. Type `mkdir ../../../hw11; mv {.,}* ../../../hw11; cd ../../../hw11` to move `hw11` to your starting folder.
 
 ![How to Run: Step 3](readme/how_to_run_step3.png?raw=true)
 
-4. Type `git init; git add .; git commit -m "final build"` to create a Git repository.
+4. Afterwards, type `git init; git add .; git commit -m "final build"` to create a Git repository.
 
 ![How to Run: Step 4](readme/how_to_run_step4.png?raw=true)
 
-5. Type `heroku login` to log in to your account. Then, type `heroku create` to create a Heroku app.
+5. Type `heroku login` to log in to your Heroku account. Then, type `heroku create` to create a Heroku app.
 
 ![How to Run: Step 5](readme/how_to_run_step5.png?raw=true)
 
-6. 
+6. Finally, type `git push heroku master` to build the app. You can find the URL at the end.
 
 ![How to Run: Step 6](readme/how_to_run_step6.png?raw=true)
+
+![How to Run: Step 6](readme/how_to_run_step6b.png?raw=true)
