@@ -11,9 +11,9 @@ const mysql = require("mysql");
 const connection = mysql.createConnection({
     "host"              : "us-cdbr-iron-east-05.cleardb.net",
     "port"              : 3306,
-    "user"              : "baabfce79d92f0",
-    "password"          : "e7e93590",
-    "database"          : "heroku_d2871eb4b2937fc",
+    "user"              : "b0ed46db0e3a15",
+    "password"          : "a8423544",
+    "database"          : "heroku_9bba764527aec01",
     "multipleStatements": true
 });
 

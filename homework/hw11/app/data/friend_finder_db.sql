@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS heroku_d2871eb4b2937fc;
-CREATE DATABASE heroku_d2871eb4b2937fc;
-USE heroku_d2871eb4b2937fc;
+DROP DATABASE IF EXISTS heroku_9bba764527aec01;
+CREATE DATABASE heroku_9bba764527aec01;
+USE heroku_9bba764527aec01;
 
 /* For testing on localhost
 DROP DATABASE IF EXISTS friend_finder_db;
