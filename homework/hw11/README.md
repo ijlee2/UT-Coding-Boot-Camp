@@ -1,6 +1,6 @@
 # Friend Finder
 
-Find your next BFF today!
+[Find your next BFF today!](https://friend-finder-777.herokuapp.com)
 
 
 ## Technologies Used
@@ -36,7 +36,7 @@ Type `mkdir ../../../hw11; mv {.,}* ../../../hw11; cd ../../../hw11` to move `hw
 
 ![How to Run: Step 5](readme/how_to_run_step5.png?raw=true)
 
-6. Finally, type `git push heroku master` to build the app. You can always find the URL at the end.
+6. Finally, type `git push heroku master` to build the app. You can find the URL at the end.
 
 ![How to Run: Step 6a](readme/how_to_run_step6a.png?raw=true)
 
@@ -47,6 +47,10 @@ Type `mkdir ../../../hw11; mv {.,}* ../../../hw11; cd ../../../hw11` to move `hw
 
 To use your own database, you will also need [MySQL Workbench](https://dev.mysql.com/downloads/workbench/).
 
-1. Open 
+1. Open the file `app/data/friends.js`. You will need to modify lines 13 (host name), 15 (user name), 16 (password), and 17 (default schema name).
 
 ![How to Configure Database: Step 1](readme/how_to_configure_database_step1.png?raw=true)
+
+2. On Heroku, you can use [ClearDB](https://devcenter.heroku.com/articles/cleardb) or [JawsDB](https://devcenter.heroku.com/articles/jawsdb). Both provide a free-tier option.
+
+![How to Configure Database: Step 1](readme/how_to_configure_database_step2.png?raw=true)
