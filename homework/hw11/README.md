@@ -28,7 +28,7 @@ Type `mkdir ../../../hw11; mv {.,}* ../../../hw11; cd ../../../hw11` to move `hw
 
 ![How to Run: Step 3](readme/how_to_run_step3.png?raw=true)
 
-4. Afterwards, type `git init; git add .; git commit -m "final build"` to create a Git repo.
+4. Afterwards, type `git init; git add .; git commit -m "final build"` to create a Git repository.
 
 ![How to Run: Step 4](readme/how_to_run_step4.png?raw=true)
 
@@ -47,14 +47,20 @@ Type `mkdir ../../../hw11; mv {.,}* ../../../hw11; cd ../../../hw11` to move `hw
 
 To use your own database, you will also need [MySQL Workbench](https://dev.mysql.com/downloads/workbench/).
 
-1. On Heroku, you can use [ClearDB](https://devcenter.heroku.com/articles/cleardb) or [JawsDB](https://devcenter.heroku.com/articles/jawsdb). Both provide a free-tier option.
+1. On Heroku, you can use either [ClearDB](https://devcenter.heroku.com/articles/cleardb) or [JawsDB](https://devcenter.heroku.com/articles/jawsdb). Both provide a free-tier option.
 
-For JawsDB, type `heroku addons:create jawsdb", then `heroku config:get JAWSDB_URL` to find your user name, password, host name, port number, and default schema (in the order of appearance).
-
-![How to Configure Database: Step 1](readme/how_to_configure_database_step2.png?raw=true)
-
-2. Open the file `app/data/friends.js`. Change lines 13 - 17 accordingly.
+For JawsDB, type `heroku addons:create jawsdb`, then `heroku config:get JAWSDB_URL` to find (in the order of appearance) your user name, password, host name, port number, and default schema.
 
 ![How to Configure Database: Step 1](readme/how_to_configure_database_step1.png?raw=true)
 
-3. To seed your database, open **MySQL Workbench**.
+2. Open the file `app/data/friends.js` and change lines 13 - 17.
+
+![How to Configure Database: Step 2](readme/how_to_configure_database_step2.png?raw=true)
+
+3. To seed your database, open MySQL Workbench.
+
+![How to Configure Database: Step 3a](readme/how_to_configure_database_step3a.png?raw=true)
+
+Click Setup New Connection. Enter user name, host name, port number, and default schema. It will then ask for your password.
+
+![How to Configure Database: Step 3b](readme/how_to_configure_database_step3b.png?raw=true)
