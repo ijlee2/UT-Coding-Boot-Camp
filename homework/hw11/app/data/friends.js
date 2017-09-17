@@ -8,7 +8,8 @@
 const mysql = require("mysql");
 
 // Connect to MySQL
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
+    "connectionLimit"   : 10,
     "host"              : "us-cdbr-iron-east-05.cleardb.net",
     "port"              : 3306,
     "user"              : "b0ed46db0e3a15",
@@ -26,13 +27,13 @@ const connection = mysql.createConnection({
     "database"          : "friend_finder_db",
     "multipleStatements": true
 });
-*/
 
 connection.connect(error => {
     if (error) throw error;
 
     console.log(`Database connected as thread ${connection.threadId}.`);
 });
+*/
 
 
 
@@ -52,7 +53,7 @@ module.exports = function FriendFinder() {
     let friends;
 
     // Get friends from the database
-    connection.query("SELECT * FROM friends", (error, results) => {
+    pool.query("SELECT * FROM friends", (error, results) => {
         if (error) throw error;
 
         friends = results.map(r => ({
@@ -92,7 +93,7 @@ module.exports = function FriendFinder() {
 
              SELECT id FROM friends ORDER BY id DESC LIMIT 1;`;
 
-        connection.query(sql_command, (error, results) => {
+        pool.query(sql_command, (error, results) => {
             if (error) throw error;
 
             // Save a local copy
