@@ -10,11 +10,11 @@ const mysql = require("mysql");
 // Connect to MySQL
 const pool = mysql.createPool({
     "connectionLimit"   : 10,
-    "host"              : "us-cdbr-iron-east-05.cleardb.net",
+    "host"              : "ysp9sse09kl0tzxj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "port"              : 3306,
-    "user"              : "b0ed46db0e3a15",
-    "password"          : "a8423544",
-    "database"          : "heroku_9bba764527aec01",
+    "user"              : "l7g2iikw6shnok4f",
+    "password"          : "atw1sx49swurflkj",
+    "database"          : "yfpdqkylr03ge45y",
     "multipleStatements": true
 });
 
