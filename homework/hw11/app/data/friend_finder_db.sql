@@ -1,12 +1,10 @@
-DROP DATABASE IF EXISTS heroku_9bba764527aec01;
-CREATE DATABASE heroku_9bba764527aec01;
-USE heroku_9bba764527aec01;
-
 /* For testing on localhost
 DROP DATABASE IF EXISTS friend_finder_db;
 CREATE DATABASE friend_finder_db;
 USE friend_finder_db;
 */
+
+DROP TABLE IF EXISTS friends;
 
 CREATE TABLE friends (
     id        INT AUTO_INCREMENT NOT NULL,
