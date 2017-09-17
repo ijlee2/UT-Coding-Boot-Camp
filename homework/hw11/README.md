@@ -4,13 +4,15 @@ Find your next BFF today!
 
 
 ## Technologies Used
+
 - [x] Front end: HTML5, CSS3, Bootstrap4, ES6
 
 - [x] Back end: Node, Express, MySQL
 
 
 ## How to Run
-To run Friend Finder, you will need [Bash](https://git-scm.com/downloads/), [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm), [MySQL Workbench](https://dev.mysql.com/downloads/workbench/), and [Heroku](https://www.heroku.com/).
+
+To run Friend Finder, you will need [Bash](https://git-scm.com/downloads/), [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm), and [Heroku](https://www.heroku.com/).
 
 1. In Bash, type `git clone git@github.com:ijlee2/UT-Coding-Boot-Camp.git` to download Friend Finder.
 
@@ -20,11 +22,13 @@ To run Friend Finder, you will need [Bash](https://git-scm.com/downloads/), [Nod
 
 ![How to Run: Step 2](readme/how_to_run_step2.png?raw=true)
 
-3. To deploy on Heroku, you will need to move `hw11` directory to a folder that isn't a Git repository. Type `mkdir ../../../hw11; mv {.,}* ../../../hw11; cd ../../../hw11` to move `hw11` to your starting folder.
+3. To deploy on Heroku, you will need to move `hw11` directory to a folder that isn't a Git repository.
+
+Type `mkdir ../../../hw11; mv {.,}* ../../../hw11; cd ../../../hw11` to move `hw11` to your starting folder.
 
 ![How to Run: Step 3](readme/how_to_run_step3.png?raw=true)
 
-4. Afterwards, type `git init; git add .; git commit -m "final build"` to create a Git repository.
+4. Afterwards, type `git init; git add .; git commit -m "final build"` to create a Git repo.
 
 ![How to Run: Step 4](readme/how_to_run_step4.png?raw=true)
 
@@ -32,8 +36,17 @@ To run Friend Finder, you will need [Bash](https://git-scm.com/downloads/), [Nod
 
 ![How to Run: Step 5](readme/how_to_run_step5.png?raw=true)
 
-6. Finally, type `git push heroku master` to build the app. You can find the URL at the end.
+6. Finally, type `git push heroku master` to build the app. You can always find the URL at the end.
 
-![How to Run: Step 6](readme/how_to_run_step6.png?raw=true)
+![How to Run: Step 6a](readme/how_to_run_step6a.png?raw=true)
 
-![How to Run: Step 6](readme/how_to_run_step6b.png?raw=true)
+![How to Run: Step 6b](readme/how_to_run_step6b.png?raw=true)
+
+
+## How to Configure Database
+
+To use your own database, you will also need [MySQL Workbench](https://dev.mysql.com/downloads/workbench/).
+
+1. Open 
+
+![How to Configure Database: Step 1](readme/how_to_configure_database_step1.png?raw=true)
