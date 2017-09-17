@@ -21,15 +21,16 @@ const router = express.Router();
 *****************************************************************************
 *****************************************************************************/
 const directory_public = path.join(__dirname, "..", "public");
+const paths = {
+    "/"          : "home.html",
+    "/survey"    : "survey.html",
+    "/importance": "importance.html"
+};
 
-// Home page
-router.get("/", (req, res) => {
-    res.sendFile(path.join(directory_public, "home.html"));
-});
-
-// Survey page
-router.get("/survey", (req, res) => {
-    res.sendFile(path.join(directory_public, "survey.html"));
-});
+for (let key in paths) {
+    router.get(key, (req, res) => {
+        res.sendFile(path.join(directory_public, paths[key]));
+    });
+}
 
 module.exports = router;

@@ -41,10 +41,10 @@ $("#button_submit").click(event => {
     }
 
     for (let i = 0; i < 10; i++) {
-        const answer = parseInt($(`#q${i}`).val());
+        const answer = $(`#q${i}`).val();
         answers.push(answer);
 
-        if (isNaN(answer)) {
+        if (!answer) {
             displayError(3 + i, "Please answer this question.");
             index_error = Math.min(index_error, 3 + i);
         }
@@ -66,22 +66,15 @@ $("#button_submit").click(event => {
             $("#friend_number").text(friend_number);
 
             // Display friend's photo if it exists
-            if (response.friend_photo_url) {
-                $("#friend_photo").attr("src", response.friend_photo_url);
-                $("#friend_photo").show();
-
-            } else {
-                $("#friend_photo").attr("src", "");
-                $("#friend_photo").hide();
-
-            }
+            $("#friend_photo").attr("src", response.friend_photo_url);
+            $("#friend_photo").css("display", (response.friend_photo_url !== "") ? "block" : "none");
 
             // Turn the modal on
             $("#modal_response").modal();
 
             // Redirect page when the user turns the modal off
             $("#modal_response").on("hidden.bs.modal", event => {
-                window.location = "/";
+                window.location = "/importance";
             });
         });
     }

@@ -35,7 +35,7 @@ router.post("/friends", (req, res) => {
     // For some reason, req.body.answers gives an array of strings
     const profile = {
         "name"     : req.body.name,
-        "photo_url": req.body.photo_url,
+        "photo_url": (validUrl.isUri(req.body.photo_url)) ? req.body.photo_url : "",
         "answers"  : req.body.answers.map(a => parseInt(a))
     };
     
@@ -47,7 +47,7 @@ router.post("/friends", (req, res) => {
     res.send({
         "my_name"         : profile.name,
         "friend_name"     : friend.name,
-        "friend_photo_url": (validUrl.isUri(friend.photo_url)) ? friend.photo_url : undefined
+        "friend_photo_url": friend.photo_url
     });
 });
 
