@@ -44,25 +44,18 @@ const icecreams = [
 // Routes
 app.get("/icecream/:name", (req, res) => {
     const name = req.params.name;
-    let flavorFound = false;
 
     for (let i = 0; i < icecreams.length; i++) {
         if (icecreams[i].name === name) {
-            flavorFound = true;
-
-            res.render("benandjerry", {
+            return res.render("benandjerry", {
                 "icecream": icecreams[i]
             });
-
-            break;
         }
     }
 
-    if (!flavorFound) {
-        res.render("benandjerry", {
-            "icecream": []
-        });
-    }
+    res.render("benandjerry", {
+        "icecream": []
+    });
 });
 
 // Initiate the listener.

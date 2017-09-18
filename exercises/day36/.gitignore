@@ -1,3 +1,6 @@
+animals/node_modules
+animals/package-lock.json
+
 ben_and_jerry/node_modules
 ben_and_jerry/package-lock.json
 
