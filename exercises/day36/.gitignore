@@ -9,3 +9,6 @@ lunch/package-lock.json
 
 task_saver/node_modules
 task_saver/package-lock.json
+
+wishes/node_modules
+wishes/package-lock.json

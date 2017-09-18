@@ -14,45 +14,33 @@ app.set("view engine", "handlebars");
 
 const connection = mysql.createConnection({
     "host"    : "localhost",
+    "port"    : 3306,
     "user"    : "root",
     "password": "",
-    "database": "task_saver_db"
+    "database": "wishes_db"
 });
 
-connection.connect(function(err) {
-    if (err) {
-        console.error("error connecting: " + err.stack);
-        return;
+connection.connect(function(error) {
+    if (error) {
+        return console.error(`error connecting: ${error.stack}`);
     }
 
-    console.log("connected as id " + connection.threadId);
+    console.log(`Connected as id ${connection.threadId}`);
 });
 
 // Root get route
 app.get("/", function(req, res) {
-    connection.query("SELECT * FROM tasks;", function(err, data) {
-        if (err) throw err;
+    connection.query("SELECT * FROM wishes;", function(error, results) {
+        if (error) throw error;
 
-        // Test it
-        // console.log('The solution is: ', data);
-
-        // Test it
-        // res.send(data);
-
-        res.render("index", {"tasks": data});
+        res.render("index", {"wishes": results});
     });
 });
 
 // Post route -> back to home
 app.post("/", function(req, res) {
-    // Test it
-    // console.log('You sent, ' + req.body.task);
-
-    // Test it
-    // res.send('You sent, ' + req.body.task);
-
-    connection.query("INSERT INTO tasks (task) VALUES (?)", [req.body.task], function(err, result) {
-        if (err) throw err;
+    connection.query(`INSERT INTO wishes (wish) VALUES ("${req.body.wish}")`, (error, result) => {
+        if (error) throw error;
 
         res.redirect("/");
     });
