@@ -6,3 +6,6 @@ ben_and_jerry/package-lock.json
 
 lunch/node_modules
 lunch/package-lock.json
+
+task_saver/node_modules
+task_saver/package-lock.json
