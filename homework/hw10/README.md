@@ -3,11 +3,7 @@ Bamazon is a CRM that focuses on sales. It provides command-line interfaces for 
 
 
 ## Technologies Used
-- [x] ES6
-
-- [x] Node.js
-
-- [x] MySQL
+- [x] ES7, Node, MySQL
 
 
 ## How to Run

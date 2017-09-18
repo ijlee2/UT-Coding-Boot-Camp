@@ -3,9 +3,7 @@ LIRI (Language Interpretation and Recognition Interface) understands your comman
 
 
 ## Technologies Used
-- [x] ES6
-
-- [x] Node.js
+- [x] ES7, Node
 
 
 ## How to Run

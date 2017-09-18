@@ -3,9 +3,7 @@ You can create two types of flashcards (basic and cloze) to help you with studyi
 
 
 ## Technologies Used
-- [x] ES6
-
-- [x] Node.js
+- [x] ES7, Node
 
 
 ## How to Run

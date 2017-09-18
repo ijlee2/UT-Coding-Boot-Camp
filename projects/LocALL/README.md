@@ -17,7 +17,7 @@ For places to eat, to play, and to drink, choose LocALL. We give you the best re
 ## Technologies Used
 - [x] Bootstrap, CSS Grid
 
-- [x] ES6, jQuery
+- [x] ES7, jQuery
 
 - [x] Google Maps, Google Places, Google Firebase
 

@@ -5,7 +5,7 @@
 
 ## Technologies Used
 
-- [x] Front end: HTML5, CSS3, Bootstrap4, ES6
+- [x] Front end: HTML5, CSS3, Bootstrap4, ES7
 
 - [x] Back end: Node, Express, MySQL
 
