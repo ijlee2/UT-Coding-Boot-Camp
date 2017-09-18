@@ -32,7 +32,6 @@ router.get("/friends", (req, res) => {
 
 // Find the most compatible friend
 router.post("/friends", (req, res) => {
-    // For some reason, req.body.answers gives an array of strings
     const profile = {
         "name"     : req.body.name,
         "photo_url": (validUrl.isUri(req.body.photo_url)) ? req.body.photo_url : "",
