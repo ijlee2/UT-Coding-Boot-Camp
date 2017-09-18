@@ -19,6 +19,6 @@ CREATE TABLE wishes (
 );
 
 INSERT INTO wishes (wish) VALUES
-("Be a great programmer."),
+("Be a great dancer."),
 ("Be a great cook."),
 ("Be a great friend.");
