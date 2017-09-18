@@ -1,0 +1,13 @@
+{{#if icecream}}
+    <h1>Flavor found</h1>
+
+    <ul>
+        {{#each icecream}}
+        <li>{{@key}}: {{this}}</li>
+        {{/each}}
+    </ul>
+
+{{else}}
+    <h1>Flavor not found</h1>
+
+{{/if}}
