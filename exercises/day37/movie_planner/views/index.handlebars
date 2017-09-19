@@ -1,0 +1,32 @@
+<h1>Movie Planner</h1>
+
+<ul>
+    {{#each movies}}
+    <li>
+        <p>
+            {{this.id}}. {{this.title}}
+
+            <form action="/{{this.id}}?_method=DELETE" method="POST">
+                <button type="submit">Delete movie!</button>
+            </form>
+        </p>
+    </li>
+    {{/each}}
+</ul>
+
+<h2>Create a Plan</h2>
+<form method="POST" action="/" class="button-size">
+    <textarea type="text" name="title"></textarea>
+    <button type="submit">Save movie!</button>
+</form>
+
+<h2>Update a Plan</h2>
+<form action="/?_method=PUT" method="POST" class="button-size">
+    <select name="id">
+		{{#each movies}}
+			<option value="{{this.id}}">{{this.title}}</option>
+		{{/each}}
+	</select>
+    <textarea type="text" name="title" placeholder="plan"></textarea>
+    <button type="submit">Update movie!</button>
+</form>
