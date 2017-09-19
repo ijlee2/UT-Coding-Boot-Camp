@@ -38,12 +38,17 @@ const burger = {
             "date"    : getDate()
         }
 
-        const id_object = {
-            "name" : "id",
-            "value": id
-        }
+        // Make the name explicit if the id name is different from "id"
+        const id_object = {id};
 
         orm.updateOne("burgers", object, id_object, callback);
+    },
+
+    "deleteBurger": function(id, callback) {
+        // Make the name explicit if the id name is different from "id"
+        const id_object = {id};
+
+        orm.deleteOne("burgers", id_object, callback);
     }
 };
 

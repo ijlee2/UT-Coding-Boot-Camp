@@ -18,15 +18,19 @@
     <div class="row">
         <!-- Burgers to be eaten -->
         <div class="col-xs-12 col-md-6">
-            {{#each burgers_uneaten}}
-            <div class="burger_uneaten">{{this}}</div>
+            {{#each burgers}}
+                {{#unless this.devoured}}
+                    <div class="burger_uneaten">{{this.name}}</div>
+                {{/unless}}
             {{/each}}
         </div>
 
         <!-- Burgers finished -->
         <div class="col-xs-12 col-md-6">
-            {{#each burgers_eaten}}
-            <div class="burger_eaten">{{this}}</div>
+            {{#each burgers}}
+                {{#if this.devoured}}
+                    <div class="burger_eaten">{{this.name}}</div>
+                {{/if}}
             {{/each}}
         </div>
     </div>

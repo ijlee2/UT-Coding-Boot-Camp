@@ -7,34 +7,29 @@ function addQuotes(x) {
     return (typeof x === "string") ? `"${x}"` : `${x}`;
 }
 
+function querySQL(sql_command, callback) {
+    connection.query(sql_command, (error, results) => {
+        if (error) throw error;
+
+        callback(results);
+    });
+}
+
 const orm = {
     "selectAll": function(table_name, callback) {
-        const sql_command = `SELECT * FROM ${table_name}`;
-
-        connection.query(sql_command, (error, results) => {
-            if (error) throw error;
-
-            callback(results);
-        });
+        querySQL(`SELECT * FROM ${table_name};`, callback);
     },
 
     "insertOne": function(table_name, object, callback) {
         const keys = [], values = [];
 
-        // Use a for loop to ensure that the key-value pairs appear correctly
-        // (Object.values is not fully implemented yet)
+        // Use a for loop to pair keys and values correctly (Object.values is not fully implemented yet)
         for (let key in object) {
             keys.push(key);
             values.push(addQuotes(object[key]));
         }
-
-        const sql_command = `INSERT INTO ${table_name} (${keys.join(", ")}) VALUES (${values.join(", ")});`;
-
-        connection.query(sql_command, (error, results) => {
-            if (error) throw error;
-
-            callback(results);
-        });
+        
+        querySQL(`INSERT INTO ${table_name} (${keys.join(", ")}) VALUES (${values.join(", ")});`, callback);
     },
 
     "updateOne": function(table_name, object, id_object, callback) {
@@ -44,13 +39,11 @@ const orm = {
             key_values.push(`${key} = ${addQuotes(object[key])}`);
         }
 
-        const sql_command = `UPDATE ${table_name} SET ${key_values.join(", ")} WHERE ${id_object.name} = ${id_object.value};`;
+        querySQL(`UPDATE ${table_name} SET ${key_values.join(", ")} WHERE ${id_object.name} = ${id_object.value};`, callback);
+    },
 
-        connection.query(sql_command, (error, results) => {
-            if (error) throw error;
-
-            callback(results);
-        });
+    "deleteOne": function(table_name, id_object, callback) {
+        querySQL(`DELETE FROM ${table_name} WHERE ${id_object.name} = ${id_object.value};`, callback);
     }
 }
 

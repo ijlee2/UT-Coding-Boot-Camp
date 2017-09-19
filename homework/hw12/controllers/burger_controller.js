@@ -21,8 +21,8 @@ router.get("/test", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-    function callback(burgers) {
-        res.render("index", burgers);
+    function callback(results) {
+        res.render("index", {"burgers": results});
     }
 
     burger.getBurgers(callback);
@@ -41,11 +41,15 @@ router.patch("/", (req, res) => {
         res.redirect("/");
     }
 
-    burger.addBurger(req.body.burger_name, req.body.isEaten, req.body.id, callback);
+    burger.updateBurger(req.body.burger_name, req.body.isEaten, req.body.id, callback);
 });
 
 router.delete("/", (req, res) => {
-    console.log("Delete");
+    function callback(results) {
+        res.redirect("/");
+    }
+
+    burger.deleteBurger(req.body.id, callback);
 });
 
 module.exports = router;
