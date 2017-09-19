@@ -35,7 +35,7 @@ const orm = {
 
             callback(results);
         });
-    }
+    },
 
     "updateOne": function(table_name, object, id_object, callback) {
         const key_values = [];

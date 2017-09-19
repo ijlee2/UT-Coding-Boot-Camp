@@ -6,10 +6,9 @@ USE burgers_db;
 DROP TABLE IF EXISTS burgers;
 
 CREATE TABLE burgers (
-    id        INT AUTO_INCREMENT NOT NULL,
-    name      VARCHAR(50) NOT NULL,
-    image_url TEXT NOT NULL,
-    devoured  BOOLEAN NOT NULL,
-    date      TIMESTAMP NOT NULL,
+    id       INT AUTO_INCREMENT NOT NULL,
+    name     VARCHAR(50) NOT NULL,
+    devoured BOOLEAN NOT NULL,
+    date     TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
 );
