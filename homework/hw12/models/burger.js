@@ -8,4 +8,4 @@
 const path  = require("path");
 const mysql = require("mysql");
 
-const orm = require(path.join(__dirname, "orm.js"));
+const orm = require(path.join(__dirname, "..", "config", "orm.js"));
