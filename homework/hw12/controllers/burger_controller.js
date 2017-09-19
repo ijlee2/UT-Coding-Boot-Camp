@@ -33,7 +33,7 @@ router.post("/", (req, res) => {
         res.redirect("/");
     }
 
-    burger.addBurger(req.body.burger_name, req.body.isEaten, callback);
+    burger.addBurger(req.body.burger_name, false, callback);
 });
 
 router.patch("/", (req, res) => {
