@@ -14,9 +14,17 @@ const bodyParser     = require("body-parser");
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
-const directory_public = path.join(__dirname, "public");
 
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Set up views
+    
+*****************************************************************************
+*****************************************************************************/
 // Set public directory
+const directory_public = path.join(__dirname, "public");
 app.use(express.static(directory_public));
 
 // Set up Express to handle parsing data
@@ -24,18 +32,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({"extended": false}));
 
+// Set handlebars
+app.engine("handlebars", exphbs({"defaultLayout": "main"}));
+app.set("view engine", "handlebars");
+
 
 
 /****************************************************************************
  ****************************************************************************
     
-    Set up routes
+    Set up controllers
     
 *****************************************************************************
 *****************************************************************************/
-const directory_routes = path.join(__dirname, "routes", "routes.js");
-
-require(directory_routes)(app);
+const directory_controllers = path.join(__dirname, "controllers", "burger_controller.js");
+require(directory_controllers)(app);
 
 
 

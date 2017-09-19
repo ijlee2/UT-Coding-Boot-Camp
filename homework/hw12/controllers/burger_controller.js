@@ -11,7 +11,10 @@ module.exports = function createRouter(app) {
 
     app.route("/burgers")
         .get((req, res) => {
-            console.log("Get");
+            res.render("index", {
+                "burgers_uneaten": ["Burger 1", "Burger 2", "Burger 3", "Burger 4"],
+                "burgers_eaten"  : ["Burger A", "Burger B", "Burger C"]
+            });
         })
 
         .post((req, res) => {
