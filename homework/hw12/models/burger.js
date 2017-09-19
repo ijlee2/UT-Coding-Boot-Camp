@@ -1,19 +1,13 @@
 const path = require("path");
 
+// Talk to the ORM
 const orm = require(path.join(__dirname, "..", "config", "orm.js"));
 
-exports.getBurgers = function() {
-    Promise.resolve(orm.selectAll())
-    .then(burgers => {
-        console.log(burgers);
+const burger = {
+    "getAll": function(callback) {
+        orm.selectAll("burgers", results => callback(results));
+    }
 
-        return {
-            "burgers_uneaten": burgers.filter(b => b.devoured),
-            "burgers_eaten"  : burgers.filter(b => !b.devoured)
-        };
-        
-    }, function() {
-        console.log("error");
+};
 
-    });
-}
+module.exports = burger;

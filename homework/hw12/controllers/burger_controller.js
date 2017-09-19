@@ -21,8 +21,13 @@ router.get("/test", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-//    res.render("index", burger.getBurgers());
-    console.log("Get");
+    const callback = function(burgers) {
+        console.log(burgers);
+
+//        res.render("index", burgers);
+    }
+
+    burger.getAll(callback);
 });
 
 router.post("/", (req, res) => {

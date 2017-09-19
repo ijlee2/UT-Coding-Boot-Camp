@@ -16,15 +16,21 @@ function getTimestamp() {
     return new Date(time).toISOString().slice(0, 19).replace("T", " ");
 }
 
-exports.selectAll = function(table_name) {
-    const sql_command = "SELECT * FROM ${table_name}";
-    
-    connection.query(sql_command, (error, results) => {
-        if (error) throw error;
+const orm = {
+    "selectAll": function(table_name, callback) {
+        const sql_command = `SELECT * FROM ${table_name}`;
 
-        return results;
-    });
+        connection.query(sql_command, (error, results) => {
+            if (error) throw error;
+
+            callback(results);
+        });
+    }
 }
+
+module.exports = orm;
+
+/*
 
 exports.insertOne = function(table_name, object) {
     let keys = "", values = "";
@@ -51,3 +57,4 @@ exports.updateOne = function(table_name, object, id) {
         if (error) throw error;
     });
 }
+*/
