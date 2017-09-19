@@ -19,14 +19,14 @@
         <!-- Burgers to be eaten -->
         <div class="col-xs-12 col-md-6">
             {{#each burgers_uneaten}}
-            <div class="burger_uneaten">Burger {{@index}}: {{this}}</div>
+            <div class="burger_uneaten">{{this}}</div>
             {{/each}}
         </div>
 
         <!-- Burgers finished -->
         <div class="col-xs-12 col-md-6">
             {{#each burgers_eaten}}
-            <div class="burger_eaten">Burger {{@index}}: {{this}}</div>
+            <div class="burger_eaten">{{this}}</div>
             {{/each}}
         </div>
     </div>
