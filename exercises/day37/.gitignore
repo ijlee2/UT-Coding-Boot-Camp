@@ -1,2 +1,5 @@
 movie_planner/node_modules
 movie_planner/package-lock.json
+
+quotes_app/node_modules
+quotes_app/package-lock.json
