@@ -3,11 +3,48 @@ const path = require("path");
 // Talk to the ORM
 const orm = require(path.join(__dirname, "..", "config", "orm.js"));
 
-const burger = {
-    "getAll": function(callback) {
-        orm.selectAll("burgers", results => callback(results));
-    }
+// Convert JS Date to MySQL Timestamp
+// Source: https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+function getDate() {
+    // Get current time
+    let time = new Date();
 
+    // Convert to local time
+    time -= time.getTimezoneOffset() * 60000;
+
+    // Change the format to Timestamp
+    return new Date(time).toISOString().slice(0, 19).replace("T", " ");
+}
+
+const burger = {
+    "getBurgers": function(callback) {
+        orm.selectAll("burgers", callback);
+    },
+
+    "addBurger": function(burger_name, isEaten, callback) {
+        const object = {
+            "name"    : burger_name,
+            "devoured": isEaten,
+            "date"    : getDate()
+        }
+
+        orm.insertOne("burgers", object, callback);
+    },
+
+    "updateBurger": function(burger_name, isEaten, id, callback) {
+        const object = {
+            "name"    : burger_name,
+            "devoured": isEaten,
+            "date"    : getDate()
+        }
+
+        const id_object = {
+            "name" : "id",
+            "value": id
+        }
+
+        orm.updateOne("burgers", object, id_object, callback);
+    }
 };
 
 module.exports = burger;

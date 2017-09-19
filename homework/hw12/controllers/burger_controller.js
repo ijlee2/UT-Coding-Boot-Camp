@@ -21,21 +21,27 @@ router.get("/test", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-    const callback = function(burgers) {
-        console.log(burgers);
-
-//        res.render("index", burgers);
+    function callback(burgers) {
+        res.render("index", burgers);
     }
 
-    burger.getAll(callback);
+    burger.getBurgers(callback);
 });
 
 router.post("/", (req, res) => {
-    console.log("Post");
+    function callback(results) {
+        res.redirect("/");
+    }
+
+    burger.addBurger(req.body.burger_name, req.body.isEaten, callback);
 });
 
 router.patch("/", (req, res) => {
-    console.log("Patch");
+    function callback(results) {
+        res.redirect("/");
+    }
+
+    burger.addBurger(req.body.burger_name, req.body.isEaten, req.body.id, callback);
 });
 
 router.delete("/", (req, res) => {
