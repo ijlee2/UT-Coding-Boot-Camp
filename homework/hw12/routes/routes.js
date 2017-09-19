@@ -5,7 +5,11 @@ const path    = require("path");
 
 // Create a router
 module.exports = function createRouter(app) {
-    app.route("/")
+    app.route("/").get((req, res) => {
+        res.sendFile(path.join(__dirname, "..", "public", "test.html"));
+    });
+
+    app.route("/burgers")
         .get((req, res) => {
             console.log("Get");
         })

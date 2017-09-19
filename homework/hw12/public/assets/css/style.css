@@ -1,0 +1,4 @@
+.burger_uneaten, .burger_eaten {
+    height: 3.5em;
+    border: 2px solid gray;
+}
