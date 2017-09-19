@@ -1,5 +1,11 @@
 movie_planner/node_modules
 movie_planner/package-lock.json
 
+orm_example/node_modules
+orm_example/package-lock.json
+
+party_database/node_modules
+party_database/package-lock.json
+
 quotes_app/node_modules
 quotes_app/package-lock.json
