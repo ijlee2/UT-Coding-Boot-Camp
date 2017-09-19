@@ -56,7 +56,9 @@ app.get("/:id", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-    const sql_command = `INSERT INTO quotes (author, quote) VALUES ("${req.body.author}", "${req.body.quote}");`;
+    const sql_command =
+        `INSERT INTO quotes (author, quote)
+         VALUES ("${req.body.author}", "${req.body.quote}");`;
 
     connection.query(sql_command, (error, results) => {
         if (error) throw error;
@@ -79,13 +81,13 @@ app.patch("/:id", (req, res) => {
 });
 
 app.delete("/:id", (req, res) => {
-    connection.query(`DELETE FROM quotes WHERE id = ${req.params.id}`, (error, results) => {
+    const sql_command = `DELETE FROM quotes WHERE id = ${req.params.id}`;
+
+    connection.query(sql_command, (error, results) => {
         if (error) throw error;
 
         res.redirect("/");
     });
 });
-
-
 
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`));
