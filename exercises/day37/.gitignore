@@ -1,11 +1,11 @@
 async_solution/node_modules
 async_solution/package-lock.json
 
+cats/node_modules
+cats/package-lock.json
+
 movie_planner/node_modules
 movie_planner/package-lock.json
-
-mvc_example/node_modules
-mvc_example/package-lock.json
 
 orm_example/node_modules
 orm_example/package-lock.json
