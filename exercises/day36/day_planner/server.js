@@ -19,8 +19,8 @@ app.engine("handlebars", exphbs({"defaultLayout": "main"}));
 app.set("view engine", "handlebars");
 
 const connection = mysql.createConnection({
-    "host": "localhost",
-    "user": "root",
+    "host"    : "localhost",
+    "user"    : "root",
     "password": "",
     "database": "day_planner_db"
 });
@@ -40,22 +40,12 @@ app.get("/", function(req, res) {
             throw error;
         }
 
-        res.render("index", {"plans": data });
+        res.render("index", {"plans": data});
     });
 });
 
 app.post("/", function(req, res) {
     connection.query("INSERT INTO plans (plan) VALUES (?)", [req.body.plan], function(error, result) {
-        if (error) {
-            throw error;
-        }
-
-        res.redirect("/");
-    });
-});
-
-app.delete("/:id", function(req, res) {
-    connection.query("DELETE FROM plans WHERE id = ?", [req.params.id], function(error, result) {
         if (error) {
             throw error;
         }
@@ -74,4 +64,14 @@ app.put("/", function(req, res) {
     });
 });
 
-app.listen(PORT, () => console.log(`Listening to port ${port}`));
+app.delete("/:id", function(req, res) {
+    connection.query("DELETE FROM plans WHERE id = ?", [req.params.id], function(error, result) {
+        if (error) {
+            throw error;
+        }
+
+        res.redirect("/");
+    });
+});
+
+app.listen(PORT, () => console.log(`Listening to port ${PORT}`));
