@@ -16,46 +16,34 @@ function getTimestamp() {
     return new Date(time).toISOString().slice(0, 19).replace("T", " ");
 }
 
-exports.selectAll = function() {
-    const sql_command = "SELECT * FROM burgers;";
+exports.selectAll = function(table_name) {
+    const sql_command = "SELECT * FROM ${table_name}";
     
     connection.query(sql_command, (error, results) => {
         if (error) throw error;
 
         return results;
     });
-
-    /*
-    return [
-    {
-        "name": "burger 1",
-        "devoured": true
-    },
-    {
-        "name": "burger 2",
-        "devoured": false
-    },
-    {
-        "name": "burger 3",
-        "devoured": true
-    }
-    ];
-    */
 }
 
-exports.insertOne = function(burger) {
+exports.insertOne = function(table_name, object) {
+    let keys = "", values = "";
+
+    for (let key in object) {
+
+    }
+
     const sql_command =
-        `INSERT INTO burgers (name, devoured, date)
-         VALUES ("${burger.name}", false, "${getTimestamp()}");`;
+        `INSERT INTO ${table_name} (${keys}) VALUES (${values});`;
 
     connection.query(sql_command, (error, results) => {
         if (error) throw error;
     });
 }
 
-exports.updateOne = function(id, burger) {
+exports.updateOne = function(table_name, object, id) {
     const sql_command =
-        `UPDATE burgers
+        `UPDATE ${table_name}
          SET name = "${burger.name}", devoured = ${burger.devoured}, date = "${getTimestamp()}"
          WHERE id = ${id};`;
 

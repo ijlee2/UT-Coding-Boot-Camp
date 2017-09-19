@@ -45,8 +45,16 @@ app.set("view engine", "handlebars");
     
 *****************************************************************************
 *****************************************************************************/
-const directory_controllers = path.join(__dirname, "controllers", "burger_controller.js");
-require(directory_controllers)(app);
+// Override POST methods to handle PATCH and DELETE
+app.use(methodOverride("_method"));
+
+// Set controllers directory
+const directory_controllers = path.join(__dirname, "controllers");
+
+// Talk to the burger controller
+app.use("/", require(
+    path.join(directory_controllers, "burger_controller.js"))
+);
 
 
 
