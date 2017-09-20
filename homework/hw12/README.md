@@ -65,6 +65,6 @@ Enter your username, hostname, port number, and default schema. Once you click o
 
 ![How to Configure Database: Step 3b](readme/how_to_configure_database_step3b.png?raw=true)
 
-4. Finally, connect to your database and run `db/schema.sql` and `db/seeds.sql`.
+4. Finally, connect to your database, then run `db/schema.sql` and `db/seeds.sql`.
 
 ![How to Configure Database: Step 4](readme/how_to_configure_database_step4.png?raw=true)
