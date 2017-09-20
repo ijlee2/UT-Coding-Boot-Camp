@@ -7,7 +7,7 @@
 
 - [x] Front end: HTML5, CSS3, Bootstrap4, ES7
 
-- [x] Back end: Node, Express, MySQL
+- [x] Back end: Node, Express, MySQL, Handlebars
 
 
 ## How to Run
