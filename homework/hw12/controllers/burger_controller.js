@@ -36,20 +36,20 @@ router.post("/", (req, res) => {
     burger.addBurger(req.body.burger_name, false, callback);
 });
 
-router.patch("/", (req, res) => {
+router.patch("/:id", (req, res) => {
     function callback(results) {
         res.redirect("/");
     }
 
-    burger.updateBurger(req.body.burger_name, req.body.isEaten, req.body.id, callback);
+    burger.updateBurger(req.body.burger_name, req.body.isEaten, parseInt(req.params.id), callback);
 });
 
-router.delete("/", (req, res) => {
+router.delete("/:id", (req, res) => {
     function callback(results) {
         res.redirect("/");
     }
 
-    burger.deleteBurger(req.body.id, callback);
+    burger.deleteBurger(parseInt(req.params.id), callback);
 });
 
 module.exports = router;
