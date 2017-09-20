@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Chirpy!</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <!-- Moment.js -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1 class="text-center">Chirpy!</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <p class="cool-font">Name</p>
+
+                    <!-- Hint: add something to the input tag to be able to get its data -->
+                    <input class="form-control" type="text" id="name" name="name" placeholder="Enter Your Name">
+                    <br>
+
+                    <p class="cool-font">Chirp</p>
+
+                    <!-- Hint: add something to the textarea tag to be able to get its data -->
+                    <textarea class="form-control" rows="3" id="chirp" name="chirp" placeholder="Enter Chirp Here!"></textarea>
+
+                    <!-- Hint: add something to the button tag to be able to listen to its click -->
+                    <button class="btn btn-lg pull-right" id="submit_chirp">Submit!</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <h2>Chirps</h2>
+                    <hr>
+
+                    <!-- Display all chirps here -->
+                    <div id="chirps">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="js/chirp.js"></script>
+    </body>
+</html>
