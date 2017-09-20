@@ -28,7 +28,9 @@ $("#submit_chirp").click(function() {
         "chirp" : $("#chirp").val().trim()
     };
 
-    $.post("/api/new", data, function(results) {
+    $.post("/api/new", data, function() {
+        $("#name, #chirp").val("");
+
         getChirps();
     });
 });
