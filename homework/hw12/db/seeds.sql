@@ -1,4 +1,5 @@
-USE burgers_db;
+-- USE burgers_db;
+USE brvxapelkn8nfbdt;
 
 INSERT INTO burgers (name, devoured, date) VALUES
 ("The Classic"         , true , "2017-09-17 13:10:08"),
@@ -17,4 +18,4 @@ INSERT INTO burgers (name, devoured, date) VALUES
 ("Ahi Tuna"            , true , "2017-09-17 13:30:44"),
 ("La Bandita"          , false, "2017-09-17 13:32:29");
 
-SELECT * FROM burgers_db.burgers;
+SELECT * FROM burgers;

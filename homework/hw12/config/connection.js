@@ -8,18 +8,17 @@
 const mysql = require("mysql");
 
 // Connect to MySQL
-/*
-const pool = mysql.createPool({
+const connection = mysql.createConnection({
     "connectionLimit"   : 10,
-    "host"              : "ysp9sse09kl0tzxj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "host"              : "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "port"              : 3306,
-    "user"              : "l7g2iikw6shnok4f",
-    "password"          : "atw1sx49swurflkj",
-    "database"          : "yfpdqkylr03ge45y",
+    "user"              : "hm1lc2ulcte784rs",
+    "password"          : "f3zwbvolinwcctn4",
+    "database"          : "brvxapelkn8nfbdt",
     "multipleStatements": true
-});*/
+});
 
-/* For testing on localhost */
+/* For testing on localhost
 const connection = mysql.createConnection({
     "host"              : "localhost",
     "port"              : 3306,
@@ -28,6 +27,7 @@ const connection = mysql.createConnection({
     "database"          : "burgers_db",
     "multipleStatements": true
 });
+*/
 
 connection.connect(error => {
     if (error) throw error;
