@@ -3,6 +3,7 @@ DROP DATABASE IF EXISTS todolist;
 -- Creates the "todolist" database --
 CREATE DATABASE todolist;
 
+/* ORM
 USE todolist;
 
 CREATE TABLE todos (
@@ -15,3 +16,4 @@ CREATE TABLE todos (
 INSERT INTO todos (text, complete) VALUES
 ("Eat dinner", true),
 ("Brush teeth", false);
+*/

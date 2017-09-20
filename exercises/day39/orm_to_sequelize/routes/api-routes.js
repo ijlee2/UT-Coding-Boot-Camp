@@ -6,6 +6,7 @@
 // =============================================================
 // grab the orm from the config
 // (remember: connection.js -> orm.js -> route file)
+/*
 var orm = require("../config/orm.js");
 
 // Routes
@@ -40,3 +41,4 @@ module.exports = function(app) {
         });
     });
 };
+*/
