@@ -17,15 +17,10 @@ $("#search-btn").on("click", function() {
         // log the data to our console
         console.log(data);
 
-        // if the data is false (i.e. not there), then return an error message
-        if (data === false) {
-            $("#name").text("The force is not strong with this one. Your character was not found. ");
-            // don't show the stats section, since there are no stats to show
+        if (!data) {
             $("#stats").hide();
-        }
 
-        // otherwise
-        else {
+        } else {
             // show the stats section
             $("#stats").show();
             // put the character name in the name tag,
