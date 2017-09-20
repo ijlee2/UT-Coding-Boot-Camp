@@ -6,9 +6,10 @@ It is important since other developers will be unlikely to have the same databas
 /* Create and use the starwars db */
 DROP DATABASE IF EXISTS `starwars`;
 CREATE DATABASE `starwars`;
+/*
 USE `starwars`;
 
-/* Create a table for all your star wars characters */
+-- Create a table for all your star wars characters 
 CREATE TABLE `allcharacters` (
 	`id` Int(11) AUTO_INCREMENT NOT NULL,
 	`routeName` VARCHAR(255) NOT NULL,
@@ -19,3 +20,4 @@ CREATE TABLE `allcharacters` (
 
 	PRIMARY KEY (`id`)
 );
+*/
