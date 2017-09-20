@@ -53,7 +53,7 @@ For JawsDB, type `heroku addons:create jawsdb`, then `heroku config:get JAWSDB_U
 
 ![How to Configure Database: Step 1](readme/how_to_configure_database_step1.png?raw=true)
 
-2. Open the file `app/data/friends.js`, change the values on lines 13 - 17, and type `git push heroku master` in Bash to apply the changes.
+2. Open the file `config/connection.js`, change the values on lines 13 - 17, and type `git push heroku master` in Bash to apply the changes.
 
 ![How to Configure Database: Step 2](readme/how_to_configure_database_step2.png?raw=true)
 
