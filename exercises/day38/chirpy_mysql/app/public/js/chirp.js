@@ -10,7 +10,10 @@ function getChirps() {
         let output = "";
 
         results.forEach(r => {
-            output += `<p><strong>${r.author}</strong></p><p>${r.chirp}</p><p>${r.time_created}</p><hr>`;
+            output += `
+                <div>
+                    <p><strong>${r.author}</strong></p><p>${r.chirp}</p><p>${r.time_created}</p>
+                </div>`;
         });
 
         $("#chirps").html(output);
