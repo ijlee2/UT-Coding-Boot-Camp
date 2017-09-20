@@ -21,21 +21,20 @@ const burger = {
         orm.selectAll("burgers", callback);
     },
 
-    "addBurger": function(burger_name, isEaten, callback) {
+    "addBurger": function(name, devoured, callback) {
         const object = {
-            "name"    : burger_name,
-            "devoured": isEaten,
-            "date"    : getDate()
+            name,
+            devoured,
+            "date": getDate()
         }
 
         orm.insertOne("burgers", object, callback);
     },
 
-    "updateBurger": function(burger_name, isEaten, id, callback) {
+    "updateBurger": function(name, id, callback) {
         const object = {
-            "name"    : burger_name,
-            "devoured": isEaten,
-            "date"    : getDate()
+            name,
+            "date": getDate()
         }
 
         const id_object = {

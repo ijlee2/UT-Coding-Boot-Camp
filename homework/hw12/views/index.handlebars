@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-4">
-            <h2>Add a burger:</h2>
+            <h2>{{title}} a burger:</h2>
 
-            <form action="/" method="POST">
+            <form action="{{action}}" method="POST">
                 <div class="form-group py-3">
                     <label for="name"><strong>Burger name</strong></label>
-                    <input type="text" class="form-control form-control-lg" id="name" name="burger_name" required>
-                    <div class="form-control-feedback"></div>
+                    <input type="hidden" name="id" value="{{id}}">
+                    <input type="text" class="form-control form-control-lg" id="name" name="burger_name" value="{{name}}" required>
                 </div>
 
                 <div class="text-center">
@@ -21,9 +21,17 @@
 
             {{#each burgers}}
                 {{#unless this.devoured}}
-                    <form action="/{{this.id}}?_method=PATCH" method="POST">
-                        <button class="btn btn-warning burgers_not_devoured my-2" type="submit">{{this.name}}</button>
-                    </form>
+                    <div class="btn-warning burgers_not_devoured my-2">
+                        <span class="align-middle">{{this.name}}</span>
+
+                        <form action="/{{this.id}}?_method=DELETE" method="POST">
+                            <button class="btn btn-link align-middle float-right" type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </form>
+                        
+                        <form action="/{{this.id}}" method="GET">
+                            <button class="btn btn-link align-middle float-right" type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
                 {{/unless}}
             {{/each}}
         </div>
@@ -33,9 +41,17 @@
 
             {{#each burgers}}
                 {{#if this.devoured}}
-                    <form action="/{{this.id}}?_method=DELETE" method="POST">
-                        <button class="btn btn-success burgers_devoured my-2" type="submit">{{this.name}}</button>
-                    </form>
+                    <div class="btn-success burgers_devoured my-2">
+                        <span class="align-middle">{{this.name}}</span>
+
+                        <form action="/{{this.id}}?_method=DELETE" method="POST">
+                            <button class="btn btn-link align-middle float-right" type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </form>
+                        
+                        <form action="/{{this.id}}" method="GET">
+                            <button class="btn btn-link align-middle float-right" type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
                 {{/if}}
             {{/each}}
         </div>

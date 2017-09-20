@@ -16,13 +16,29 @@ const burger = require(path.join(__dirname, "..", "models", "burger.js"));
     
 *****************************************************************************
 *****************************************************************************/
-router.get("/test", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "public", "test.html"));
-});
-
-router.get("/", (req, res) => {
+router.get("/:id?", (req, res) => {
     function callback(results) {
-        res.render("index", {"burgers": results});
+        if (!req.params.id) {
+            res.render("index", {
+                "title"   : "Add",
+                "action"  : "/",
+                "id"      : undefined,
+                "name"    : "",
+                "burgers" : results
+            });
+
+        } else {
+            const id = parseInt(req.params.id);
+
+            res.render("index", {
+                "title"   : "Edit",
+                "action"  : `/${id}?_method=PATCH`,
+                "id"      : id,
+                "name"    : results.filter(r => r.id === id)[0].name,
+                "burgers" : results
+            });
+
+        }
     }
 
     burger.getBurgers(callback);
@@ -41,7 +57,7 @@ router.patch("/:id", (req, res) => {
         res.redirect("/");
     }
 
-    burger.updateBurger(req.body.burger_name, req.body.isEaten, parseInt(req.params.id), callback);
+    burger.updateBurger(req.body.burger_name, parseInt(req.params.id), callback);
 });
 
 router.delete("/:id", (req, res) => {
