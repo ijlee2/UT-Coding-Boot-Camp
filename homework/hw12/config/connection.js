@@ -1,38 +1,16 @@
-/****************************************************************************
- ****************************************************************************
-    
-    Initialize
-    
-*****************************************************************************
-*****************************************************************************/
+// Import packages
 const mysql = require("mysql");
 
-// Connect to MySQL
-const pool = mysql.createPool({
-    "connectionLimit"   : 10,
-    "host"              : "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "port"              : 3306,
-    "user"              : "hm1lc2ulcte784rs",
-    "password"          : "f3zwbvolinwcctn4",
-    "database"          : "brvxapelkn8nfbdt",
-    "multipleStatements": true
-});
+// For testing on localhost
+const config_localhost = {
+    "host"    : "localhost",
+    "port"    : 3306,
+    "user"    : "root",
+    "password": "",
+    "database": "burgers_db"
+};
 
-/* For testing on localhost
-const connection = mysql.createConnection({
-    "host"              : "localhost",
-    "port"              : 3306,
-    "user"              : "root",
-    "password"          : "",
-    "database"          : "burgers_db",
-    "multipleStatements": true
-});
-
-connection.connect(error => {
-    if (error) throw error;
-
-    console.log(`Database connected as thread ${connection.threadId}.`);
-});
-*/
+// Connect to database
+const pool = mysql.createPool(process.env.JAWSDB_URL || config_localhost);
 
 module.exports = pool;
