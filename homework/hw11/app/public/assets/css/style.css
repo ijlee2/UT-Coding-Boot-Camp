@@ -18,7 +18,7 @@ body {
     letter-spacing: 0.05em;
 }
 
-/* Override Bootstrap CSS */
+/* Override Bootstrap */
 .jumbotron {
     background-color: var(--color-background);
 }
