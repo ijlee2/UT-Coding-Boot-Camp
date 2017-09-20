@@ -1,45 +1,47 @@
-<div class="container">
+<div class="container p-5">
+    <h1 class="display-4 text-center mb-5">Eat-Da-Burger</h1>
+
     <div class="row">
-        <div class="col-12 col-lg-4">
+        <div class="col-12 col-lg-4 mb-5">
             <div class="row">
-                <div class="col-10">
-                    <h2>{{title}} a burger:</h2>
+                <div class="col-11">
+                    <h2 class="mb-4">{{title}} a burger:</h2>
 
                     <form action="{{action}}" method="POST">
-                        <div class="form-group py-3">
-                            <label for="burger_name"><strong>Burger name</strong></label>
+                        <div class="form-group py-2 mb-4">
+                            <label for="burger_name">Burger name</label>
                             <input type="hidden" name="id" value="{{id}}">
                             <input type="text" class="form-control form-control-lg" id="burger_name" name="name" value="{{name}}" required>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-info btn-lg mt-4 mb-3 px-5 pt-3" id="button_submit">Submit</button>
+                            <button type="submit" class="btn btn-info" id="button_submit" title="Click to submit.">Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 col-lg-4">
-            <h2>Haven't eaten:</h2>
+        <div class="col-12 col-lg-4 mb-5">
+            <h2 class="mb-4">Haven't eaten:</h2>
 
             {{#each burgers}}
                 {{#unless this.devoured}}
-                    <div class="row">
-                        <div class="col-10 col-lg-9">
+                    <div class="row mb-2">
+                        <div class="col-11 col-lg-10">
                             <form action="/{{this.id}}/1?_method=PATCH" method="POST">
                                 <input type="hidden" name="name" value="{{this.name}}">
-                                <button class="btn btn-warning burgers_not_devoured" type="submit">{{this.name}}</button>
+                                <button type="submit" class="btn btn-warning burgers_not_devoured" title="Click to devour the {{this.name}} burger!">{{this.name}}</button>
                             </form>
                         </div>
 
                         <div class="col-1 col-lg-1">
                             <form action="/{{this.id}}?_method=DELETE" method="POST">
-                                <button class="btn btn-link" type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                <button type="submit" class="btn btn-link" title="Click to delete the {{this.name}} burger."><i class="fa fa-times" aria-hidden="true"></i></button>
                             </form>
 
                             <form action="/{{this.id}}" method="GET">
-                                <button class="btn btn-link" type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                <button type="submit" class="btn btn-link" title="Click to edit the {{this.name}} burger."><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                             </form>
                         </div>
                     </div>
@@ -48,22 +50,22 @@
         </div>
 
         <div class="col-12 col-lg-4">
-            <h2>Have eaten:</h2>
+            <h2 class="mb-4">Have eaten:</h2>
 
             {{#each burgers}}
                 {{#if this.devoured}}
-                    <div class="row">
-                        <div class="col-10 col-lg-9">
-                            <button class="btn btn-success burgers_not_devoured" type="button">{{this.name}}</button>
+                    <div class="row mb-2">
+                        <div class="col-11 col-lg-10">
+                            <button type="button" class="btn btn-success burgers_devoured">{{this.name}}</button>
                         </div>
 
                         <div class="col-1 col-lg-1">
                             <form action="/{{this.id}}?_method=DELETE" method="POST">
-                                <button class="btn btn-link" type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                <button type="submit" class="btn btn-link" title="Click to delete the {{this.name}} burger."><i class="fa fa-times" aria-hidden="true"></i></button>
                             </form>
 
                             <form action="/{{this.id}}" method="GET">
-                                <button class="btn btn-link" type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                <button type="submit" class="btn btn-link" title="Click to edit the {{this.name}} burger."><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                             </form>
                         </div>
                     </div>
