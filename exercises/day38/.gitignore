@@ -1,2 +1,5 @@
 chirpy_mysql/node_modules
 chirpy_mysql/package-lock.json
+
+chirpy_sequelize/node_modules
+chirpy_sequelize/package-lock.json
