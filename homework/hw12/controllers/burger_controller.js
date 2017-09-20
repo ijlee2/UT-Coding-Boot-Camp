@@ -28,13 +28,14 @@ router.get("/:id?", (req, res) => {
             });
 
         } else {
-            const id = parseInt(req.params.id);
+            const id     = parseInt(req.params.id);
+            const burger = results.filter(r => r.id === id)[0];
 
             res.render("index", {
                 "title"   : "Edit",
-                "action"  : `/${id}?_method=PATCH`,
+                "action"  : `/${id}/${(burger.devoured) ? "1" : "0"}?_method=PATCH`,
                 "id"      : id,
-                "name"    : results.filter(r => r.id === id)[0].name,
+                "name"    : burger.name,
                 "burgers" : results
             });
 
@@ -49,15 +50,15 @@ router.post("/", (req, res) => {
         res.redirect("/");
     }
 
-    burger.addBurger(req.body.burger_name, false, callback);
+    burger.addBurger(req.body.name, false, callback);
 });
 
-router.patch("/:id", (req, res) => {
+router.patch("/:id/:devoured", (req, res) => {
     function callback(results) {
         res.redirect("/");
     }
-
-    burger.updateBurger(req.body.burger_name, parseInt(req.params.id), callback);
+    
+    burger.updateBurger(parseInt(req.params.id), req.body.name, (req.params.devoured === "1"), callback);
 });
 
 router.delete("/:id", (req, res) => {

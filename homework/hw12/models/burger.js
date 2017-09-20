@@ -31,18 +31,19 @@ const burger = {
         orm.insertOne("burgers", object, callback);
     },
 
-    "updateBurger": function(name, id, callback) {
-        const object = {
-            name,
-            "date": getDate()
-        }
-
+    "updateBurger": function(id, name, devoured, callback) {
         const id_object = {
             "name" : "id",
             "value": id
         };
 
-        orm.updateOne("burgers", object, id_object, callback);
+        const object = {
+            name,
+            devoured,
+            "date": getDate()
+        }
+        
+        orm.updateOne("burgers", id_object, object, callback);
     },
 
     "deleteBurger": function(id, callback) {

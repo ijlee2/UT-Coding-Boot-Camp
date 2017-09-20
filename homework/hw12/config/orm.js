@@ -32,7 +32,7 @@ const orm = {
         querySQL(`INSERT INTO ${table_name} (${keys.join(", ")}) VALUES (${values.join(", ")});`, callback);
     },
 
-    "updateOne": function(table_name, object, id_object, callback) {
+    "updateOne": function(table_name, id_object, object, callback) {
         const key_values = [];
 
         for (let key in object) {
