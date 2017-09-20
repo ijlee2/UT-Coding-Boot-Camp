@@ -1,14 +1,14 @@
 const mysql = require("mysql");
 const path  = require("path");
 
-const connection = require(path.join(__dirname, "connection.js"));
+const pool = require(path.join(__dirname, "connection.js"));
 
 function addQuotes(x) {
     return (typeof x === "string") ? `"${x}"` : `${x}`;
 }
 
 function querySQL(sql_command, callback) {
-    connection.query(sql_command, (error, results) => {
+    pool.query(sql_command, (error, results) => {
         if (error) throw error;
 
         callback(results);

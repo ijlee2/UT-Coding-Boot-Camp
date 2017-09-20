@@ -8,7 +8,7 @@
 const mysql = require("mysql");
 
 // Connect to MySQL
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
     "connectionLimit"   : 10,
     "host"              : "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "port"              : 3306,
@@ -27,12 +27,12 @@ const connection = mysql.createConnection({
     "database"          : "burgers_db",
     "multipleStatements": true
 });
-*/
 
 connection.connect(error => {
     if (error) throw error;
 
     console.log(`Database connected as thread ${connection.threadId}.`);
 });
+*/
 
-module.exports = connection;
+module.exports = pool;
