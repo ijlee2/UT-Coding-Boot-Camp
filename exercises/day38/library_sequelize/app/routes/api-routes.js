@@ -52,8 +52,9 @@ module.exports = function(app) {
 
     // Add sequelize code to get all "long" books (more than 150 pages) and return them as JSON
     app.get("/api/books/long", function(req, res) {
-        Book.findOne({
-            "where": {"genre": req.params.genre}
+        Book.findAll({
+            "where": {"pages": {$gt: 150}},
+            "order": [["pages", "DESC"]]
 
         }).then(results => {
             res.json(results);
@@ -64,7 +65,8 @@ module.exports = function(app) {
     // Add sequelize code to get all "short" books (150 pages or less) and return them as JSON
     app.get("/api/books/short", function(req, res) {
         Book.findAll({
-            "where": {"pages": {$lte: 150}}
+            "where": {"pages": {$lte: 150}},
+            "order": [["pages", "ASC"]]
 
         }).then(results => {
             res.json(results);
