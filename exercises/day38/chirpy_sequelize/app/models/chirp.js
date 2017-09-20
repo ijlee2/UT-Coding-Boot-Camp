@@ -7,18 +7,13 @@ const sequelize = require("../config/connection.js");
 
 // Creates a "Chirp" model that matches up with DB
 const Chirp = sequelize.define("chirp", {
-    "author": {
-        "type": Sequelize.STRING
-    },
-    "body": {
-        "type": Sequelize.STRING
-    },
-    "created_at": {
-        "type": Sequelize.DATE
-    }
+    "author"    : {"type": Sequelize.STRING},
+    "body"      : {"type": Sequelize.STRING},
+    "created_at": {"type": Sequelize.DATE}
     
 }, {
     "timestamps": false
+    
 });
 
 // Syncs with DB
