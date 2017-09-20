@@ -4,5 +4,11 @@ chirpy_mysql/package-lock.json
 chirpy_sequelize/node_modules
 chirpy_sequelize/package-lock.json
 
+library_sequelize/node_modules
+library_sequelize/package-lock.json
+
+sequelize_cli/node_modules
+sequelize_cli/package-lock.json
+
 star_wars/node_modules
 star_wars/package-lock.json
