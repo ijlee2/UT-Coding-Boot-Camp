@@ -53,18 +53,14 @@ For JawsDB, type `heroku addons:create jawsdb`, then `heroku config:get JAWSDB_U
 
 ![How to Configure Database: Step 1](readme/how_to_configure_database_step1.png?raw=true)
 
-2. Open the file `config/connection.js`, change the values on lines 13 - 17, and type `git push heroku master` in Bash to apply the changes.
+2. To seed your database, open MySQL Workbench and click Setup New Connection.
 
-![How to Configure Database: Step 2](readme/how_to_configure_database_step2.png?raw=true)
-
-3. To seed your database, open MySQL Workbench and click Setup New Connection.
-
-![How to Configure Database: Step 3a](readme/how_to_configure_database_step3a.png?raw=true)
+![How to Configure Database: Step 2a](readme/how_to_configure_database_step2a.png?raw=true)
 
 Enter your username, hostname, port number, and default schema. Once you click on OK, you will be asked for the password.
 
-![How to Configure Database: Step 3b](readme/how_to_configure_database_step3b.png?raw=true)
+![How to Configure Database: Step 2b](readme/how_to_configure_database_step2b.png?raw=true)
 
-4. Finally, connect to your database, then run `db/schema.sql` and `db/seeds.sql`.
+3. Finally, connect to your database, then run `db/schema.sql` and `db/seeds.sql`.
 
-![How to Configure Database: Step 4](readme/how_to_configure_database_step4.png?raw=true)
+![How to Configure Database: Step 3](readme/how_to_configure_database_step3.png?raw=true)
