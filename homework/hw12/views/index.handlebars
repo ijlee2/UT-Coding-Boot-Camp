@@ -8,7 +8,7 @@
                     <h2 class="mb-4">{{title}} a burger:</h2>
 
                     <form action="{{action}}" method="POST">
-                        <div class="form-group py-2 mb-4">
+                        <div class="form-group py-3 mb-4">
                             <label for="burger_name">Burger name</label>
                             <input type="hidden" name="id" value="{{id}}">
                             <input type="text" class="form-control form-control-lg" id="burger_name" name="name" value="{{name}}" required>
@@ -23,11 +23,11 @@
         </div>
 
         <div class="col-12 col-lg-4 mb-5">
-            <h2 class="mb-4">Haven't eaten:</h2>
+            <h2 class="mb-5">Haven't eaten:</h2>
 
             {{#each burgers}}
                 {{#unless this.devoured}}
-                    <div class="row mb-2">
+                    <div class="row mb-2 burgers">
                         <div class="col-11 col-lg-10">
                             <form action="/{{this.id}}/1?_method=PATCH" method="POST">
                                 <input type="hidden" name="name" value="{{this.name}}">
@@ -50,11 +50,11 @@
         </div>
 
         <div class="col-12 col-lg-4 mb-5">
-            <h2 class="mb-4">Have eaten:</h2>
+            <h2 class="mb-5">Have eaten:</h2>
 
             {{#each burgers}}
                 {{#if this.devoured}}
-                    <div class="row mb-2">
+                    <div class="row mb-2 burgers">
                         <div class="col-11 col-lg-10">
                             <button type="button" class="btn btn-success burgers_devoured">{{this.name}}</button>
                         </div>
@@ -73,8 +73,8 @@
             {{/each}}
         </div>
     </div>
+    <hr>
     
-    <hr>  
     <footer class="text-center pt-2">
         Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2017 by <a href="https://www.linkedin.com/in/ijlee2/" target="_blank">Isaac J. Lee</a>, all rights reserved.
     </footer>
