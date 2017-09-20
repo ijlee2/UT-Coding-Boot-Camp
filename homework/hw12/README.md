@@ -57,6 +57,8 @@ For JawsDB, type `heroku addons:create jawsdb`, then `heroku config:get JAWSDB_U
 
 ![How to Configure Database: Step 2](readme/how_to_configure_database_step2.png?raw=true)
 
+Afterwards, type `git push heroku master` to apply the changes.
+
 3. To seed your database, open MySQL Workbench and click Setup New Connection.
 
 ![How to Configure Database: Step 3a](readme/how_to_configure_database_step3a.png?raw=true)
