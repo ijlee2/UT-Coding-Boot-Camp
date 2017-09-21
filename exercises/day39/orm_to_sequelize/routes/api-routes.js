@@ -37,10 +37,10 @@ module.exports = function(app) {
 */
         Todo.create({
             "text"    : req.body.text,
-            "complete": (req.body.complete === "true") ? 1 : 0
+            "complete": req.body.complete
 
         }).then(results => {
-            res.end();
+            res.json(results);
 
         });
     });
@@ -54,7 +54,7 @@ module.exports = function(app) {
         });
 */
         Todo.destroy({
-            "where": {"id": req.body.id}
+            "where": {"id": req.params.id}
 
         }).then(results => {
             res.end();
@@ -69,12 +69,13 @@ module.exports = function(app) {
             res.json(results);
         });
 */
+        console.log(req.body);
         Todo.update({
             "text"    : req.body.text,
-            "complete": (req.body.complete === "true") ? 1 : 0
+            "complete": req.body.complete
 
         }, {
-            "id": req.body.id
+            "where": {"id": parseInt(req.body.id)}
 
         }).then(results => {
             res.end();

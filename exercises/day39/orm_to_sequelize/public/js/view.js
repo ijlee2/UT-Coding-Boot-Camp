@@ -35,6 +35,7 @@ $(document).ready(function() {
     function getTodos() {
         $.get("/api/todos", function(data) {
             todos = data;
+            
             initializeRows();
         });
     }
