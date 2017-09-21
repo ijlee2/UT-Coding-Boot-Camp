@@ -1,2 +1,5 @@
+cms/node_modules
+cms/package-lock.json
+
 orm_to_sequelize/node_modules
 orm_to_sequelize/package-lock.json
