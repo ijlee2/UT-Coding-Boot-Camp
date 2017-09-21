@@ -57,7 +57,7 @@ module.exports = function(app) {
             "where": {"id": req.params.id}
 
         }).then(results => {
-            res.end();
+            res.json(results);
 
         })
     });
@@ -69,16 +69,15 @@ module.exports = function(app) {
             res.json(results);
         });
 */
-        console.log(req.body);
         Todo.update({
             "text"    : req.body.text,
             "complete": req.body.complete
 
         }, {
-            "where": {"id": parseInt(req.body.id)}
+            "where": {"id": req.body.id}
 
         }).then(results => {
-            res.end();
+            res.json(results);
 
         });
     });

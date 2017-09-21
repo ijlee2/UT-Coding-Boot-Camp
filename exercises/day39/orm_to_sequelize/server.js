@@ -6,9 +6,10 @@
 // =============================================================
 const express    = require("express");
 const bodyParser = require("body-parser");
+const path       = require("path");
 
 // Get all of our models
-const db = require("./models");
+const db = require(path.join(__dirname, "models"));
 
 // Sets up the Express App
 // =============================================================
