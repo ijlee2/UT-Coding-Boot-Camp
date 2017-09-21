@@ -11,7 +11,7 @@ var orm = require("../config/orm.js");
 */
 
 // Grab our models
-var db = require("../models");
+var Todo = require("../models").Todo;
 
 // Routes
 // =============================================================
@@ -23,6 +23,9 @@ module.exports = function(app) {
             res.json(results);
         });
 */
+        Todo.findAll({}).then(results => {
+            res.json(results);
+        });
     });
 
     // POST route for saving a new todo. We can create a todo using the data on req.body
@@ -32,6 +35,14 @@ module.exports = function(app) {
             res.json(results);
         });
 */
+        Todo.create({
+            "text"    : req.body.text,
+            "complete": (req.body.complete === "true") ? 1 : 0
+
+        }).then(results => {
+            res.end();
+
+        });
     });
 
     // DELETE route for deleting todos. We can access the ID of the todo to delete in
@@ -42,6 +53,13 @@ module.exports = function(app) {
             res.json(results);
         });
 */
+        Todo.destroy({
+            "where": {"id": req.body.id}
+
+        }).then(results => {
+            res.end();
+
+        })
     });
 
     // PUT route for updating todos. We can access the updated todo in req.body
@@ -50,6 +68,17 @@ module.exports = function(app) {
         orm.editTodo(req.body, function(results) {
             res.json(results);
         });
-    });
 */
+        Todo.update({
+            "text"    : req.body.text,
+            "complete": (req.body.complete === "true") ? 1 : 0
+
+        }, {
+            "id": req.body.id
+
+        }).then(results => {
+            res.end();
+
+        });
+    });
 };

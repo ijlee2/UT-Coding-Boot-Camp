@@ -113,12 +113,12 @@ $(document).ready(function() {
         const $newInputRow = $(
             [
                 "<li class='list-group-item todo-item'>",
-                "<span>",
-                todo.text,
-                "</span>",
-                "<input type='text' class='edit' style='display: none;'>",
-                "<button class='delete btn btn-default'>x</button>",
-                "<button class='complete btn btn-default'>✓</button>",
+                    "<span>",
+                    todo.text,
+                    "</span>",
+                    "<input type='text' class='edit' style='display: none;'>",
+                    "<button class='delete btn btn-default'>x</button>",
+                    "<button class='complete btn btn-default'>✓</button>",
                 "</li>"
             ].join("")
         );
