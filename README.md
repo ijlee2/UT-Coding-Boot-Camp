@@ -23,8 +23,8 @@ If you have suggestions for making my code better and simpler, please let me kno
 9. [Flashcard Generator](https://github.com/ijlee2/UT-Coding-Boot-Camp/tree/master/homework/hw9/)
 10. [Bamazon](https://github.com/ijlee2/UT-Coding-Boot-Camp/tree/master/homework/hw10/)
 11. [Friend Finder](https://friend-finder-777.herokuapp.com/)
-12. [Eat-Da-Burger (ORM)](https://eat-da-burger-100.herokuapp.com/)
-13. Eat-Da-Burger (Sequelize)
+12. [Eat-Da-Burger w/ ORM](https://eat-da-burger-100.herokuapp.com/)
+13. [Eat-Da-Burger w/ Sequelize](https://eat-da-burger-200.herokuapp.com/)
 
 ## Exercises
 A collection of codes made from scratch or from a starter template.
