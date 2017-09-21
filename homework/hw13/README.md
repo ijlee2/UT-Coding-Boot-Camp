@@ -61,4 +61,4 @@ Enter your username, hostname, port number, and default schema. Once you click o
 
 ![How to Configure Database: Step 2b](readme/how_to_configure_database_step2b.png?raw=true)
 
-3. Sequelize will automatically create the database for you. Sit back and relax!
+3. Sequelize will automatically create the database for you. Sit back and relax, enjoy your burger!
