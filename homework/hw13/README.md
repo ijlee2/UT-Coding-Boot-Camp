@@ -22,9 +22,9 @@ To run Eat-Da-Burger, you will need [Bash](https://git-scm.com/downloads/), [Nod
 
 ![How to Run: Step 2](readme/how_to_run_step2.png?raw=true)
 
-3. To deploy on Heroku, you will need to move `hw12` directory to a folder that isn't a Git repository.
+3. To deploy on Heroku, you will need to move `hw13` directory to a folder that isn't a Git repository.
 
-Type `mkdir ../../../hw12; mv {.,}* ../../../hw12; cd ../../../hw12` to move `hw12` to your starting folder.
+Type `mkdir ../../../hw13; mv {.,}* ../../../hw13; cd ../../../hw13` to move `hw13` to your starting folder.
 
 ![How to Run: Step 3](readme/how_to_run_step3.png?raw=true)
 
@@ -61,6 +61,4 @@ Enter your username, hostname, port number, and default schema. Once you click o
 
 ![How to Configure Database: Step 2b](readme/how_to_configure_database_step2b.png?raw=true)
 
-3. Finally, connect to your database, then run `db/schema.sql` and `db/seeds.sql`.
-
-![How to Configure Database: Step 3](readme/how_to_configure_database_step3.png?raw=true)
+3. Sequelize will automatically create the database for you. Sit back and relax!
