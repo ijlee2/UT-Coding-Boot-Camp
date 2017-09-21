@@ -10,6 +10,6 @@ CREATE TABLE burgers (
     id       INT AUTO_INCREMENT NOT NULL,
     name     VARCHAR(50) NOT NULL,
     devoured BOOLEAN NOT NULL,
-    date     TIMESTAMP NOT NULL,
+    date     DATETIME NOT NULL,
     PRIMARY KEY (id)
 );
