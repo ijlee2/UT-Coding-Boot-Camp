@@ -24,7 +24,21 @@ body {
 }
 
 .display-4 {
+    position : relative;
     font-size: 2.25em;
+}
+
+.sequelize_logo {
+    color            : var(--color-text-highlight);
+    font-family      : "Kaushan Script", cursive;
+    font-size        : 0.75em;
+    
+    position         : absolute;
+    top              : 50%;
+    right            : 21%;
+        -ms-transform: rotate(-14deg);
+    -webkit-transform: rotate(-14deg);
+            transform: rotate(-14deg);
 }
 
 h2 {
@@ -60,14 +74,41 @@ h2 {
 /****************************************************************************
  ****************************************************************************
 
-    Extra small devices
+    Media queries
     
 *****************************************************************************
 *****************************************************************************/
+/* Desktop */
+@media all and (max-width: 1199px), all and (max-device-width: 1199px) {
+    .sequelize_logo {
+        right: 15%;
+    }
+}
+
+/* Tablet */
+@media all and (max-width: 991px), all and (max-device-width: 991px) {
+    .sequelize_logo {
+        right: 1.5%;
+    }
+}
+
+/* Tablet */
+@media all and (max-width: 767px), all and (max-device-width: 767px) {
+    .sequelize_logo {
+        top  : 70%;
+        right: -5%;
+    }
+}
+
+/* Extra small devices */
 @media all and (max-width: 575px), all and (max-device-width: 575px) {
     body {
-        font-size: 20px;
-        font-size: 3.48vw;
+        font-size: 22px;
+        font-size: 3.83vw;
+    }
+
+    .sequelize_logo {
+        right: 3%;
     }
 
     #button_submit, .burgers_not_devoured, .burgers_devoured, .btn-link {
