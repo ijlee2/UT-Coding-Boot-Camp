@@ -31,7 +31,9 @@ require("./routes/api-routes.js")(app);
 
 // Starting our Express app
 // =============================================================
-db.sequelize.sync().then(function() {
+// {"force": true} will drop the Todo table and recreate it with a new configuration
+// each time we run the app
+db.sequelize.sync({"force": true}).then(function() {
     app.listen(PORT, function() {
         console.log("App listening on PORT " + PORT);
     });

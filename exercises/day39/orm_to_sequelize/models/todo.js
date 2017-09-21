@@ -1,12 +1,14 @@
 module.exports = function(sequelize, DataTypes) {
     const Todo = sequelize.define("Todo", {
         "text": {
-            "type"    : DataTypes.STRING,
-            "validate": {"notEmpty": true}
+            "type"     : DataTypes.STRING,
+            "allowNull": false,
+            "validate" : {"len": [1, 140]}
         },
 
         "complete": {
-            "type": DataTypes.BOOLEAN
+            "type"        : DataTypes.BOOLEAN,
+            "defaultValue": false
         }
     });
 
