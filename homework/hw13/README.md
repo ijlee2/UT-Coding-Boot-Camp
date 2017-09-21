@@ -18,7 +18,7 @@ To run Eat-Da-Burger, you will need [Bash](https://git-scm.com/downloads/), [Nod
 
 ![How to Run: Step 1](readme/how_to_run_step1.png?raw=true)
 
-2. Then, type `cd UT-Coding-Boot-Camp/homework/hw12; npm install` to download the required packages.
+2. Then, type `cd UT-Coding-Boot-Camp/homework/hw13; npm install` to download the required packages.
 
 ![How to Run: Step 2](readme/how_to_run_step2.png?raw=true)
 

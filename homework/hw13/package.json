@@ -1,7 +1,7 @@
 {
-  "name": "hw12_isaac_lee",
+  "name": "hw13_isaac_lee",
   "version": "1.0.0",
-  "description": "Eat Da Burger",
+  "description": "Eat Da Burger Sequelize!",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.1",
