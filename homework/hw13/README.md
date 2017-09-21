@@ -1,13 +1,13 @@
-# Eat-Da-Burger
+# Eat-Da-Burger Sequelize!
 
-[Plan your next burger today!](https://eat-da-burger-100.herokuapp.com)
+[Plan your next burger today!](https://eat-da-burger-200.herokuapp.com)
 
 
 ## Technologies Used
 
 - [x] Front end: HTML5, CSS3, Bootstrap4, ES7
 
-- [x] Back end: Node, Express, MySQL, Handlebars
+- [x] Back end: Node, Express, MySQL, Sequelize, Handlebars
 
 
 ## How to Run

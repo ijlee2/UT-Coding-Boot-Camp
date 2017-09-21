@@ -66,8 +66,8 @@ h2 {
 *****************************************************************************/
 @media all and (max-width: 575px), all and (max-device-width: 575px) {
     body {
-        font-size: 20px;
-        font-size: 3.48vw;
+        font-size: 22px;
+        font-size: 3.83vw;
     }
 
     #button_submit, .burgers_not_devoured, .burgers_devoured, .btn-link {
