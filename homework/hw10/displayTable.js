@@ -5,7 +5,7 @@ module.exports = function displayTable(array, numRowsPerGroup, columnType) {
     
     *************************************************************************/
     array.forEach(row => {
-        for (let key of row) {
+        for (let key in row) {
             if (typeof columnType[key] !== "undefined") {
                 row[key] = row[key].toFixed(columnType[key]);
             }
@@ -26,7 +26,7 @@ module.exports = function displayTable(array, numRowsPerGroup, columnType) {
 
     // Account for the values
     array.forEach(row => {
-        for (let key of row) {
+        for (let key in row) {
             columnWidths[key] = Math.max(columnWidths[key], row[key].length);
         }
     });

@@ -119,16 +119,29 @@ function createRecommendations(eat, play, drink, directoryName) {
     let latitude, longitude;
     let temp, total = 0;
 
-    for (key1 of eat) {
+    for (key1 in eat) {
+        // Ignore the proto method
+        if (!eat.hasOwnProperty(key1)) {
+            continue;
+        }
+
         event1 = eat[key1];
 
-        for (key2 of play) {
+        for (key2 in play) {
+            if (!play.hasOwnProperty(key2)) {
+                continue;
+            }
+
             event2 = play[key2];
 
             // Find the distance between points
             a = spherical_distance(event1.geometry, event2.geometry);
 
-            for (key3 of drink) {
+            for (key3 in drink) {
+                if (!drink.hasOwnProperty(key3)) {
+                    continue;
+                }
+                
                 event3 = drink[key3];
 
                 // Find the distance between points

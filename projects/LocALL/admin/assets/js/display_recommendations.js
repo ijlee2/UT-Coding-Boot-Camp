@@ -223,7 +223,7 @@ $("body").on("click", "tbody tr", function() {
     map.setZoom(Math.max(10, 15 - Math.floor(1 + r.metric / 3)));
     
     // Place a marker for each place
-    for (let key of places) {
+    for (let key in places) {
         const p = places[key];
 
         const marker = new google.maps.Marker({

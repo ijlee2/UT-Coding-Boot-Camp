@@ -43,7 +43,7 @@ const eventNames = {
     
 *****************************************************************************
 *****************************************************************************/
-for (let eventType of eventNames) {
+for (let eventType in eventNames) {
     eventNames[eventType].forEach(eventName =>
         database_events.child(`${eventType}/${eventName}`).once("value").then(function(snapshot) {
             const database     = snapshot.val();
@@ -51,7 +51,12 @@ for (let eventType of eventNames) {
 
             let names = [], name;
 
-            for (let key of database) {
+            for (let key in database) {
+                // Ignore the proto method
+                if (!database.hasOwnProperty(key)) {
+                    continue;
+                }
+                
                 // Check for duplicate names
                 name = database[key].name;
 

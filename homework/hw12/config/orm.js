@@ -29,7 +29,7 @@ const orm = {
         const keys = [], values = [];
 
         // Use a for loop to pair keys and values correctly (Object.values is not fully implemented yet)
-        for (let key of object) {
+        for (let key in object) {
             keys.push(key);
             values.push(addQuotes(object[key]));
         }
@@ -41,7 +41,7 @@ const orm = {
     "updateOne": function(table_name, id_object, object, callback) {
         const key_values = [];
 
-        for (let key of object) {
+        for (let key in object) {
             key_values.push(`${key} = ${addQuotes(object[key])}`);
         }
 
