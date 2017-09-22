@@ -55,7 +55,7 @@ $(document).ready(function() {
 
         if ("a" <= yourGuess && yourGuess <= "z") {
             // Check if the guess has yet to be made
-            if (guesses_array.indexOf(yourGuess) === -1) {
+            if (!guesses_array.includes(yourGuess)) {
                 numTriesLeft--;
 
                 $("#numTriesLeft").text(numTriesLeft);

@@ -94,7 +94,7 @@ function spherical_distance(point1, point2) {
     const lng2_rad = point2.lng * deg_to_rad;
 
     // Find the distance
-    return 2 * r * Math.sqrt(Math.pow(Math.sin((lat2_rad - lat1_rad) / 2), 2) + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.pow(Math.sin((lng2_rad - lng1_rad) / 2), 2));
+    return 2 * r * Math.sqrt(Math.sin((lat2_rad - lat1_rad) / 2) ** 2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin((lng2_rad - lng1_rad) / 2) ** 2);
 }
 
 
@@ -223,7 +223,7 @@ $("body").on("click", "tbody tr", function() {
     map.setZoom(Math.max(10, 15 - Math.floor(1 + r.metric / 3)));
     
     // Place a marker for each place
-    for (let key in places) {
+    for (let key of places) {
         const p = places[key];
 
         const marker = new google.maps.Marker({

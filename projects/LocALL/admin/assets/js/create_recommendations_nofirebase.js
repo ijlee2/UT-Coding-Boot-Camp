@@ -77,7 +77,7 @@ function spherical_distance(point1, point2) {
     const lng2_rad = point2.lng * deg_to_rad;
 
     // Find the distance
-    return 2 * r * Math.sqrt(Math.pow(Math.sin((lat2_rad - lat1_rad) / 2), 2) + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.pow(Math.sin((lng2_rad - lng1_rad) / 2), 2));
+    return 2 * r * Math.sqrt(Math.sin((lat2_rad - lat1_rad) / 2) ** 2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin((lng2_rad - lng1_rad) / 2) ** 2);
 }
 
 
@@ -118,7 +118,7 @@ eat.forEach(event1 => {
                 longitude = (event1.geometry.lng + event2.geometry.lng + event3.geometry.lng) / 3;
 
                 // Un-normalized probability
-                temp = 1 / Math.pow(Math.log(1 + metric), 2);
+                temp = 1 / (Math.log(1 + metric) ** 2);
 
                 data.push({
                     "eat"        : event1,
@@ -201,7 +201,7 @@ $("body").on("click", "tbody tr", function() {
     map.setZoom(Math.max(10, 15 - Math.floor(1 + d.metric / 3)));
     
     // Place a marker for each place
-    for (let key in places) {
+    for (let key of places) {
         const marker = new google.maps.Marker({
             "map"     : map,
             "position": places[key].geometry,

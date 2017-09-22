@@ -29,7 +29,7 @@ function updateSearchHistory(query) {
         $("#searchHistory").html(output);
     
     // Add new queries to the search history
-    } else if (topics.indexOf(query) === -1) {
+    } else if (!topics.includes(query)) {
         topics.push(query);
         numTopics++;
 
@@ -55,7 +55,7 @@ function toggleGIFAnimation() {
     let img_url = $("img", this).attr("src");
     
     // GIPHY adds _s for still images
-    if (img_url.indexOf("_s.gif") >= 0) {
+    if (img_url.includes("_s.gif")) {
         // Play the GIF
         img_url = img_url.replace("_s.gif", ".gif");
 

@@ -106,7 +106,7 @@ function buyItem() {
             "type"    : "input",
             "name"    : "item_id",
             "message" : "Enter the ID of the item that you want to buy:",
-            "validate": value => (value !== "" && !isNaN(value) && items.indexOf(parseFloat(value)) >= 0)
+            "validate": value => (value !== "" && !isNaN(value) && items.includes(parseFloat(value)))
         },
         {
             "type"    : "input",

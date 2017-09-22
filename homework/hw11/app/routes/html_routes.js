@@ -27,7 +27,7 @@ const paths = {
     "/importance": "importance.html"
 };
 
-for (let key in paths) {
+for (let key of paths) {
     router.get(key, (req, res) => {
         res.sendFile(path.join(directory_public, paths[key]));
     });

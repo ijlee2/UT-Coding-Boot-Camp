@@ -122,7 +122,7 @@ const HangmanGame = function() {
     }
 
     function isGuessNew(x) {
-        return guesses_array.indexOf(x) === -1;
+        return !guesses_array.includes(x);
     }
 
     this.checkProgress = function(letter) {

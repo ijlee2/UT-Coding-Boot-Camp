@@ -78,7 +78,7 @@ $(document).ready(function() {
 
         if ("a" <= letter && letter <= "z") {
             // Check if the letter is a new guess
-            if (guesses_array.indexOf(letter) === -1) {
+            if (!guesses_array.includes(letter)) {
                 // Check if the letter is a part of the word
                 let index = answer.indexOf(letter);
 

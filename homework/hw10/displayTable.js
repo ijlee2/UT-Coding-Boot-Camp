@@ -5,7 +5,7 @@ module.exports = function displayTable(array, numRowsPerGroup, columnType) {
     
     *************************************************************************/
     array.forEach(row => {
-        for (let key in row) {
+        for (let key of row) {
             if (typeof columnType[key] !== "undefined") {
                 row[key] = row[key].toFixed(columnType[key]);
             }
@@ -26,7 +26,7 @@ module.exports = function displayTable(array, numRowsPerGroup, columnType) {
 
     // Account for the values
     array.forEach(row => {
-        for (let key in row) {
+        for (let key of row) {
             columnWidths[key] = Math.max(columnWidths[key], row[key].length);
         }
     });
@@ -51,7 +51,7 @@ module.exports = function displayTable(array, numRowsPerGroup, columnType) {
             console.log(`${output_header}`.yellow.bold);
         }
 
-        // TODO: Use Object.values() once it's fully implemented in ES2017
+        // TODO: Use Object.values() once ES8 is accepted
         const output_row = headers.reduce((sum, value) => {
             const item = row[value];
 

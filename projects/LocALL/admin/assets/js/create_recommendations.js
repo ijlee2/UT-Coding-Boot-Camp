@@ -95,7 +95,7 @@ function spherical_distance(point1, point2) {
     const lng2_rad = point2.lng * deg_to_rad;
 
     // Find the distance
-    return 2 * r * Math.sqrt(Math.pow(Math.sin((lat2_rad - lat1_rad) / 2), 2) + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.pow(Math.sin((lng2_rad - lng1_rad) / 2), 2));
+    return 2 * r * Math.sqrt(Math.sin((lat2_rad - lat1_rad) / 2) ** 2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin((lng2_rad - lng1_rad) / 2) ** 2);
 }
 
 
@@ -119,29 +119,16 @@ function createRecommendations(eat, play, drink, directoryName) {
     let latitude, longitude;
     let temp, total = 0;
 
-    for (key1 in eat) {
-        // Ignore the proto method
-        if (!eat.hasOwnProperty(key1)) {
-            continue;
-        }
-
+    for (key1 of eat) {
         event1 = eat[key1];
 
-        for (key2 in play) {
-            if (!play.hasOwnProperty(key2)) {
-                continue;
-            }
-
+        for (key2 of play) {
             event2 = play[key2];
 
             // Find the distance between points
             a = spherical_distance(event1.geometry, event2.geometry);
 
-            for (key3 in drink) {
-                if (!drink.hasOwnProperty(key3)) {
-                    continue;
-                }
-
+            for (key3 of drink) {
                 event3 = drink[key3];
 
                 // Find the distance between points
@@ -158,7 +145,7 @@ function createRecommendations(eat, play, drink, directoryName) {
                     longitude = (event1.geometry.lng + event2.geometry.lng + event3.geometry.lng) / 3;
 
                     // Un-normalized probability
-                    temp = 1 / Math.pow(Math.log(1 + metric), 2);
+                    temp = 1 / (Math.log(1 + metric) ** 2);
 
                     data.push({
                         "eat"        : event1,

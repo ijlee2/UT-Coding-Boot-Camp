@@ -236,9 +236,8 @@ function addTrain() {
     // Format the departure time
     const departure_string = $("#departure").val().trim();
 
-    const i = departure_string.indexOf(":");
-    const h = parseInt(departure_string.substring(0, i));
-    const m = parseInt(departure_string.substring(i + 1));
+    // Extract hour and minute
+    [h, m] = departure_string.split(":").map(x => parseInt(x, 10));
 
     // Update the database
     const train = {
@@ -259,9 +258,8 @@ function editTrain() {
     // Format the departure time
     const departure_string = $("#departure").val().trim();
 
-    const i = departure_string.indexOf(":");
-    const h = parseInt(departure_string.substring(0, i));
-    const m = parseInt(departure_string.substring(i + 1));
+    // Extract hour and minute
+    [h, m] = departure_string.split(":").map(x => parseInt(x, 10));
 
     // Update the database
     const train = {
