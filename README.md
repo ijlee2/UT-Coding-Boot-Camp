@@ -6,8 +6,8 @@ Unless I noted otherwise, I have written all code. I'd much appreciate it if you
 If you have suggestions for making my code better and simpler, please let me know!
 
 ## Projects
-1. [LocALL](https://github.com/ijlee2/LocALL) (w/ [Margie Tagaban](https://github.com/taggie05), [Aaron Tyler](https://github.com/atyler88), [Jacque White](https://github.com/JacqueWhite))
-2. [Mai](https://github.com/ijlee2/Mai) (w/ [John Absher](https://github.com/absher16/), [David Gutierrez](https://github.com/dcgutierrez93), [Jason Joachim](https://github.com/jasonjoachim))
+1. [LocALL](https://github.com/ijlee2/LocALL) (w/ [Margie Tagaban](https://www.linkedin.com/in/margarita-tagaban/), [Aaron Tyler](https://github.com/atyler88/), [Jacque White](https://www.linkedin.com/in/jacquelinewhite15/))
+2. [Mai](https://github.com/ijlee2/Mai) (w/ [John Absher](https://www.linkedin.com/in/johnabsher/), [David Gutierrez](https://www.linkedin.com/in/david-gutierrez-979a4a148/), [Jason Joachim](https://www.linkedin.com/in/jasonjoachim/))
 3. 
 
 ## Homework
