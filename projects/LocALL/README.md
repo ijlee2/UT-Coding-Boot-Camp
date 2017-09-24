@@ -4,7 +4,7 @@ For places to eat, to play, and to drink, choose LocALL. We give you the best re
 
 ## Team Members
 - [Margie Tagaban](https://www.linkedin.com/in/margarita-tagaban/) (front-end)
-- Aaron Tyler (front-end)
+- [Aaron Tyler](https://github.com/atyler88/) (front-end)
 - [Isaac Lee](https://www.linkedin.com/in/ijlee2/) (back-end)
 - [Jacque White](https://www.linkedin.com/in/jacquelinewhite15/) (back-end)
 
