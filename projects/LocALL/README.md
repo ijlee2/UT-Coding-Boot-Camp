@@ -3,10 +3,10 @@
 For places to eat, to play, and to drink, choose LocALL. We give you the best recommendations in an instant!
 
 ## Team Members
-- Margie Tagaban (front-end)
+- [Margie Tagaban](https://www.linkedin.com/in/margarita-tagaban/) (front-end)
 - Aaron Tyler (front-end)
-- Isaac Lee (back-end)
-- Jacque White (back-end)
+- [Isaac Lee](https://www.linkedin.com/in/ijlee2/) (back-end)
+- [Jacque White](https://www.linkedin.com/in/jacquelinewhite15/) (back-end)
 
 ## GitHub Demos
 - [Click here to see our website in action.](https://ijlee2.github.io/LocALL/)
