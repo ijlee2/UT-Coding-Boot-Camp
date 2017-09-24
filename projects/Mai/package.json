@@ -1,0 +1,77 @@
+{
+    "//": [
+        "body-parser                : Parse incoming request bodies in middlewares",
+        "del                        : Delete files and folders",
+        "express                    : Develop API using Express",
+        "express-handlebars         : Use Handlebars to create custom pages",
+        "lokijs                     : Fast, in-memory datastore for Node",
+        "method-override            : Override POST method to handle PATCH and DELETE",
+        "multer                     : Node middleware for handling multipart/form-data",
+        "mysql2                     : Performance-driven MySQL client for Node",
+        "node-cloud-vision-api-comoc: Wrapper for using Google Cloud Vision",
+        "path                       : Utilities for working with file and directory paths",
+        "sequelize                  : Node ORM for MySQL"
+    ],
+    "name": "mai",
+    "version": "1.0.0",
+    "description": "Everyone has a story to share. Hear them out.",
+    "keywords": [
+        "Google Cloud Vision",
+        "Google Natural Language Processing",
+        "Image Recognition",
+        "Natural Language Generation",
+        "Story"
+    ],
+    "homepage": "https://github.com/ijlee2/Mai",
+    "bugs": {
+        "url": "https://github.com/ijlee2/Mai/issues"
+    },
+    "license": "UNLICENSED",
+    "contributors": [
+        {
+            "name": "John Absher",
+            "url": "https://www.linkedin.com/in/johnabsher/"
+        },
+        {
+            "name": "David Gutierrez",
+            "url": "https://www.linkedin.com/in/david-gutierrez-979a4a148/"
+        },
+        {
+            "name": "Jason Joachim",
+            "url": "https://www.linkedin.com/in/jasonjoachim/"
+        },
+        {
+            "name": "Isaac Lee",
+            "url": "https://www.linkedin.com/in/ijlee2/"
+        }
+    ],
+    "main": "server.js",
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "del": "^3.0.0",
+        "express": "^4.15.4",
+        "express-handlebars": "^3.0.0",
+        "lokijs": "^1.5.0",
+        "method-override": "^2.3.9",
+        "multer": "^1.3.0",
+        "mysql2": "^1.4.2",
+        "node-cloud-vision-api-comoc": "^0.1.2",
+        "path": "^0.12.7",
+        "sequelize": "^4.10.2"
+    },
+    "devDependencies": {
+        "@types/del": "^3.0.0",
+        "@types/express": "^4.0.37",
+        "@types/lokijs": "^1.2.30",
+        "@types/multer": "^1.3.3",
+        "typescript": "^2.5.2"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ijlee2/Mai.git"
+    }
+}

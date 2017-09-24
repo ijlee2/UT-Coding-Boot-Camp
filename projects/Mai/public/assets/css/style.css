@@ -1,0 +1,164 @@
+/****************************************************************************
+ ****************************************************************************
+    
+    Default stylesheet
+    
+*****************************************************************************
+*****************************************************************************/
+:root {
+    /* Define fonts */
+    --font-main     : "Nunito", sans-serif;
+    --font-highlight: "Leckerli One", cursive;
+
+    /* Define heights */
+    --height-nav: 40px;
+
+    /* Define color scheme (TODO: Delete this if not used later) */
+    /*
+    --color-background: #f0f2f0;
+    */
+}
+
+html {
+    font-family: var(--font-main);
+    font-size  : 20px;
+}
+
+
+/* Navbar */
+/* Source for changing the height: https://stackoverflow.com/questions/35552708/is-materialize-navbar-height-adjustment-possible */
+nav {
+    height     : var(--height-nav);
+    line-height: var(--height-nav);
+}
+
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height     : var(--height-nav);
+    line-height: var(--height-nav);
+}
+
+nav .button-collapse i {
+    height     : var(--height-nav);
+    line-height: var(--height-nav);
+}
+
+nav .brand-logo {
+    font-family   : var(--font-highlight);
+    font-size     : 1.05em;
+    height        : 1.4em;
+    letter-spacing: 0.04em;
+    top           : 0.15em;
+    margin-left   : 1em;
+}
+
+nav .brand-logo img {
+    height: 100%;
+}
+
+nav .mai-menu-desktop-items {
+    font-size     : 0.75em;
+    letter-spacing: 0.01em;
+}
+
+nav #mai-menu-desktop li:last-child {
+    margin-right: 1em;
+}
+
+
+/* Footer */
+.footer-copyright {
+    font-size: 0.75em;
+}
+
+
+/* Signup, Login */
+.mai-signup-wrapper, .mai-login-wrapper {
+    height: calc(100vh - var(--height-nav));
+}
+
+h1.brand-logo { 
+    font-family   : var(--font-highlight);
+    font-size     : 2.8em;
+    height        : 1.4em;
+    letter-spacing: 0.01em;
+}
+
+h1.brand-logo img {
+    height: 100%;
+}
+
+.input-field {
+    margin-top   : 0.6em;
+    margin-bottom: 0.6em;
+}
+
+#mai-form-signup label, #mai-form-login label {
+    font-size: 0.85em;
+}
+
+#mai-form-signup button, #mai-form-login button {
+    font-size: 0.85em;
+    width    : 100%;
+}
+
+.mai-separator-1 {
+    height: 0.4em;
+}
+
+.mai-separator-2 {
+    height: 1.2em;
+}
+
+.mai-separator-3 {
+    height: 2em;
+}
+
+
+/* User, Story */
+#mai-user-stats {
+    font-size: 1.2em;
+}
+
+#mai-user-stats #mai-fullname {
+    font-family   : var(--font-highlight);
+    font-size     : 2.1em;
+    letter-spacing: 0.01em;
+}
+
+#mai-user-stats #mai-numStories,
+#mai-user-stats #mai-numWriters,
+#mai-user-stats #mai-numReaders {
+    font-size: 1.2em;
+}
+
+
+
+/****************************************************************************
+ ****************************************************************************
+    
+    Media query
+    
+*****************************************************************************
+*****************************************************************************/
+/* Tablet and larger */
+@media only screen and (min-width: 601px) {
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height     : var(--height-nav);
+        line-height: var(--height-nav);
+    }
+}
+
+/* Desktop */
+@media all and (max-width: 1200px), all and (max-device-width: 1200px) {
+}
+
+/* Tablet */
+@media all and (max-width: 992px), all and (max-device-width: 992px) {
+    nav .brand-logo {
+        margin-left: 0;
+    }
+}
+
+/* Mobile */
+@media all and (max-width: 600px), all and (max-device-width: 600px) {
+}
