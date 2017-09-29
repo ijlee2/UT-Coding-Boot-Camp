@@ -40,5 +40,11 @@ db.students.find({"rownumber": 5, "os": "Mac"}).pretty();
 // List students whose hobby includes drinking coffee
 db.students.find({"hobbies": "drinking coffee"});
 
+// Query with an or
+db.students.find({
+    "hobbies": {$in: ["drinking coffee", "playing basketball"]}
+    
+});
+
 // Drop database
 db.dropDatabase();
