@@ -1,20 +1,31 @@
+:root {
+    /* Define color scheme */
+    --color-gray      : #aaa;
+    --color-dark-gray : #777;
+    --color-light-gray: #ebebeb;
+    --color-link      : #2938f9;
+}
+
 html {
     margin : 0;
     padding: 0;
 }
 
 body {
-    background : #777;
-    
-    width      : 960px;
-    margin     : auto;
-
+    background : var(--color-dark-gray);
     font-family: "Arial", "Helvetica Neue", "Helvetica", sans-serif;
     font-size  : 18px;
+    width      : 960px;
+    margin     : auto;
+}
+
+body *:hover {
+    transform : scale(1.02);
+    transition: all 0.2s;
 }
 
 section {
-    background: #ebebeb;
+    background: var(--color-light-gray);
     text-align: center;
 }
 
@@ -33,8 +44,7 @@ section {
 }
 
 #article {
-    background: #777;
-
+    background    : var(--color-dark-gray);
     width         : 92%;
     margin        : 15px auto;
     padding-top   : 30px;
@@ -68,9 +78,9 @@ section {
     clear: both;
 }
 
-#copyright {
-    background    : #aaa;
-    color         : #2938f9;
+#copyright, #copyright a {
+    background    : var(--color-gray);
+    color         : var(--color-link);
     text-align    : center;
     
     margin-top    : 30px;
