@@ -18,13 +18,13 @@
 body {
     background-image : url("../images/crossword.png");
     background-repeat: repeat;
-    font-family      : "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    font-family      : "Arial", "Helvetica Neue", "Helvetica", sans-serif;
     font-size        : 17px;
 }
 
 h1, h2 {
     color         : var(--color-mint-green);
-    font-family   : "Georgia", Times, "Times New Roman", serif;
+    font-family   : "Georgia", "Times", "Times New Roman", serif;
     font-weight   : bold;
     letter-spacing: 0.015em;
 }
@@ -61,7 +61,7 @@ figcaption strong {
 .navbar-brand {
     background-color: var(--color-mint-green) !important;
     color           : var(--color-light-theme) !important;
-    font-family     : "Georgia", Times, "Times New Roman", serif;
+    font-family     : "Georgia", "Times", "Times New Roman", serif;
     font-size       : 1.9em;
     font-weight     : bold;
     letter-spacing  : 0.02em;
@@ -111,16 +111,16 @@ figcaption strong {
 
 
 /* Begin: portfolio.html */
-.left_pane figure.portfolio {
-    position: relative; /* For figcaption (position: absolute) */
+.left_pane .portfolio {
+    position     : relative; /* For figcaption (position: absolute) */
     margin-bottom: 20% !important;
 }
 
-.left_pane figure.portfolio img {
+.left_pane .portfolio img {
     border: 2px solid var(--color-separator);
 }
 
-.left_pane figure.portfolio figcaption {
+.left_pane .portfolio figcaption {
     background-color: var(--color-mint-green);
     color           : var(--color-light-theme);
     font-size       : 1.1em;
@@ -154,7 +154,7 @@ figcaption strong {
 }
 
 .left_pane textarea {
-    font-family  : "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    font-family  : "Arial", "Helvetica Neue", "Helvetica", sans-serif;
     font-size    : 1.1em;
 
     display      : block;
@@ -282,10 +282,10 @@ figcaption strong {
     #hamburger_menu {
         background-color: var(--color-dark-theme);
 
-        position: absolute;
-        top     : 0;
-        right   : 0;
-        border  : 1px solid var(--color-light-theme);
+        position        : absolute;
+        top             : 0;
+        right           : 0;
+        border          : 1px solid var(--color-light-theme);
     }
 
     #hamburger_menu span {
@@ -296,7 +296,7 @@ figcaption strong {
         margin-top: 18px;
     }
 
-    #top_pane button span.icon-bar {
+    #top_pane button .icon-bar {
         margin: 6px 5px;
     }
     
