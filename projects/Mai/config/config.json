@@ -2,7 +2,7 @@
     "development": {
         "username": "root",
         "password": null,
-        "database": "database_development",
+        "database": "mai_db",
         "host"    : "127.0.0.1",
         "dialect" : "mysql"
     },
@@ -10,16 +10,16 @@
     "test": {
         "username": "root",
         "password": null,
-        "database": "database_test",
+        "database": "mai_db",
         "host"    : "127.0.0.1",
         "dialect" : "mysql"
     },
     
     "production": {
-        "username": "root",
-        "password": null,
-        "database": "database_production",
-        "host"    : "127.0.0.1",
+        "username": "ndht3sf9kno7gydy",
+        "password": "p61gudcegp2ox850",
+        "database": "ocbusqsbzymg3amh",
+        "host"    : "i943okdfa47xqzpy.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
         "dialect" : "mysql"
     }
 }

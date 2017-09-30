@@ -1,0 +1,22 @@
+<div class="mai-separator-2"></div>
+
+<h1>Writers</h1>
+
+<div class="row">
+    {{#each writers}}
+    <div class="col s4 m3 xl2">
+        <div class="row">
+            <div class="col s10 offset-s1 mai-writer">
+                <a href="/profile_{{this.id}}">
+                    <img src="{{this.url_photo}}" class="responsive-img circle" alt="{{this.fullname}}">
+                    <div class="center-align">{{this.fullname}}</div>
+                </a>
+
+                <div class="mai-separator-1"></div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<div class="mai-separator-3"></div>

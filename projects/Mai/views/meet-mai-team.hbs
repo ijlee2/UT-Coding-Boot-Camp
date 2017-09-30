@@ -1,0 +1,50 @@
+<div class="mai-desktop-page">
+    <div class="mai-separator-2"></div>
+
+    <h1 class="mai-attacher-1">Mai Team</h1>
+
+    <div class="carousel">
+        {{#each maiTeam}}
+        <div class="carousel-item center-align">
+            <a href="{{this.url_linkedin}}" target="_blank">
+                <h2>{{this.fullname}}</h2>
+                <img class="responsive-img" src="{{this.url_photo}}" alt="{{this.fullname}}">
+            </a>
+
+            <p>{{this.biography}}</p>
+        </div>
+
+        {{/each}}
+    </div>
+</div>
+
+<div class="mai-mobile-page">
+    <div class="mai-separator-2"></div>
+
+    <div class="row">
+        <div class="col s12 m10 offset-m1">
+            <h1>Mai Team</h1>
+            
+            <div class="row">
+                {{#each maiTeam}}
+                <div class="col s12 m6">
+                    <div class="card mai-card">
+                        <div class="card-image">
+                            <a href="{{this.url_linkedin}}" target="_blank">
+                                <img class="responsive-img" src="{{this.url_photo}}" alt="{{this.fullname}}">
+                            </a>
+                        </div>
+
+                        <div class="card-content">
+                            <h2>{{this.fullname}}</h2>
+                            <p>{{this.biography}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="mai-separator-3"></div>
+    </div>
+</div>

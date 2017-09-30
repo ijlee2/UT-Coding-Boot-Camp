@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Everyone has a story to tell. Hear them out.">
+        <meta name="author" content="John Absher, David Gutierrez, Jason Joachim, Isaac J. Lee">
+        <title>Mai</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="../assets/images/mai.png">
+        
+        <!-- Import fonts -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Leckerli+One|Nunito" rel="stylesheet">
+
+        <!-- Import Materialize -->
+        <link type="text/css" rel="stylesheet" href="../assets/css/materialize/materialize.min.css" media="screen,projection">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+        <!-- Let browser know website is optimized for mobile -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body class="blue-grey lighten-5">
+        <!-- Navbar -->
+        <nav>
+            <div class="nav-wrapper grey darken-4">
+                <a href="index.html" class="brand-logo"><img class="responsive-img" src="../assets/images/mai_inverted.png" alt="Mai logo">Mai</a>
+                <a href="#" data-activates="mai-menu-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+                
+                <!-- Desktop -->
+                <ul id="mai-dropdown-writer" class="dropdown-content">
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="settings.html">Settings</a></li>
+                    <li><a href="#">Logout</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="meet-mai.html">Meet Mai</a></li>
+                    <li><a href="meet-mai-team.html">Meet Mai Team</a></li>
+                </ul>
+
+                <ul class="right hide-on-med-and-down" id="mai-menu-desktop">
+                    <li><a class="mai-menu-desktop-items" href="index.html">Home</a></li>
+                    <li class="green darken-2"><a class="mai-menu-desktop-items" href="upload-photos.html">Compose</a></li>
+                    <li><a class="mai-menu-desktop-items" href="writers.html">Find Writers</a></li>
+                    <li><a class="mai-menu-desktop-items dropdown-button" href="#" data-activates="mai-dropdown-writer">Isaac Lee<i class="material-icons right">arrow_drop_down</i></a></li>
+
+                    <!-- TODO: For testing only. Remove these links later. -->
+                    <li class="grey darken-2"><a class="mai-menu-desktop-items" href="story.html">Story</a></li>
+                </ul>
+                
+                <!-- Mobile -->
+                <ul class="side-nav" id="mai-menu-mobile">
+                    <li class="black-text center-align">Isaac Lee</li>
+
+                    <li class="divider"></li>
+
+                    <li><a class="mai-menu-mobile-items" href="index.html">Home</a></li>
+                    <li class="green lighten-3"><a class="mai-menu-mobile-items" href="upload-photos.html">Compose</a></li>
+                    <li><a class="mai-menu-mobile-items" href="writers.html">Find Writers</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a class="mai-menu-mobile-items" href="profile.html">Profile</a></li>
+                    <li><a class="mai-menu-mobile-items" href="settings.html">Settings</a></li>
+                    <li><a class="mai-menu-mobile-items" href="#">Logout</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a class="mai-menu-mobile-items" class="mai-menu-mobile-items" href="meet-mai.html">Meet Mai</a></li>
+                    <li><a class="mai-menu-mobile-items" href="meet-mai-team.html">Meet Mai Team</a></li>
+
+                    <li class="divider"></li>
+
+                    <!-- TODO: For testing only. Remove these links later. -->
+                    <li class="grey lighten-1"><a class="mai-menu-mobile-items" href="story.html">Story</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="mai-separator-3"></div>
+            
+            <div class="row">
+                <div class="col s10 offset-s1 l12">
+                    <h1 class="mai-attacher-1">Settings</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Left pane -->
+                <div class="col s10 offset-s1 l6">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col s12 m10 offset-m1">
+                                    <h2>Update profile</h2>
+                                    
+                                    <div class="mai-separator-2"></div>
+
+                                    <form action="/api/update-profile/INSERT_UUID_HERE?_method=PATCH" method="POST">
+                                        <div class="input-field">
+                                            <label for="mai-fullname" class="blue-grey-text text-darken-2">Full name</label>
+                                            <input type="text" name="fullname" id="mai-fullname" class="validate" placeholder="Jane Smith" required>
+                                        </div>
+
+                                        <div class="input-field">
+                                            <label for="mai-email" class="blue-grey-text text-darken-2">Email</label>
+                                            <input type="text" name="email" id="mai-email" class="validate" placeholder="janeaustin@gmail.com" required>
+                                        </div>
+
+                                        <div class="input-field">
+                                            <label for="mai-username" class="blue-grey-text text-darken-2">Username</label>
+                                            <input type="text" name="username" id="mai-username" class="validate" placeholder="jane_austin" required>
+                                        </div>
+
+                                        <div class="mai-separator-2"></div>
+
+                                        <button type="submit" class="btn-large waves-effect waves-light" title="Click to update.">Update</button>
+                                    </form>
+
+                                    <div class="mai-separator-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right pane -->
+                <div class="col s10 offset-s1 l6">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col s12 m10 offset-m1">
+                                    <h2>Update password</h2>
+                                    
+                                    <div class="mai-separator-2"></div>
+
+                                    <form action="/api/update-password/INSERT_UUID_HERE?_method=PATCH" method="POST">
+                                        <div class="input-field">
+                                            <label for="mai-current-password" class="blue-grey-text text-darken-2">Current password</label>
+                                            <input type="password" name="password_current" id="mai-current-password" class="validate" placeholder="********" required>
+                                        </div>
+
+                                        <div class="input-field">
+                                            <label for="mai-new-password" class="blue-grey-text text-darken-2">New password</label>
+                                            <input type="password" name="password_new" id="mai-new-password" class="validate" placeholder="" required>
+                                        </div>
+
+                                        <div class="mai-separator-2"></div>
+
+                                        <button type="submit" class="btn-large waves-effect waves-light" title="Click to update.">Update</button>
+                                    </form>
+
+                                    <div class="mai-separator-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col s12 m10 offset-m1">
+                                    <h2>Delete Mai account</h2>
+                                    
+                                    <div class="mai-separator-3"></div>
+                                    
+                                    <form action="/api/delete-account/INSERT_UUID_HERE?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn-large waves-effect waves-light red darken-2" title="Click to delete Mai account.">Delete Mai account</button>
+                                    </form>
+
+                                    <div class="mai-separator-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mai-separator-3"></div>
+        </div>
+
+        <footer class="page-footer grey darken-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l6">
+                        <h5 class="white-text">Footer Content</h5>
+                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    </div>
+                    <div class="col s12 l4 offset-l2">
+                        <h5 class="white-text">Links</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="index.html">Home</a></li>
+                            <li><a class="grey-text text-lighten-3" href="compose.html">Compose</a></li>
+                            <li><a class="grey-text text-lighten-3" href="writers.html">Find Writers</a></li>
+                            <li><a class="grey-text text-lighten-3" href="meet-mai.html">Meet Mai</a></li>
+                            <li><a class="grey-text text-lighten-3" href="meet-mai-team.html">Meet Mai Team</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-copyright teal darken-1">
+                <div class="container">
+                    <div class="center-align">
+                        Copyright © 2017 by <a class="lime-text text-lighten-4" href="https://www.linkedin.com/in/johnabsher/" target="_blank">John Absher</a>, <a class="lime-text text-lighten-4" href="https://www.linkedin.com/in/david-gutierrez-979a4a148/" target="_blank">David Gutierrez</a>, <a class="lime-text text-lighten-4" href="https://www.linkedin.com/in/jasonjoachim/" target="_blank">Jason Joachim</a>, <a class="lime-text text-lighten-4" href="https://www.linkedin.com/in/ijlee2/" target="_blank">Isaac Lee</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Import jQuery before materialize.js -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../assets/javascript/materialize/materialize.min.js"></script>
+        
+        <!-- Custom JavaScript -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                // Dropdown menu
+                $(".dropdown-button").dropdown();
+
+                // Navbar for mobile
+                $(".button-collapse").sideNav();
+            });
+        </script>
+    </body>
+</html>

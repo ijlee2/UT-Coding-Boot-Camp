@@ -1,23 +1,29 @@
 module.exports = function(sequelize, DataTypes) {
-    const readers = sequelize.define("reader", {
-       "user_id": {
-            "type"      : DataTypes.INTEGER,
-            "references": {
-                "model": users,
-                "key"  : "id"
-            },
-            "allowNull" : false,
-            "validate"  : {
-            }
+    const Reader = sequelize.define("Reader", {
+        "id": {
+            "type"        : DataTypes.UUID,
+            "defaultValue": DataTypes.UUIDV4,
+            "allowNull"   : false,
+            "primaryKey"  : true
         },
         
         "reader_id": {
-            "type"     : DataTypes.INTEGER,
+            "type"     : DataTypes.UUID,
             "allowNull": false,
             "validate" : {
+                "isUUID": {
+                    "args": 4,
+                    "msg" : "Please enter a valid UUID."
+                }
             }
         }
-    });
 
-    return reader;
+    }, {"underscored": true});
+
+    // Create associations
+    Reader.associate = function(models) {
+        Reader.belongsTo(models.Writer, {"onDelete": "CASCADE"});
+    }
+
+    return Reader;
 }

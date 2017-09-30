@@ -1,79 +1,47 @@
+/* For reference only
 DROP DATABASE IF EXISTS mai_db;
 CREATE DATABASE mai_db;
 USE mai_db;
 
--- Create users
-CREATE TABLE users (
+CREATE TABLE Writers (
     id        INT NOT NULL AUTO_INCREMENT,
-    fullname  VARCHAR(200) NOT NULL,
-    email     VARCHAR(255) NOT NULL UNIQUE,
-    username  VARCHAR(40)  NOT NULL UNIQUE,
-    hash      VARCHAR(512) /* NOT NULL */,
+    fullname  VARCHAR(100) NOT NULL,
+    email     VARCHAR(100) NOT NULL UNIQUE,
+    username  VARCHAR(32)  NOT NULL UNIQUE,
+    hash      VARCHAR(60)  NOT NULL,
 
-    photo_url TEXT,
+    url_photo VARCHAR(256),
     flagged   BOOLEAN DEFAULT false,
 
     PRIMARY KEY (id)
 );
 
--- Create stories
-CREATE TABLE stories (
-    id  INT NOT NULL AUTO_INCREMENT,
-    url TEXT NOT NULL,
-
-    PRIMARY KEY (id)
-);
-
--- Create photos
-CREATE TABLE photos (
-    id      INT NOT NULL AUTO_INCREMENT,
-    url     TEXT NOT NULL,
-    caption TEXT,
-    date DATETIME NOT NULL,
-
-    PRIMARY KEY (id)
-);
-
--- Create writers (following)
-CREATE TABLE writers (
+CREATE TABLE Stories (
     id        INT NOT NULL AUTO_INCREMENT,
-    user_id   INT NOT NULL,
-    writer_id INT NOT NULL,
+    WriterID  INT NOT NULL,
+    title     VARCHAR(256) NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (writer_id) REFERENCES users(id)
+    FOREIGN KEY (WriterID) REFERENCES Writers(id) ON DELETE CASCADE
 );
 
--- Create readers (followers)
-CREATE TABLE readers (
-    id        INT NOT NULL AUTO_INCREMENT,
-    user_id   INT NOT NULL,
-    reader_id INT NOT NULL,
+CREATE TABLE Photos (
+    id         INT NOT NULL AUTO_INCREMENT,
+    StoryID    INT NOT NULL,
+    url        VARCHAR(256) NOT NULL,
+    caption    TEXT NOT NULL,
+    time_taken DATETIME,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (reader_id) REFERENCES users(id)
+    FOREIGN KEY (StoryID) REFERENCES Stories(id) ON DELETE CASCADE
 );
 
--- Create users_to_stories
-CREATE TABLE users_to_stories(
+CREATE TABLE Readers (
     id       INT NOT NULL AUTO_INCREMENT,
-    user_id  INT NOT NULL,
-    story_id INT NOT NULL,
+    WriterID INT NOT NULL,
+    ReaderID INT NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (story_id) REFERENCES stories(id)
+    FOREIGN KEY (WriterID) REFERENCES Writers(id) ON DELETE CASCADE
 );
-
--- Create stories_to_photos
-CREATE TABLE stories_to_photos(
-    id       INT NOT NULL AUTO_INCREMENT, 
-    story_id INT NOT NULL,
-    photo_id INT NOT NULL,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (story_id) REFERENCES stories(id),
-    FOREIGN KEY (photo_id) REFERENCES photos(id)
-);
+*/
