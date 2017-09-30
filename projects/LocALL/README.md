@@ -1,4 +1,4 @@
-![LocALL](assets/images/locall_splash.png?raw=true)
+<a href="https://ijlee2.github.io/LocALL/" target="_blank"><img src="assets/images/locall_splash.png?raw=true" alt="LocALL"></a>
 # LocALL
 For places to eat, to play, and to drink, choose LocALL. We give you the best recommendations in an instant!
 
