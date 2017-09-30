@@ -7,7 +7,13 @@ If you have suggestions for making my code better and simpler, please let me kno
 
 ## Projects
 1. [LocALL](https://github.com/ijlee2/LocALL) (w/ [Margie Tagaban](https://www.linkedin.com/in/margarita-tagaban/), [Aaron Tyler](https://github.com/atyler88/), [Jacque White](https://www.linkedin.com/in/jacquelinewhite15/))
+
+![LocALL](https://github.com/ijlee2/LocALL/raw/master/assets/images/locall_splash.png?raw=true)
+
 2. [Mai](https://github.com/ijlee2/Mai) (w/ [John Absher](https://www.linkedin.com/in/johnabsher/), [David Gutierrez](https://www.linkedin.com/in/david-gutierrez-979a4a148/), [Jason Joachim](https://www.linkedin.com/in/jasonjoachim/))
+
+![Mai](https://github.com/ijlee2/Mai/raw/master/public/assets/images/mai_splash.png?raw=true)
+
 3. 
 
 ## Homework
