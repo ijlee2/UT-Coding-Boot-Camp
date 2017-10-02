@@ -19,13 +19,15 @@
 // We'll be rewriting the table's data frequently, so let's make our code more DRY
 // by writing a function that takes in data (JSON) and creates a table body
 function displayResults(data) {
+    $("tbody").empty();
+
     let output = "";
 
     data.forEach(d => {
         output += `<tr><td>${d.name}</td><td>${d.numLegs}</td><td>${d.class}</td><td>${d.weight}</td><td>${d.name_custom}</td></tr>`;
     });
 
-    $("#results tbody").html(output);
+    $("tbody").html(output);
 }
 
 $(document).ready(function() {
