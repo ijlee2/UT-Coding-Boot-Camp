@@ -4,6 +4,12 @@ custom-method/package-lock.json
 mongoose-schema/node_modules
 mongoose-schema/package-lock.json
 
+populate-exercise/node_modules
+populate-exercise/package-lock.json
+
+populate-intro/node_modules
+populate-intro/package-lock.json
+
 scraping-to-db/node_modules
 scraping-to-db/package-lock.json
 
