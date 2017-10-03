@@ -49,9 +49,6 @@ app.get("/scrape", (req, res) => {
         // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
         const $ = cheerio.load(html);
 
-        // An empty array to save the data that we'll scrape
-//        const results = [];
-
         // Select each element in the HTML body from which you want information.
         // NOTE: Cheerio selectors function similarly to jQuery's selectors,
         // but be sure to visit the package's npm page to see how it works
@@ -62,8 +59,9 @@ app.get("/scrape", (req, res) => {
             const link  = `http://www.neogaf.com/forum/${selector.attr("href")}`;
 
             // Save title and link to the database
-//            results.push({title, link});
-            bulk.insert({title, link});
+            if (title && link) {
+                bulk.insert({title, link});
+            }
         });
 
         bulk.execute((error, results) => {

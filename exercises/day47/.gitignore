@@ -1,2 +1,8 @@
+mongoose-schema/node_modules
+mongoose-schema/package-lock.json
+
 scraping-to-db/node_modules
 scraping-to-db/package-lock.json
+
+user-schema/node_modules
+user-schema/package-lock.json
