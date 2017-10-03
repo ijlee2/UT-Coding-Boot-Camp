@@ -1,3 +1,6 @@
+custom-method/node_modules
+custom-method/package-lock.json
+
 mongoose-schema/node_modules
 mongoose-schema/package-lock.json
 
