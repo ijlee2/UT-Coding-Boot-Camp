@@ -13,5 +13,8 @@ populate-intro/package-lock.json
 scraping-to-db/node_modules
 scraping-to-db/package-lock.json
 
+scraping-with-mongoose/node_modules
+scraping-with-mongoose/package-lock.json
+
 user-schema/node_modules
 user-schema/package-lock.json
