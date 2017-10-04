@@ -25,13 +25,12 @@ const Comment = require(path.join(__dirname, "..", "models", "Comment.js"));
 
 *****************************************************************************
 *****************************************************************************/
-router.get("/", (req, res) => {
-    res.send("index");
+router.post("/scrape", (req, res) => {
+
 });
 
+router.post("/add-comment", (req, res) => {
 
-router.get("/saved", (req, res) => {
-    res.send("saved");
 });
 
 

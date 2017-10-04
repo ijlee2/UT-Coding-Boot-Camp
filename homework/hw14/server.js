@@ -5,19 +5,24 @@
     
 *****************************************************************************
 *****************************************************************************/
-// Import packages
+// Use Express
 const express        = require("express");
 const exphbs         = require("express-handlebars");
-const mongojs        = require("mongojs");
-const mongoose       = require("mongoose");
 const path           = require("path");
+const app            = express();
+
+// For making requests
 const methodOverride = require("method-override");
 const bodyParser     = require("body-parser");
+
+// For web scraping
 const cheerio        = require("cheerio");
 const request        = require("request");
 
-// Use Express
-const app  = express();
+// For MongoDB
+const mongoose       = require("mongoose");
+
+// Set port number
 const PORT = process.env.PORT || 3000;
 
 
@@ -29,16 +34,21 @@ const PORT = process.env.PORT || 3000;
 
 *****************************************************************************
 *****************************************************************************/
-// Import our models
-const databaseUrl = "zoo";
-const collections = ["animals"];
+// Configure mongoose
+mongoose.Promise = Promise;
 
-// Use mongojs to hook the database to the db variable
-const db = mongojs(databaseUrl, collections);
+mongoose.connect("mongodb://localhost/neogaf_scraper", {"useMongoClient": true});
 
-// This makes sure that any errors are logged if mongodb runs into an issue
+const db = mongoose.connection;
+
+// Log errors if mongodb runs into an issue
 db.on("error", error => {
     console.log(`Database Error: ${error}`);
+});
+
+// Log success once we connect to the database through mongoose
+db.once("open", () => {
+    console.log("Mongoose connection successful.");
 });
 
 
@@ -57,7 +67,7 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 
-// Set extended to true so that we can parse arrays of input fields (e.g. name="captions[0]")
+// Set extended to true so that we can parse arrays of input fields
 app.use(bodyParser.urlencoded({"extended": true}));
 
 // Set handlebars
