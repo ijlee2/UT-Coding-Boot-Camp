@@ -36,10 +36,17 @@ router.get("/", (req, res) => {
         .exec((err, threads) => {
             if (err) throw err;
 
-            res.render("index", {
-                "customJavascript": ["index"],
-                threads
-            });
+            // Scrape if there aren't any threads yet
+            if (threads.length === 0) {
+                res.redirect("/api/scrape");
+
+            } else {
+                res.render("index", {
+                    "customJavascript": ["index"],
+                    threads
+                });
+                
+            }
         });
 });
 
@@ -58,8 +65,10 @@ router.get("/showthread_:threadId", (req, res) => {
 });
 
 
-router.get("/saved", (req, res) => {
-    res.send("saved");
+router.get("/about", (req, res) => {
+    res.render("about", {
+        "customJavascript": ["index"]
+    });
 });
 
 
