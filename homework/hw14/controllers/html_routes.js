@@ -78,12 +78,36 @@ router.get("/scrape", (req, res) => {
             }, (err, doc) => {
                 if (err) throw err;
 
-                console.log(doc);
-
             });
         });
 
         res.redirect("/");
+    });
+});
+
+
+router.get("/showthread_:id", (req, res) => {
+    Thread.find({"threadId": req.params.id}, (err, doc) => {
+        if (err) throw err;
+        
+        // Retrieve the main post
+        request(`http://www.neogaf.com/forum/showthread.php?t=${req.params.id}`, (error, response, html) => {
+            if (error) throw error;
+
+            // Load the HTML into cheerio
+            const $ = cheerio.load(html);
+
+            // Find thread body
+            const selector = $(".post")[0];
+            const body     = $(selector).html().trim();
+
+            res.render("thread", {
+                "customCSS"       : ["style"],
+                "customJavascript": ["index"],
+                "thread"          : doc[0],
+                body
+            });
+        });
     });
 });
 
