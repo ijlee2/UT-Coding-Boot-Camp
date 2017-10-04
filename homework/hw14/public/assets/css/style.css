@@ -112,7 +112,7 @@ nav #neotech-menu-desktop li:last-child {
 .neotech-comments {
     font-size: 0.8em;
     position : relative;
-    padding  : 0.2em 0.5em;
+    padding  : 0.2em 0.8em;
 }
 
 .neotech-comments:nth-child(odd) {
@@ -137,7 +137,6 @@ nav #neotech-menu-desktop li:last-child {
 .card button {
     margin-bottom: -0.75em;
 }
-
 
 /* Footer */
 footer {

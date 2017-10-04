@@ -1,5 +1,3 @@
-let displayImages = true;
-
 $(document).ready(function() {
     // Dropdown menu
     $(".dropdown-button").dropdown();
@@ -7,11 +5,11 @@ $(document).ready(function() {
     // Navbar for mobile
     $(".button-collapse").sideNav();
 
-    // Hide images by default
-    $("img").css({"display": "none"});
+    // Make the page responsive
+    $("img").addClass("responsive-img");
 
+    // Allow the user to show or hide images
     $("#neotech-image").click(() => {
-        console.log("index button clicked");
         // Toggle
         const displayImages = !($("#neotech-image i").text() === "image");
 

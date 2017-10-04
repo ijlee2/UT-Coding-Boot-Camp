@@ -33,18 +33,14 @@ const url_thread = "http://www.neogaf.com/forum/showthread.php?t=";
 *****************************************************************************
 *****************************************************************************/
 router.get("/scrape", (req, res) => {
-    /************************************************************************
-        
-        Extract information from the forum
-
-    *************************************************************************/
+    // Extract information from the forum
     request(url_forum, (err0, res0, html) => {
         if (err0) throw err0;
 
         // Load the HTML into cheerio
         const $ = cheerio.load(html);
 
-        // Find all threads on the first page
+        // Scrape all threads on the first page
         $(`tr.threadbit`).each((index, element) => {
             const data = $(element).children("td");
 
@@ -67,12 +63,7 @@ router.get("/scrape", (req, res) => {
             }, (err1, res1) => {
                 if (err1) throw err1;
 
-                
-                /************************************************************
-        
-                    Extract information from the thread
-
-                *************************************************************/
+                // Extract information from the thread
                 request(url_thread + threadId, (err2, res2, html) => {
                     if (err2) throw err2;
 
@@ -97,7 +88,6 @@ router.get("/scrape", (req, res) => {
     });
 });
 
-
 router.post("/add-comment_:threadId", (req, res) => {
     const comment = new Comment(req.body);
 
@@ -109,7 +99,7 @@ router.post("/add-comment_:threadId", (req, res) => {
             "$push": {"comments": doc._id}
 
         }, {
-            // Return the modified document rather than the original
+            // Return the modified document
             "new": true
 
         }, (err1, doc1) => {
@@ -120,7 +110,6 @@ router.post("/add-comment_:threadId", (req, res) => {
         });
     });
 });
-
 
 router.delete("/delete-comment_:threadId&:commentId", (req, res) => {
     Comment.remove({"_id": req.params.commentId}, (err, doc) => {

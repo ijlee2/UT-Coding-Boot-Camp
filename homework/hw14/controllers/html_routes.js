@@ -9,10 +9,6 @@
 const express = require("express");
 const path    = require("path");
 
-// For web scraping
-const cheerio = require("cheerio");
-const request = require("request");
-
 // Create an instance of Router
 const router = express.Router();
 
@@ -41,15 +37,11 @@ router.get("/", (req, res) => {
                 res.redirect("/api/scrape");
 
             } else {
-                res.render("index", {
-                    "customJavascript": ["index"],
-                    threads
-                });
+                res.render("index", {threads});
                 
             }
         });
 });
-
 
 router.get("/showthread_:threadId", (req, res) => {
     Thread.find({"threadId": req.params.threadId})
@@ -57,18 +49,12 @@ router.get("/showthread_:threadId", (req, res) => {
         .exec((err, doc) => {
             if (err) throw err;
 
-            res.render("thread", {
-                "customJavascript": ["thread"],
-                "thread": doc[0]
-            });
+            res.render("thread", {"thread": doc[0]});
         });
 });
 
-
 router.get("/about", (req, res) => {
-    res.render("about", {
-        "customJavascript": ["index"]
-    });
+    res.render("about", {});
 });
 
 

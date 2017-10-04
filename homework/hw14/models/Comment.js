@@ -6,14 +6,12 @@ const Schema = mongoose.Schema;
 
 // Create the schema for Comment
 const commentSchema = new Schema({
-    // Commenter
     "author": {
         "type"    : String,
         "trim"    : true,
         "required": true
     },
 
-    // Comment
     "body": {
         "type"    : String,
         "trim"    : true,
