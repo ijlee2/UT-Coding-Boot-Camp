@@ -98,8 +98,27 @@ router.get("/scrape", (req, res) => {
 });
 
 
-router.post("/add-comment", (req, res) => {
+router.post("/add-comment_:threadId", (req, res) => {
+    const comment = new Comment(req.body);
 
+    comment.save((err, doc) => {
+        if (err) throw err;
+
+        Thread.findOneAndUpdate({"threadId": req.params.threadId}, {
+            // Save the comment id
+            "$push": {"comments": doc._id}
+
+        }, {
+            // Return the modified document rather than the original
+            "new": true
+
+        }, (err1, doc1) => {
+            if (err1) throw err1;
+
+            res.redirect(`/showthread_${req.params.threadId}`);
+
+        });
+    });
 });
 
 

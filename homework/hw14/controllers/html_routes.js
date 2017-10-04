@@ -45,16 +45,18 @@ router.get("/", (req, res) => {
 });
 
 
-router.get("/showthread_:id", (req, res) => {
-    Thread.find({"threadId": req.params.id}, (err, doc) => {
-        if (err) throw err;
-        
-        res.render("thread", {
-            "customCSS"       : ["style"],
-            "customJavascript": ["thread"],
-            "thread"          : doc[0]
+router.get("/showthread_:threadId", (req, res) => {
+    Thread.find({"threadId": req.params.threadId})
+        .populate("comments")
+        .exec((err, doc) => {
+            if (err) throw err;
+
+            res.render("thread", {
+                "customCSS"       : ["style"],
+                "customJavascript": ["thread"],
+                "thread"          : doc[0]
+            });
         });
-    });
 });
 
 

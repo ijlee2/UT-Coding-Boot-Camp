@@ -34,7 +34,7 @@ const threadSchema = new Schema({
         "required": true
     },
 
-    // Thread comments
+    // Thread comments (keep track of their IDs)
     "comments": {
         "type": [{"type": Schema.ObjectId, "ref": "Comment"}]
     }
