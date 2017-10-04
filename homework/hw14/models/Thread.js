@@ -6,17 +6,17 @@ const Schema = mongoose.Schema;
 
 // Create the schema for Thread
 const threadSchema = new Schema({
+    // Link to the thread
+    "threadId": {
+        "type"    : Number,
+        "unique"  : true,
+        "required": true
+    },
+
     // Title of the thread
     "title": {
         "type"    : String,
         "trim"    : true,
-        "required": true
-    },
-
-    // Link to the thread
-    "url_thread": {
-        "type"    : String,
-        "unique"  : true,
         "required": true
     },
 

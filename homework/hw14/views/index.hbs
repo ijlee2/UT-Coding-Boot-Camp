@@ -1,5 +1,7 @@
 <h1>Gaming</h1>
 
 {{#each threads}}
-<p>{{this.title}} by {{this.author}}</p>
+<div>
+    <a href="http://www.neogaf.com/forum/showthread.php?t={{this.threadId}}" target="_blank">{{this.title}}</a> by {{this.author}}
+</div>
 {{/each}}

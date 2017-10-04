@@ -31,21 +31,24 @@ const Comment = require(path.join(__dirname, "..", "models", "Comment.js"));
 *****************************************************************************/
 router.get("/", (req, res) => {
     // Get threads from the database
-    Thread.find({}, (err, doc) => {
-        if (err) throw err;
+    Thread.find({})
+        .sort({"title": 1})
+        .exec((err, threads) => {
+            if (err) throw err;
 
-        res.render("index", {
-            "customCSS"       : ["style"],
-            "customJavascript": ["index"],
-            "threads"         : doc
+            res.render("index", {
+                "customCSS"       : ["style"],
+                "customJavascript": ["index"],
+                threads
+            });
         });
-
-    });
 });
 
 
 router.get("/scrape", (req, res) => {
     request("http://www.neogaf.com/forum/forumdisplay.php?f=2", (error, response, html) => {
+        if (error) throw error;
+
         // Load the HTML into cheerio
         const $ = cheerio.load(html);
 
@@ -54,25 +57,33 @@ router.get("/scrape", (req, res) => {
             const data = $(element).children("td");
 
             // Find thread title and url
-            let   selector   = $(data[1]).children("div").children("a");
-            const title      = selector.text();
-            const url_thread = `http://www.neogaf.com/forum/${selector.attr("href")}`;
-
+            let   selector = $(data[1]).children("div").children("a");
+            const threadId = selector.attr("href").match(/\d+$/)[0];
+            const title    = selector.text();
+            
             // Find author
             selector     = $(data[2]).children("a");
             const author = selector.text();
 
             // Create a new entry
-            const entry = new Thread({title, url_thread, author});
+            const entry = new Thread({threadId, title, author});
+            
+            // Save the entry if it doesn't exist
+            Thread.update({threadId}, {
+                "$setOnInsert": entry
 
-            entry.save((err, doc) => {
+            }, {
+                "upsert": true
+
+            }, (err, doc) => {
                 if (err) throw err;
 
                 console.log(doc);
+
             });
         });
 
-        res.send("Scrape complete");
+        res.redirect("/");
     });
 });
 
