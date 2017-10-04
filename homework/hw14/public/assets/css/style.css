@@ -15,7 +15,6 @@
 
     /* Define color scheme */
     --color-blue-grey-lighten-5: #bbb;
-    --color-white-transparent  : rgba(255, 255, 255, 0.93);
 }
 
 
@@ -26,16 +25,10 @@
 *****************************************************************************/
 /* Window */
 body {
-    background-image : url("../images/pattern_light.png");
-    background-repeat: repeat;
-    font-family      : var(--font-main);
-    font-size        : 20px;
-    letter-spacing   : 0.015em;
-    line-height      : 1.6em;
-}
-
-#ijl-device-detector {
-    font-size: 4px;
+    font-family   : var(--font-main);
+    font-size     : 20px;
+    letter-spacing: 0.015em;
+    line-height   : 1.6em;
 }
 
 /* Fonts */
@@ -44,7 +37,7 @@ h1, h2, nav {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 2.1em;
 }
 
 h2 {
@@ -64,19 +57,19 @@ strong {
 }
 
 /* Separators */
-.ijl-attacher-1 {
+.neotech-attacher-1 {
     margin-bottom: 0;
 }
 
-.ijl-separator-1 {
+.neotech-separator-1 {
     height: 0.5em;
 }
 
-.ijl-separator-2 {
+.neotech-separator-2 {
     height: 1.2em;
 }
 
-.ijl-separator-3 {
+.neotech-separator-3 {
     height: 1.6em;
 }
 
@@ -104,12 +97,14 @@ nav .brand-logo {
     margin-left   : 1em;
 }
 
-nav .ijl-menu-items-desktop {
+nav .neotech-menu-items-desktop {
     font-size     : 0.75em;
     letter-spacing: 0.1em;
+    padding-left  : 1.75em !important;
+    padding-right : 1.75em !important;
 }
 
-nav #ijl-menu-desktop li:last-child {
+nav #neotech-menu-desktop li:last-child {
     margin-right: 1em;
 }
 
@@ -121,7 +116,7 @@ nav #ijl-menu-desktop li:last-child {
     padding-bottom: 0.4em;
 }
 
-.ijl-menu-items-mobile {
+.neotech-menu-items-mobile {
     font-size     : 1.05em !important;
     letter-spacing: 0.09em;
     height        : 100% !important;
@@ -156,14 +151,14 @@ footer a:hover {
 
 *****************************************************************************/
 /* Splash */
-.ijl-splash-wrapper {
+.neotech-splash-wrapper {
     height         : 100vh;
     display        : flex;
     justify-content: center;
     flex-direction : column;
 }
 
-.ijl-splash-wrapper > .col {
+.neotech-splash-wrapper > .col {
     background-color: var(--color-white-transparent);
     position        : relative;
     top             : calc(-1.5 * var(--height-nav));
@@ -189,7 +184,7 @@ footer a:hover {
 }
 
 /* Expertise */
-.ijl-expertise {
+.neotech-expertise {
     border-radius: 6px;
 }
 
@@ -234,22 +229,22 @@ footer a:hover {
 }
 
 /* Contact */
-#ijl-follow-me li {
+#neotech-follow-me li {
     font-size    : 1.6em;
     line-height  : 1.4em;
     float        : left;
     padding-right: 0.9em;
 }
 
-#ijl-follow-me li:hover {
+#neotech-follow-me li:hover {
     transform: scale(1.05);
 }
 
-#ijl-email-phone {
+#neotech-email-phone {
     line-height: 1.9em;
 }
 
-#ijl-email-phone a:hover {
+#neotech-email-phone a:hover {
     text-decoration: underline;
 }
 
@@ -271,10 +266,6 @@ footer a:hover {
 
 /* Desktop */
 @media all and (max-width: 1200px), all and (max-device-width: 1200px) {
-    #ijl-device-detector {
-        font-size: 3px;
-    }
-
     h1 {
         font-size     : 2.6em;
         letter-spacing: calc(0.25em * 2.6/3.4);
@@ -298,17 +289,13 @@ footer a:hover {
         letter-spacing: calc(0.22em * 2.6/3.4);
     }
 
-    #ijl-follow-me li {
+    #neotech-follow-me li {
         line-height: 1.8em;
     }
 }
 
 /* Tablet */
 @media all and (max-width: 992px), all and (max-device-width: 992px) {
-    #ijl-device-detector {
-        font-size: 2px;
-    }
-
     body {
         font-size: 17px;
     }
@@ -343,10 +330,6 @@ footer a:hover {
 
 /* Mobile */
 @media all and (max-width: 600px), all and (max-device-width: 600px) {
-    #ijl-device-detector {
-        font-size: 1px;
-    }
-
     h1 {
         font-size     : 1.6em;
         letter-spacing: calc(0.25em * 17/20 * 1.6/3.4);
@@ -370,7 +353,7 @@ footer a:hover {
         letter-spacing: calc(0.22em * 17/20 * 1.6/3.4);
     }
 
-    #ijl-follow-me li {
+    #neotech-follow-me li {
         line-height: 1.4em;
     }
 }
