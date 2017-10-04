@@ -79,7 +79,7 @@ app.get("/articles", function(req, res) {
     Article.find({}, function(err, doc) {
         if (err) throw err;
 
-        res.send(doc);
+        res.json(doc);
     });
 });
 
@@ -95,7 +95,7 @@ app.get("/articles/:id", function(req, res) {
         .exec(function(err, doc) {
             if (err) throw err;
 
-            res.send(doc);
+            res.json(doc);
         });
 });
 
@@ -110,6 +110,17 @@ app.post("/articles/:id", function(req, res) {
 
     newNote.save(function(err, doc) {
         if (err) throw err;
+
+        /*
+        Article.findOneAndUpdate({"_id": req.params.id}, {
+            "note": doc._id
+
+        }).exec(function (err1, doc1) {
+            if (err1) throw err1;
+
+            res.json(doc1);
+        });
+        */
 
         Article.findOneAndUpdate({
             "_id": req.params.id
