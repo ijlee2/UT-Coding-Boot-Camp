@@ -122,4 +122,14 @@ router.post("/add-comment_:threadId", (req, res) => {
 });
 
 
+router.delete("/delete-comment_:threadId&:commentId", (req, res) => {
+    Comment.remove({"_id": req.params.commentId}, (err, doc) => {
+        if (err) throw err;
+
+        res.redirect(`/showthread_${req.params.threadId}`);
+
+    });
+});
+
+
 module.exports = router;

@@ -19,11 +19,17 @@
             <div class="col s5 offset-s1">
                 {{#each thread.comments}}
                 <div class="neotech-comments">
-                    {{this.author}}: {{this.body}}<i class="material-icons right" id="{{this._id}}">delete_forever</i>
+                    {{this.author}}: {{this.body}}
+
+                    <form action="/api/delete-comment_{{../thread.threadId}}&{{this._id}}?_method=DELETE" method="POST">
+                        <button type="submit" class="btn waves-light" title="Click to delete {{this.author}}'s comment."><i class="material-icons">delete_forever</i></button>
+                    </form>
                 </div>
                 {{/each}}
 
+                {{#if thread.comments}}
                 <div class="neotech-separator-2"></div>
+                {{/if}}
                 
                 <div class="card blue-grey lighten-5 hoverable">
                     <div class="card-content">
