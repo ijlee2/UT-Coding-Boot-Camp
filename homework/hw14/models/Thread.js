@@ -27,6 +27,13 @@ const threadSchema = new Schema({
         "required": true
     },
 
+    // Thread body
+    "body": {
+        "type"    : String,
+        "trim"    : true,
+        "required": true
+    },
+
     // Thread comments
     "comments": {
         "type": [{"type": Schema.ObjectId, "ref": "Comment"}]

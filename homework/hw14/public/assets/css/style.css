@@ -55,6 +55,10 @@ h3 {
     font-size: 1.3em;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 strong {
     font-weight: bold;
 }

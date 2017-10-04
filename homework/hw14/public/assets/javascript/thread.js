@@ -4,4 +4,7 @@ $(document).ready(function() {
 
     // Navbar for mobile
     $(".button-collapse").sideNav();
+
+    // Make the page responsive
+    $("img").addClass("responsive-img");
 });
