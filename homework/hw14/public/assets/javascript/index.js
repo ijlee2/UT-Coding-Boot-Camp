@@ -8,8 +8,11 @@ $(document).ready(function() {
     $(".button-collapse").sideNav();
 
     $("#neotech-image").click(() => {
-        displayImages = !displayImages;
+        console.log("index button clicked");
+        // Toggle
+        const displayImages = !($("#neotech-image i").text() === "image");
 
+        $("img").css({"display": (displayImages) ? "block" : "none"});
         $("#neotech-image i").text((displayImages) ? "image" : "broken_image");
 
     });

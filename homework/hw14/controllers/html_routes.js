@@ -37,7 +37,6 @@ router.get("/", (req, res) => {
             if (err) throw err;
 
             res.render("index", {
-                "customCSS"       : ["style"],
                 "customJavascript": ["index"],
                 threads
             });
@@ -52,9 +51,8 @@ router.get("/showthread_:threadId", (req, res) => {
             if (err) throw err;
 
             res.render("thread", {
-                "customCSS"       : ["style"],
                 "customJavascript": ["thread"],
-                "thread"          : doc[0]
+                "thread": doc[0]
             });
         });
 });
