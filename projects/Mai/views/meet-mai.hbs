@@ -1,0 +1,30 @@
+<div class="row mai-about-mai-wrapper valign-wrapper">
+    <div class="col s12 m10 offset-m1 l7 offset-l4 xl5 offset-xl4">
+        <div class="row">
+            <div class="col s10 offset-s1">
+                <h1 class="brand-logo"><img class="responsive-img" src="assets/images/mai.png" alt="Mai logo">Mai</h1>
+
+                <p>For social media storytellers like you, who work hard to create engaging content each day (<em>mai-nichi</em>), I am here to help!</p>
+
+                <p>I use <strong>Google Cloud Vision</strong> and <strong>Google Cloud Natural Language</strong> to write a narrative that matches your photos and personality.</p>
+
+                <p>Let's start telling your story today!</p>
+
+                <div class="mai-separator-2"></div>
+            </div>
+
+            <div class="col s10 offset-s1">
+                {{#if maiId}}
+                <button type="button" class="btn-large waves-effect waves-light" id="button_compose" title="Click to write Mai story.">Write Mai Story</button>
+                {{else}}
+                <button type="button" class="btn-large waves-effect waves-light" id="button_home" title="Click to sign up.">Sign up</button>
+                {{/if}}
+                
+                <div class="mai-separator-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Video -->
+<video class="cover_video" src="../assets/videos/cinema_paradiso.mp4" autoplay loop></video>

@@ -1,0 +1,46 @@
+<div class="mai-separator-2"></div>
+
+<div class="row">
+    <div class="col s12 m10 offset-m1 l8 offset-l2 xl6 offset-xl3">
+        <h1 class="mai-attacher-1">Compose</h1>
+    </div>
+</div>
+
+<form id="mai-form-compose" action="/api/create-story" method="POST">
+    <div class="row">
+        <div class="col s12 m10 offset-m1 l8 offset-l2 xl6 offset-xl3">
+            <div class="card">
+                <div class="card-content">
+                    <div class="input-field">
+                        <label for="mai-title" class="blue-grey-text text-darken-2">Title</label>
+                        <input type="text" name="title" id="mai-title" class="validate" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mai-separator-3"></div>
+            
+            {{#each photos}}
+            <div class="card">
+                <div class="card-image mai-card">
+                    <img src="{{this.url}}">
+                </div>
+
+                <div class="card-content">
+                    <div class="input-field">
+                        <label for="mai-caption{{@index}}" class="blue-grey-text text-darken-2">Caption</label>
+                        <input type="text" name="captions[{{@index}}]" id="mai-caption{{@index}}" class="validate" required>
+                        <input type="hidden" name="urls[{{@index}}]" value="{{this.url}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mai-separator-3"></div>
+            {{/each}}
+
+            <button type="submit" class="btn-large waves-effect waves-light" title="Click to publish.">Publish</button>
+
+            <div class="mai-separator-3"></div>
+        </div>
+    </div>
+</form>

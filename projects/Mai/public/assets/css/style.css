@@ -1,0 +1,333 @@
+/****************************************************************************
+ ****************************************************************************
+
+    Default stylesheet
+
+*****************************************************************************
+*****************************************************************************/
+:root {
+    /* Define fonts */
+    --font-main     : "Nunito", sans-serif;
+    --font-highlight: "Leckerli One", cursive;
+
+    /* Define heights */
+    --height-nav: 40px;
+
+    /* Define color scheme */
+    --color-white-transparent: rgba(255, 255, 255, 0.92);
+}
+
+
+/****************************************************************************
+
+    General
+
+*****************************************************************************/
+/* Window */
+body {
+    font-family: var(--font-main);
+    font-size  : 20px;
+}
+
+.mai-mobile-page {
+    display: none;
+}
+
+/* Fonts */
+h1 {
+    font-family   : var(--font-highlight);
+    font-size     : 2.8em;
+    height        : 1.4em;
+    letter-spacing: 0.01em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.4em;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* Vertical separators */
+.mai-attacher-1 {
+    margin-bottom: 0;
+}
+
+.mai-separator-1 {
+    height: 0.4em;
+}
+
+.mai-separator-2 {
+    height: 1.2em;
+}
+
+.mai-separator-3 {
+    height: 2em;
+}
+
+/* Navbar */
+/* Source: https://stackoverflow.com/questions/35552708/is-materialize-navbar-height-adjustment-possible */
+nav {
+    height     : var(--height-nav);
+    line-height: var(--height-nav);
+}
+
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height     : var(--height-nav);
+    line-height: var(--height-nav);
+}
+
+nav .button-collapse i {
+    height     : var(--height-nav);
+    line-height: var(--height-nav);
+}
+
+nav .brand-logo {
+    font-family   : var(--font-highlight);
+    font-size     : 1.05em;
+    height        : 1.4em;
+    letter-spacing: 0.04em;
+    top           : 0.15em;
+    margin-left   : 1em;
+}
+
+nav .brand-logo img {
+    height: 100%;
+}
+
+nav .mai-menu-desktop-items {
+    font-size     : 0.75em;
+    letter-spacing: 0.01em;
+}
+
+nav #mai-menu-desktop li:last-child {
+    margin-right: 1em;
+}
+
+/* Footer */
+footer a:hover {
+    text-decoration: underline;
+}
+
+#mai-footer-social li {
+    font-size    : 1.6em;
+    float        : left;
+    padding-right: 0.9em;
+}
+
+.footer-copyright {
+    font-size: 0.75em;
+}
+
+/* Form */
+.input-field {
+    margin-top   : 0.6em;
+    margin-bottom: 0.6em;
+}
+
+label {
+    font-size: 0.85em !important;
+}
+
+button {
+    font-size: 0.85em !important;
+    width    : 100%;
+}
+
+/* Image */
+img.circle {
+    width: 100%;
+}
+
+/* Materialize card */
+.card label {
+    font-size: 1.2em !important;
+}
+
+.card input {
+    font-size    : 1.2em !important;
+    margin-top   : 0.75em !important;
+    margin-bottom: 1.5em !important;
+}
+
+.card p {
+    font-size: 1.2em !important;
+}
+
+.card a.btn-floating:hover {
+    background: #ffa000 !important;
+}
+
+.mai-card img {
+    object-fit: cover;
+    width     : 100%;
+    height    : 500px;
+}
+
+.mai-card-preview img {
+    object-fit: cover;
+    width     : 100%;
+    height    : 240px;
+}
+
+/* Video */
+.cover_video {
+    -webkit-filter: brightness(1.3) contrast(1.28) opacity(0.54) sepia(0.09) saturate(1.06);
+            filter: brightness(1.3) contrast(1.28) opacity(0.54) sepia(0.09) saturate(1.06);
+    position  : absolute;
+    width     : 100%;
+    height    : 100%;
+    top       : 50%;
+    left      : 50%;
+    transform : translate(-50%, -50%);
+    object-fit: cover;
+    z-index   : -1;
+}
+
+
+/****************************************************************************
+
+    Page-specific
+
+*****************************************************************************/
+/* Signup, Login */
+.mai-signup-wrapper, .mai-login-wrapper {
+    height: calc(100vh - 1.5*var(--height-nav));
+}
+
+.mai-signup-wrapper > *, .mai-login-wrapper > * {
+    background-color: var(--color-white-transparent);
+}
+
+h1.brand-logo img {
+    height: 100%;
+}
+
+/* Writers */
+.mai-writer:hover {
+    transform : scale(1.05);
+    transition: all 0.2s;
+}
+
+/* Profile */
+#mai-user-stats {
+    font-size: 1.3em;
+}
+
+#mai-user-stats #mai-numStories,
+#mai-user-stats #mai-numWriters,
+#mai-user-stats #mai-numReaders {
+    font-size: 1.75em;
+}
+
+/* Meet Mai */
+.mai-about-mai-wrapper {
+    height: calc(100vh - 1.5*var(--height-nav));
+}
+
+.mai-about-mai-wrapper > * {
+    background-color: var(--color-white-transparent);
+}
+
+/* Meet Mai Team */
+.carousel {
+    height: 67vh;
+}
+
+.carousel-item {
+    width:  30% !important;
+    top  : -30% !important;
+}
+
+
+
+/****************************************************************************
+ ****************************************************************************
+
+    Media query
+
+*****************************************************************************
+*****************************************************************************/
+/* Tablet and larger */
+@media only screen and (min-width: 601px) {
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height     : var(--height-nav);
+        line-height: var(--height-nav);
+    }
+}
+
+/* Desktop */
+@media all and (max-width: 1200px), all and (max-device-width: 1200px) {
+    .mai-card img {
+        height: 460px;
+    }
+
+    .mai-card-preview img {
+        height: 200px;
+    }
+}
+
+/* Tablet */
+@media all and (max-width: 992px), all and (max-device-width: 992px) {
+    .mai-desktop-page {
+        display: none;
+    }
+
+    .mai-mobile-page {
+        display: block;
+    }
+
+    h1 {
+        font-size: 2.4em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    nav .brand-logo {
+        margin-left: 0;
+    }
+
+    .mai-card img {
+        height: 300px;
+    }
+
+    .mai-card-preview img {
+        height: 240px;
+    }
+
+    .card p {
+        font-size: 1em !important;
+    }
+
+    #mai-user-stats {
+        font-size: 1.2em;
+    }
+
+    #mai-user-stats #mai-numStories,
+    #mai-user-stats #mai-numWriters,
+    #mai-user-stats #mai-numReaders {
+        font-size: 1.4em;
+    }
+
+    .cover_video {
+        visibility: hidden;
+    }
+}
+
+/* Mobile */
+@media all and (max-width: 600px), all and (max-device-width: 600px) {
+    .mai-card img {
+        height: 280px;
+    }
+
+    .mai-card-preview img {
+        height: 280px;
+    }
+}

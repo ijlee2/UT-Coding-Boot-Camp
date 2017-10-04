@@ -1,0 +1,53 @@
+<div class="mai-separator-2"></div>
+
+<div class="row">
+    <div class="col s12 m10 offset-m1 xl8 offset-xl2">
+        <h1 class="center-align">{{writer.fullname}}</h1>
+
+        <div class="row valign-wrapper">
+            <!-- User photo -->
+            <div class="col s3" id="mai-user-photo">
+                <img class="responsive-img circle" src="{{writer.url_photo}}" alt="{{writer.fullname}}">
+                <span class="new badge blue-grey darken-2 pulse">{{writer.numNewStories}}</span>
+            </div>
+            
+            <!-- User stats -->
+            <div class="col s9">
+                <div class="row" id="mai-user-stats">
+                    <div class="col s4 center-align grey-text text-lighten-1">
+                        <span class="black-text" id="mai-numStories">{{writer.numStories}}</span><br>stories
+                    </div>
+
+                    <div class="col s4 center-align grey-text text-lighten-1">
+                        <span class="black-text" id="mai-numWriters">{{writer.numWriters}}</span><br>writers
+                    </div>
+                    
+                    <div class="col s4 center-align grey-text text-lighten-1">
+                        <span class="black-text" id="mai-numReaders">{{writer.numReaders}}</span><br>readers
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- User stories -->
+    {{#each writer.stories}}
+    <div class="col s12 m6 l4 xl3">
+        <div class="card hoverable">
+            <div class="card-image mai-card-preview">
+                <a href="/story_{{this.id}}"><img class="responsive-img" src="{{this.url}}" title="Click to read {{this.title}}."></a>
+                {{#if ../editable}}
+                <a href="/edit-story_{{../maiId}}&{{this.id}}" class="btn-floating btn-large halfway-fab waves-effect waves-light yellow darken-2" title="Click to edit {{this.title}}."><i class="large material-icons">mode_edit</i></a>
+                {{/if}}
+            </div>
+            <a href="/story_{{this.id}}" title="Click to read {{this.title}}.">
+                <div class="card-content">{{this.title}}</div>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<div class="mai-separator-3"></div>
