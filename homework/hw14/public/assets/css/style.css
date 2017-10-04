@@ -33,21 +33,23 @@ body {
 
 /* Fonts */
 h1, h2, nav {
-    font-family: var(--font-highlight);
+    font-family: var(--font-main);
 }
 
 h1 {
-    font-size  : 2.1em;
-    font-weight: bold;
+    font-size    : 2.1em;
+    font-weight  : bold;
+    margin-bottom: 0.75em;
 }
 
 h2 {
-    font-size: 1.6em;
+    font-size    : 1.5em;
+    font-weight  : bold;
+    margin-bottom: 0.5em !important;
 }
 
 h3 {
-    font-size  : 1.4em;
-    font-weight: bold;
+    font-size: 1.2em;
 }
 
 a:hover {
@@ -97,9 +99,10 @@ nav .button-collapse i {
 }
 
 nav .brand-logo {
+    font-family   : var(--font-highlight);
     font-size     : 1.3em;
     font-weight   : bold;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
     margin-left   : 1em;
 }
 
@@ -127,6 +130,29 @@ nav #neotech-menu-desktop li:last-child {
     margin-bottom: 0.35em;
 }
 
+/* thread.hbs */
+.neotech-comments {
+    font-size: 0.8em;
+    padding: 0.2em 0.5em;
+}
+
+.neotech-comments:nth-child(odd) {
+    background-color: #b2dfdb;
+}
+
+.neotech-comments:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.neotech-comments button {
+    height: 100%;
+}
+
+.input-field {
+    margin-bottom: 0;
+}
+
+
 /* Footer */
 footer {
     font-size     : 0.86em;
@@ -137,12 +163,6 @@ footer a:hover {
     text-decoration: underline;
 }
 
-
-/****************************************************************************
-
-    Page-specific
-
-*****************************************************************************/
 
 
 /****************************************************************************

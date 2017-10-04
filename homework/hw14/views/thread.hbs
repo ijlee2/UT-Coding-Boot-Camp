@@ -2,25 +2,28 @@
     <div class="col s12 m10 offset-m1">
         <div class="neotech-separator-3"></div>
 
-        <h1>{{thread.title}}</h1>
-        <h2>by {{thread.author}}</h2>
+        <h1>Latest Tech News</h1>
+        <h2>{{thread.title}}</h2>
+
+        <div class="neotech-separator-2"></div>
     
         <div class="row">
             <div class="col s6">
-                <h3>Story</h3>
-
                 {{{thread.body}}}
                 
-                <div class="neotech-separator-2"></div>
-                <div><a href="http://www.neogaf.com/forum/showthread.php?t={{thread.threadId}}" target="_blank">Original link</a></div>
+                <div class="neotech-separator-1"></div>
+                
+                <p>- {{thread.author}}</p>
             </div>
 
             <div class="col s5 offset-s1">
-                <h3>Comments</h3>
-
                 {{#each thread.comments}}
-                    <p><span>{{this.author}}</span>: {{this.body}}</p>
+                <div class="neotech-comments">
+                    {{this.author}}: {{this.body}}<i class="material-icons right" id="{{this._id}}">delete_forever</i>
+                </div>
                 {{/each}}
+
+                <div class="neotech-separator-2"></div>
                 
                 <div class="card blue-grey lighten-5 hoverable">
                     <div class="card-content">
@@ -39,7 +42,7 @@
 
                                     <div class="neotech-separator-2"></div>
 
-                                    <button type="submit" id="button_post" class="btn waves-light" title="Click to post your comment.">Post</button>
+                                    <button type="submit" class="btn waves-light teal lighten-2 right" title="Click to post your comment.">Post</button>
                                 </form>
                             </div>
                         </div>
