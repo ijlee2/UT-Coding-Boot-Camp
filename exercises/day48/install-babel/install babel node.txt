@@ -1,0 +1,1 @@
+npm install babel-cli babel-preset-env babel-preset-stage-2 && echo "alias bnode='babel-node --presets es2015,stage-2'" >> ~/.bash_profile
