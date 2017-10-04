@@ -37,7 +37,8 @@ h1, h2, nav {
 }
 
 h1 {
-    font-size: 2.1em;
+    font-size  : 2.1em;
+    font-weight: bold;
 }
 
 h2 {
@@ -45,11 +46,16 @@ h2 {
 }
 
 h3 {
-    font-size: 1.3em;
+    font-size  : 1.4em;
+    font-weight: bold;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+nav a:hover {
+    text-decoration: none;
 }
 
 strong {
@@ -108,14 +114,6 @@ nav #neotech-menu-desktop li:last-child {
     margin-right: 1em;
 }
 
-.brand-logo-mobile {
-    font-family   : var(--font-highlight);
-    font-size     : 1.5em;
-    letter-spacing: 0.3em;
-    padding-top   : 0.5em;
-    padding-bottom: 0.4em;
-}
-
 .neotech-menu-items-mobile {
     font-size     : 1.05em !important;
     letter-spacing: 0.09em;
@@ -124,14 +122,9 @@ nav #neotech-menu-desktop li:last-child {
     padding-bottom: 0.75em !important;
 }
 
-/* Articles */
-article header {
-    background-image : url("../images/pattern_dark.png");
-    background-repeat: repeat;
-    display          : flex;
-    justify-content  : center;
-    flex-direction   : column;
-    height           : 240px;
+/* index.hbs */
+.neotech-threads {
+    margin-bottom: 0.35em;
 }
 
 /* Footer */
@@ -150,103 +143,6 @@ footer a:hover {
     Page-specific
 
 *****************************************************************************/
-/* Splash */
-.neotech-splash-wrapper {
-    height         : 100vh;
-    display        : flex;
-    justify-content: center;
-    flex-direction : column;
-}
-
-.neotech-splash-wrapper > .col {
-    background-color: var(--color-white-transparent);
-    position        : relative;
-    top             : calc(-1.5 * var(--height-nav));
-    border-radius   : 2px;
-}
-
-.cover_video {
-    -webkit-filter: brightness(1.33) contrast(1.6) opacity(0.42) sepia(0.06) saturate(1.15);
-            filter: brightness(1.33) contrast(1.6) opacity(0.42) sepia(0.06) saturate(1.15);
-    position      : absolute;
-    width         : 100%;
-    height        : calc(100% + 2.25*var(--height-nav));
-    top           : 50%;
-    left          : 50%;
-    transform     : translate(-50%, calc(-50% + var(--height-nav)));
-    object-fit    : cover;
-    z-index       : -1;
-}
-
-/* About Me */
-#about-me a {
-    font-size: 0.9em;
-}
-
-/* Expertise */
-.neotech-expertise {
-    border-radius: 6px;
-}
-
-/* Portfolio */
-.parallax-container {
-    height: 360px;
-}
-
-.parallax {
-    display        : flex;
-    justify-content: center;
-    flex-direction : column;
-}
-
-.parallax > img {
-    object-fit: fill !important;
-    width     : 100%;
-}
-
-.parallax > div {
-    font-family   : var(--font-highlight);
-    font-size     : 3.6em;
-    letter-spacing: 0.22em;
-    line-height   : 1.24em;
-    text-shadow   : 0 0 4px var(--color-blue-grey-lighten-5);
-    position      : absolute;
-    width         : 100%;
-}
-
-#portfolio li {
-    margin-top: 0.35em;
-}
-
-#portfolio a:hover {
-    text-decoration: underline;
-}
-
-.chip {
-    font-size    : 0.75em;
-    margin-top   : 0.45em;
-    margin-bottom: 0.22em;
-}
-
-/* Contact */
-#neotech-follow-me li {
-    font-size    : 1.6em;
-    line-height  : 1.4em;
-    float        : left;
-    padding-right: 0.9em;
-}
-
-#neotech-follow-me li:hover {
-    transform: scale(1.05);
-}
-
-#neotech-email-phone {
-    line-height: 1.9em;
-}
-
-#neotech-email-phone a:hover {
-    text-decoration: underline;
-}
 
 
 /****************************************************************************
