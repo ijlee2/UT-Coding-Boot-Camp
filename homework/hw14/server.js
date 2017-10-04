@@ -15,10 +15,6 @@ const app            = express();
 const methodOverride = require("method-override");
 const bodyParser     = require("body-parser");
 
-// For web scraping
-const cheerio        = require("cheerio");
-const request        = require("request");
-
 // For MongoDB
 const mongoose       = require("mongoose");
 

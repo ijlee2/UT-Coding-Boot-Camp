@@ -13,11 +13,6 @@ const commentSchema = new Schema({
         "required": true
     },
 
-    // Profile photo of commenter
-    "url_author_photo": {
-        "type": String
-    },
-
     // Comment
     "body": {
         "type"    : String,

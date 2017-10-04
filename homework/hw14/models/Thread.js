@@ -20,21 +20,11 @@ const threadSchema = new Schema({
         "required": true
     },
 
-    // First photo in the thread (if exists)
-    "url_thread_photo": {
-        "type": String
-    },
-
     // Thread starter
     "author": {
         "type"    : String,
         "trim"    : true,
         "required": true
-    },
-
-    // Profile photo of thread starter
-    "url_author_photo": {
-        "type": String
     },
 
     // Thread comments

@@ -1,0 +1,372 @@
+/****************************************************************************
+ ****************************************************************************
+
+    Default stylesheet
+
+*****************************************************************************
+*****************************************************************************/
+:root {
+    /* Define fonts */
+    --font-main     : "Nunito", sans-serif;
+    --font-highlight: "Arial", serif;
+
+    /* Define heights */
+    --height-nav: 60px;
+
+    /* Define color scheme */
+    --color-blue-grey-lighten-5: #bbb;
+    --color-white-transparent  : rgba(255, 255, 255, 0.93);
+}
+
+
+/****************************************************************************
+
+    General
+
+*****************************************************************************/
+/* Window */
+body {
+    background-image : url("../images/pattern_light.png");
+    background-repeat: repeat;
+    font-family      : var(--font-main);
+    font-size        : 20px;
+    letter-spacing   : 0.015em;
+    line-height      : 1.6em;
+}
+
+#ijl-device-detector {
+    font-size: 4px;
+}
+
+/* Fonts */
+h1, h2, nav {
+    font-family: var(--font-highlight);
+}
+
+h1 {
+    font-size: 2.2em;
+}
+
+h2 {
+    font-size     : 4.2em;
+}
+
+h3 {
+    font-size     : 1.4em;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* Separators */
+.ijl-attacher-1 {
+    margin-bottom: 0;
+}
+
+.ijl-separator-1 {
+    height: 0.5em;
+}
+
+.ijl-separator-2 {
+    height: 1.2em;
+}
+
+.ijl-separator-3 {
+    height: 1.6em;
+}
+
+/* Navbar */
+nav {
+    letter-spacing: 0.02em;
+    height        : var(--height-nav);
+    line-height   : var(--height-nav);
+}
+
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height     : var(--height-nav);
+    line-height: var(--height-nav);
+}
+
+nav .button-collapse i {
+    height     : var(--height-nav);
+    line-height: var(--height-nav);
+}
+
+nav .brand-logo {
+    font-size     : 1.3em;
+    font-weight   : bold;
+    letter-spacing: 0.02em;
+    margin-left   : 1em;
+}
+
+nav .ijl-menu-items-desktop {
+    font-size     : 0.75em;
+    letter-spacing: 0.1em;
+}
+
+nav #ijl-menu-desktop li:last-child {
+    margin-right: 1em;
+}
+
+.brand-logo-mobile {
+    font-family   : var(--font-highlight);
+    font-size     : 1.5em;
+    letter-spacing: 0.3em;
+    padding-top   : 0.5em;
+    padding-bottom: 0.4em;
+}
+
+.ijl-menu-items-mobile {
+    font-size     : 1.05em !important;
+    letter-spacing: 0.09em;
+    height        : 100% !important;
+    padding-top   : 0.75em !important;
+    padding-bottom: 0.75em !important;
+}
+
+/* Articles */
+article header {
+    background-image : url("../images/pattern_dark.png");
+    background-repeat: repeat;
+    display          : flex;
+    justify-content  : center;
+    flex-direction   : column;
+    height           : 240px;
+}
+
+/* Footer */
+footer {
+    font-size     : 0.86em;
+    letter-spacing: 0.022em;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/****************************************************************************
+
+    Page-specific
+
+*****************************************************************************/
+/* Splash */
+.ijl-splash-wrapper {
+    height         : 100vh;
+    display        : flex;
+    justify-content: center;
+    flex-direction : column;
+}
+
+.ijl-splash-wrapper > .col {
+    background-color: var(--color-white-transparent);
+    position        : relative;
+    top             : calc(-1.5 * var(--height-nav));
+    border-radius   : 2px;
+}
+
+.cover_video {
+    -webkit-filter: brightness(1.33) contrast(1.6) opacity(0.42) sepia(0.06) saturate(1.15);
+            filter: brightness(1.33) contrast(1.6) opacity(0.42) sepia(0.06) saturate(1.15);
+    position      : absolute;
+    width         : 100%;
+    height        : calc(100% + 2.25*var(--height-nav));
+    top           : 50%;
+    left          : 50%;
+    transform     : translate(-50%, calc(-50% + var(--height-nav)));
+    object-fit    : cover;
+    z-index       : -1;
+}
+
+/* About Me */
+#about-me a {
+    font-size: 0.9em;
+}
+
+/* Expertise */
+.ijl-expertise {
+    border-radius: 6px;
+}
+
+/* Portfolio */
+.parallax-container {
+    height: 360px;
+}
+
+.parallax {
+    display        : flex;
+    justify-content: center;
+    flex-direction : column;
+}
+
+.parallax > img {
+    object-fit: fill !important;
+    width     : 100%;
+}
+
+.parallax > div {
+    font-family   : var(--font-highlight);
+    font-size     : 3.6em;
+    letter-spacing: 0.22em;
+    line-height   : 1.24em;
+    text-shadow   : 0 0 4px var(--color-blue-grey-lighten-5);
+    position      : absolute;
+    width         : 100%;
+}
+
+#portfolio li {
+    margin-top: 0.35em;
+}
+
+#portfolio a:hover {
+    text-decoration: underline;
+}
+
+.chip {
+    font-size    : 0.75em;
+    margin-top   : 0.45em;
+    margin-bottom: 0.22em;
+}
+
+/* Contact */
+#ijl-follow-me li {
+    font-size    : 1.6em;
+    line-height  : 1.4em;
+    float        : left;
+    padding-right: 0.9em;
+}
+
+#ijl-follow-me li:hover {
+    transform: scale(1.05);
+}
+
+#ijl-email-phone {
+    line-height: 1.9em;
+}
+
+#ijl-email-phone a:hover {
+    text-decoration: underline;
+}
+
+
+/****************************************************************************
+ ****************************************************************************
+
+    Media query
+
+*****************************************************************************
+*****************************************************************************/
+/* Tablet and larger */
+@media only screen and (min-width: 601px) {
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height     : var(--height-nav);
+        line-height: var(--height-nav);
+    }
+}
+
+/* Desktop */
+@media all and (max-width: 1200px), all and (max-device-width: 1200px) {
+    #ijl-device-detector {
+        font-size: 3px;
+    }
+
+    h1 {
+        font-size     : 2.6em;
+        letter-spacing: calc(0.25em * 2.6/3.4);
+    }
+
+    h2 {
+        font-size     : calc(4.2em * 2.6/3.4);
+        letter-spacing: calc(0.5em * 2.6/3.4);
+    }
+
+    article header {
+        height: calc(240px * 2.6/3.4);
+    }
+
+    .parallax-container {
+        height: calc(360px * 2.6/3.4);
+    }
+
+    .parallax > div {
+        font-size     : calc(3.6em * 2.6/3.4);
+        letter-spacing: calc(0.22em * 2.6/3.4);
+    }
+
+    #ijl-follow-me li {
+        line-height: 1.8em;
+    }
+}
+
+/* Tablet */
+@media all and (max-width: 992px), all and (max-device-width: 992px) {
+    #ijl-device-detector {
+        font-size: 2px;
+    }
+
+    body {
+        font-size: 17px;
+    }
+
+    h1 {
+        font-size     : 2.2em;
+        letter-spacing: calc(0.25em * 17/20 * 2.2/3.4);
+    }
+
+    h2 {
+        font-size     : calc(4.2em * 17/20 * 2.2/3.4);
+        letter-spacing: calc(0.5em * 17/20 * 2.2/3.4);
+    }
+
+    nav .brand-logo {
+        margin-left: 0;
+    }
+
+    article header {
+        height: calc(240px * 17/20 * 2.2/3.4);
+    }
+
+    .parallax-container {
+        height: calc(360px * 17/20 * 2.2/3.4);
+    }
+
+    .parallax > div {
+        font-size     : calc(3.6em * 17/20 * 2.2/3.4);
+        letter-spacing: calc(0.22em * 17/20 * 2.2/3.4);
+    }
+}
+
+/* Mobile */
+@media all and (max-width: 600px), all and (max-device-width: 600px) {
+    #ijl-device-detector {
+        font-size: 1px;
+    }
+
+    h1 {
+        font-size     : 1.6em;
+        letter-spacing: calc(0.25em * 17/20 * 1.6/3.4);
+    }
+
+    h2 {
+        font-size     : calc(4.2em * 17/20 * 1.6/3.4);
+        letter-spacing: calc(0.5em * 17/20 * 1.6/3.4);
+    }
+
+    article header {
+        height: calc(240px * 17/20 * 1.6/3.4);
+    }
+
+    .parallax-container {
+        height: calc(360px * 17/20 * 1.6/3.4);
+    }
+
+    .parallax > div {
+        font-size     : calc(3.6em * 17/20 * 1.6/3.4);
+        letter-spacing: calc(0.22em * 17/20 * 1.6/3.4);
+    }
+
+    #ijl-follow-me li {
+        line-height: 1.4em;
+    }
+}

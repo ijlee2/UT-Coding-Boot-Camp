@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Homework 14 for UT Coding Boot Camp">
+        <meta name="author" content="Isaac J. Lee">
+        <title>NeoGAF Scraper</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.ico">
+
+        <!-- Import fonts -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Leckerli+One|Nunito" rel="stylesheet">
+
+        <!-- Import Materialize -->
+        <link type="text/css" rel="stylesheet" href="assets/css/materialize/materialize.min.css" media="screen,projection">
+
+        <!-- Custom CSS -->
+        {{#each customCSS}}
+        <link rel="stylesheet" type="text/css" href="assets/css/{{this}}.css">
+        {{/each}}
+    </head>
+    <body class="blue-grey lighten-5">
+        <!-- Navbar -->
+        <nav>
+            <div class="nav-wrapper grey darken-4">
+                <a href="/" class="brand-logo">NeoGAF Scraper</a>
+                <a href="#" data-activates="mai-menu-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+
+                <!-- Desktop -->
+                <ul class="right hide-on-med-and-down" id="mai-menu-desktop">
+                    <li><a class="mai-menu-desktop-items" href="/"><i class="material-icons left">home</i>Home</a></li>
+                    <li class="green darken-2"><a class="mai-menu-desktop-items" href="/scrape"><i class="material-icons left">library_add</i>Scrape Threads!</a></li>
+                    <li><a class="mai-menu-desktop-items" href="/saved"><i class="material-icons left">archive</i>Saved Threads</a></li>
+                </ul>
+
+                <!-- Mobile -->
+                <ul class="side-nav" id="mai-menu-mobile">
+                    <li><a class="mai-menu-mobile-items" href="/">Home</a></li>
+                    <li class="green lighten-3"><a class="mai-menu-mobile-items" href="/scrape">Scrape New Threads</a></li>
+                    <li><a class="mai-menu-mobile-items" href="/saved">Saved Threads</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            {{{body}}}
+        </div>
+
+        <footer class="page-footer footer-copyright grey darken-4">
+            <div class="container">
+                <div class="center-align">
+                    Copyright © 2017 by <a href="https://www.linkedin.com/in/ijlee2/" target="_blank" class="teal-text text-lighten-5">Isaac J. Lee</a>, all rights reserved.
+
+                    <div class="ijl-separator-2"></div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Import jQuery before materialize.js -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="assets/javascript/materialize/materialize.min.js"></script>
+
+        <!-- Custom JavaScript -->
+        <!--
+        {{#each customJavascript}}
+        <script type="text/javascript" src="assets/javascript/{{this}}.js"></script>
+        {{/each}}
+        -->
+    </body>
+</html>
