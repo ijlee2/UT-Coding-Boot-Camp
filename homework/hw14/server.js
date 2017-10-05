@@ -33,7 +33,7 @@ const PORT = process.env.PORT || 3000;
 // Configure mongoose
 mongoose.Promise = Promise;
 
-mongoose.connect("mongodb://localhost/neogaf_scraper", {"useMongoClient": true});
+mongoose.connect("mongodb://heroku_fzsk9cr3:dr5vpejt5av9494j3nj5uhto0c@ds015398.mlab.com:15398/heroku_fzsk9cr3", {"useMongoClient": true});
 
 const db = mongoose.connection;
 
