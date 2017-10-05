@@ -91,6 +91,8 @@ $(".dropdown-item").click(function() {
 
     // Display recommendations once the user selects all options
     if (eventNames.filter(a => a !== "").length === eventNames.length) {
+        $("#recommendations").html("<h2>Please wait!</h2>");
+
         displayRecommendations(eventNames);
     }
 });
