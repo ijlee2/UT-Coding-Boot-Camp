@@ -1,3 +1,19 @@
+function displayImages(isTrue) {
+    $("img").css({"display": (isTrue) ? "block" : "none"});
+
+    $("#neotech-image i").attr({"title": (isTrue) ? "Click to hide images." : "Click to show images."});
+    $("#neotech-image i").text((isTrue) ? "image" : "broken_image");
+}
+
+// Show images by default
+if (localStorage.getItem("displayImages") === null) {
+    localStorage.setItem("displayImages", true);
+    displayImages(true);
+}
+
+const isTrue = (localStorage.getItem("displayImages") === "true")
+displayImages(isTrue);
+
 $(document).ready(function() {
     // Dropdown menu
     $(".dropdown-button").dropdown();
@@ -11,12 +27,9 @@ $(document).ready(function() {
     // Allow the user to show or hide images
     $("#neotech-image").click(() => {
         // Toggle
-        const displayImages = !($("#neotech-image i").text() === "image");
-
-        $("img").css({"display": (displayImages) ? "block" : "none"});
-
-        $("#neotech-image i").attr({"title": (displayImages) ? "Click to hide images." : "Click to show images."});
-        $("#neotech-image i").text((displayImages) ? "image" : "broken_image");
-
+        const newValue = !(localStorage.getItem("displayImages") === "true");
+        
+        localStorage.setItem("displayImages", newValue);
+        displayImages(newValue);
     });
 });
