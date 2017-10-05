@@ -5,9 +5,9 @@
 
 ## Technologies Used
 
-- [x] Front end: HTML5, CSS3, Bootstrap4, ES7
+- [x] Front end: HTML5, CSS3, Bootstrap4, ES7, Handlebars
 
-- [x] Back end: Node, Express, MySQL, Handlebars
+- [x] Back end: Node, Express, MySQL
 
 
 ## How to Run
