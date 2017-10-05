@@ -6,7 +6,6 @@ const style_nav = {
     "backgroundColor": "green"
 };
 
-
 const Navbar = () => (
     <nav className="navbar" style={style_nav}>
         <a href="/">Welcome</a>
