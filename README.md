@@ -31,8 +31,8 @@ If you have suggestions for making my code better and simpler, please let me kno
 11. [Friend Finder](https://friend-finder-777.herokuapp.com/)
 12. [Eat-Da-Burger w/ ORM](https://eat-da-burger-100.herokuapp.com/)
 13. [Eat-Da-Burger w/ Sequelize](https://eat-da-burger-200.herokuapp.com/)
-14. All the News That's Fit to Scrape
-15. NYT React Search
+14. [NeoTECH](https://neotech-app.herokuapp.com/)
+15. NeoTECH w/ React
 16. Meals
 
 ## Exercises
