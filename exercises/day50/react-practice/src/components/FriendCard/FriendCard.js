@@ -2,16 +2,14 @@ import React from "react";
 import "./FriendCard.css";
 
 const FriendCard = (props) => {
-    const {name, occupation, location, src} = props;
+    const {name, occupation, location, image} = props;
 
     return (
         <div className="card">
             <div className="img-container">
-                <img
-                    alt={name}
-                    src={src}
-                />
+                <img alt={name} src={image} />
             </div>
+
             <div className="content">
                 <ul>
                     <li>
