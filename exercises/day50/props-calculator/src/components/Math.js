@@ -5,19 +5,19 @@ const Math = (props) => {
 
     switch (operator) {
         case "add":
-            return <span>{num1 + num2}</span>;
+            return <p>{num1} + {num2} = {num1 + num2}</p>;
 
         case "subtract":
-            return <span>{num1 - num2}</span>;
+            return <p>{num1} - {num2} = {num1 - num2}</p>;
 
         case "multiply":
-            return <span>{num1 * num2}</span>;
+            return <p>{num1} * {num2} = {num1 * num2}</p>;
 
         case "divide":
-            return <span>{num1 / num2}</span>;
+            return <p>{num1} / {num2} = {num1 / num2}</p>;
 
         default:
-            return <span>Error: Please check your syntax.</span>;
+            return <p>Error: Please check your syntax.</p>;
 
     }
 };
