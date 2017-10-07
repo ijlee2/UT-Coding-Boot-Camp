@@ -8,7 +8,7 @@ const Saved = () => {
                     <div className="card-content">
                         <div className="row">
                             <div className="col s10 offset-s1">
-                                <h2 className="card-title">Search</h2>
+                                <h2 className="card-title">Saved Articles</h2>
 
                                 <div>Saved 1</div>
                                 <div>Saved 2</div>

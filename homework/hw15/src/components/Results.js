@@ -1,6 +1,16 @@
 import React from "react";
 
-const Results = () => {
+const Results = (props) => {
+    const results = props.articles.map(a =>
+        <div key={a.id}>
+            <a href={a.url} target="_blank" rel="noopener noreferrer">{a.title}</a>
+
+            <form onSubmit={props.handleSave}>
+                <input type="submit" className="btn waves-light teal lighten-2" title="Click to save this article." value="Save" />
+            </form>
+        </div>
+    );
+
     return (
         <div className="card blue-grey lighten-5">
             <div className="card-content">
@@ -8,11 +18,7 @@ const Results = () => {
                     <div className="col s10 offset-s1">
                         <h2 className="card-title">Results</h2>
 
-                        <div>Result 1</div>
-                        <div>Result 2</div>
-                        <div>Result 3</div>
-                        <div>Result 4</div>
-                        <div>Result 5</div>
+                        {results}
                     </div>
                 </div>
             </div>
