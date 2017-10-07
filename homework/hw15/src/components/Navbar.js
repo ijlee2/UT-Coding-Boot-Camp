@@ -6,7 +6,7 @@ const Navbar = () => {
         <nav>
             <div className="nav-wrapper grey darken-4">
                 <a href="/" className="brand-logo orange-text text-darken-3">NeoTECH</a>
-                <a href="#" data-activates="neotech-menu-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
+                <a href="#nowhere" data-activates="neotech-menu-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
 
                 {/* Desktop */}
                 <ul className="right hide-on-med-and-down" id="neotech-menu-desktop">
