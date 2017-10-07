@@ -41,8 +41,8 @@ class Body extends Component {
 
         axios
             .get("https://api.nytimes.com/svc/search/v2/articlesearch.json?", {params})
-            .then(res => {
-                const articles = res.data.response.docs.map(a => ({
+            .then(response => {
+                const articles = response.data.response.docs.map(a => ({
                     "id"       : a._id,
                     "title"    : a.headline.main,
                     "byline"   : a.byline.original,
@@ -51,10 +51,14 @@ class Body extends Component {
                     "category" : a.new_desk,
                     "date"     : a.pub_date,
                     "keywords" : a.keywords,
-                    "wordcount": a.word_count
+                    "wordCount": a.word_count
                 }));
 
                 this.setState({"articles": articles});
+
+            })
+            .catch(error => {
+                console.log(error);
 
             });
     }
@@ -63,12 +67,30 @@ class Body extends Component {
         event.preventDefault();
 
         const articleId = event.target.id.value;
+        const article   = this.state.articles.find(a => a.id === articleId);
+
+        console.log(article);
+        
+        /*
+        axios
+            .post("/api/saved", article)
+            .then(response => {
+                console.log(response);
+
+            })
+            .catch(error => {
+                console.log(error);
+
+            });
+        */
     }
 
     handleRemove(event) {
         event.preventDefault();
 
         const articleId = event.target.id.value;
+        
+        console.log(articleId);
     }
 
     render() {

@@ -7,7 +7,6 @@
 *****************************************************************************/
 // Use Express
 const express        = require("express");
-const exphbs         = require("express-handlebars");
 const path           = require("path");
 const app            = express();
 
@@ -25,13 +24,15 @@ const PORT = process.env.PORT || 3000;
 
 /****************************************************************************
  ****************************************************************************
+    
     Set models
+    
 *****************************************************************************
 *****************************************************************************/
 // Configure mongoose
 mongoose.Promise = Promise;
 
-mongoose.connect("mongodb://heroku_fzsk9cr3:dr5vpejt5av9494j3nj5uhto0c@ds015398.mlab.com:15398/heroku_fzsk9cr3", {"useMongoClient": true});
+mongoose.connect("mongodb://heroku_9d5g2039:b02qd7irk8mcfrft78drfu7u15@ds013495.mlab.com:13495/heroku_9d5g2039", {"useMongoClient": true});
 
 const db = mongoose.connection;
 
@@ -64,19 +65,13 @@ app.use(bodyParser.text());
 // Set extended to true so that we can parse arrays of input fields
 app.use(bodyParser.urlencoded({"extended": true}));
 
-// Set handlebars
-app.engine(".hbs", exphbs({
-    "defaultLayout": "main",
-    "extname"      : ".hbs"
-}));
-
-app.set("view engine", ".hbs");
-
 
 
 /****************************************************************************
  ****************************************************************************
+    
     Set controllers
+    
 *****************************************************************************
 *****************************************************************************/
 // Override POST methods to handle PATCH and DELETE
@@ -94,7 +89,9 @@ app.use("/api", router_api);
 
 /****************************************************************************
  ****************************************************************************
+    
     Listen for connections on the port
+    
 *****************************************************************************
 *****************************************************************************/
 // Set the app to listen on port 3000

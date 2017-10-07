@@ -3,9 +3,10 @@ import moment from "moment";
 
 import Time from "./Header/Time";
 
-// Find out how many seconds remain until the next minute
-let seconds = new Date().getSeconds;
-let secondsRemaining = (seconds > 0) ? 1000 * (60 - seconds) : 0;
+// Find out how many milliseconds remain until the next minute
+const date  = new Date();
+let ms_now  = 1000 * date.getSeconds() + date.getMilliseconds();
+let ms_left = (ms_now > 0) ? 60000 - ms_now : 0;
 
 class Header extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class Header extends Component {
             // Afterwards, update the time every 1 minute
             setInterval(this.updateTime, 60000);
 
-        }, secondsRemaining);
+        }, ms_left);
     }
 
     updateTime() {

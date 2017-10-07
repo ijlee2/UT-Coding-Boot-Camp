@@ -1,22 +1,16 @@
 {
-  "name": "hw15_isaac_lee",
+  "name": "hw15_front_end_isaac_lee",
   "version": "1.0.0",
   "description": "Homework 15 for UT Coding Boot Camp",
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
-    "body-parser": "^1.18.2",
-    "cheerio": "^1.0.0-rc.2",
-    "express": "^4.16.1",
-    "method-override": "^2.3.10",
     "moment": "^2.18.1",
-    "mongoose": "^4.12.0",
-    "path": "^0.12.7",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
