@@ -7,7 +7,7 @@
 *****************************************************************************/
 :root {
     /* Define fonts */
-    --font-main     : "Open Sans Condensed", sans-serif;
+    --font-main     : "Lora", serif;
     --font-highlight: "Playfair Display SC", serif;
 
     /* Define heights */
@@ -47,7 +47,7 @@ h2 {
     font-size    : 1.5em;
     font-weight  : bold;
     line-height  : 1.6em;
-    margin-bottom: 0.5em !important;
+    margin-bottom: 1.25em !important;
 }
 
 a:hover {
@@ -103,40 +103,31 @@ nav #nyt-menu-desktop li:last-child {
     padding-bottom: 0.6em !important;
 }
 
-/* index.hbs */
-.nyt-threads {
-    margin-bottom: 0.35em;
+/* Query.js */
+.card .input-field {
+    margin-bottom: -0.25em;
 }
 
-/* thread.hbs */
-.nyt-comments {
-    font-size: 0.8em;
+/* Results.js */
+.nyt-results {
+    font-size: 0.85em;
     position : relative;
-    padding  : 0.2em 0.8em;
+    padding  : 0.4em 0.8em;
 }
 
-.nyt-comments:nth-child(odd) {
+.nyt-results:nth-child(odd) {
     background-color: #b2dfdb;
 }
 
-.nyt-comments:nth-child(even) {
-    background-color: #fafafa;
+.nyt-results:nth-child(even) {
 }
 
-.nyt-comments button {
-    position : absolute;
-    top      : 0;
-    right    : 0;
-    transform: translateX(100%);
+.nyt-results button {
+    position: absolute;
+    top     : 0;
+    right   : 0;
 }
 
-.card .input-field {
-    margin-bottom: -0.75em;
-}
-
-.card button {
-    margin-bottom: -0.75em;
-}
 
 /* Footer */
 footer {
@@ -200,10 +191,6 @@ footer a:hover {
 
     nav .brand-logo {
         margin-left: 0;
-    }
-
-    .nyt-threads {
-        margin-bottom: 0.55em;
     }
 
     .nyt-comments p {

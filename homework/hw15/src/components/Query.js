@@ -26,7 +26,7 @@ const Query = (props) => {
 
                             <div className="nyt-separator-2"></div>
 
-                            <input type="submit" className="btn waves-light teal lighten-2" title="Click to search articles." value="Search" />
+                            <button type="submit" className="btn waves-light teal lighten-2" title="Click to search articles.">Submit</button>
                         </form>
                     </div>
                 </div>

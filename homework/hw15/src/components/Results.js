@@ -2,11 +2,11 @@ import React from "react";
 
 const Results = (props) => {
     const results = props.articles.map(a =>
-        <div key={a.id}>
+        <div className="nyt-results" key={a.id}>
             <a href={a.url} target="_blank" rel="noopener noreferrer">{a.title}</a>
 
             <form onSubmit={props.handleSave}>
-                <input type="submit" className="btn waves-light teal lighten-2" title="Click to save this article." value="Save" />
+                <button type="submit" className="btn waves-light teal lighten-2" title="Click to save this article."><i class="material-icons">add</i></button>
             </form>
         </div>
     );
