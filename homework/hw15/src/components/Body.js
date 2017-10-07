@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import Query from "./Query";
-import Results from "./Results";
+import Search from "./Body/Search";
+import Saved  from "./Body/Saved";
 
-class Search extends Component {
+class Body extends Component {
     constructor(props) {
         super(props);
 
@@ -16,8 +16,13 @@ class Search extends Component {
             "articlesSaved": []
         }
 
+        // Methods for Search component
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        // Methods for Saved component
+        this.handleSave   = this.handleSave.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
     }
 
     handleChange(event) {
@@ -54,22 +59,40 @@ class Search extends Component {
             });
     }
 
+    handleSave(event) {
+        event.preventDefault();
+
+        const articleId = event.target.id.value;
+    }
+
+    handleRemove(event) {
+        event.preventDefault();
+
+        const articleId = event.target.id.value;
+    }
+
     render() {
-        return [
-            <Query 
-                topic={this.state.topic}
-                startYear={this.state.startYear}
-                endYear={this.state.endYear}
-                articles={this.state.articles}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-            />,
-            
-            <div className="nyt-separator-1" />,
-            
-            <Results articles={this.state.articles} />
-        ];
+        return (
+            <div className="body">
+                <Search
+                    topic={this.state.topic}
+                    startYear={this.state.startYear}
+                    endYear={this.state.endYear}
+                    articles={this.state.articles}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    handleSave={this.handleSave}
+                />
+
+                <div className="nyt-separator-1" />
+
+                <Saved
+                    articlesSaved={this.state.articlesSaved}
+                    handleRemove={this.handleRemove}
+                />
+            </div>
+        );
     }
 }
 
-export default Search;
+export default Body;

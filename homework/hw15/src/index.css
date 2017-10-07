@@ -132,6 +132,11 @@ nav #nyt-menu-desktop li:last-child {
     margin-bottom: 0.5em;
 }
 
+.nyt-results:hover {
+    transform : scale(1.01);
+    transition: all 0.2s;
+}
+
 .nyt-results:nth-child(odd) {
     background-color: #b2dfdb;
 }

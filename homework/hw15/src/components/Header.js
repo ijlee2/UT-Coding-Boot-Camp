@@ -1,28 +1,31 @@
 import React, { Component } from "react";
 import moment from "moment";
 
-import Time from "./Time";
+import Time from "./Header/Time";
 
-let initial = 1000 * (60 - new Date().getSeconds());
+// Find out how many seconds remain until the next minute
+let seconds = new Date().getSeconds;
+let secondsRemaining = (seconds > 0) ? 1000 * (60 - seconds) : 0;
 
 class Header extends Component {
     constructor(props) {
         super(props);
         
         this.state = {
+            // Display the time
             "time": moment().format("LLL")
         }
 
         this.updateTime = this.updateTime.bind(this);
 
+        // Update the time at the next minute
         setTimeout(() => {
-            // Display the time
             this.updateTime();
 
-            // Update the time every 1 minute
+            // Afterwards, update the time every 1 minute
             setInterval(this.updateTime, 60000);
 
-        }, initial);
+        }, secondsRemaining);
     }
 
     updateTime() {

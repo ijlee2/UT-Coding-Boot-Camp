@@ -9,7 +9,8 @@ const Results = (props) => {
             <span>{a.byline}</span>
 
             <form onSubmit={props.handleSave}>
-                <button type="submit" className="btn btn-large waves-light teal lighten-2" title="Click to save this article."><i class="material-icons">add</i></button>
+                <input type="hidden" name="id" value={a.id} />
+                <button type="submit" className="btn btn-large waves-light teal lighten-2" title="Click to save this article."><i className="material-icons">add</i></button>
             </form>
         </div>
     );
