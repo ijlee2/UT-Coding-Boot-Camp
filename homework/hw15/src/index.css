@@ -44,10 +44,12 @@ h1 {
 }
 
 h2 {
-    font-size    : 1.5em;
-    font-weight  : bold;
-    line-height  : 1.6em;
+    font-size    : 1.8em !important;
     margin-bottom: 1.25em !important;
+}
+
+h3 {
+    font-size: 1.2em;
 }
 
 a:hover {
@@ -103,16 +105,31 @@ nav #nyt-menu-desktop li:last-child {
     padding-bottom: 0.6em !important;
 }
 
+/* Cards */
+.card {
+    padding-bottom: 1em;
+}
+
 /* Query.js */
-.card .input-field {
+.input-field {
     margin-bottom: -0.25em;
+}
+
+.input-field label {
+    font-size: 0.9em;
+}
+
+.input-field input {
+    font-size    : 1.05em !important;
+    margin-top   : 0.4em !important;
+    margin-bottom: 1.05em !important;
 }
 
 /* Results.js */
 .nyt-results {
-    font-size: 0.85em;
-    position : relative;
-    padding  : 0.4em 0.8em;
+    position     : relative;
+    padding      : 1em 4em 1.8em 2em;
+    margin-bottom: 0.5em;
 }
 
 .nyt-results:nth-child(odd) {
@@ -120,6 +137,11 @@ nav #nyt-menu-desktop li:last-child {
 }
 
 .nyt-results:nth-child(even) {
+    background-color: #c8e6c9;
+}
+
+.nyt-results span {
+    font-size: 0.9em;
 }
 
 .nyt-results button {

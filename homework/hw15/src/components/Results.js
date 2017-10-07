@@ -1,12 +1,15 @@
 import React from "react";
 
+const numArticlesToReturn = 5;
+
 const Results = (props) => {
-    const results = props.articles.map(a =>
-        <div className="nyt-results" key={a.id}>
-            <a href={a.url} target="_blank" rel="noopener noreferrer">{a.title}</a>
+    const results = props.articles.slice(0, numArticlesToReturn).map(a =>
+        <div className="nyt-results hoverable" key={a.id}>
+            <h3><a href={a.url} target="_blank" rel="noopener noreferrer">{a.title}</a></h3>
+            <span>{a.byline}</span>
 
             <form onSubmit={props.handleSave}>
-                <button type="submit" className="btn waves-light teal lighten-2" title="Click to save this article."><i class="material-icons">add</i></button>
+                <button type="submit" className="btn btn-large waves-light teal lighten-2" title="Click to save this article."><i class="material-icons">add</i></button>
             </form>
         </div>
     );
