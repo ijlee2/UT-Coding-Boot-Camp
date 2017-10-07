@@ -1,11 +1,15 @@
 import React, { Component } from "react";
+import axios from "axios";
+
+const apiKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
+const apiUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${apiKey}&hl=true&q=`;
 
 class Query extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            "topic"    : "Hello",
+            "topic"    : "",
             "startYear": 2017,
             "endYear"  : 2017
         };
@@ -21,7 +25,24 @@ class Query extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        console.log(this.state);
+        const url = `${apiUrl}${this.state.topic}&begin_date=${this.state.startYear}0101&end_date=${this.state.endYear}0101`;
+
+        axios.get(url).then(res => {
+            const articles = res.data.response.docs.map(a => ({
+                "id"       : a._id,
+                "title"    : a.headline.main,
+                "byline"   : a.byline.original,
+                "summary"  : a.snippet,
+                "url"      : a.web_url,
+                "category" : a.new_desk,
+                "date"     : a.pub_date,
+                "keywords" : a.keywords,
+                "wordcount": a.word_count
+            }));
+
+            console.log(articles);
+
+        });
     }
 
     render() {
