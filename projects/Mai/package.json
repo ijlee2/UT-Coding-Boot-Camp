@@ -27,6 +27,7 @@
   "bugs": {
     "url": "https://github.com/ijlee2/Mai/issues"
   },
+  "private": true,
   "license": "UNLICENSED",
   "contributors": [
     {
