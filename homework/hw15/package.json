@@ -4,9 +4,16 @@
   "description": "Homework 15 for UT Coding Boot Camp",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.1",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.12.0",
+    "path": "^0.12.7",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.14",
+    "request": "^2.83.0"
   },
   "devDependencies": {},
   "scripts": {
