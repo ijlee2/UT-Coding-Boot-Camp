@@ -1,0 +1,240 @@
+/****************************************************************************
+ ****************************************************************************
+
+    Default stylesheet
+
+*****************************************************************************
+*****************************************************************************/
+:root {
+    /* Define fonts */
+    --font-main     : "Open Sans Condensed", sans-serif;
+    --font-highlight: "Playfair Display SC", serif;
+
+    /* Define heights */
+    --height-nav: 54px;
+
+    /* Define color scheme */
+    --color-blue-grey-lighten-5: #bbb;
+}
+
+
+/****************************************************************************
+
+    General
+
+*****************************************************************************/
+/* Window */
+body {
+    font-family   : var(--font-main);
+    font-size     : 20px;
+    letter-spacing: 0.015em;
+    line-height   : 1.6em;
+}
+
+/* Fonts */
+h1, nav, .brand-logo, footer {
+    font-family: var(--font-highlight);
+}
+
+h1 {
+    font-size     : 2.1em;
+    font-weight   : bold;
+    letter-spacing: 0.07em;
+    margin-bottom : 0.75em;
+}
+
+h2 {
+    font-size    : 1.5em;
+    font-weight  : bold;
+    line-height  : 1.6em;
+    margin-bottom: 0.5em !important;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+nav a:hover {
+    text-decoration: none;
+}
+
+/* Separators */
+.neotech-separator-1 {
+    height: 0.5em;
+}
+
+.neotech-separator-2 {
+    height: 1.2em;
+}
+
+.neotech-separator-3 {
+    height: 1.6em;
+}
+
+/* Navbar */
+nav, nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons, nav .button-collapse i {
+    height     : var(--height-nav);
+    line-height: var(--height-nav);
+}
+
+nav .brand-logo {
+    font-size     : 1.3em;
+    font-weight   : bold;
+    letter-spacing: 0.09em;
+    margin-left   : 1em;
+}
+
+nav .neotech-menu-items-desktop {
+    font-size     : 0.9em;
+    letter-spacing: 0.15em;
+    padding-left  : 1.25em !important;
+    padding-right : 1.25em !important;
+}
+
+nav #neotech-menu-desktop li:last-child {
+    margin-right: 0.75em;
+}
+
+.neotech-menu-items-mobile {
+    font-size     : 1.2em !important;
+    letter-spacing: 0.18em;
+    height        : 100% !important;
+    padding-top   : 0.6em !important;
+    padding-bottom: 0.6em !important;
+}
+
+/* index.hbs */
+.neotech-threads {
+    margin-bottom: 0.35em;
+}
+
+/* thread.hbs */
+.neotech-comments {
+    font-size: 0.8em;
+    position : relative;
+    padding  : 0.2em 0.8em;
+}
+
+.neotech-comments:nth-child(odd) {
+    background-color: #b2dfdb;
+}
+
+.neotech-comments:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.neotech-comments button {
+    position : absolute;
+    top      : 0;
+    right    : 0;
+    transform: translateX(100%);
+}
+
+.card .input-field {
+    margin-bottom: -0.75em;
+}
+
+.card button {
+    margin-bottom: -0.75em;
+}
+
+/* Footer */
+footer {
+    font-size     : 0.9em;
+    letter-spacing: 0.15em;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+
+/****************************************************************************
+ ****************************************************************************
+
+    Media query
+
+*****************************************************************************
+*****************************************************************************/
+/* Tablet and larger */
+@media only screen and (min-width: 601px) {
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height     : var(--height-nav);
+        line-height: var(--height-nav);
+    }
+}
+
+/* Desktop */
+@media all and (max-width: 1200px), all and (max-device-width: 1200px) {
+    body {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size     : 1.8em;
+        letter-spacing: calc(0.07em * 18/20 * 1.8/2.1);
+    }
+
+    h2 {
+        font-size     : calc(1.5em * 18/20 * 1.8/2.1);
+        letter-spacing: calc(0.015em * 18/20 * 1.8/2.1);
+    }
+}
+
+/* Tablet */
+@media all and (max-width: 992px), all and (max-device-width: 992px) {
+    body {
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size     : 1.6em;
+        letter-spacing: calc(0.07em * 1.6/2.1);
+    }
+
+    h2 {
+        font-size     : calc(1.5em * 1.6/2.1);
+        letter-spacing: calc(0.015em * 1.6/2.1);
+    }
+
+    nav .brand-logo {
+        margin-left: 0;
+    }
+
+    .neotech-threads {
+        margin-bottom: 0.55em;
+    }
+
+    .neotech-comments p {
+        width: 85%;
+    }
+
+    .neotech-comments button {
+        position : absolute;
+        top      : 0;
+        right    : 0;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile */
+@media all and (max-width: 600px), all and (max-device-width: 600px) {
+    body {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size     : 1.8em;
+        letter-spacing: calc(0.07em * 18/20 * 1.8/2.1);
+    }
+
+    h2 {
+        font-size     : calc(1.5em * 18/20 * 1.8/2.1);
+        letter-spacing: calc(0.015em * 18/20 * 1.8/2.1);
+    }
+
+    .neotech-comments p {
+        width: 70%;
+    }
+}

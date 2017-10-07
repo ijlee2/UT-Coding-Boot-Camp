@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col s12 xl10 offset-xl1">
+        <div class="neotech-separator-3"></div>
+
+        <h1>Latest Tech News</h1>
+        <h2>{{thread.title}}</h2>
+
+        <div class="neotech-separator-2"></div>
+    
+        <div class="row">
+            <div class="col s12 l7">
+                {{{thread.body}}}
+                
+                <div class="neotech-separator-1"></div>
+                
+                <p>- {{thread.author}}</p>
+
+                <div class="neotech-separator-2"></div>
+            </div>
+
+            <div class="col s12 l5">
+                {{#each thread.comments}}
+                <div class="neotech-comments">
+                    <p>{{this.author}}: {{this.body}}</p>
+
+                    <form action="/api/delete-comment_{{../thread.threadId}}&{{this._id}}?_method=DELETE" method="POST">
+                        <button type="submit" class="btn waves-light" title="Click to delete {{this.author}}'s comment."><i class="material-icons">delete_forever</i></button>
+                    </form>
+                </div>
+                {{/each}}
+
+                {{#if thread.comments}}
+                <div class="neotech-separator-1"></div>
+                {{/if}}
+                
+                <div class="card blue-grey lighten-5 hoverable">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12">
+                                <form action="/api/add-comment_{{thread.threadId}}" method="POST">
+                                    <div class="input-field">
+                                        <label for="neotech-author" class="blue-grey-text text-darken-2">My name:</label>
+                                        <input type="text" name="author" id="neotech-author" class="validate" required>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label for="neotech-comment" class="blue-grey-text text-darken-2">My comment:</label>
+                                        <input type="text" name="body" id="neotech-comment" class="validate" required>
+                                    </div>
+
+                                    <div class="neotech-separator-2"></div>
+
+                                    <button type="submit" class="btn waves-light teal lighten-2 right" title="Click to post your comment.">Post</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="neotech-separator-3"></div>
+    </div>
+</div>

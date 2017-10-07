@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col s12 l10 offset-l1 xl8 offset-xl2">
+        <div class="neotech-separator-3"></div>
+
+        <h1>Latest Tech News</h1>
+
+        <ul>
+            {{#each threads}}
+            <li class="neotech-threads">
+                <a href="/showthread_{{this.threadId}}">{{this.title}}</a> by {{this.author}}
+            </li>
+            {{/each}}
+        </ul>
+        
+        <div class="neotech-separator-3"></div>
+    </div>
+</div>
