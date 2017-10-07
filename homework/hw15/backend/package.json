@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.1",
     "method-override": "^2.3.10",
     "mongoose": "^4.11.14",

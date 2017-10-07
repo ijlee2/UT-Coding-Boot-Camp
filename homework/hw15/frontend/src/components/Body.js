@@ -22,7 +22,7 @@ class Body extends Component {
 
         // Methods for Saved component
         this.handleSave   = this.handleSave.bind(this);
-        this.handleRemove = this.handleRemove.bind(this);
+        this.handleUnsave = this.handleUnsave.bind(this);
     }
 
     handleChange(event) {
@@ -71,21 +71,24 @@ class Body extends Component {
 
         console.log(article);
         
-        /*
         axios
-            .post("/api/saved", article)
+            .post("http://localhost:8080/api/saved", {article})
             .then(response => {
-                console.log(response);
+                // Add the article to saved
+                this.setState({
+                    "articlesSaved": [...this.state.articlesSaved, article]
+                });
+
+                console.log(this.state.articlesSaved);
 
             })
             .catch(error => {
-                console.log(error);
+                console.log("Uh oh!" + error);
 
             });
-        */
     }
 
-    handleRemove(event) {
+    handleUnsave(event) {
         event.preventDefault();
 
         const articleId = event.target.id.value;
@@ -110,7 +113,7 @@ class Body extends Component {
 
                 <Saved
                     articlesSaved={this.state.articlesSaved}
-                    handleRemove={this.handleRemove}
+                    handleUnsave={this.handleUnsave}
                 />
             </div>
         );

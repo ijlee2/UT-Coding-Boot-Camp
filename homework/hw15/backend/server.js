@@ -17,8 +17,11 @@ const bodyParser     = require("body-parser");
 // For MongoDB
 const mongoose       = require("mongoose");
 
+// Use CORS to bypass security
+const cors           = require("cors");
+
 // Set port number
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 
 
@@ -58,6 +61,9 @@ db.once("open", () => {
 // Set public directory
 app.use(express.static("public"));
 
+// Set up CORS
+app.use(cors());
+
 // Set up Express to handle parsing data
 app.use(bodyParser.json());
 app.use(bodyParser.text());
@@ -78,11 +84,11 @@ app.use(bodyParser.urlencoded({"extended": true}));
 app.use(methodOverride("_method"));
 
 // Set routers
-const router_html = require(path.join(__dirname, "controllers", "html_routes.js"));
+//const router_html = require(path.join(__dirname, "controllers", "html_routes.js"));
 const router_api  = require(path.join(__dirname, "controllers", "api_routes.js"));
 
 // Talk to routers
-app.use("/", router_html);
+//app.use("/", router_html);
 app.use("/api", router_api);
 
 
@@ -94,5 +100,5 @@ app.use("/api", router_api);
     
 *****************************************************************************
 *****************************************************************************/
-// Set the app to listen on port 3000
+// Start the server
 app.listen(PORT, () => console.log(`App listening on ${PORT}.`));

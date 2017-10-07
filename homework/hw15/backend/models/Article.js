@@ -39,7 +39,7 @@ const articleSchema = new Schema({
         "required": true
     },
 
-    "keywords": [String],
+    "keywords": Array,
 
     "wordCount": Number,
 
