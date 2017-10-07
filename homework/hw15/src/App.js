@@ -1,15 +1,10 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 import Saved  from "./components/Saved";
 import Footer from "./components/Footer";
 
 class App extends Component {
-    // Show images by default
-    state = {
-        "displayImages": true
-    };
-
     render() {
         // React 16 array notation
         return [
