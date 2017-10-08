@@ -8,7 +8,7 @@ const Query = (props) => {
                     <div className="col s10 offset-s1">
                         <h2 className="card-title">Search</h2>
 
-                        <form onSubmit={props.handleSubmit}>
+                        <form className="nyt-query" onSubmit={props.handleSubmit}>
                             <div className="input-field">
                                 <label htmlFor="nyt-topic" className="blue-grey-text text-darken-2">Topic</label>
                                 <input type="text" name="topic" id="nyt-topic" value={props.topic} onChange={props.handleChange} className="validate" required />

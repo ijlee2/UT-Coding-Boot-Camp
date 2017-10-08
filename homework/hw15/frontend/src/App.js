@@ -11,7 +11,7 @@ class App extends Component {
             <div className="app">
                 <div className="container">
                     <div className="row">
-                        <div className="col s12 m10 offset-m1 l8 offset-l2">
+                        <div className="col s12 xl8 offset-xl2">
                             <Header />
 
                             <div className="nyt-separator-2" />

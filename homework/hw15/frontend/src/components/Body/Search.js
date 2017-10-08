@@ -15,7 +15,7 @@ const Search = (props) => {
                 handleSubmit={props.handleSubmit}
             />
             
-            <div className="nyt-separator-1" />
+            <div className="nyt-separator-2" />
             
             <Results
                 articles={props.articles}

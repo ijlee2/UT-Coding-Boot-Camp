@@ -137,7 +137,7 @@ class Body extends Component {
                     handleSave={this.handleSave}
                 />
 
-                <div className="nyt-separator-1" />
+                <div className="nyt-separator-2" />
 
                 <Saved
                     articlesSaved={this.state.articlesSaved}
