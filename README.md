@@ -14,7 +14,7 @@ If you have suggestions for making my code better and simpler, please let me kno
 
 <a href="https://github.com/ijlee2/Mai" target="_blank"><img src="https://github.com/ijlee2/Mai/raw/master/public/assets/images/mai_splash.png?raw=true" alt="Mai"></a>
 
-3. 
+3. Mai 2
 
 ## Homework
 0. [Pre-work assignments](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw0/module-8/fanpage.html)
@@ -32,7 +32,7 @@ If you have suggestions for making my code better and simpler, please let me kno
 12. [Eat-Da-Burger w/ ORM](https://eat-da-burger-100.herokuapp.com/)
 13. [Eat-Da-Burger w/ Sequelize](https://eat-da-burger-200.herokuapp.com/)
 14. [NeoTECH](https://neotech-app.herokuapp.com/)
-15. NeoTECH w/ React
+15. [NYT React](https://nyt-app.herokuapp.com/)
 16. Meals
 
 ## Exercises

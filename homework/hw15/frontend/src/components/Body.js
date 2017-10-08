@@ -5,7 +5,7 @@ import openSocket from "socket.io-client";
 import Search from "./Body/Search";
 import Saved  from "./Body/Saved";
 
-const socket = openSocket("http://localhost:8080");
+const socket = openSocket("/");
 
 class Body extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class Body extends Component {
     componentDidMount() {
         // Find saved articles
         axios
-            .get("http://localhost:8080/api/saved")
+            .get("/api/saved")
             .then(response => {
                 this.setState({
                     "articlesSaved": response.data
@@ -95,7 +95,7 @@ class Body extends Component {
         const article   = this.state.articles.find(a => a.id === articleId);
 
         axios
-            .post("http://localhost:8080/api/saved", {article})
+            .post("/api/saved", {article})
             .then(response => {
                 if (response.status === 200) {
                     // Add the article to articlesSaved
@@ -121,7 +121,7 @@ class Body extends Component {
         
         // Override POST with DELETE
         axios
-            .post("http://localhost:8080/api/saved?_method=DELETE", {id})
+            .post("/api/saved?_method=DELETE", {id})
             .then(response => {
                 // Remove the article from articlesSaved
                 this.setState({

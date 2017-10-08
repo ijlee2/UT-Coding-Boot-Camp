@@ -25,7 +25,7 @@ const mongoose       = require("mongoose");
 const cors           = require("cors");
 
 // Set port number
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 
 
 
@@ -62,8 +62,8 @@ db.once("open", () => {
     
 *****************************************************************************
 *****************************************************************************/
-// Set public directory
-app.use(express.static("public"));
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
 
 // Set up CORS
 app.use(cors());
@@ -95,7 +95,7 @@ app.use("/api", router_api);
 
 // Display the single page app
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "frontend", "public", "index.html"));
+    res.sendFile(path.join(__dirname, "..", "frontend", "build", "index.html"));
 
 });
 
