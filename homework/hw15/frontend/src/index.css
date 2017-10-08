@@ -25,10 +25,12 @@
 *****************************************************************************/
 /* Window */
 body {
-    font-family   : var(--font-main);
-    font-size     : 20px;
-    letter-spacing: 0.12em;
-    line-height   : 1.6em;
+    background-image : url("./pattern_light.png");
+    background-repeat: repeat;
+    font-family      : var(--font-main);
+    font-size        : 20px;
+    letter-spacing   : 0.12em;
+    line-height      : 1.6em;
 }
 
 /* Fonts */
