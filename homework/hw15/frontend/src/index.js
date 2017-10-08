@@ -19,7 +19,7 @@ const router = (
     // A Router can have only 1 child element, so we add a div tag to allow multiple Routes
     <Router>
         <div>
-            <Route exact path="/" component={App} />
+            <Route path="/" component={App} />
         </div>
     </Router>
 );
