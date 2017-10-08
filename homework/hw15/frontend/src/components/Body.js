@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
+import openSocket from "socket.io-client";
 
 import Search from "./Body/Search";
 import Saved  from "./Body/Saved";
+
+const socket = openSocket("http://localhost:8080");
 
 class Body extends Component {
     constructor(props) {
@@ -23,6 +26,11 @@ class Body extends Component {
         // Methods for Saved component
         this.handleSave   = this.handleSave.bind(this);
         this.handleUnsave = this.handleUnsave.bind(this);
+        
+        // Listen to broadcasts by other users
+        socket.on("alertEveryoneElse", message => {
+            alert(message);
+        });
     }
 
     componentDidMount() {
@@ -62,7 +70,7 @@ class Body extends Component {
                 const articles = response.data.response.docs.map(a => ({
                     "id"       : a._id,
                     "title"    : a.headline.main,
-                    "byline"   : (a.byline) ? a.byline.original : "",
+                    "byline"   : (a.byline) ? a.byline.original : "Anonymous",
                     "summary"  : a.snippet,
                     "url"      : a.web_url,
                     "category" : a.new_desk,
@@ -94,6 +102,9 @@ class Body extends Component {
                     this.setState({
                         "articlesSaved": [...this.state.articlesSaved, article]
                     });
+
+                    // Broadcast the update
+                    socket.emit("articleSaved", {"user": "Isaac", "title": article.title});
                 }
 
             })

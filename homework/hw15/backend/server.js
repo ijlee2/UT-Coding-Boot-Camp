@@ -14,6 +14,10 @@ const app            = express();
 const methodOverride = require("method-override");
 const bodyParser     = require("body-parser");
 
+// For real-time notification
+const http           = require("http");
+const socketIO       = require("socket.io");
+
 // For MongoDB
 const mongoose       = require("mongoose");
 
@@ -104,5 +108,16 @@ app.get("*", (req, res) => {
     
 *****************************************************************************
 *****************************************************************************/
+const server = http.createServer(app);
+const io     = socketIO(server);
+
+io.on("connection", socket => {
+    socket.on("articleSaved", data => {
+        // Alert everyone else
+        socket.broadcast.emit("alertEveryoneElse", `${data.user} saved the article "${data.title}!"`);
+        
+    });
+});
+
 // Start the server
-app.listen(PORT, () => console.log(`App listening on ${PORT}.`));
+server.listen(PORT, () => console.log(`App listening on ${PORT}.`));
