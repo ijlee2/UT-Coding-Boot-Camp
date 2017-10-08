@@ -25,6 +25,22 @@ class Body extends Component {
         this.handleUnsave = this.handleUnsave.bind(this);
     }
 
+    componentDidMount() {
+        // Find saved articles
+        axios
+            .get("http://localhost:8080/api/saved")
+            .then(response => {
+                this.setState({
+                    "articlesSaved": response.data
+                });
+
+            })
+            .catch(error => {
+                console.error(`Error in retrieving saved article:\n${error}`);
+
+            });
+    }
+
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
     }
@@ -39,13 +55,14 @@ class Body extends Component {
             "end_date"  : `${this.state.endYear}1231`
         };
 
+        // Find articles
         axios
             .get("https://api.nytimes.com/svc/search/v2/articlesearch.json?", {params})
             .then(response => {
                 const articles = response.data.response.docs.map(a => ({
                     "id"       : a._id,
                     "title"    : a.headline.main,
-                    "byline"   : a.byline.original,
+                    "byline"   : (a.byline) ? a.byline.original : "",
                     "summary"  : a.snippet,
                     "url"      : a.web_url,
                     "category" : a.new_desk,
@@ -54,7 +71,7 @@ class Body extends Component {
                     "wordCount": a.word_count
                 }));
 
-                this.setState({"articles": articles});
+                this.setState({articles});
 
             })
             .catch(error => {
@@ -69,21 +86,19 @@ class Body extends Component {
         const articleId = event.target.id.value;
         const article   = this.state.articles.find(a => a.id === articleId);
 
-        console.log(article);
-        
         axios
             .post("http://localhost:8080/api/saved", {article})
             .then(response => {
-                // Add the article to saved
-                this.setState({
-                    "articlesSaved": [...this.state.articlesSaved, article]
-                });
-
-                console.log(this.state.articlesSaved);
+                if (response.status === 200) {
+                    // Add the article to articlesSaved
+                    this.setState({
+                        "articlesSaved": [...this.state.articlesSaved, article]
+                    });
+                }
 
             })
             .catch(error => {
-                console.log("Uh oh!" + error);
+                console.error(`Error in saving the article:\n${error}`);
 
             });
     }
@@ -91,9 +106,22 @@ class Body extends Component {
     handleUnsave(event) {
         event.preventDefault();
 
-        const articleId = event.target.id.value;
+        const id = event.target.id.value;
         
-        console.log(articleId);
+        // Override POST with DELETE
+        axios
+            .post("http://localhost:8080/api/saved?_method=DELETE", {id})
+            .then(response => {
+                // Remove the article from articlesSaved
+                this.setState({
+                    "articlesSaved": this.state.articlesSaved.filter(a => a.id !== id)
+                });
+
+            })
+            .catch(error => {
+                console.error(`Error in unsaving the article:\n${error}`);
+
+            });
     }
 
     render() {

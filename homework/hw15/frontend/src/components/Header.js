@@ -37,7 +37,7 @@ class Header extends Component {
 
     render() {
         return (
-            <header className="">
+            <header>
                 <h1 className="center-align">New York Times</h1>
                 <Time time={this.state.time} />
             </header>

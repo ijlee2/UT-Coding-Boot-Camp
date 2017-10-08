@@ -84,12 +84,16 @@ app.use(bodyParser.urlencoded({"extended": true}));
 app.use(methodOverride("_method"));
 
 // Set routers
-//const router_html = require(path.join(__dirname, "controllers", "html_routes.js"));
-const router_api  = require(path.join(__dirname, "controllers", "api_routes.js"));
+const router_api = require(path.join(__dirname, "controllers", "api_routes.js"));
 
-// Talk to routers
-//app.use("/", router_html);
+// Talk to routers (order matters here)
 app.use("/api", router_api);
+
+// Display the single page app
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "frontend", "public", "index.html"));
+
+});
 
 
 

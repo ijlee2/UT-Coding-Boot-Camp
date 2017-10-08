@@ -2,7 +2,7 @@ import React from "react";
 
 const Query = (props) => {
     return (
-        <div className="card blue-grey lighten-5">
+        <div className="card grey lighten-5">
             <div className="card-content">
                 <div className="row">
                     <div className="col s10 offset-s1">

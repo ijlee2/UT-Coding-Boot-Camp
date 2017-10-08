@@ -27,8 +27,8 @@
 body {
     font-family   : var(--font-main);
     font-size     : 20px;
-    letter-spacing: 0.015em;
-    line-height   : 1.6em;
+    letter-spacing: 0.12em !important;
+    line-height   : 1.6em !important;
 }
 
 /* Fonts */
@@ -37,10 +37,10 @@ h1, nav, .brand-logo, footer {
 }
 
 h1 {
-    font-size     : 2.3em;
+    font-size     : 2.6em !important;
     font-weight   : bold;
-    letter-spacing: 0.07em;
-    margin-bottom : 0.75em;
+    letter-spacing: 0.2em !important;
+    margin-bottom : 0.75em !important;
 }
 
 h2 {
@@ -108,6 +108,12 @@ nav #nyt-menu-desktop li:last-child {
 /* Cards */
 .card {
     padding-bottom: 1em;
+}
+
+/* Time.js */
+.nyt-time {
+    font-size     : 1.16em;
+    letter-spacing: 0.08em;
 }
 
 /* Query.js */
@@ -283,10 +289,9 @@ footer a:hover {
 *****************************************************************************/
 /* Window */
 body {
-    font-family   : var(--font-main);
-    font-size     : 20px;
-    letter-spacing: 0.015em;
-    line-height   : 1.6em;
+    font-family: var(--font-main);
+    font-size  : 20px;
+    line-height: 1.6em;
 }
 
 /* Fonts */
@@ -378,9 +383,10 @@ nav #nyt-menu-desktop li:last-child {
 }
 
 .input-field input {
-    font-size    : 1.05em !important;
-    margin-top   : 0.4em !important;
-    margin-bottom: 1.05em !important;
+    font-size     : 1.05em !important;
+    letter-spacing: 0.08em !important;
+    margin-top    : 0.4em !important;
+    margin-bottom : 1.05em !important;
 }
 
 /* Results.js */
@@ -392,7 +398,7 @@ nav #nyt-menu-desktop li:last-child {
 
 .nyt-results:hover {
     transform : scale(1.01);
-    transition: all 0.2s;
+    transition: all 0.25s;
 }
 
 .nyt-results:nth-child(odd) {
@@ -412,7 +418,6 @@ nav #nyt-menu-desktop li:last-child {
     top     : 0;
     right   : 0;
 }
-
 
 /* Footer */
 footer {
