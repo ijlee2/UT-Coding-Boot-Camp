@@ -25,6 +25,30 @@ class OmdbContainer extends Component {
 
     };
 
+    renderMovie = () => {
+        if (this.state.result.Title) {
+            return (
+                <Panel heading={this.state.result.Title}>
+                    <MovieDetail
+                        src={this.state.result.Poster}
+                        director={this.state.result.Director}
+                        genre={this.state.result.Genre}
+                        released={this.state.result.Released}
+                    />
+                </Panel>
+            );
+
+        } else {
+            return (
+                <Panel heading="Search for a Movie to Begin">
+                    <h3>No results to display</h3>
+                </Panel>
+
+            );
+
+        }
+    }
+
     handleInputChange = event => {
         const {name, value} = event.target;
 
@@ -45,16 +69,9 @@ class OmdbContainer extends Component {
             <Container>
                 <Row>
                     <Col size="md-8">
-                        <Panel heading={this.state.result.Title || "Search for a Movie to Begin"}>
-                            <MovieDetail
-                                src={this.state.result.Poster}
-                                director={this.state.result.Director}
-                                genre={this.state.result.Genre}
-                                released={this.state.result.Released}
-                            />
-                        </Panel>
+                        {this.renderMovie()}
                     </Col>
-                    
+
                     <Col size="md-4">
                         <Panel heading="Search">
                             <Search
