@@ -8,12 +8,15 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
 class Books extends Component {
-    // Initialize this.state.books as an empty array
+    // Initialize state
     state = {
-        books: []
+        "title"   : "",
+        "author"  : "",
+        "synopsis": "",
+        "books"   : []
     };
 
-    // Add code here to get all books from the database and save them to this.state.books
+    // Get all books from the database and save them to this.state.books
     componentDidMount() {
         API
             .getBooks()
@@ -29,6 +32,40 @@ class Books extends Component {
             });
     }
 
+    handleInputChange = event => {
+        const {name, value} = event.target;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+
+        API.saveBook({
+            "title"   : this.state.title,
+            "author"  : this.state.author,
+            "synopsis": this.state.synopsis
+        });
+    }
+
+    deleteBook = id => {
+        // Remove from the database
+        API
+            .deleteBook(id)
+            .then(res => {
+                this.setState({
+                    "books": this.state.books.filter(b => b._id !== id)
+                });
+
+            })
+            .catch(err => {
+                console.error(err);
+
+            })
+    }
+
     render() {
         return (
             <Container fluid>
@@ -38,10 +75,27 @@ class Books extends Component {
                             <h1>What Books Should I Read?</h1>
                         </Jumbotron>
                         <form>
-                            <Input name="title" placeholder="Title (required)" />
-                            <Input name="author" placeholder="Author (required)" />
-                            <TextArea name="synopsis" placeholder="Synopsis (Optional)" />
-                            <FormBtn>Submit Book</FormBtn>
+                            <Input
+                                name="title"
+                                value={this.state.title}
+                                onChange={this.handleInputChange}
+                                placeholder="Title (required)"
+                            />
+
+                            <Input
+                                name="author"
+                                value={this.state.author}
+                                onChange={this.handleInputChange}
+                                placeholder="Author (required)"
+                            />
+
+                            <TextArea
+                                name="synopsis"
+                                onChange={this.handleInputChange}
+                                placeholder="Synopsis (Optional)"
+                            />
+
+                            <FormBtn onClick={this.handleFormSubmit}>Submit Book</FormBtn>
                         </form>
                     </Col>
 
@@ -49,6 +103,7 @@ class Books extends Component {
                         <Jumbotron>
                             <h1>Books On My List</h1>
                         </Jumbotron>
+
                         {this.state.books.length ? (
                             <List>
                                 {this.state.books.map(book => (
@@ -58,12 +113,15 @@ class Books extends Component {
                                                 {book.title} by {book.author}
                                             </strong>
                                         </a>
-                                        <DeleteBtn />
+
+                                        <DeleteBtn onClick={this.deleteBook.bind(null, book._id)} />
                                     </ListItem>
                                 ))}
                             </List>
+
                         ) : (
                             <h3>No Results to Display</h3>
+
                         )}
                     </Col>
                 </Row>
