@@ -76,9 +76,16 @@ class App extends Component {
 
                     <Row>
                         <Col size="xs-12">
-                            <h1>Render Recipes Here</h1>
+                            {
+                                (this.state.recipes.length === 0) ?
+                                    <h1>No recipes found</h1>
 
-                            <RecipeList recipes={this.state.recipes} />
+                                :
+                                    <div>
+                                        <h1>Search results</h1>
+                                        <RecipeList recipes={this.state.recipes} />
+                                    </div>
+                            }
                         </Col>
                     </Row>
                 </Container>

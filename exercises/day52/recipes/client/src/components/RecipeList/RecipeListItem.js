@@ -25,9 +25,9 @@ export const RecipeListItem = props => {
                             Ingredients: {recipe.ingredients}
                         </p>
                         <a
-                            rel="noreferrer noopener"
-                            target="_blank"
                             href={recipe.href}
+                            target="_blank"
+                            rel="noreferrer noopener"
                         >
                             Go to recipe!
                         </a>
