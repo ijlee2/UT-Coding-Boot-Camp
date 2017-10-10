@@ -10,16 +10,16 @@ import Search      from "./Search/Search";
 class SearchResultContainer extends Component {
     state = {
         "breedName": "",
-        "result"   : []
+        "dogs"     : []
     };
 
     searchDogs = query => {
         axios
-            .get("https://dog.ceo/api/breed/hound/images")
+            .get(`https://dog.ceo/api/breed/${query}/images`)
             .then(res => {
                 // Return the first 10 dogs
                 this.setState({
-                    "result": res.data.message.slice(0, 10)
+                    "dogs": res.data.message.slice(0, 10)
                 });
 
             })
@@ -28,8 +28,8 @@ class SearchResultContainer extends Component {
     };
 
     displayDogs = () => {
-        return this.state.result.map((url, index) =>
-            <img className="responsive-img" src={`${url}`} key={index} alt={`dog{index}`}></img>
+        return this.state.dogs.map((url, index) =>
+            <img className="responsive-img" src={`${url}`} key={index} alt={`dog{index}`} />
         );
     }
 
