@@ -43,11 +43,26 @@ class Books extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
 
-        API.saveBook({
-            "title"   : this.state.title,
-            "author"  : this.state.author,
-            "synopsis": this.state.synopsis
-        });
+        API
+            .saveBook({
+                "title"   : this.state.title,
+                "author"  : this.state.author,
+                "synopsis": this.state.synopsis
+            })
+            .then(res => {
+                const {author, data, synopsis, title, _id} = res.data;
+
+                this.setState({
+                    "books": [...this.state.books, {author, data, synopsis, title, _id}]
+                });
+
+                console.log(this.state.books);
+
+            })
+            .catch(err => {
+                console.error(err);
+
+            });
     }
 
     deleteBook = id => {
@@ -95,7 +110,12 @@ class Books extends Component {
                                 placeholder="Synopsis (Optional)"
                             />
 
-                            <FormBtn onClick={this.handleFormSubmit}>Submit Book</FormBtn>
+                            <FormBtn
+                                disabled={!(this.state.author && this.state.title)}
+                                onClick={this.handleFormSubmit}
+                            >
+                                Submit Book
+                            </FormBtn>
                         </form>
                     </Col>
 
