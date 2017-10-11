@@ -6,13 +6,15 @@
     </head>
     <body>
         <div class="container">
+            <!--
             <?php print_r($_GET) ?>
+            -->
 
             <div class="jumbotron">
                 <h1>Welcome, Stranger!</h1>
             </div>
 
-            <?php require './content.php' ?>
+            <?php require "./content.php" ?>
         </div>
     </body>
 </html>
