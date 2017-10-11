@@ -4,8 +4,8 @@ function println($string) {
     echo "$string\n";
 }
 
-function printSeparator($length) {
-    echo str_repeat("-", $length ? : 50)."\n";
+function printSeparator($char = "-", $length = 50) {
+    println(str_repeat($char, $length));
 }
 
 function isNameLong($fullName) {
