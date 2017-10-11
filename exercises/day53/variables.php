@@ -16,7 +16,7 @@ if (strlen($fullName) > 12) {
 
 }
 
-echo str_repeat("-", 50)."\n";
+echo str_repeat("-", 50) . "\n";
 
 echo "I am $age years old.\n";
 
