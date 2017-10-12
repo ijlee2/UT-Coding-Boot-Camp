@@ -39,7 +39,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Get the values
+        $fullname = $request->fullname;
+        $email    = $request->email;
+        $password = $request->password;
+
+        var_dump($fullname, $email, $password);
     }
 
     /**

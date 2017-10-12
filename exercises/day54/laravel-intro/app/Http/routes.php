@@ -26,6 +26,7 @@ Route::resource("user", "UsersController");
 Route::get("/create_user", "UsersController@create");
 
 // POST -> store
+Route::post("/create_user", "UsersController@store");
 
 // PATCH -> update
 
