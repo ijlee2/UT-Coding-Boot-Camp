@@ -14,3 +14,20 @@
 Route::get("/", "HomeController@index");
 
 Route::get("/about", "AboutController@index");
+
+
+//Route::get("/users", "UsersController@index");
+
+// Using --resource
+Route::resource("user", "UsersController");
+
+// https://laravel.com/docs/5.5/routing
+// GET -> index, create, edit, show
+Route::get("/create_user", "UsersController@create");
+
+// POST -> store
+
+// PATCH -> update
+
+// DELETE -> destroy
+Route::delete("/user/:id", "UsersController@destroy");

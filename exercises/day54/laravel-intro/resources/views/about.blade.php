@@ -7,7 +7,7 @@
 @section("content")
     <div class="jumbotron">
         <h1 class="display-3 text-center">About Me</h1>
-        <h2>{{ $firstName }} {{ $lastName }}</h2>
-        <h3>{{ $email }}</h3>
     </div>
+
+    <p>My name is {{ $firstName }} {{ $lastName }}. You can email me at <a href="mailto:{{ $email }}">{{ $email }}</a>.</p>
 @endsection
