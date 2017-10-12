@@ -11,14 +11,6 @@
 |
 */
 
-Route::get("/", function() {
-    $site_title = "Home";
+Route::get("/", "HomeController@index");
 
-    return view("home", compact("site_title"));
-});
-
-Route::get("/about", function() {
-    $site_title = "About Us";
-
-    return view("about", compact("site_title"));
-});
+Route::get("/about", "AboutController@index");

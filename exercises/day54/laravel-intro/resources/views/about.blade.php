@@ -1,9 +1,13 @@
 @extends("layout")
 
 @section("title")
-    Laravel Intro - About Us
+    {{ $site_title }}
 @endsection
 
 @section("content")
-    <h1>About Us</h1>
-@stop
+    <div class="jumbotron">
+        <h1 class="display-3 text-center">About Me</h1>
+        <h2>{{ $firstName }} {{ $lastName }}</h2>
+        <h3>{{ $email }}</h3>
+    </div>
+@endsection

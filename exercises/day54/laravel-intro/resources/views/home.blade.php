@@ -1,9 +1,11 @@
 @extends("layout")
 
 @section("title")
-    Laravel Intro - Home
+    {{ $site_title }}
 @endsection
 
 @section("content")
-    <h1>This is one lean template.</h1>
-@stop
+    <div class="jumbotron">
+        <h1 class="display-3 text-center">This is one lean template.</h1>
+    </div>
+@endsection
