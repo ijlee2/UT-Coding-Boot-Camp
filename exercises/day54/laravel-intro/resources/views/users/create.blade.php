@@ -11,13 +11,13 @@
 
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="form-group">
-            <label for="user_fullname">Full name</label>
-            <input type="text" class="form-control" id="user_fullname" name="fullname" placeholder="Enter first and last names">
+            <label for="user_name">Name</label>
+            <input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name">
         </div>
 
         <div class="form-group">
             <label for="user_email">Email</label>
-            <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" name="email" placeholder="Enter email">
+            <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" name="email" placeholder="Enter your email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\User;
+
 class UsersController extends Controller
 {
     /**
@@ -16,6 +18,9 @@ class UsersController extends Controller
     public function index()
     {
         //
+        $users = User::all();
+
+        return view("users.index", compact("users"));
     }
 
     /**
@@ -39,12 +44,21 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // Get the values
-        $fullname = $request->fullname;
-        $email    = $request->email;
-        $password = $request->password;
+        // Create a new user
+        $user = new User;
 
-        var_dump($fullname, $email, $password);
+        // Get the values
+        $user->name     = $request->name;
+        $user->email    = $request->email;
+        $user->password = $request->password;
+
+        // Save the user to the database
+        $user->save();
+
+        // Return to the form
+        $site_title = "Create a user";
+
+        return view("users.create", comapct("site_title"));
     }
 
     /**
