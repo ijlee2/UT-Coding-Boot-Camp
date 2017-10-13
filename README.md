@@ -14,7 +14,7 @@ If you have suggestions for making my code better and simpler, please let me kno
 
 <a href="https://github.com/ijlee2/Mai" target="_blank"><img src="https://github.com/ijlee2/Mai/raw/master/public/assets/images/mai_splash.png?raw=true" alt="Mai"></a>
 
-3. Mai 2
+3. Mai, Phase 2 (w/ [John Absher](https://www.linkedin.com/in/johnabsher/), [Brian Ervin](https://www.linkedin.com/in/brianervinmedia/), [David Gutierrez](https://www.linkedin.com/in/david-gutierrez-979a4a148/), [Jason Joachim](https://www.linkedin.com/in/jasonjoachim/))
 
 ## Homework
 0. [Pre-work assignments](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw0/module-8/fanpage.html)
@@ -33,7 +33,7 @@ If you have suggestions for making my code better and simpler, please let me kno
 13. [Eat-Da-Burger w/ Sequelize](https://eat-da-burger-200.herokuapp.com/)
 14. [NeoTECH](https://neotech-app.herokuapp.com/)
 15. [NYT React](https://nyt-app.herokuapp.com/)
-16. Meals
+16. [My Fitness Buddy](https://my-fitness-buddy.herokuapp.com/)
 
 ## Exercises
 A collection of codes made from scratch or from a starter template.
