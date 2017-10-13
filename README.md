@@ -1,22 +1,27 @@
 # UT Coding Boot Camp (Full Stack)
+
 Projects, homework, and exercises for UT Coding Boot Camp.
 
 Unless I noted otherwise, I have written all code. I'd much appreciate it if you cite [my blog](https://crunchingnumbers.live) and code in your medium of output, e.g. papers, code, your very own blog. :)
 
 If you have suggestions for making my code better and simpler, please let me know!
 
+
 ## Projects
+
 1. [LocALL](https://github.com/ijlee2/LocALL) (w/ [Margie Tagaban](https://www.linkedin.com/in/margarita-tagaban/), [Aaron Tyler](https://github.com/atyler88/), [Jacque White](https://www.linkedin.com/in/jacquelinewhite15/))
 
-<a href="https://github.com/ijlee2/LocALL" target="_blank"><img src="https://github.com/ijlee2/LocALL/raw/master/assets/images/locall_splash.png?raw=true" alt="LocALL"></a>
+    <a href="https://github.com/ijlee2/LocALL" target="_blank"><img src="https://github.com/ijlee2/LocALL/raw/master/assets/images/locall_splash.png?raw=true" alt="LocALL"></a>
 
 2. [Mai](https://github.com/ijlee2/Mai) (w/ [John Absher](https://www.linkedin.com/in/johnabsher/), [David Gutierrez](https://www.linkedin.com/in/david-gutierrez-979a4a148/), [Jason Joachim](https://www.linkedin.com/in/jasonjoachim/))
 
-<a href="https://github.com/ijlee2/Mai" target="_blank"><img src="https://github.com/ijlee2/Mai/raw/master/public/assets/images/mai_splash.png?raw=true" alt="Mai"></a>
+    <a href="https://github.com/ijlee2/Mai" target="_blank"><img src="https://github.com/ijlee2/Mai/raw/master/public/assets/images/mai_splash.png?raw=true" alt="Mai"></a>
 
 3. Mai, Phase 2 (w/ [John Absher](https://www.linkedin.com/in/johnabsher/), [Brian Ervin](https://www.linkedin.com/in/brianervinmedia/), [David Gutierrez](https://www.linkedin.com/in/david-gutierrez-979a4a148/), [Jason Joachim](https://www.linkedin.com/in/jasonjoachim/))
 
+
 ## Homework
+
 0. [Pre-work assignments](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw0/module-8/fanpage.html)
 1. [Wireframe](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw1/wireframe/) (easy), [Portfolio](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw1/basic-portfolio/) (hard)
 2. [Portfolio w/ Responsive Design](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw2/responsive-portfolio/), [Portfolio w/ Bootstrap](https://ijlee2.github.io/UT-Coding-Boot-Camp/homework/hw2/bootstrap-portfolio/)
@@ -35,5 +40,7 @@ If you have suggestions for making my code better and simpler, please let me kno
 15. [NYT React](https://nyt-app.herokuapp.com/)
 16. [My Fitness Buddy](https://my-fitness-buddy.herokuapp.com/)
 
+
 ## Exercises
+
 A collection of codes made from scratch or from a starter template.
