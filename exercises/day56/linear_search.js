@@ -1,4 +1,4 @@
-// Create an array of numbers and a target number
+// Create a sorted array of numbers and a target number
 const array  = [10, 34, 56, 67, 93, 120, 137, 168, 259,280, 311, 342, 413, 514];
 const target = array[Math.floor(array.length * Math.random())];
 
@@ -6,7 +6,10 @@ const target = array[Math.floor(array.length * Math.random())];
 for (let i = 0; i < array.length; i++) {
     if (array[i] === target) {
         console.log(`Target ${target} found at index ${i}.`);
+    }
 
+    // Check for duplicates
+    if (array[i] > target) {
         break;
     }
 }
