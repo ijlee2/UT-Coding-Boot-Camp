@@ -17,7 +17,7 @@ If you have suggestions for making my code better and simpler, please let me kno
 
     <a href="https://github.com/ijlee2/Mai" target="_blank"><img src="https://github.com/ijlee2/Mai/raw/master/public/assets/images/mai_splash.png?raw=true" alt="Mai"></a>
 
-3. Mai, Phase 2 (w/ [John Absher](https://www.linkedin.com/in/johnabsher/), [Brian Ervin](https://www.linkedin.com/in/brianervinmedia/), [David Gutierrez](https://www.linkedin.com/in/david-gutierrez-979a4a148/), [Jason Joachim](https://www.linkedin.com/in/jasonjoachim/))
+3. [Mai, Phase 2](https://ijlee2.github.io/Mai-2/) (w/ [John Absher](https://www.linkedin.com/in/johnabsher/), [Brian Ervin](https://www.linkedin.com/in/brianervinmedia/), [David Gutierrez](https://www.linkedin.com/in/david-gutierrez-979a4a148/), [Jason Joachim](https://www.linkedin.com/in/jasonjoachim/))
 
 
 ## Homework
