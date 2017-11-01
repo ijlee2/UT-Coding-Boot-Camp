@@ -21,6 +21,13 @@ const multer = require("multer");
 const upload = multer({"dest": "uploads"});
 const sizeOf = require("image-size");
 
+// Cookie will expire in 1 week
+const cookieOptions = {
+    "expires" : new Date(Date.now() + 604800000),
+    "httpOnly": (process.argv[2] !== "local"),
+    "secure"  : (process.argv[2] !== "local")
+};
+
 // Import Google Cloud Vision
 const vision = require("node-cloud-vision-api-comoc");
 vision.init({"auth": "AIzaSyDac5vMeEApkYZaE09R4bFhAWxjJtwyQoU"});
@@ -66,15 +73,8 @@ const defaultValues = {
 *****************************************************************************/
 router.post("/signup", (req, res) => {
     function callback(result) {
-        // Cookie will expire in 1 week
-        const options = {
-            "expires" : new Date(Date.now() + 604800000),
-            "httpOnly": true,
-            "secure"  : true
-        };
-     
-        res.cookie("maiId", result.id, options);
-        res.cookie("maiFullname", result.fullname, options);
+        res.cookie("maiId", result.id, cookieOptions);
+        res.cookie("maiFullname", result.fullname, cookieOptions);
         res.redirect("/");
     }
 
@@ -104,14 +104,8 @@ router.post("/login", (req, res) => {
         bcrypt.compare(req.body.password, results[0].hash, (error, isMatch) => {
             if (isMatch) {
                 if (!req.cookies.cookieName) {
-                    const options = {
-                        "expires" : new Date(Date.now() + 604800000),
-                        "httpOnly": true,
-                        "secure"  : true
-                    };
-
-                    res.cookie("maiId", results[0].id, options);
-                    res.cookie("maiFullname", results[0].fullname, options);
+                    res.cookie("maiId", results[0].id, cookieOptions);
+                    res.cookie("maiFullname", results[0].fullname, cookieOptions);
                 }
 
                 res.redirect("/");

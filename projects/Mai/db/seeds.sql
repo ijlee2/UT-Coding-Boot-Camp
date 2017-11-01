@@ -1,12 +1,13 @@
 -- Match with production schema
-USE ocbusqsbzymg3amh;
+USE c35bssae3bm9no8a;
 
 
 INSERT INTO Writers (id, fullname, email, username, hash, url_photo, flagged, created_at, updated_at) VALUES
-("2c43aa1d-e8bf-44d1-bb10-cc28ccec0964", "John Absher"    , "john.absher@example.com"    , "john" , "$2a$12$5ZWQzoBvw7yP9HwPH4Dgu.MILNr6kn.U0Syp1QC6ksV.Qh5QW3EKi", "assets/images/john_absher.jpg"    , false, "2017-09-25 04:15:06", "2017-09-25 04:15:06"),
-("7592aa72-3832-4b2d-9b8e-658dc21b277d", "David Gutierrez", "david.gutierrez@example.com", "david", "$2a$12$5ZWQzoBvw7yP9HwPH4Dgu.MILNr6kn.U0Syp1QC6ksV.Qh5QW3EKi", "assets/images/david_gutierrez.jpg", false, "2017-09-25 15:05:57", "2017-09-25 15:05:57"),
-("a5211e7d-8382-4221-b77a-824b051e2370", "Jason Joachim"  , "jason.joachim@example.com"  , "jason", "$2a$12$5ZWQzoBvw7yP9HwPH4Dgu.MILNr6kn.U0Syp1QC6ksV.Qh5QW3EKi", "assets/images/jason_joachim.jpg"  , false, "2017-09-25 10:28:24", "2017-09-25 10:28:24"),
-("a696e28e-79b0-47ed-a9ce-d2e681665459", "Isaac Lee"      , "isaac.lee@example.com"      , "isaac", "$2a$12$5ZWQzoBvw7yP9HwPH4Dgu.MILNr6kn.U0Syp1QC6ksV.Qh5QW3EKi", "assets/images/isaac_lee.jpg"      , false, "2017-09-25 04:13:41", "2017-09-25 08:13:41");
+("2c43aa1d-e8bf-44d1-bb10-cc28ccec0964", "John Absher"    , "john.absher@example.com"    , "john" , "$2a$12$5ZWQzoBvw7yP9HwPH4Dgu.MILNr6kn.U0Syp1QC6ksV.Qh5QW3EKi", "assets/images/john_absher.jpg"     , false, "2017-09-25 04:15:06", "2017-09-25 04:15:06"),
+("886604c3-e463-4ff7-81f5-3f3077c44a66", "Brian Ervin"    , "brian.ervin@example.com"    , "brian", "$2a$12$5ZWQzoBvw7yP9HwPH4Dgu.MILNr6kn.U0Syp1QC6ksV.Qh5QW3EKi", "assets/images/default_profile4.jpg", false, "2017-09-25 17:24:33", "2017-09-25 17:24:33"),
+("7592aa72-3832-4b2d-9b8e-658dc21b277d", "David Gutierrez", "david.gutierrez@example.com", "david", "$2a$12$5ZWQzoBvw7yP9HwPH4Dgu.MILNr6kn.U0Syp1QC6ksV.Qh5QW3EKi", "assets/images/david_gutierrez.jpg" , false, "2017-09-25 15:05:57", "2017-09-25 15:05:57"),
+("a5211e7d-8382-4221-b77a-824b051e2370", "Jason Joachim"  , "jason.joachim@example.com"  , "jason", "$2a$12$5ZWQzoBvw7yP9HwPH4Dgu.MILNr6kn.U0Syp1QC6ksV.Qh5QW3EKi", "assets/images/jason_joachim.jpg"   , false, "2017-09-25 10:28:24", "2017-09-25 10:28:24"),
+("a696e28e-79b0-47ed-a9ce-d2e681665459", "Isaac Lee"      , "isaac.lee@example.com"      , "isaac", "$2a$12$5ZWQzoBvw7yP9HwPH4Dgu.MILNr6kn.U0Syp1QC6ksV.Qh5QW3EKi", "assets/images/isaac_lee.jpg"       , false, "2017-09-25 04:13:41", "2017-09-25 08:13:41");
 
 
 INSERT INTO Stories (id, title, created_at, updated_at, writer_id) VALUES
@@ -16,6 +17,13 @@ INSERT INTO Stories (id, title, created_at, updated_at, writer_id) VALUES
 ("2000a6d2-2ffb-43de-9795-daa66d59aa6f", "My Morning"       , "2017-09-28 08:25:43", "2017-09-28 08:25:43", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964"),
 ("4828900f-8643-4aac-9565-dc0b3618fc70", "My Afternoon"     , "2017-09-28 14:39:50", "2017-09-28 14:39:50", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964"),
 ("31df97a6-b2c6-454d-8770-3347d66724ae", "My Evening"       , "2017-09-28 20:15:15", "2017-09-28 20:15:15", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964"),
+
+("743d5ea0-ba32-459c-85b6-a238594df43a", "Inspirations"     , "2017-09-27 11:30:17", "2017-09-27 11:30:17", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
+("8d43ca57-76e5-4e4b-b316-3948fc4cfbb7", "Hike in Austin"   , "2017-09-26 20:30:17", "2017-09-26 20:30:17", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
+("91797d63-1dd6-4848-81ba-be472ecd8e68", "Hidden Places"    , "2017-09-26 17:03:28", "2017-09-26 17:03:28", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
+("01f3ff9e-afa9-4416-b4fa-01cfdc9d1dc3", "My Morning"       , "2017-09-28 08:25:43", "2017-09-28 08:25:43", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
+("c55ee6f7-9204-4ee0-808d-b9378a2f92f1", "My Afternoon"     , "2017-09-28 14:39:50", "2017-09-28 14:39:50", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
+("e9519886-08f6-4bbd-bd01-aae15d5d2829", "My Evening"       , "2017-09-28 20:15:15", "2017-09-28 20:15:15", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
 
 ("c24530d6-7b65-44ca-8e43-5cd58e44c3e9", "Inspirations"     , "2017-09-27 11:30:17", "2017-09-27 11:30:17", "7592aa72-3832-4b2d-9b8e-658dc21b277d"),
 ("d584af97-0c4b-463d-970f-32c2cdbe91d7", "Hike in Austin"   , "2017-09-26 20:30:17", "2017-09-26 20:30:17", "7592aa72-3832-4b2d-9b8e-658dc21b277d"),
@@ -51,7 +59,7 @@ INSERT INTO Photos (id, url, caption, time_taken, created_at, updated_at, story_
 ("cf3b5629-f778-4103-8fb7-0253c45d9eb0", "https://goo.gl/eH41R5", "Feeling the cool breeze."                                , "2017-09-15 12:11:15", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "63618791-709f-4691-95ae-4727299d790d"),
 ("d466295e-d272-4ef5-b84b-92cd343a9e36", "https://goo.gl/WJkBzh", "Venice. Right in the thick of it!"                       , "2017-09-15 16:40:25", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "63618791-709f-4691-95ae-4727299d790d"),
 ("f4b128c5-247e-4d35-8dd9-f8f6352f43f7", "https://goo.gl/2T8MNJ", "Electric nighttime algae in Australia. Loving it."       , "2017-09-15 22:37:08", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "63618791-709f-4691-95ae-4727299d790d"),
-("29a239a0-4614-410b-a111-ba85e541bcc2", "https://goo.gl/MtGZEr", "This is the best day ever already! XOXO"                 , "2017-09-28 07:23:34", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "2000a6d2-2ffb-43de-9795-daa66d59aa6f"),
+("29a239a0-4614-410b-a111-ba85e541bcc2", "https://goo.gl/DWMLcr", "This is the best day ever already! XOXO"                 , "2017-09-28 07:23:34", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "2000a6d2-2ffb-43de-9795-daa66d59aa6f"),
 ("be36bd2f-6010-41e6-850c-14c10c520320", "https://goo.gl/zJy72M", "Morning coffee and a stroll through NYC. Doing it right!", "2017-09-28 08:09:17", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "2000a6d2-2ffb-43de-9795-daa66d59aa6f"),
 ("574ecd28-73b4-4a87-8dd0-febd10e3ab75", "https://goo.gl/SQA2Cf", "Morning canoe trip. Worth waking up for!"                , "2017-09-28 09:15:54", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "2000a6d2-2ffb-43de-9795-daa66d59aa6f"),
 ("943fc890-d1f5-40a4-8569-1dc7a8aa4e9b", "https://goo.gl/6ZxKvs", "Gametime!"                                               , "2017-09-28 11:56:39", "2017-09-28 14:39:06", "2017-09-28 14:39:06", "4828900f-8643-4aac-9565-dc0b3618fc70"),
@@ -61,6 +69,28 @@ INSERT INTO Photos (id, url, caption, time_taken, created_at, updated_at, story_
 ("9eb791da-1088-4a75-a292-249efd629660", "https://goo.gl/QgWG9M", "We all start as strangers. $friendsgiving"               , "2017-09-28 19:05:26", "2017-09-28 20:15:04", "2017-09-28 20:15:04", "31df97a6-b2c6-454d-8770-3347d66724ae"),
 ("dee4f3c6-9b7b-438f-ab85-2d6fe36791e1", "https://goo.gl/ZKsjY9", "She said yes!!!!"                                        , "2017-09-28 20:10:33", "2017-09-28 20:15:04", "2017-09-28 20:15:04", "31df97a6-b2c6-454d-8770-3347d66724ae"),
 ("b6dd1dd1-f05c-4636-be12-2e5566cc8929", "https://goo.gl/huUNKg", "Feeling high on this sunrise. Very blessed."             , "2017-09-28 20:14:28", "2017-09-28 20:14:46", "2017-09-28 20:14:46", "31df97a6-b2c6-454d-8770-3347d66724ae"),
+
+("0a4d6dc9-89f0-434b-a25f-7877c129c9e2", "https://goo.gl/9p2qT2", "Teachers are treasures."                                 , "2017-09-26 15:10:57", "2017-09-27 11:29:47", "2017-09-27 11:29:47", "743d5ea0-ba32-459c-85b6-a238594df43a"),
+("63985be5-ed1b-460f-9a1a-b8110e352e0b", "https://goo.gl/uKWPCJ", "Words to live and change your life by..."                , "2017-09-26 15:21:04", "2017-09-27 11:29:47", "2017-09-27 11:29:47", "743d5ea0-ba32-459c-85b6-a238594df43a"),
+("9c053f32-ad6e-40b8-a5bc-0013936d7388", "https://goo.gl/tAeWUE", "Trying to change my perspective on things.."             , "2017-09-26 16:50:18", "2017-09-27 11:29:47", "2017-09-27 11:29:47", "743d5ea0-ba32-459c-85b6-a238594df43a"),
+("d49d1d2a-e64e-4d2f-9f7c-a67b7788e0d7", "https://goo.gl/Cg9SvX", "Yeah!"                                                   , "2017-09-26 18:13:36", "2017-09-27 11:29:47", "2017-09-27 11:29:47", "743d5ea0-ba32-459c-85b6-a238594df43a"),
+("2c4becc9-e54a-4f80-a103-29d406d4e873", "https://goo.gl/yCFoNu", "Feeling humble and blessed today. Best day of my life."  , "2017-09-26 19:40:22", "2017-09-27 11:29:47", "2017-09-27 11:29:47", "743d5ea0-ba32-459c-85b6-a238594df43a"),
+("d32a3e5c-09f2-4deb-87ce-ed4058144e86", "https://goo.gl/XNqBGr", "Excited to see where I end up!"                          , "2017-08-30 12:11:06", "2017-09-26 20:30:12", "2017-09-26 20:30:12", "8d43ca57-76e5-4e4b-b316-3948fc4cfbb7"),
+("5a33741f-9fb0-42e3-aed7-d128f2505b8f", "https://goo.gl/1uKufW", "Wish you were here."                                     , "2017-08-30 14:35:27", "2017-09-26 20:30:12", "2017-09-26 20:30:12", "8d43ca57-76e5-4e4b-b316-3948fc4cfbb7"),
+("194216d9-80e5-4aa7-8afd-35b225759718", "https://goo.gl/V3fhGy", "Just do it!"                                             , "2017-08-30 15:00:33", "2017-09-26 20:30:12", "2017-09-26 20:30:12", "8d43ca57-76e5-4e4b-b316-3948fc4cfbb7"),
+("52a492d1-476a-4794-869a-6948dd3f03ea", "https://goo.gl/eH41R5", "Feeling the cool breeze."                                , "2017-09-15 12:11:15", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "91797d63-1dd6-4848-81ba-be472ecd8e68"),
+("7fd8937a-27bf-4900-9a76-80a2e13eecce", "https://goo.gl/WJkBzh", "Venice. Right in the thick of it!"                       , "2017-09-15 16:40:25", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "91797d63-1dd6-4848-81ba-be472ecd8e68"),
+("333a26ec-11e4-4594-a433-3fe7669402d9", "https://goo.gl/2T8MNJ", "Electric nighttime algae in Australia. Loving it."       , "2017-09-15 22:37:08", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "91797d63-1dd6-4848-81ba-be472ecd8e68"),
+("5bbe5514-b572-49cf-a576-68f88c2f0b3c", "https://goo.gl/DWMLcr", "This is the best day ever already! XOXO"                 , "2017-09-28 07:23:34", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "01f3ff9e-afa9-4416-b4fa-01cfdc9d1dc3"),
+("a0cddada-3f68-4b49-b994-516cc4c1ce40", "https://goo.gl/zJy72M", "Morning coffee and a stroll through NYC. Doing it right!", "2017-09-28 08:09:17", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "01f3ff9e-afa9-4416-b4fa-01cfdc9d1dc3"),
+("34fce534-a061-4472-89bd-47d61263b1fd", "https://goo.gl/SQA2Cf", "Morning canoe trip. Worth waking up for!"                , "2017-09-28 09:15:54", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "01f3ff9e-afa9-4416-b4fa-01cfdc9d1dc3"),
+("9f3c32f8-1691-4952-b04a-5722c13d031d", "https://goo.gl/6ZxKvs", "Gametime!"                                               , "2017-09-28 11:56:39", "2017-09-28 14:39:06", "2017-09-28 14:39:06", "c55ee6f7-9204-4ee0-808d-b9378a2f92f1"),
+("2238a3d7-4827-44e6-8bae-9a2644cc16e1", "https://goo.gl/yPwbkp", "Grandma and Grampa hanging out with the boys :)"         , "2017-09-28 13:19:50", "2017-09-28 14:39:06", "2017-09-28 14:39:06", "c55ee6f7-9204-4ee0-808d-b9378a2f92f1"),
+("cd5212f6-f0ed-4444-91c9-c9cbc0a105dc", "https://goo.gl/V3Xn1v", "Lazy Sunday float. Get it."                              , "2017-09-28 13:25:49", "2017-09-28 14:39:06", "2017-09-28 14:39:06", "c55ee6f7-9204-4ee0-808d-b9378a2f92f1"),
+("05837b09-8197-4642-8b48-5f11a7ec580d", "https://goo.gl/c83xCA", "It's about to get very quiet at this table."             , "2017-09-28 14:38:27", "2017-09-28 14:39:06", "2017-09-28 14:39:06", "c55ee6f7-9204-4ee0-808d-b9378a2f92f1"),
+("486401ac-be6e-4887-ad30-0c8bd9d73b11", "https://goo.gl/QgWG9M", "We all start as strangers. $friendsgiving"               , "2017-09-28 19:05:26", "2017-09-28 20:15:04", "2017-09-28 20:15:04", "e9519886-08f6-4bbd-bd01-aae15d5d2829"),
+("9d3f3a55-95a7-4c01-82ab-f2fb9a993068", "https://goo.gl/ZKsjY9", "She said yes!!!!"                                        , "2017-09-28 20:10:33", "2017-09-28 20:15:04", "2017-09-28 20:15:04", "e9519886-08f6-4bbd-bd01-aae15d5d2829"),
+("05282d81-cf55-47f0-bc2a-5f038c9ffecd", "https://goo.gl/huUNKg", "Feeling high on this sunrise. Very blessed."             , "2017-09-28 20:14:28", "2017-09-28 20:14:46", "2017-09-28 20:14:46", "e9519886-08f6-4bbd-bd01-aae15d5d2829"),
 
 ("dc3ffff4-8d77-4707-bdcc-ef28518ce2c9", "https://goo.gl/9p2qT2", "Teachers are treasures."                                 , "2017-09-26 15:10:57", "2017-09-27 11:29:47", "2017-09-27 11:29:47", "c24530d6-7b65-44ca-8e43-5cd58e44c3e9"),
 ("f5665244-d3a3-4dee-acfc-7854bb36e960", "https://goo.gl/uKWPCJ", "Words to live and change your life by..."                , "2017-09-26 15:21:04", "2017-09-27 11:29:47", "2017-09-27 11:29:47", "c24530d6-7b65-44ca-8e43-5cd58e44c3e9"),
@@ -73,7 +103,7 @@ INSERT INTO Photos (id, url, caption, time_taken, created_at, updated_at, story_
 ("e8c7f6cb-edb2-4ba8-86b3-eac3d6c27901", "https://goo.gl/eH41R5", "Feeling the cool breeze."                                , "2017-09-15 12:11:15", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "b1ede670-585b-4e02-924f-afd9b4861d4c"),
 ("c5827eb6-061d-4ddf-9c16-116a56e0da26", "https://goo.gl/WJkBzh", "Venice. Right in the thick of it!"                       , "2017-09-15 16:40:25", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "b1ede670-585b-4e02-924f-afd9b4861d4c"),
 ("7a9875e3-9151-4c55-998c-9a5c0c3d976f", "https://goo.gl/2T8MNJ", "Electric nighttime algae in Australia. Loving it."       , "2017-09-15 22:37:08", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "b1ede670-585b-4e02-924f-afd9b4861d4c"),
-("50373a68-cdc6-4d17-820d-41edf8a099dc", "https://goo.gl/MtGZEr", "This is the best day ever already! XOXO"                 , "2017-09-28 07:23:34", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "4405a89e-f9c1-4042-b730-217e9bc5a163"),
+("50373a68-cdc6-4d17-820d-41edf8a099dc", "https://goo.gl/DWMLcr", "This is the best day ever already! XOXO"                 , "2017-09-28 07:23:34", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "4405a89e-f9c1-4042-b730-217e9bc5a163"),
 ("68f48d3d-f78d-4b6e-9427-8fae433d501a", "https://goo.gl/zJy72M", "Morning coffee and a stroll through NYC. Doing it right!", "2017-09-28 08:09:17", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "4405a89e-f9c1-4042-b730-217e9bc5a163"),
 ("07b4f94a-5f72-4991-ad64-e44bf1fbb5cd", "https://goo.gl/SQA2Cf", "Morning canoe trip. Worth waking up for!"                , "2017-09-28 09:15:54", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "4405a89e-f9c1-4042-b730-217e9bc5a163"),
 ("ad18d323-de56-49a2-bc83-418436255ba4", "https://goo.gl/6ZxKvs", "Gametime!"                                               , "2017-09-28 11:56:39", "2017-09-28 14:39:06", "2017-09-28 14:39:06", "81d7d549-176c-44b3-9f84-b8fe2fafad6f"),
@@ -95,7 +125,7 @@ INSERT INTO Photos (id, url, caption, time_taken, created_at, updated_at, story_
 ("26191b1b-2d8e-4467-b679-f2cd2249b2fb", "https://goo.gl/eH41R5", "Feeling the cool breeze."                                , "2017-09-15 12:11:15", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "1be4cbb0-0d29-4158-acc5-8b9407c927e9"),
 ("41136757-efc3-4ec3-a821-bf32460c2205", "https://goo.gl/WJkBzh", "Venice. Right in the thick of it!"                       , "2017-09-15 16:40:25", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "1be4cbb0-0d29-4158-acc5-8b9407c927e9"),
 ("a62f87f6-b0a1-45b8-856e-fdf1c6ec1a5f", "https://goo.gl/2T8MNJ", "Electric nighttime algae in Australia. Loving it."       , "2017-09-15 22:37:08", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "1be4cbb0-0d29-4158-acc5-8b9407c927e9"),
-("52a7a9a0-3820-4546-84d7-d93281e2ff57", "https://goo.gl/MtGZEr", "This is the best day ever already! XOXO"                 , "2017-09-28 07:23:34", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "a9c447f3-a812-4407-812f-30217e05a975"),
+("52a7a9a0-3820-4546-84d7-d93281e2ff57", "https://goo.gl/DWMLcr", "This is the best day ever already! XOXO"                 , "2017-09-28 07:23:34", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "a9c447f3-a812-4407-812f-30217e05a975"),
 ("c05c2b24-8074-48e2-bcbe-4e0dca4cfdfb", "https://goo.gl/zJy72M", "Morning coffee and a stroll through NYC. Doing it right!", "2017-09-28 08:09:17", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "a9c447f3-a812-4407-812f-30217e05a975"),
 ("91e7dd8c-722e-40c8-9265-e012e2f6b8e3", "https://goo.gl/SQA2Cf", "Morning canoe trip. Worth waking up for!"                , "2017-09-28 09:15:54", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "a9c447f3-a812-4407-812f-30217e05a975"),
 ("39b20d1a-a735-4a73-ab45-afb88f5b4bf4", "https://goo.gl/6ZxKvs", "Gametime!"                                               , "2017-09-28 11:56:39", "2017-09-28 14:39:06", "2017-09-28 14:39:06", "31b390ac-50c0-430d-afc2-d6c9e23eb313"),
@@ -117,7 +147,7 @@ INSERT INTO Photos (id, url, caption, time_taken, created_at, updated_at, story_
 ("bfc5d5b3-7fa6-4e0c-b7b6-c65d8e116d4b", "https://goo.gl/eH41R5", "Feeling the cool breeze."                                , "2017-09-15 12:11:15", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "4876b5a4-aeed-4026-b3e5-3d50621a77b3"),
 ("a385261e-7590-4383-8ccc-96a3ea6c420c", "https://goo.gl/WJkBzh", "Venice. Right in the thick of it!"                       , "2017-09-15 16:40:25", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "4876b5a4-aeed-4026-b3e5-3d50621a77b3"),
 ("ee80ec1b-bd76-45f9-948a-4fec71379a29", "https://goo.gl/2T8MNJ", "Electric nighttime algae in Australia. Loving it."       , "2017-09-15 22:37:08", "2017-09-26 17:03:13", "2017-09-26 17:03:13", "4876b5a4-aeed-4026-b3e5-3d50621a77b3"),
-("35a581a5-5e9a-46b4-b5e9-599760f4a85e", "https://goo.gl/MtGZEr", "This is the best day ever already! XOXO"                 , "2017-09-28 07:23:34", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "93de8a1c-6c58-4328-ae45-6336a703172e"),
+("35a581a5-5e9a-46b4-b5e9-599760f4a85e", "https://goo.gl/DWMLcr", "This is the best day ever already! XOXO"                 , "2017-09-28 07:23:34", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "93de8a1c-6c58-4328-ae45-6336a703172e"),
 ("be76bc24-2709-4930-91a2-f349b515c388", "https://goo.gl/zJy72M", "Morning coffee and a stroll through NYC. Doing it right!", "2017-09-28 08:09:17", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "93de8a1c-6c58-4328-ae45-6336a703172e"),
 ("d93a017c-8e96-4c39-8907-478f47cd2fa6", "https://goo.gl/SQA2Cf", "Morning canoe trip. Worth waking up for!"                , "2017-09-28 09:15:54", "2017-09-28 08:25:20", "2017-09-28 08:25:20", "93de8a1c-6c58-4328-ae45-6336a703172e"),
 ("8d88aca2-de2c-4930-be1e-110d51c9f2f7", "https://goo.gl/6ZxKvs", "Gametime!"                                               , "2017-09-28 11:56:39", "2017-09-28 14:39:06", "2017-09-28 14:39:06", "5ba8c1ee-ad4a-471f-8b2e-2b3de4e60f09"),
@@ -130,21 +160,35 @@ INSERT INTO Photos (id, url, caption, time_taken, created_at, updated_at, story_
 
 
 INSERT INTO Readers (id, reader_id, created_at, updated_at, writer_id) VALUES
-("df929932-11d6-432b-a463-dbf96f27b365", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964", "2017-09-26 12:00:00", "2017-09-26 12:00:00", "7592aa72-3832-4b2d-9b8e-658dc21b277d"),
-("3d34ca74-4738-4e99-9298-efd4dbf9fc04", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964", "2017-09-26 12:00:03", "2017-09-26 12:00:03", "a5211e7d-8382-4221-b77a-824b051e2370"),
-("fa1e2f01-367d-4c66-93f3-aa6552e414d9", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964", "2017-09-26 12:00:07", "2017-09-26 12:00:07", "a696e28e-79b0-47ed-a9ce-d2e681665459"),
+-- John
+("6bd06fd8-211b-490d-82f4-659052344b5a", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964", "2017-09-26 12:00:00", "2017-09-26 12:00:00", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
+("df929932-11d6-432b-a463-dbf96f27b365", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964", "2017-09-26 12:00:03", "2017-09-26 12:00:03", "7592aa72-3832-4b2d-9b8e-658dc21b277d"),
+("3d34ca74-4738-4e99-9298-efd4dbf9fc04", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964", "2017-09-26 12:00:07", "2017-09-26 12:00:07", "a5211e7d-8382-4221-b77a-824b051e2370"),
+("fa1e2f01-367d-4c66-93f3-aa6552e414d9", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964", "2017-09-26 12:00:10", "2017-09-26 12:00:10", "a696e28e-79b0-47ed-a9ce-d2e681665459"),
 
-("a790f6a8-d33f-47e5-a6b9-48923b436b92", "7592aa72-3832-4b2d-9b8e-658dc21b277d", "2017-09-26 13:00:00", "2017-09-26 13:00:00", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964"),
-("df59556f-b3be-4d85-bfc1-fdb84783a2b1", "7592aa72-3832-4b2d-9b8e-658dc21b277d", "2017-09-26 13:00:03", "2017-09-26 13:00:03", "a5211e7d-8382-4221-b77a-824b051e2370"),
-("bf58ccf3-c0c4-4d41-b811-32b076c3d394", "7592aa72-3832-4b2d-9b8e-658dc21b277d", "2017-09-26 13:00:07", "2017-09-26 13:00:07", "a696e28e-79b0-47ed-a9ce-d2e681665459"),
+-- Brian
+("a790f6a8-d33f-47e5-a6b9-48923b436b92", "886604c3-e463-4ff7-81f5-3f3077c44a66", "2017-09-26 13:00:00", "2017-09-26 13:00:00", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964"),
+("df59556f-b3be-4d85-bfc1-fdb84783a2b1", "886604c3-e463-4ff7-81f5-3f3077c44a66", "2017-09-26 13:00:03", "2017-09-26 13:00:03", "7592aa72-3832-4b2d-9b8e-658dc21b277d"),
+("bf58ccf3-c0c4-4d41-b811-32b076c3d394", "886604c3-e463-4ff7-81f5-3f3077c44a66", "2017-09-26 13:00:07", "2017-09-26 13:00:07", "a5211e7d-8382-4221-b77a-824b051e2370"),
+("407ec978-2424-44d4-b434-37244c60ca6e", "886604c3-e463-4ff7-81f5-3f3077c44a66", "2017-09-26 13:00:10", "2017-09-26 13:00:10", "a696e28e-79b0-47ed-a9ce-d2e681665459"),
 
-("ece2c087-9546-4060-9e02-4eee1a524817", "a5211e7d-8382-4221-b77a-824b051e2370", "2017-09-26 14:00:00", "2017-09-26 14:00:00", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964"),
-("2bcf6fb0-4195-498a-892f-053f8d95c4fa", "a5211e7d-8382-4221-b77a-824b051e2370", "2017-09-26 14:00:03", "2017-09-26 14:00:03", "7592aa72-3832-4b2d-9b8e-658dc21b277d"),
-("4de62c1e-70b4-4f13-a71c-6b5dc9d2fa94", "a5211e7d-8382-4221-b77a-824b051e2370", "2017-09-26 14:00:07", "2017-09-26 14:00:07", "a696e28e-79b0-47ed-a9ce-d2e681665459"),
+-- David
+("35f2e720-001e-4c93-ba6a-fc51aa4f5604", "7592aa72-3832-4b2d-9b8e-658dc21b277d", "2017-09-26 14:00:00", "2017-09-26 14:00:00", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964"),
+("bbd0b0ae-db7c-4525-ac39-2587bdc28036", "7592aa72-3832-4b2d-9b8e-658dc21b277d", "2017-09-26 14:00:03", "2017-09-26 14:00:03", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
+("18b89047-75b9-4672-bba4-13c2d38fdd5e", "7592aa72-3832-4b2d-9b8e-658dc21b277d", "2017-09-26 14:00:07", "2017-09-26 14:00:07", "a5211e7d-8382-4221-b77a-824b051e2370"),
+("898abbb8-338d-4b90-a815-970b6c51b32d", "7592aa72-3832-4b2d-9b8e-658dc21b277d", "2017-09-26 14:00:10", "2017-09-26 14:00:10", "a696e28e-79b0-47ed-a9ce-d2e681665459"),
 
+-- Jason
+("ece2c087-9546-4060-9e02-4eee1a524817", "a5211e7d-8382-4221-b77a-824b051e2370", "2017-09-26 15:00:00", "2017-09-26 15:00:00", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964"),
+("0fe5bf1d-d330-49c8-9c8a-b43b209ad443", "a5211e7d-8382-4221-b77a-824b051e2370", "2017-09-26 15:00:03", "2017-09-26 15:00:03", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
+("2bcf6fb0-4195-498a-892f-053f8d95c4fa", "a5211e7d-8382-4221-b77a-824b051e2370", "2017-09-26 15:00:07", "2017-09-26 15:00:07", "7592aa72-3832-4b2d-9b8e-658dc21b277d"),
+("4de62c1e-70b4-4f13-a71c-6b5dc9d2fa94", "a5211e7d-8382-4221-b77a-824b051e2370", "2017-09-26 15:00:10", "2017-09-26 15:00:10", "a696e28e-79b0-47ed-a9ce-d2e681665459"),
+
+-- Isaac
 ("da1cef07-b865-4a9f-9e99-591b0f0cc11c", "a696e28e-79b0-47ed-a9ce-d2e681665459", "2017-09-26 15:00:00", "2017-09-26 15:00:00", "2c43aa1d-e8bf-44d1-bb10-cc28ccec0964"),
-("00293059-18ab-4bdb-b6eb-430254dce3cb", "a696e28e-79b0-47ed-a9ce-d2e681665459", "2017-09-26 15:00:03", "2017-09-26 15:00:03", "7592aa72-3832-4b2d-9b8e-658dc21b277d"),
-("cb0c3ef8-6f85-4c66-b802-2727d864a2f0", "a696e28e-79b0-47ed-a9ce-d2e681665459", "2017-09-26 15:00:07", "2017-09-26 15:00:07", "a5211e7d-8382-4221-b77a-824b051e2370");
+("de8e6252-b369-4f08-abc5-bce2024cced8", "a696e28e-79b0-47ed-a9ce-d2e681665459", "2017-09-26 15:00:03", "2017-09-26 15:00:03", "886604c3-e463-4ff7-81f5-3f3077c44a66"),
+("00293059-18ab-4bdb-b6eb-430254dce3cb", "a696e28e-79b0-47ed-a9ce-d2e681665459", "2017-09-26 15:00:07", "2017-09-26 15:00:07", "7592aa72-3832-4b2d-9b8e-658dc21b277d"),
+("cb0c3ef8-6f85-4c66-b802-2727d864a2f0", "a696e28e-79b0-47ed-a9ce-d2e681665459", "2017-09-26 15:00:10", "2017-09-26 15:00:10", "a5211e7d-8382-4221-b77a-824b051e2370");
 
 
 /* Check if values have been added correctly */

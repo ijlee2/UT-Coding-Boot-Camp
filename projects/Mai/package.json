@@ -1,76 +1,83 @@
 {
-  "//": [
-    "bcrypt                     : Hash user passwords",
-    "body-parser                : Parse incoming request bodies in middlewares",
-    "cookie-parser              : Create cookies in Express",
-    "express                    : Develop API using Express",
-    "express-handlebars         : Use Handlebars to create custom pages",
-    "image-size                 : Check the dimensions of an image",
-    "method-override            : Override POST method to handle PATCH and DELETE",
-    "multer                     : Node middleware for handling multipart/form-data",
-    "mysql2                     : Performance-driven MySQL client for Node",
-    "node-cloud-vision-api-comoc: Wrapper for using Google Cloud Vision",
-    "path                       : Utilities for working with file and directory paths",
-    "sequelize                  : Node ORM for MySQL"
-  ],
-  "name": "mai",
-  "version": "1.0.0",
-  "description": "Everyone has a story to tell. Hear them out.",
-  "keywords": [
-    "Google Cloud Vision",
-    "Google Natural Language Processing",
-    "Image Recognition",
-    "Natural Language Generation",
-    "Personality"
-  ],
-  "homepage": "https://github.com/ijlee2/Mai",
-  "bugs": {
-    "url": "https://github.com/ijlee2/Mai/issues"
-  },
-  "private": true,
-  "license": "UNLICENSED",
-  "contributors": [
-    {
-      "name": "John Absher",
-      "url": "https://www.linkedin.com/in/johnabsher/"
+    "//": [
+        "aws-sdk                    : Use AWS (S3, in particular)",
+        "bcrypt                     : Hash user passwords",
+        "body-parser                : Parse incoming request bodies in middlewares",
+        "cookie-parser              : Create cookies in Express",
+        "express                    : Develop API using Express",
+        "express-handlebars         : Use Handlebars to create custom pages",
+        "image-size                 : Check the dimensions of an image",
+        "method-override            : Override POST method to handle PATCH and DELETE",
+        "multer                     : Node middleware for handling multipart/form-data",
+        "mysql2                     : Performance-driven MySQL client for Node",
+        "node-cloud-vision-api-comoc: Wrapper for using Google Cloud Vision",
+        "path                       : Utilities for working with file and directory paths",
+        "sequelize                  : Node ORM for MySQL"
+    ],
+    "name": "mai",
+    "version": "1.0.0",
+    "description": "Everyone has a story to tell. Hear them out.",
+    "keywords": [
+        "Amazon RDS",
+        "Amazon S3",
+        "Google Cloud Vision",
+        "Google Cloud Natural Language"
+    ],
+    "homepage": "https://mai-app.herokuapp.com",
+    "bugs": {
+        "url": "https://github.com/ijlee2/Mai/issues"
     },
-    {
-      "name": "David Gutierrez",
-      "url": "https://www.linkedin.com/in/david-gutierrez-979a4a148/"
+    "private": true,
+    "license": "UNLICENSED",
+    "contributors": [
+        {
+            "name": "John Absher",
+            "url": "https://www.linkedin.com/in/johnabsher/"
+        },
+        {
+            "name": "Brian Ervin",
+            "url": "https://www.linkedin.com/in/brianervinmedia/"
+        },
+        {
+            "name": "David Gutierrez",
+            "url": "https://www.linkedin.com/in/david-gutierrez-979a4a148/"
+        },
+        {
+            "name": "Jason Joachim",
+            "url": "https://www.linkedin.com/in/jasonjoachim/"
+        },
+        {
+            "name": "Isaac Lee",
+            "url": "https://www.linkedin.com/in/ijlee2/"
+        }
+    ],
+    "main": "server.js",
+    "dependencies": {
+        "aws-sdk": "^2.123.0",
+        "bcrypt": "^1.0.3",
+        "body-parser": "^1.18.2",
+        "cookie-parser": "^1.4.3",
+        "ejs": "^2.5.7",
+        "express": "^4.15.4",
+        "express-handlebars": "^3.0.0",
+        "image-size": "^0.6.1",
+        "method-override": "^2.3.9",
+        "multer": "^1.3.0",
+        "mysql2": "^1.4.2",
+        "node-cloud-vision-api-comoc": "^0.1.2",
+        "path": "^0.12.7",
+        "sequelize": "^4.10.2"
     },
-    {
-      "name": "Jason Joachim",
-      "url": "https://www.linkedin.com/in/jasonjoachim/"
+    "devDependencies": {
+        "nodemon": "^1.12.1"
     },
-    {
-      "name": "Isaac Lee",
-      "url": "https://www.linkedin.com/in/ijlee2/"
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "local": "nodemon server.js local",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ijlee2/Mai.git"
     }
-  ],
-  "main": "server.js",
-  "dependencies": {
-    "aws-sdk": "^2.123.0",
-    "bcrypt": "^1.0.3",
-    "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "ejs": "^2.5.7",
-    "express": "^4.15.4",
-    "express-handlebars": "^3.0.0",
-    "image-size": "^0.6.1",
-    "method-override": "^2.3.9",
-    "multer": "^1.3.0",
-    "mysql2": "^1.4.2",
-    "node-cloud-vision-api-comoc": "^0.1.2",
-    "path": "^0.12.7",
-    "sequelize": "^4.10.2"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ijlee2/Mai.git"
-  }
 }

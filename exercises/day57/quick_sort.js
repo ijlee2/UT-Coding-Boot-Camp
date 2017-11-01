@@ -21,6 +21,7 @@ function quickSort(array, index_l, index_r) {
     }
 }
 
+// Hoare partition scheme
 function partition(array, index_l, index_r) {
     // Choose a pivot element
     const pivot = array[index_l];

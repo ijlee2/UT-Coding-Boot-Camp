@@ -3,5 +3,5 @@ $(document).ready(function() {
     $(".dropdown-button").dropdown();
 
     // Navbar for mobile
-    $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav({"closeOnClick": true});
 });

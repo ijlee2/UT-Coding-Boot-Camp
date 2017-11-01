@@ -16,15 +16,20 @@
 
 ## Technologies Used
 
-- [x] Flexbox (future), Materialize, ES7, jQuery, React (future), Handlebars
+- [x] Materialize, Material-UI (Phase 2), ES7, jQuery, Handlebars, React + Redux (Phase 2)
 
 - [x] Node, Express, MySQL, Sequelize
 
-- [x] bcrypt, Cookies, Dropzone
+- [x] bcrypt, JWT (Phase 2), Cookies, Dropzone
 
-- [x] Amazon RDS (future), Amazon S3 (future)
+- [x] Amazon RDS (Phase 3), Amazon S3 (Phase 2)
 
-- [x] Google Cloud Vision (future), Google Cloud Natural Language (future)
+- [x] Google Cloud Vision (Phase 2), Google Cloud Natural Language (Phase 3)
+
+
+## Demos
+- [Link to Phase 1 (Handlebars)](https://mai-app-hbs.herokuapp.com/)
+- [Link to Phase 2 (React + Redux)](https://mai-app.herokuapp.com/)
 
 
 ## Sketches
@@ -36,6 +41,17 @@
 - [Front End 4](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/front_end_page04.jpg)
 - [Back End 1](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/back_end_page01.jpg)
 
+### Phase 2
+
+- [Components 1](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/components01.jpg)
+- [Components 2](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/components02.jpg)
+- [Components 3](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/components03.jpg)
+- [Components 4](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/components04.jpg)
+- [Components 5](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/components05.jpg)
+- [Components 6](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/components06.jpg)
+- [Components 7](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/components07.jpg)
+- [Components 8](https://raw.githubusercontent.com/ijlee2/Mai/master/readme/components08.jpg)
+
 
 ## Notes
 
@@ -43,8 +59,14 @@
 
 [Models & Migrations](https://www.duringthedrive.com/2017/05/06/models-migrations-sequelize-node/)
 
-[Using AWS S3](https://devcenter.heroku.com/articles/s3)
-
 [Express Session](https://github.com/expressjs/session)
 
 [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html)
+
+[JSON Web Tokens](https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens)
+
+[S3 File Uploads in Node.js](https://devcenter.heroku.com/articles/s3-upload-node)
+
+[Uploading photos to AWS S3](https://medium.com/@pandeysoni/upload-files-to-aws-s3-in-node-js-f05b204ff686)
+
+[Another helpful article on S3-Node uploads](http://www.joshsgman.com/upload-to-and-get-images-from-amazon-s3-with-node-js/)

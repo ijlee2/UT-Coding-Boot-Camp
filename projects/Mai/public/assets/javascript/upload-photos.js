@@ -114,7 +114,7 @@ $(document).ready(function() {
     $(".dropdown-button").dropdown();
 
     // Navbar for mobile
-    $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav({"closeOnClick": true});
 
     // =============================
     // Begin insertion of John's code snippet to upload photos to S3.
